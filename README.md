@@ -24,6 +24,8 @@
 
 * As a student I want to create an account so that I can view future events I save
 
+* As a student I want to share an event so that I can bring my friend to the event
+
 ## Figma
 https://www.figma.com/file/P8tmvTYt1H0Et5hkN3kiQK/My-Student-Wellbeing---Campus-Event-Hub?type=design&node-id=0-1&mode=design&t=4r2yyeJO134k1NVd-0
 
