@@ -48,7 +48,7 @@ https://drive.google.com/file/d/1W7SFcBgQLPi31u1PaKrLVHIoLa1PwnIf/view
 
 ### Relational Model
 
-- User (user_id (pk), email, password, created_at, updated_at, de;eted_at, is_admin)
+- User (user_id (pk), email, password, created_at, updated_at, deleted_at, is_admin)
 - Event (event_id (pk), univ_id (fk), title, date, time, description, location, type, image_url, created_at, updated_at, deleted_at)
 - User_Event (user_id (fk), event_id (fk))
 - University (univ_id (pk), name, location, created_at, updated_at)
