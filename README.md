@@ -1,5 +1,5 @@
 # Campus-Event-Hub
-## User Stories
+👩‍💻 ## User Stories
 ## Admin
 * As an Admin I want to approve events so that I can ensure they are official campus events
 
