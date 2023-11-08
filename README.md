@@ -39,16 +39,16 @@ https://drive.google.com/file/d/1W7SFcBgQLPi31u1PaKrLVHIoLa1PwnIf/view
 - User
 - Event
 - User_Event
-- University
+- Institution
 
 ### Relationship:
 
 - A user may save 0 or more events. Events can be saved by 0 or more users.
-- University may have 0 or many event; An event belongs to one and only one university.
+- Institution may have 0 or many event; An event belongs to one and only one university.
 
 ### Relational Model
 
-- User (user_id (pk), email, password, created_at, updated_at, deleted_at, is_admin)
+- User (user_id (pk), email, password, created_at, updated_at, deleted_at, is_admin, inst_id (fk))
 - Event (event_id (pk), univ_id (fk), title, date, time, description, location, type, image_url, created_at, updated_at, deleted_at)
 - User_Event (user_id (fk), event_id (fk))
-- University (univ_id (pk), name, location, created_at, updated_at)
+- Institution (inst_id (pk), name, location, created_at, updated_at)
