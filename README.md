@@ -1,5 +1,5 @@
 # Campus-Event-Hub
-👩‍💻 ## User Stories
+## User Stories 👩‍💻 
 ## Admin
 * As an Admin I want to approve events so that I can ensure they are official campus events
 
@@ -26,10 +26,10 @@
 
 * As a student I want to share an event so that I can bring my friend to the event
 
-## Figma
+## Figma 🎨
 https://www.figma.com/file/P8tmvTYt1H0Et5hkN3kiQK/My-Student-Wellbeing---Campus-Event-Hub?type=design&node-id=0-1&mode=design&t=4r2yyeJO134k1NVd-0
 
-## Database Diagram
+## Database Diagram 💿
 https://drive.google.com/file/d/1W7SFcBgQLPi31u1PaKrLVHIoLa1PwnIf/view
 
 ## Entity Relationship Model
