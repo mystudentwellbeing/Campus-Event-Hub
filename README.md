@@ -49,6 +49,6 @@ https://drive.google.com/file/d/1W7SFcBgQLPi31u1PaKrLVHIoLa1PwnIf/view
 ### Relational Model
 
 - User (user_id (pk), email, password, created_at, updated_at, deleted_at, is_admin, inst_id (fk))
-- Event (event_id (pk), univ_id (fk), title, date, time, description, location, type, image_url, created_at, updated_at, deleted_at)
+- Event (event_id (pk), inst_id (fk), name_of_event, type, date, time, name_of_venue, address, city, postal_code, description, short_description, virtual_link , image_url, contact_name, contact_email, contact_phone, name_organization, created_at, updated_at, deleted_at)
 - User_Event (user_id (fk), event_id (fk))
 - Institution (inst_id (pk), inst_name, inst_location, created_at, updated_at)
