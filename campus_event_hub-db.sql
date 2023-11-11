@@ -4,7 +4,7 @@
 
 create database campus_event_hub;
 
--- creating table
+-- creating tables
 
 CREATE TABLE IF NOT EXISTS users(
 	user_id INT AUTO_INCREMENT PRIMARY KEY,
