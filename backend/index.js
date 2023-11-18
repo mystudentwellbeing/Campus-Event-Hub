@@ -5,6 +5,6 @@ const port = 3000;
 // allows us to parse json 
 app.use(express.json());
 
-app.get('/', (req,res) => res.json({message : "Hello World!"}));
+app.get('/', (req,res) => res.json({message : "Hello API World!"}));
 
 app.listen(port, () => console.log(`API server ready on http://localhost:${port}`));
