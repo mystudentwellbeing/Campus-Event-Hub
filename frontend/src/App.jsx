@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './ui/navbar/Navbar';
 import Homepage from './pages/Homepage';
+import EventList from './features/EventList';
+import EventFullInfo from './features/EventFullInfo';
 import AboutUs from './pages/AboutUs';
 import SubmitEvents from './pages/SubmitEvents';
 import ContactUs from './pages/ContactUs';
@@ -14,7 +16,11 @@ function App() {
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route index element={<Homepage />} />
+        <Route path="/" element={<Homepage />}>
+          <Route index element={<EventList />} />
+          <Route path="events" element={<EventList />} />
+          <Route path="events/:id" element={<EventFullInfo />} />
+        </Route>
         <Route path="aboutus" element={<AboutUs />} />
         <Route path="submitevents" element={<SubmitEvents />} />
         <Route path="contactus" element={<ContactUs />} />
