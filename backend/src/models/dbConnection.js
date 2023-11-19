@@ -1,6 +1,10 @@
 import Db from 'mysql2-async';
 
 const configuration = {
+    // user: 'root' ,
+    // password: 'password',
+    // database: 'mystudentwellbeing-db',
+    // host: '127.0.0.1',
     user: process.env.DATABASE_USER,
     password: process.env.DATABASE_PASSWORD,
     database: process.env.DATABASE_NAME,
