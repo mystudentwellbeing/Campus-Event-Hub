@@ -1,0 +1,19 @@
+.navBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--white);
+  z-index: 100;
+  font-size: 1.5rem;
+}
+
+.navBar h2 {
+  font-size: 1.5rem;
+  color: var(--darkblue);
+}
+
+.navBar a {
+  color: inherit;
+  text-decoration: none;
+}

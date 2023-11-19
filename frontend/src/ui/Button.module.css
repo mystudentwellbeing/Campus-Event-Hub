@@ -1,0 +1,44 @@
+.btn {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  background-color: var(--blue);
+  height: auto;
+  width: 10rem;
+  margin: 0.4rem;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 2rem;
+  color: var(--white);
+  font: inherit;
+  font-weight: bold;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: box-shadow 0.2s, opacity 0.2s;
+}
+
+.btn:hover {
+  box-shadow: 0.4rem 0.4rem 0.5rem var(--grey2);
+}
+
+.btn:active {
+  opacity: 0.7;
+}
+
+.login:hover,
+.signup:hover {
+  background: var(--green);
+  width: 11rem;
+  height: 4.2rem;
+}
+
+.filter {
+  font-size: 1.2rem;
+  width: 100%;
+  font-weight: normal;
+  padding: 1rem 1.5rem;
+  color: var(--black);
+  background-color: var(--white);
+  border: 0.1rem solid var(--grey2);
+}
