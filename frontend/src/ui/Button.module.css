@@ -32,3 +32,13 @@
   width: 11rem;
   height: 4.2rem;
 }
+
+.filter {
+  font-size: 1.2rem;
+  width: 100%;
+  font-weight: normal;
+  padding: 1rem 1.5rem;
+  color: var(--black);
+  background-color: var(--white);
+  border: 0.1rem solid var(--grey2);
+}

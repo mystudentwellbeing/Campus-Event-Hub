@@ -1,4 +1,6 @@
 import Event from './Event';
+import Search from '../features/Search';
+import Filter from '../features/Filter';
 import eventsData from '../data/events.json';
 import styles from './Homepage.module.css';
 
@@ -7,25 +9,13 @@ const events = eventsData.events;
 // Check the structure of 'events' here
 console.log(events);
 
-const HomePage = () => {
+const Homepage = () => {
   //return <div>HomePage</div>;
   return (
     <main className={styles.homepage}>
       <div className={styles.serchbar}>
-        <div>
-          <p className={styles.serchbox}>Search Events!</p>
-        </div>
-        <div className={styles.filtericons}>
-          <button>NETWORKING</button>
-          <button>CAMPUS</button>
-          <button>CULTURAL</button>
-          <button>HOBBIES</button>
-          <button>SPORTS</button>
-          <button>EDUCATIONAL</button>
-          <button>NIGHTLIFE</button>
-          <button>ARTS</button>
-          <button>WELLBEING</button>
-        </div>
+        <Search />
+        <Filter />
       </div>
       <div className={styles.allevents}>
         {events.map((event, index) => (
@@ -45,4 +35,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default Homepage;
