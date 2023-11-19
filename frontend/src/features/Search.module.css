@@ -1,11 +1,32 @@
-.search {
+.searchContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.searchBox {
   display: flex;
   align-items: center;
   height: 5rem;
   width: 45rem;
   font-size: 1.5rem;
   background-color: var(--grey1);
-  /* color: var(--black); */
+  border: none;
   border-radius: 1rem;
   padding: 0rem 2rem;
+}
+
+.searchBox:focus {
+  outline: 0.2rem solid var(--blue);
+}
+
+.searchBox::placeholder {
+  color: var(--black);
+  font-size: 1.5rem;
+}
+
+.icon {
+  font-size: 2rem;
+  margin-left: 2rem;
 }

@@ -10,7 +10,6 @@ const events = eventsData.events;
 console.log(events);
 
 const Homepage = () => {
-  //return <div>HomePage</div>;
   return (
     <main className={styles.homepage}>
       <div className={styles.serchbar}>
