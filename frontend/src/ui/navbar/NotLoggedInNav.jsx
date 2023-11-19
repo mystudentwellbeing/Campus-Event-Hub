@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import Hamburger from 'hamburger-react';
 import useOutsideClick from '../../hooks/useOutsideClick';
 import Button from '../Button';
+import logo from '../../assets/logo.png';
 import styles from './NotLoggedInNav.module.css';
 
 const NotLoggedInNav = () => {
@@ -34,6 +35,9 @@ const NotLoggedInNav = () => {
 
   return (
     <div className={styles.navBarContainer}>
+      <Link to="/">
+        <img src={logo} alt="my student wellbeing logo" />
+      </Link>
       <Link to="/">
         <h2>Student Event Hub</h2>
       </Link>
