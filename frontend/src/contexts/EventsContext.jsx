@@ -1,4 +1,4 @@
-import { useState, createContext } from 'react';
+import { useState, createContext, useMemo } from 'react';
 import eventsData from '../data/events.json';
 
 const EventsContext = createContext();
@@ -10,6 +10,17 @@ const EventsProvider = ({ children }) => {
   const [filters, setFilters] = useState([]);
   // const [isLoading, setLoading] = useState(true);
   // const [error, setError] = useState('');
+
+  const eventCountsByType = useMemo(() => {
+    const counts = {};
+    events.forEach((event) => {
+      event.type.split(',').forEach((type) => {
+        const trimmedType = type.trim().toUpperCase();
+        counts[trimmedType] = (counts[trimmedType] || 0) + 1;
+      });
+    });
+    return counts;
+  }, [events]);
 
   const filteredEvents = events
     .filter((event) => {
@@ -33,7 +44,14 @@ const EventsProvider = ({ children }) => {
 
   return (
     <EventsContext.Provider
-      value={{ filteredEvents, query, setQuery, filters, setFilters }}
+      value={{
+        eventCountsByType,
+        filteredEvents,
+        query,
+        setQuery,
+        filters,
+        setFilters,
+      }}
     >
       {children}
     </EventsContext.Provider>

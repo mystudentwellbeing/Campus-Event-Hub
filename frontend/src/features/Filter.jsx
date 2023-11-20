@@ -12,7 +12,7 @@ import { LuFlower2 } from 'react-icons/lu';
 import styles from './Filter.module.css';
 
 const Filter = () => {
-  const { filters, setFilters } = useEvents();
+  const { filters, setFilters, eventCountsByType } = useEvents();
 
   const toggleFilter = (filterType) => {
     setFilters((prevFilters) =>
@@ -32,7 +32,7 @@ const Filter = () => {
         className={isActive('NETWORKING') ? styles.activeFilter : ''}
       >
         <GrGroup className={styles.filterIcon} />
-        NETWORKING
+        NETWORKING ({eventCountsByType['NETWORKING'] || 0})
       </Button>
       <Button
         type="filter"
@@ -40,7 +40,7 @@ const Filter = () => {
         className={isActive('CAMPUS') ? styles.activeFilter : ''}
       >
         <LuSchool className={styles.filterIcon} />
-        CAMPUS
+        CAMPUS ({eventCountsByType['CAMPUS'] || 0})
       </Button>
       <Button
         type="filter"
@@ -48,7 +48,7 @@ const Filter = () => {
         className={isActive('CULTURAL') ? styles.activeFilter : ''}
       >
         <IoEarthOutline className={styles.filterIcon} />
-        CULTURAL
+        CULTURAL ({eventCountsByType['CULTURAL'] || 0})
       </Button>
       <Button
         type="filter"
@@ -56,7 +56,7 @@ const Filter = () => {
         className={isActive('HOBBIES') ? styles.activeFilter : ''}
       >
         <MdOutlineHeadset className={styles.filterIcon} />
-        HOBBIES
+        HOBBIES ({eventCountsByType['HOBBIES'] || 0})
       </Button>
       <Button
         type="filter"
@@ -64,7 +64,7 @@ const Filter = () => {
         className={isActive('SPORTS') ? styles.activeFilter : ''}
       >
         <MdOutlineSportsBasketball className={styles.filterIcon} />
-        SPORTS
+        SPORTS ({eventCountsByType['SPORTS'] || 0})
       </Button>
       <Button
         type="filter"
@@ -72,7 +72,7 @@ const Filter = () => {
         className={isActive('EDUCATIONAL') ? styles.activeFilter : ''}
       >
         <SlGraduation className={styles.filterIcon} />
-        EDUCATIONAL
+        EDUCATIONAL ({eventCountsByType['EDUCATIONAL'] || 0})
       </Button>
       <Button
         type="filter"
@@ -80,7 +80,7 @@ const Filter = () => {
         className={isActive('NIGHTLIFE') ? styles.activeFilter : ''}
       >
         <MdNightlife className={styles.filterIcon} />
-        NIGHTLIFE
+        NIGHTLIFE ({eventCountsByType['NIGHTLIFE'] || 0})
       </Button>
       <Button
         type="filter"
@@ -88,7 +88,7 @@ const Filter = () => {
         className={isActive('ARTS') ? styles.activeFilter : ''}
       >
         <MdOutlineColorLens className={styles.filterIcon} />
-        ARTS
+        ARTS ({eventCountsByType['ARTS'] || 0})
       </Button>
       <Button
         type="filter"
@@ -96,7 +96,7 @@ const Filter = () => {
         className={isActive('WELLBEING') ? styles.activeFilter : ''}
       >
         <LuFlower2 className={styles.filterIcon} />
-        WELLBEING
+        WELLBEING ({eventCountsByType['WELLBEING'] || 0})
       </Button>
     </div>
   );
