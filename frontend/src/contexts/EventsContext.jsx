@@ -10,14 +10,16 @@ const EventsProvider = ({ children }) => {
   // const [isLoading, setLoading] = useState(true);
   // const [error, setError] = useState('');
 
-  const filteredEvents = query
-    ? events.filter(
-        (event) =>
-          event.name_of_event.toLowerCase().includes(query.toLowerCase()) ||
-          event.description.toLowerCase().includes(query.toLowerCase()) ||
-          event.type.toLowerCase().includes(query.toLowerCase())
-      )
-    : events;
+  const filteredEvents = (
+    query
+      ? events.filter(
+          (event) =>
+            event.name_of_event.toLowerCase().includes(query.toLowerCase()) ||
+            event.description.toLowerCase().includes(query.toLowerCase()) ||
+            event.type.toLowerCase().includes(query.toLowerCase())
+        )
+      : events
+  ).sort((a, b) => a.date.localeCompare(b.date));
 
   return (
     <EventsContext.Provider value={{ filteredEvents, query, setQuery }}>

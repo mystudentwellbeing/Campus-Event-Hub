@@ -1,9 +1,6 @@
-// import eventsData from '../data/events.json';
 import useEvents from '../hooks/useEvents';
 import Event from './Event';
 import styles from './EventList.module.css';
-
-// const events = eventsData.events;
 
 const EventList = () => {
   const { filteredEvents } = useEvents();
