@@ -1,9 +1,10 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { FaMagnifyingGlass } from 'react-icons/fa6';
+import useEvents from '../hooks/useEvents';
 import styles from './Search.module.css';
 
 const Search = () => {
-  const [query, setQuery] = useState('');
+  const { query, setQuery } = useEvents();
   const inputEl = useRef(null);
 
   useEffect(() => {

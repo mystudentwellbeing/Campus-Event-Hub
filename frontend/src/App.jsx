@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { EventsProvider } from './contexts/EventsContext';
 import Navbar from './ui/navbar/Navbar';
 import Homepage from './pages/Homepage';
 import EventList from './features/EventList';
@@ -14,20 +15,22 @@ import './App.css';
 function App() {
   return (
     <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Homepage />}>
-          <Route index element={<EventList />} />
-          <Route path="events" element={<EventList />} />
-          <Route path="events/:id" element={<EventFullInfo />} />
-        </Route>
-        <Route path="aboutus" element={<AboutUs />} />
-        <Route path="submitevents" element={<SubmitEvents />} />
-        <Route path="contactus" element={<ContactUs />} />
-        <Route path="login" element={<Login />} />
-        <Route path="signup" element={<Signup />} />
-      </Routes>
-      <Footer />
+      <EventsProvider>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Homepage />}>
+            <Route index element={<EventList />} />
+            <Route path="events" element={<EventList />} />
+            <Route path="events/:id" element={<EventFullInfo />} />
+          </Route>
+          <Route path="submitevents" element={<SubmitEvents />} />
+          <Route path="aboutus" element={<AboutUs />} />
+          <Route path="contactus" element={<ContactUs />} />
+          <Route path="login" element={<Login />} />
+          <Route path="signup" element={<Signup />} />
+        </Routes>
+        <Footer />
+      </EventsProvider>
     </BrowserRouter>
   );
 }

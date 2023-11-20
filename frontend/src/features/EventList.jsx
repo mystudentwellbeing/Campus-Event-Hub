@@ -1,15 +1,18 @@
-import eventsData from '../data/events.json';
+// import eventsData from '../data/events.json';
+import useEvents from '../hooks/useEvents';
 import Event from './Event';
 import styles from './EventList.module.css';
 
-const events = eventsData.events;
+// const events = eventsData.events;
 
 const EventList = () => {
+  const { filteredEvents } = useEvents();
+
   return (
     <div className={styles.allevents}>
-      {events.map((event, index) => (
+      {filteredEvents.map((event) => (
         <Event
-          key={index}
+          key={event.event_id}
           image_url={event.image_url}
           name_of_event={event.name_of_event}
           price={event.price}
