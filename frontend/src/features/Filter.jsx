@@ -12,47 +12,89 @@ import { LuFlower2 } from 'react-icons/lu';
 import styles from './Filter.module.css';
 
 const Filter = () => {
-  const { setFilter } = useEvents();
+  const { filters, setFilters } = useEvents();
 
-  const handleFilterChange = (filterType) => {
-    setFilter(filterType);
+  const toggleFilter = (filterType) => {
+    setFilters((prevFilters) =>
+      prevFilters.includes(filterType)
+        ? prevFilters.filter((f) => f !== filterType)
+        : [...prevFilters, filterType]
+    );
   };
+
+  const isActive = (filterType) => filters.includes(filterType);
 
   return (
     <div className={styles.filterContainer}>
-      <Button type="filter" onClick={() => handleFilterChange('NETWORKING')}>
+      <Button
+        type="filter"
+        onClick={() => toggleFilter('NETWORKING')}
+        className={isActive('NETWORKING') ? styles.activeFilter : ''}
+      >
         <GrGroup className={styles.filterIcon} />
         NETWORKING
       </Button>
-      <Button type="filter" onClick={() => handleFilterChange('CAMPUS')}>
+      <Button
+        type="filter"
+        onClick={() => toggleFilter('CAMPUS')}
+        className={isActive('CAMPUS') ? styles.activeFilter : ''}
+      >
         <LuSchool className={styles.filterIcon} />
         CAMPUS
       </Button>
-      <Button type="filter" onClick={() => handleFilterChange('CULTURAL')}>
+      <Button
+        type="filter"
+        onClick={() => toggleFilter('CULTURAL')}
+        className={isActive('CULTURAL') ? styles.activeFilter : ''}
+      >
         <IoEarthOutline className={styles.filterIcon} />
         CULTURAL
       </Button>
-      <Button type="filter" onClick={() => handleFilterChange('HOBBIES')}>
+      <Button
+        type="filter"
+        onClick={() => toggleFilter('HOBBIES')}
+        className={isActive('HOBBIES') ? styles.activeFilter : ''}
+      >
         <MdOutlineHeadset className={styles.filterIcon} />
         HOBBIES
       </Button>
-      <Button type="filter" onClick={() => handleFilterChange('SPORTS')}>
+      <Button
+        type="filter"
+        onClick={() => toggleFilter('SPORTS')}
+        className={isActive('SPORTS') ? styles.activeFilter : ''}
+      >
         <MdOutlineSportsBasketball className={styles.filterIcon} />
         SPORTS
       </Button>
-      <Button type="filter" onClick={() => handleFilterChange('EDUCATIONAL')}>
+      <Button
+        type="filter"
+        onClick={() => toggleFilter('EDUCATIONAL')}
+        className={isActive('EDUCATIONAL') ? styles.activeFilter : ''}
+      >
         <SlGraduation className={styles.filterIcon} />
         EDUCATIONAL
       </Button>
-      <Button type="filter" onClick={() => handleFilterChange('NIGHTLIFE')}>
+      <Button
+        type="filter"
+        onClick={() => toggleFilter('NIGHTLIFE')}
+        className={isActive('NIGHTLIFE') ? styles.activeFilter : ''}
+      >
         <MdNightlife className={styles.filterIcon} />
         NIGHTLIFE
       </Button>
-      <Button type="filter" onClick={() => handleFilterChange('ARTS')}>
+      <Button
+        type="filter"
+        onClick={() => toggleFilter('ARTS')}
+        className={isActive('ARTS') ? styles.activeFilter : ''}
+      >
         <MdOutlineColorLens className={styles.filterIcon} />
         ARTS
       </Button>
-      <Button type="filter" onClick={() => handleFilterChange('WELLBEING')}>
+      <Button
+        type="filter"
+        onClick={() => toggleFilter('WELLBEING')}
+        className={isActive('WELLBEING') ? styles.activeFilter : ''}
+      >
         <LuFlower2 className={styles.filterIcon} />
         WELLBEING
       </Button>

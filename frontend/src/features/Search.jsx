@@ -13,12 +13,11 @@ const Search = () => {
 
       if (e.code === 'Enter') {
         inputEl.current.focus();
-        setQuery('');
       }
     };
     document.addEventListener('keydown', callback);
     return () => document.removeEventListener('keydown', callback);
-  }, [setQuery]);
+  }, []);
 
   return (
     <div className={styles.searchContainer}>

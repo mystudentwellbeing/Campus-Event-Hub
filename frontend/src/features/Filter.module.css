@@ -10,3 +10,8 @@
   font-size: 2rem;
   margin-right: 1rem;
 }
+
+.activeFilter {
+  background-color: var(--blue);
+  color: white;
+}
