@@ -1,3 +1,12 @@
+.eventCard {
+  text-decoration: none;
+}
+
+.eventCard:link,
+.eventCard:visited {
+  color: inherit;
+}
+
 .event {
   height: 27rem;
   width: 37rem;
