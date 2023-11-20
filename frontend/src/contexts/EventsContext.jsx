@@ -8,6 +8,7 @@ const EventsProvider = ({ children }) => {
 
   const [query, setQuery] = useState('');
   const [filters, setFilters] = useState([]);
+  const [currentEvent, setCurrentEvent] = useState([]);
   // const [isLoading, setLoading] = useState(true);
   // const [error, setError] = useState('');
 
@@ -42,6 +43,11 @@ const EventsProvider = ({ children }) => {
     })
     .sort((a, b) => a.date.localeCompare(b.date));
 
+  const getEventById = (id) => {
+    const foundEvent = events.find((event) => event.event_id === id);
+    setCurrentEvent(foundEvent);
+  };
+
   return (
     <EventsContext.Provider
       value={{
@@ -51,6 +57,8 @@ const EventsProvider = ({ children }) => {
         setQuery,
         filters,
         setFilters,
+        getEventById,
+        currentEvent,
       }}
     >
       {children}

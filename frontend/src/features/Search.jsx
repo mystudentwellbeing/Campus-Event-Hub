@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-import { FaMagnifyingGlass } from 'react-icons/fa6';
 import useEvents from '../hooks/useEvents';
 import styles from './Search.module.css';
 
@@ -29,7 +28,6 @@ const Search = () => {
         onChange={(e) => setQuery(e.target.value)}
         ref={inputEl}
       />
-      <FaMagnifyingGlass className={styles.icon} />
     </div>
   );
 };

@@ -1,26 +1,22 @@
 import styles from './Event.module.css';
 
-const Event = ({
-  image_url,
-  name_of_event,
-  price,
-  date,
-  time,
-  type,
-  short_description,
-}) => {
+const Event = ({ event }) => {
   return (
     <div className={styles.event}>
-      <img className={styles.eventImage} src={image_url} alt="EventImage" />
+      <img
+        className={styles.eventImage}
+        src={event.image_url}
+        alt="EventImage"
+      />
       <div className={styles.eventHeader}>
-        <h4>{name_of_event}</h4>
-        <h3>{price} &nbsp; Like</h3>
+        <h4>{event.name_of_event}</h4>
+        <h3>{event.price} &nbsp; Like</h3>
       </div>
       <p>
-        {date} and {time}
+        {event.date} and {event.time}
       </p>
-      <p className={styles.eventType}>{type}</p>
-      <p>{short_description}</p>
+      <p className={styles.eventType}>{event.type}</p>
+      <p>{event.short_description}</p>
     </div>
   );
 };
