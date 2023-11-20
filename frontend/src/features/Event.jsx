@@ -1,20 +1,17 @@
 import { Link } from 'react-router-dom';
 import useEvents from '../hooks/useEvents';
-import { IoIosHeartEmpty } from 'react-icons/io';
-import { IoIosHeart } from 'react-icons/io';
+import { IoIosHeartEmpty, IoIosHeart } from 'react-icons/io';
 import styles from './Event.module.css';
 
 const Event = ({ event }) => {
-  const { likedEvents, toggleLike, getEventById } = useEvents();
+  const { likedEvents, toggleLike } = useEvents();
 
   const isLiked = likedEvents[event.event_id];
 
-  const handleToggleLike = () => {
+  const handleToggleLike = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     toggleLike(event.event_id);
-  };
-
-  const handleEventClick = (id) => {
-    getEventById(id);
   };
 
   const displayPrice = (price) => {
@@ -27,11 +24,7 @@ const Event = ({ event }) => {
   };
 
   return (
-    <Link
-      to={`/events/${event.event_id}`}
-      onClick={() => handleEventClick(event.event_id)}
-      className={styles.eventCard}
-    >
+    <Link to={`/events/${event.event_id}`} className={styles.eventCard}>
       <div className={styles.event}>
         <img
           className={styles.eventImage}
