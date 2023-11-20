@@ -1,0 +1,75 @@
+.eventCard {
+  text-decoration: none;
+}
+
+.eventCard:link,
+.eventCard:visited {
+  color: inherit;
+}
+
+.event {
+  height: 27rem;
+  width: 37rem;
+  font-size: 1.5rem;
+  border-radius: 0.4rem;
+  background-color: var(--grey1);
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.eventImage {
+  height: 15rem;
+  width: 37rem;
+}
+
+.eventHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0rem 1rem;
+  font-weight: 600;
+}
+
+.eventHeader h4 {
+  color: var(--darkblue);
+  font-weight: 900;
+}
+
+.headerRightSide {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+}
+
+.eventHeader h3 {
+  color: var(--green);
+  font-size: 1.2rem;
+}
+
+.event p {
+  padding: 0rem 1rem;
+}
+
+.eventType {
+  color: var(--blue);
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.emptyHeartIcon {
+  display: flex;
+  align-items: center;
+  color: var(--black);
+  font-size: 2rem;
+  font-weight: bold;
+  margin-right: 0.5rem;
+  vertical-align: baseline;
+}
+
+.heartIcon {
+  display: flex;
+  align-items: center;
+  color: var(--red);
+  font-size: 2rem;
+  margin-right: 0.5rem;
+}
