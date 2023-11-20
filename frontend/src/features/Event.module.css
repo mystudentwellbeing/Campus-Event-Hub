@@ -1,3 +1,12 @@
+.event {
+  height: 27rem;
+  width: 37rem;
+  font-size: 1.5rem;
+  border-radius: 0.4rem;
+  background-color: var(--grey1);
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
 .eventImage {
   height: 15rem;
   width: 37rem;
@@ -16,17 +25,16 @@
   font-weight: 900;
 }
 
-.eventHeader h3 {
-  color: var(--green);
+.headerRightSide {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
 }
 
-.event {
-  height: 27rem;
-  width: 37rem;
-  font-size: 1.5rem;
-  border-radius: 0.4rem;
-  background-color: var(--grey1);
-  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.2);
+.eventHeader h3 {
+  color: var(--green);
+  font-size: 1.2rem;
 }
 
 .event p {
@@ -36,4 +44,23 @@
 .eventType {
   color: var(--blue);
   font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.emptyHeartIcon {
+  display: flex;
+  align-items: center;
+  color: var(--black);
+  font-size: 2rem;
+  font-weight: bold;
+  margin-right: 0.5rem;
+  vertical-align: baseline;
+}
+
+.heartIcon {
+  display: flex;
+  align-items: center;
+  color: var(--red);
+  font-size: 2rem;
+  margin-right: 0.5rem;
 }

@@ -9,6 +9,7 @@ const EventsProvider = ({ children }) => {
   const [query, setQuery] = useState('');
   const [filters, setFilters] = useState([]);
   const [currentEvent, setCurrentEvent] = useState([]);
+  const [likedEvents, setLikedEvents] = useState({});
   // const [isLoading, setLoading] = useState(true);
   // const [error, setError] = useState('');
 
@@ -48,6 +49,13 @@ const EventsProvider = ({ children }) => {
     setCurrentEvent(foundEvent);
   };
 
+  const toggleLike = (eventId) => {
+    setLikedEvents((prevLikedEvents) => ({
+      ...prevLikedEvents,
+      [eventId]: !prevLikedEvents[eventId],
+    }));
+  };
+
   return (
     <EventsContext.Provider
       value={{
@@ -59,6 +67,8 @@ const EventsProvider = ({ children }) => {
         setFilters,
         getEventById,
         currentEvent,
+        likedEvents,
+        toggleLike,
       }}
     >
       {children}
