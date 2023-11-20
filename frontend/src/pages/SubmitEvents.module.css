@@ -43,6 +43,7 @@
     width: 20rem;
     border-radius: 0.5rem;
     border: 0.001rem solid #d9d9d9;
+    padding: 1rem;
 }
 
 .formContainerTextarea {
@@ -50,6 +51,7 @@
     width: 20rem;
     border-radius: 0.5rem;
     border: 0.001rem solid #d9d9d9;
+    padding: 1rem;
 }
 
 .formContainerSpecial {
