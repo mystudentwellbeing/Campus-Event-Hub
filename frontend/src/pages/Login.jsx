@@ -1,5 +1,12 @@
+import LoginForm from '../features/authentication/LoginForm';
+import styles from './Login.module.css';
+
 const Login = () => {
-  return <div>Login</div>;
+  return (
+    <main className={styles.login}>
+      <LoginForm />
+    </main>
+  );
 };
 
 export default Login;
