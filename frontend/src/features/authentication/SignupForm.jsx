@@ -15,6 +15,8 @@ const SignupForm = () => {
         <Input placeholder="email" disabled />
         <label htmlFor="password">Password</label>
         <Input placeholder="password" disabled />
+        <label htmlFor="passwordConfirm">Confirm Password</label>
+        <Input placeholder="password" disabled type="password" />
         <Button type="signin">Creat account</Button>
         <p>Already a member?</p>
         <Link to="/login">Sign in here!</Link>

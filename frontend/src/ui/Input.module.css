@@ -10,3 +10,7 @@
 .input:focus {
   outline: none;
 }
+
+.password {
+  margin-bottom: 2rem;
+}

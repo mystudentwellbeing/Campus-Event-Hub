@@ -1,0 +1,67 @@
+.loginContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 95%;
+  height: auto;
+  margin: auto;
+  padding: 3rem 1rem;
+  box-shadow: 0 0 2rem 0 rgba(0, 0, 0, 0.05), 0 0 0 0.1rem rgba(0, 0, 0, 0.08);
+}
+
+.loginContainer h3 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.loginContainer label {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 1rem 0;
+}
+
+.loginContainer p {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  align-self: center;
+}
+
+.loginContainer a:link,
+.loginContainer a:visited {
+  color: inherit;
+  align-self: center;
+  font-size: 1.5rem;
+}
+
+.loginContainer a:hover {
+  color: var(--green2);
+}
+
+.inputRow {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 50%;
+  margin: 1rem;
+}
+
+.error {
+  color: red;
+  font-size: 1.2rem;
+  align-self: center;
+  margin-top: 0.5rem;
+}
+
+@media (min-width: 481px) and (max-width: 1023px) {
+  .loginContainer {
+    width: 80%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .loginContainer {
+    width: 50%;
+  }
+}

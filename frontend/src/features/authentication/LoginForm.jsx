@@ -54,7 +54,7 @@ const LoginForm = () => {
           value={password}
         />
         {error && <div className={styles.error}>{error}</div>}
-        <Button type="signin">Sign In</Button>
+        <Button type="login">Log In</Button>
         <p>Not a member?</p>
         <Link to="/signup">Sign up here!</Link>
       </div>
