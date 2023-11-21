@@ -23,6 +23,21 @@ const Event = ({ event }) => {
     return price;
   };
 
+  const formatEventDate = (date) => {
+    const dateOptions = {
+      weekday: 'short',
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    };
+    const formattedDate = new Date(date).toLocaleDateString(
+      'en-US',
+      dateOptions
+    );
+
+    return formattedDate;
+  };
+
   return (
     <Link to={`/events/${event.event_id}`} className={styles.eventCard}>
       <div className={styles.event}>
@@ -45,7 +60,8 @@ const Event = ({ event }) => {
           </div>
         </div>
         <p>
-          {event.date} and {event.time}
+          {formatEventDate(event.date)} &nbsp;&nbsp; {event.startTime} -{' '}
+          {event.endTime}
         </p>
         <p className={styles.eventType}>{event.type}</p>
         <p>{event.short_description}</p>
