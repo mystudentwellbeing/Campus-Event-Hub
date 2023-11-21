@@ -4,6 +4,7 @@ import useAuth from '../../hooks/useAuth';
 import Hamburger from 'hamburger-react';
 import useOutsideClick from '../../hooks/useOutsideClick';
 import Button from '../Button';
+import logo from '../../assets/logo.png';
 import styles from './notLoggedInNav.module.css';
 
 const LoggedInNav = () => {
@@ -44,9 +45,11 @@ const LoggedInNav = () => {
   return (
     <div className={styles.navBarContainer}>
       <Link to="/">
+        <img src={logo} alt="my student wellbeing logo" />
+      </Link>
+      <Link to="/">
         <h2>Student Event Hub</h2>
       </Link>
-
       <ul
         ref={dropdownRef}
         className={isHambugerOpen ? styles.navMenuDropdown : styles.navMenu}
