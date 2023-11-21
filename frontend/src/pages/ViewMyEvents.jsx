@@ -1,9 +1,9 @@
 import { Outlet } from 'react-router-dom';
+import styles from './ViewMyEvents.module.css';
 
 const ViewMyEvents = () => {
   return (
-    <main>
-      <h1>View My Events</h1>
+    <main className={styles.container}>
       <Outlet />
     </main>
   );

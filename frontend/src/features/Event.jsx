@@ -4,14 +4,14 @@ import { IoIosHeartEmpty, IoIosHeart } from 'react-icons/io';
 import styles from './Event.module.css';
 
 const Event = ({ event }) => {
-  const { likedEvents, toggleLike } = useEvents();
+  const { savedEvents, toggleSave } = useEvents();
 
-  const isLiked = likedEvents[event.event_id];
+  const isSaved = savedEvents[event.event_id];
 
-  const handleToggleLike = (e) => {
+  const handleToggleSave = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    toggleLike(event.event_id);
+    toggleSave(event.event_id);
   };
 
   const displayPrice = (price) => {
@@ -51,8 +51,8 @@ const Event = ({ event }) => {
           <h4>{event.name_of_event}</h4>
           <div className={styles.headerRightSide}>
             <h3>{displayPrice(event.price)}</h3>
-            <div onClick={handleToggleLike}>
-              {isLiked ? (
+            <div onClick={handleToggleSave}>
+              {isSaved ? (
                 <IoIosHeart className={styles.heartIcon} />
               ) : (
                 <IoIosHeartEmpty className={styles.emptyHeartIcon} />
