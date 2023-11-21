@@ -269,14 +269,14 @@ const SubmitEvents = () => {
             ></textarea>
           </div>
         </div>
-        <div className={styles.formContainer}>        
+        <div className={styles.formContainerTerms}>
           <input type='checkbox'
             name='termsCondition'
             value={termsCondition}
             onChange={(e) => setTermsCondition(e.target.value)}
             required
           />
-          <a><label>Terms and Conditions</label></a>
+          <label><a>Terms and Conditions</a></label>
         </div>
         <div className={styles.formContainer}>
           <Button type='submit' className={styles.btnEvents}>Submit</Button>
