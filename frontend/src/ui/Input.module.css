@@ -1,0 +1,16 @@
+.input {
+  height: 3rem;
+  width: 100%;
+  box-shadow: 0 0 2rem 0 rgba(0, 0, 0, 0.05), 0 0 0 0.1rem rgba(0, 0, 0, 0.08);
+  border: none;
+  padding: 0.8rem;
+  font-family: inherit;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.password {
+  margin-bottom: 2rem;
+}

@@ -57,6 +57,11 @@ const NotLoggedInNav = () => {
               SUBMIT EVENTS
             </Link>
           </li>
+          <li>
+            <Link to="/contactus" onClick={closeMenu}>
+              CONTACT US
+            </Link>
+          </li>
         </div>
         <div className={styles.btnWarapper}>
           <li>

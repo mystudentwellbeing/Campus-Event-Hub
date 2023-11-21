@@ -1,0 +1,19 @@
+.signup {
+  display: flex;
+  flex-grow: 1;
+  margin-top: 4rem;
+}
+
+@media (min-width: 481px) and (max-width: 1023px) {
+  .signup {
+    min-width: 60rem;
+    margin-top: 6rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .signup {
+    min-width: 100rem;
+    margin-top: 8rem;
+  }
+}
