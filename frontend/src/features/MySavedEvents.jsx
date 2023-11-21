@@ -1,5 +1,7 @@
+import { Link } from 'react-router-dom';
 import useEvents from '../hooks/useEvents';
 import Event from './Event';
+import { FaLongArrowAltRight } from 'react-icons/fa';
 import styles from './MySavedEvents.module.css';
 
 const MySavedEvents = () => {
@@ -10,8 +12,12 @@ const MySavedEvents = () => {
   );
 
   return (
-    <main className={styles.container}>
+    <main>
       <h1>My Saved Events ❤️</h1>
+      <Link to="mysubmittedevents" className={styles.textWrapper}>
+        <p>View My Submitted Events</p>
+        <FaLongArrowAltRight />
+      </Link>
       <div className={styles.eventsList}>
         {savedEventsList.length > 0 ? (
           savedEventsList.map((event) => (
