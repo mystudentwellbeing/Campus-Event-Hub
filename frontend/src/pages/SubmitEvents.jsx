@@ -172,11 +172,24 @@ const SubmitEvents = () => {
         <div className={styles.formContainer}>
         <div>
             <label>Type</label>
-            <input type='textbox'
+            <select
               name='type'
+              className={styles.dropdownStyle}
               value={type}
               onChange={(e) => setType(e.target.value)}
-            />
+            >
+            <option value=''>Select Event Type</option>
+            <option value='NETWORKING'>NETWORKING</option>
+            <option value='CAMPUS'>CAMPUS</option>
+            <option value='CULTURAL'>CULTURAL</option>
+            <option value='HOBBIES'>HOBBIES</option>
+            <option value='SPORTS'>SPORTS</option>
+            <option value='EDUCATIONAL'>EDUCATIONAL</option>
+            <option value='NIGHTLIFE'>NIGHTLIFE</option>
+            <option value='ARTS'>ARTS</option>
+            <option value='WELLBEING'>WELLBEING</option>
+            {console.log(type)}
+            </select>
           </div>
           <div>
             <label>Address (Street Number & Name)</label>
@@ -232,10 +245,13 @@ const SubmitEvents = () => {
               onChange={(e) => setShortDesc(e.target.value)}
             />
             <label>Price of Ticket</label>
-            <input type='textbox'
+            <input type='number'
               name='price'
               value={price}
               onChange={(e) => setPrice(e.target.value)}
+              min='0'
+              step='0.01'
+              required
             />
             <label>Image</label>
             <input type='textbox'
