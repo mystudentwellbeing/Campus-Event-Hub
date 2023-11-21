@@ -63,12 +63,12 @@ const LoggedInNav = () => {
             </Link>
           </li>
           <li>
-            <Link to="/submitevents" onClick={closeMenu}>
+            <Link to="/viewmyevents" onClick={closeMenu}>
               VIEW MY EVENTS
             </Link>
           </li>
           <li>
-            <Link to="/submitevents" onClick={closeMenu}>
+            <Link to="/setting" onClick={closeMenu}>
               SETTING
             </Link>
           </li>

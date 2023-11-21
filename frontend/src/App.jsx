@@ -7,6 +7,8 @@ import EventList from './features/EventList';
 import EventFullInfo from './features/EventFullInfo';
 import AboutUs from './pages/AboutUs';
 import SubmitEvents from './pages/SubmitEvents';
+import ViewMyEvents from './pages/ViewMyEvents';
+import Setting from './pages/Setting';
 import ContactUs from './pages/ContactUs';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -26,6 +28,8 @@ function App() {
               <Route path="events/:id" element={<EventFullInfo />} />
             </Route>
             <Route path="submitevents" element={<SubmitEvents />} />
+            <Route path="viewmyevents" element={<ViewMyEvents />} />
+            <Route path="setting" element={<Setting />} />
             <Route path="aboutus" element={<AboutUs />} />
             <Route path="contactus" element={<ContactUs />} />
             <Route path="login" element={<Login />} />
