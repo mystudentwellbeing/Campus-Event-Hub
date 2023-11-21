@@ -24,6 +24,8 @@ const SubmitEvents = () => {
 
   const formRef = useRef(null);
 
+  const today = new Date();
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     alert(`Event Submitted`);
@@ -135,18 +137,23 @@ const SubmitEvents = () => {
         <div className={styles.formContainer}>
           <div>
             <label>Date</label>
-            <input type='textbox'
+            <input type='date'
               name='date'
               value={date}
+              placeholder='Select Event Date'
+              min={today.toISOString().split('T')[0]}
               onChange={(e) => setDate(e.target.value)}
+              required
             />
           </div>
           <div>
             <label>Time</label>
-            <input type='textbox'
+            <input type='time'
               name='time'
               value={time}
+              placeholder='Select Event Time'
               onChange={(e) => setTime(e.target.value)}
+              required
             />
           </div>
         </div>
@@ -239,6 +246,7 @@ const SubmitEvents = () => {
             name='termsCondition'
             value={termsCondition}
             onChange={(e) => setTermsCondition(e.target.value)}
+            required
           />
           <label><a>Terms and Conditions</a></label>
         </div>
