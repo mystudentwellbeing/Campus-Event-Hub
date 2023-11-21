@@ -30,7 +30,8 @@ const Event = ({ event }) => {
       month: 'short',
       day: 'numeric',
     };
-    const formattedDate = new Date(date).toLocaleDateString(
+    const [year, month, day] = date.split('-');
+    const formattedDate = new Date(year, month - 1, day).toLocaleDateString(
       'en-US',
       dateOptions
     );
