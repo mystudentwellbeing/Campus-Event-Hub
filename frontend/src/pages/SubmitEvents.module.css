@@ -14,7 +14,7 @@
 
 .title {
     color: var(--darkblue);
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 900;
     padding: 0.5rem 1rem;
     margin: 1rem 4rem;
@@ -62,7 +62,7 @@
     gap: 1rem;
 }
 
-button {
+/* button {
     color: var(--white);
     font-size: 1.25rem;
     font-weight: bold;
@@ -71,7 +71,9 @@ button {
     height: 2.5rem;
     width: 7.5rem;
     margin: 1.5rem;
-}
+} */
 
-  
-  
+.btnEvents {
+    background-color: var(--darkblue);
+    margin: 1.5rem;
+}

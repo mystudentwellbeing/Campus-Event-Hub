@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import styles from './SubmitEvents.module.css';
+import Button from '../ui/Button';
 
 const SubmitEvents = () => {
   const [contactName, setContactName] = useState('');
@@ -9,7 +10,9 @@ const SubmitEvents = () => {
   const [nameOfInst, setNameOfInst] = useState('');
   const [nameOfEvent, setNameOfEvent] = useState('');
   const [date, setDate] = useState('');
-  const [time, setTime] = useState('');
+  //const [time, setTime] = useState('');
+  const [startTime, setStartTime] = useState('');
+  const [endTime, setEndTime] = useState('');
   const [type, setType] = useState('');
   const [address, setAddress] = useState('');
   const [nameOfVenue, setNameOfVenue] = useState('');
@@ -37,7 +40,9 @@ const SubmitEvents = () => {
     setNameOfInst('');
     setNameOfEvent('');
     setDate('');
-    setTime('');
+    //setTime('');
+    setStartTime('');
+    setEndTime('');
     setType('');
     setAddress('');
     setNameOfVenue('');
@@ -61,7 +66,9 @@ const SubmitEvents = () => {
     setNameOfInst('');
     setNameOfEvent('');
     setDate('');
-    setTime('');
+    //setTime('');
+    setStartTime('');
+    setEndTime('');
     setType('');
     setAddress('');
     setNameOfVenue('');
@@ -79,7 +86,7 @@ const SubmitEvents = () => {
     // <div>SubmitEvents</div>
     <div className={styles.submitEvents}>
       <h3 className={styles.title}>Submit your event</h3>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} ref={formRef}>
         <div className={styles.formContainer}>
           <div>
             <label>Contact Name</label>
@@ -87,6 +94,7 @@ const SubmitEvents = () => {
               name='contactName'
               value={contactName}
               onChange={(e) => setContactName(e.target.value)}
+              required
             />
           </div>
           <div>
@@ -140,19 +148,23 @@ const SubmitEvents = () => {
             <input type='date'
               name='date'
               value={date}
-              placeholder='Select Event Date'
               min={today.toISOString().split('T')[0]}
               onChange={(e) => setDate(e.target.value)}
               required
             />
           </div>
           <div>
-            <label>Time</label>
+            <label>Event Start & End Time</label>
             <input type='time'
-              name='time'
-              value={time}
-              placeholder='Select Event Time'
-              onChange={(e) => setTime(e.target.value)}
+              name='startTime'
+              value={startTime}
+              onChange={(e) => setStartTime(e.target.value)}
+              required
+            />
+            <input type='time'
+              name='endTime'
+              value={endTime}
+              onChange={(e) => setEndTime(e.target.value)}
               required
             />
           </div>
@@ -248,11 +260,11 @@ const SubmitEvents = () => {
             onChange={(e) => setTermsCondition(e.target.value)}
             required
           />
-          <label><a>Terms and Conditions</a></label>
+          <a><label>Terms and Conditions</label></a>
         </div>
         <div className={styles.formContainer}>
-          <button type="submit">Submit</button>
-          <button type="reset" onReset={handleReset}>Cancel</button>
+          <Button type='submit' className={styles.btnEvents}>Submit</Button>
+          <Button type='reset' className={styles.btnEvents} onClick={handleReset}>Cancel</Button>
         </div>
       </form>
     </div>
