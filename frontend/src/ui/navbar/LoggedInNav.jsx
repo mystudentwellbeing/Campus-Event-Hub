@@ -4,7 +4,7 @@ import useAuth from '../../hooks/useAuth';
 import Hamburger from 'hamburger-react';
 import useOutsideClick from '../../hooks/useOutsideClick';
 import Button from '../Button';
-import styles from './loggedInNav.module.css';
+import styles from './notLoggedInNav.module.css';
 
 const LoggedInNav = () => {
   const [isHambugerOpen, setHamburgerOpen] = useState(false);
@@ -60,6 +60,16 @@ const LoggedInNav = () => {
           <li>
             <Link to="/submitevents" onClick={closeMenu}>
               SUBMIT EVENTS
+            </Link>
+          </li>
+          <li>
+            <Link to="/submitevents" onClick={closeMenu}>
+              VIEW MY EVENTS
+            </Link>
+          </li>
+          <li>
+            <Link to="/submitevents" onClick={closeMenu}>
+              SETTING
             </Link>
           </li>
           <li>
