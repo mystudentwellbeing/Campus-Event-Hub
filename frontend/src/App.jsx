@@ -8,11 +8,14 @@ import EventFullInfo from './features/EventFullInfo';
 import AboutUs from './pages/AboutUs';
 import SubmitEvents from './pages/SubmitEvents';
 import ViewMyEvents from './pages/ViewMyEvents';
+import MySavedEvents from './features/MySavedEvents';
+import MySubmittedEvents from './features/MySubmittedEvents';
 import Setting from './pages/Setting';
 import ContactUs from './pages/ContactUs';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Footer from './ui/Footer';
+import ProtectedRoute from './pages/ProtectedRoute';
 import './App.css';
 
 function App() {
@@ -28,8 +31,31 @@ function App() {
               <Route path="events/:id" element={<EventFullInfo />} />
             </Route>
             <Route path="submitevents" element={<SubmitEvents />} />
-            <Route path="viewmyevents" element={<ViewMyEvents />} />
-            <Route path="setting" element={<Setting />} />
+
+            {/* Wrap ViewMyEvents and its nested routes with ProtectedRoute */}
+            <Route
+              path="viewmyevents"
+              element={
+                <ProtectedRoute>
+                  <ViewMyEvents />
+                </ProtectedRoute>
+              }
+            >
+              <Route index element={<MySavedEvents />} />
+              <Route path="mysavedevents" element={<MySavedEvents />} />
+              <Route path="mysubmittedevents" element={<MySubmittedEvents />} />
+            </Route>
+
+            {/* Wrap Setting with ProtectedRoute */}
+            <Route
+              path="setting"
+              element={
+                <ProtectedRoute>
+                  <Setting />
+                </ProtectedRoute>
+              }
+            />
+
             <Route path="aboutus" element={<AboutUs />} />
             <Route path="contactus" element={<ContactUs />} />
             <Route path="login" element={<Login />} />
