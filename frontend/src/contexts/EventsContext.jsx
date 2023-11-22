@@ -73,6 +73,17 @@ const EventsProvider = ({ children }) => {
     }));
   };
 
+  // Events submiited by the current user
+  const currentUserId = 1;
+
+  const myApprovedEvents = events.filter(
+    (event) => event.user_id === currentUserId && event.is_approved === 1
+  );
+
+  const myPendingEvents = events.filter(
+    (event) => event.user_id === currentUserId && event.is_approved !== 1
+  );
+
   return (
     <EventsContext.Provider
       value={{
@@ -86,6 +97,8 @@ const EventsProvider = ({ children }) => {
         currentEvent,
         savedEvents,
         toggleSave,
+        myApprovedEvents,
+        myPendingEvents,
       }}
     >
       {children}
