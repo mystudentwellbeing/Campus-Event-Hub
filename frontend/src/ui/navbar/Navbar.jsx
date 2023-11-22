@@ -1,15 +1,14 @@
-// import { useAuth } from "../../contexts/AuthContext";
+import useAuth from '../../hooks/useAuth';
 import NotLoggedInNav from './NotLoggedInNav';
-// import LoggedInNav from "./LoggedInNav";
+import LoggedInNav from './LoggedInNav';
 import styles from './Navbar.module.css';
 
 const Navbar = () => {
-  // const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = useAuth();
 
   return (
     <nav className={styles.navBar}>
-      {/* {isAuthenticated ? <LoggedInNav /> : <NotLoggedInNav />} */}
-      <NotLoggedInNav />
+      {isAuthenticated ? <LoggedInNav /> : <NotLoggedInNav />}
     </nav>
   );
 };

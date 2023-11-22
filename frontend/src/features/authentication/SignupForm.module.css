@@ -1,0 +1,60 @@
+.signupContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  width: 95%;
+  margin: auto;
+  padding: 3rem 1rem;
+  box-shadow: 0 0 2rem 0 rgba(0, 0, 0, 0.05), 0 0 0 0.1rem rgba(0, 0, 0, 0.08);
+}
+
+.signupContainer h3 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.signupContainer label {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 1rem 0;
+}
+
+.signupContainer p {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  align-self: center;
+}
+
+.signupContainer a:link,
+.signupContainer a:visited {
+  color: inherit;
+  align-self: center;
+  font-size: 1.5rem;
+}
+
+.signupContainer a:hover {
+  color: var(--green2);
+}
+
+.inputRow {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 50%;
+  margin: 1rem;
+}
+
+@media (min-width: 481px) and (max-width: 1023px) {
+  .signupContainer {
+    width: 80%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .signupContainer {
+    width: 50%;
+  }
+}

@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import styles from './SubmitEvents.module.css';
+import Button from '../ui/Button';
 
 const SubmitEvents = () => {
   const [contactName, setContactName] = useState('');
@@ -9,7 +10,9 @@ const SubmitEvents = () => {
   const [nameOfInst, setNameOfInst] = useState('');
   const [nameOfEvent, setNameOfEvent] = useState('');
   const [date, setDate] = useState('');
-  const [time, setTime] = useState('');
+  //const [time, setTime] = useState('');
+  const [startTime, setStartTime] = useState('');
+  const [endTime, setEndTime] = useState('');
   const [type, setType] = useState('');
   const [address, setAddress] = useState('');
   const [nameOfVenue, setNameOfVenue] = useState('');
@@ -24,6 +27,8 @@ const SubmitEvents = () => {
 
   const formRef = useRef(null);
 
+  const today = new Date();
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     alert(`Event Submitted`);
@@ -35,7 +40,9 @@ const SubmitEvents = () => {
     setNameOfInst('');
     setNameOfEvent('');
     setDate('');
-    setTime('');
+    //setTime('');
+    setStartTime('');
+    setEndTime('');
     setType('');
     setAddress('');
     setNameOfVenue('');
@@ -59,7 +66,9 @@ const SubmitEvents = () => {
     setNameOfInst('');
     setNameOfEvent('');
     setDate('');
-    setTime('');
+    //setTime('');
+    setStartTime('');
+    setEndTime('');
     setType('');
     setAddress('');
     setNameOfVenue('');
@@ -77,7 +86,7 @@ const SubmitEvents = () => {
     // <div>SubmitEvents</div>
     <div className={styles.submitEvents}>
       <h3 className={styles.title}>Submit your event</h3>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} ref={formRef}>
         <div className={styles.formContainer}>
           <div>
             <label>Contact Name</label>
@@ -85,6 +94,7 @@ const SubmitEvents = () => {
               name='contactName'
               value={contactName}
               onChange={(e) => setContactName(e.target.value)}
+              required
             />
           </div>
           <div>
@@ -135,29 +145,51 @@ const SubmitEvents = () => {
         <div className={styles.formContainer}>
           <div>
             <label>Date</label>
-            <input type='textbox'
+            <input type='date'
               name='date'
               value={date}
+              min={today.toISOString().split('T')[0]}
               onChange={(e) => setDate(e.target.value)}
+              required
             />
           </div>
           <div>
-            <label>Time</label>
-            <input type='textbox'
-              name='time'
-              value={time}
-              onChange={(e) => setTime(e.target.value)}
+            <label>Event Start & End Time</label>
+            <input type='time'
+              name='startTime'
+              value={startTime}
+              onChange={(e) => setStartTime(e.target.value)}
+              required
+            />
+            <input type='time'
+              name='endTime'
+              value={endTime}
+              onChange={(e) => setEndTime(e.target.value)}
+              required
             />
           </div>
         </div>
         <div className={styles.formContainer}>
         <div>
             <label>Type</label>
-            <input type='textbox'
+            <select
               name='type'
+              className={styles.dropdownStyle}
               value={type}
               onChange={(e) => setType(e.target.value)}
-            />
+            >
+            <option value=''>Select Event Type</option>
+            <option value='NETWORKING'>NETWORKING</option>
+            <option value='CAMPUS'>CAMPUS</option>
+            <option value='CULTURAL'>CULTURAL</option>
+            <option value='HOBBIES'>HOBBIES</option>
+            <option value='SPORTS'>SPORTS</option>
+            <option value='EDUCATIONAL'>EDUCATIONAL</option>
+            <option value='NIGHTLIFE'>NIGHTLIFE</option>
+            <option value='ARTS'>ARTS</option>
+            <option value='WELLBEING'>WELLBEING</option>
+            {console.log(type)}
+            </select>
           </div>
           <div>
             <label>Address (Street Number & Name)</label>
@@ -213,10 +245,13 @@ const SubmitEvents = () => {
               onChange={(e) => setShortDesc(e.target.value)}
             />
             <label>Price of Ticket</label>
-            <input type='textbox'
+            <input type='number'
               name='price'
               value={price}
               onChange={(e) => setPrice(e.target.value)}
+              min='0'
+              step='0.01'
+              required
             />
             <label>Image</label>
             <input type='textbox'
@@ -234,17 +269,18 @@ const SubmitEvents = () => {
             ></textarea>
           </div>
         </div>
-        <div className={styles.formContainer}>        
+        <div className={styles.formContainerTerms}>
           <input type='checkbox'
             name='termsCondition'
             value={termsCondition}
             onChange={(e) => setTermsCondition(e.target.value)}
+            required
           />
           <label><a>Terms and Conditions</a></label>
         </div>
         <div className={styles.formContainer}>
-          <button type="submit">Submit</button>
-          <button type="reset" onReset={handleReset}>Cancel</button>
+          <Button type='submit' className={styles.btnEvents}>Submit</Button>
+          <Button type='reset' className={styles.btnEvents} onClick={handleReset}>Cancel</Button>
         </div>
       </form>
     </div>
