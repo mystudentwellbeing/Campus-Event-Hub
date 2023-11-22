@@ -1,0 +1,23 @@
+.container {
+  border: 0.2rem solid green;
+}
+
+.sectionContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 4rem;
+  border: 0.2rem solid red;
+  width: 80vw;
+  height: 50vh;
+  font-size: 1.2rem;
+}
+
+.approved {
+  border: 0.2rem solid purple;
+  width: 50%;
+}
+
+.pending {
+  border: 0.2rem solid blue;
+  width: 50%;
+}
