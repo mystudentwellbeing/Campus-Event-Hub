@@ -23,5 +23,5 @@ CREATE TABLE IF NOT EXISTS evnets (
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, 
   deleted_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,    
   inst_id INT NOT NULL,    
-  CONSTRAINT fk_event_inst_id FOREIGN KEY (inst_id) REFERENCES institutions(inst_id) ) 
+  CONSTRAINT fk_event_inst_id FOREIGN KEY (inst_id) REFERENCES institutions(inst_id)
 );
