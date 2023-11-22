@@ -62,7 +62,7 @@ const EventsProvider = ({ children }) => {
   }, [filteredEvents]);
 
   const getEventById = (id) => {
-    const foundEvent = events.find((event) => event.event_id === id);
+    const foundEvent = events.find((event) => event.event_id === parseInt(id));
     setCurrentEvent(foundEvent);
   };
 
