@@ -9,7 +9,7 @@ const restrictTo = async (req, res, next) => {
   const userIdBeingAccessed = Number(req.params.userId);
   if (
     req.currentUser.is_admin !== 1 &&
-    req.currentUser.id !== userIdBeingAccessed
+    req.currentUser.user_id !== userIdBeingAccessed
   ) {
     return res.status(403).json({ message: 'You do not have permission' });
   }
