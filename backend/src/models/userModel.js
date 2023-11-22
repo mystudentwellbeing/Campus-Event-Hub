@@ -4,7 +4,7 @@ import { v4 } from 'uuid';
 
 class User {
   constructor(
-    id,
+    user_id,
     email,
     password,
     created_at,
@@ -13,7 +13,7 @@ class User {
     is_admin,
     session_uuid
   ) {
-    this.id = id;
+    this.user_id = user_id;
 
     this.email = email;
     this.password = password;
@@ -24,8 +24,10 @@ class User {
     this.session_uuid = session_uuid;
   }
 
-  static async findById(id) {
-    const row = await db.getrow('SELECT * FROM users WHERE id = ?', [id]);
+  static async findById(user_id) {
+    const row = await db.getrow('SELECT * FROM users WHERE user_id = ?', [
+      user_id,
+    ]);
     if (row) {
       return new User(...Object.values(row));
     }
@@ -47,22 +49,28 @@ class User {
 
   async save() {
     const result = await db.query(
-      'INSERT INTO users (email, password, is_active, is_admin, session_uuid) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+      'INSERT INTO users (email, password, is_active, is_admin, session_uuid) VALUES (?, ?, ?, ?, ?)',
       [this.email, this.password, 1, 0, this.session_uuid]
     );
-    this.id = result.insertId;
+    this.user_id = result.insertId;
   }
 
   async update() {
     await db.update(
-      'UPDATE users SET email=?, is_active=?, session_uuid=? WHERE id = ?',
-      [this.email, this.is_active, this.session_uuid, this.id]
+      'UPDATE users SET email=?, password=?, is_active=?, session_uuid=? WHERE user_id=?',
+      [
+        this.email,
+        this.password,
+        this.is_active,
+        this.session_uuid,
+        this.user_id,
+      ]
     );
   }
   async logout() {
-    await db.update('UPDATE users SET session_uuid = ? WHERE id = ?', [
+    await db.update('UPDATE users SET session_uuid=? WHERE user_id=?', [
       v4(),
-      this.id,
+      this.user_id,
     ]);
   }
 
@@ -71,12 +79,12 @@ class User {
   }
 
   async delete() {
-    await db.query('DELETE FROM users WHERE id = ?', [this.id]);
+    await db.query('DELETE FROM users WHERE user_id = ?', [this.user_id]);
   }
 
   toJSON() {
     return {
-      id: this.id,
+      user_id: this.user_id,
       email: this.email,
       created_at: this.created_at,
       updated_at: this.updated_at,

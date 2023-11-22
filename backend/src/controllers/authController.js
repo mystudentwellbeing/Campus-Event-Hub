@@ -56,7 +56,7 @@ const signup = async (req, res) => {
   await newUser.save();
 
   const token = jsonwebtoken.sign(
-    { id: newUser.id, email: newUser.email },
+    { user_id: newUser.user_id, email: newUser.email },
     process.env.JWT_SECRET,
     { expiresIn: process.env.JWT_EXPIRES_IN }
   );

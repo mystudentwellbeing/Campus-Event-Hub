@@ -10,14 +10,20 @@ const verifyToken = async (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   const token = authHeader && authHeader.split(' ')[1];
-
+  console.log('Received token:', token);
   if (!token) {
     return res.status(401).json({ message: 'You are not logged in!' });
   }
 
   try {
     const decoded = jsonwebtoken.verify(token, process.env.JWT_SECRET);
-    const user = await User.findById(decoded.id);
+    console.log('Decoded token:', decoded);
+    const user = await User.findById(decoded.user_id);
+    console.log(
+      'Database session_uuid vs Token session_uuid:',
+      user.session_uuid,
+      decoded.session_uuid
+    );
     if (user.session_uuid !== decoded.session_uuid) {
       return res.status(401).json({ message: 'Unauthorized' });
     }

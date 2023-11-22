@@ -22,6 +22,5 @@ const configuration = {
 // }
 
 const db = new Db(configuration);
-console.log(configuration);
 
 export default db;
