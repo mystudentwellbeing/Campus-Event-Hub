@@ -1,6 +1,8 @@
 import { useRef, useState } from 'react';
-import styles from './SubmitEvents.module.css';
+import TermsConditions from '../features/TermsConditions';
+import Modal from '../ui/Modal';
 import Button from '../ui/Button';
+import styles from './SubmitEvents.module.css';
 
 const SubmitEvents = () => {
   const [contactName, setContactName] = useState('');
@@ -24,6 +26,7 @@ const SubmitEvents = () => {
   const [price, setPrice] = useState('');
   const [image, setImage] = useState('');
   const [termsCondition, setTermsCondition] = useState('');
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const formRef = useRef(null);
 
@@ -295,7 +298,17 @@ const SubmitEvents = () => {
             required
           />
           <label>
-            <a>Terms and Conditions</a>
+            <a onClick={() => setModalOpen((show) => !show)}>
+              Terms and Conditions
+            </a>
+            {isModalOpen && (
+              <Modal
+                title="Terms and Conditions"
+                onClose={() => setModalOpen(false)}
+              >
+                <TermsConditions onCloseModal={() => setModalOpen(false)} />
+              </Modal>
+            )}
           </label>
         </div>
         <div className={styles.formContainer}>

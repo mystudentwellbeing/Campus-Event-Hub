@@ -42,3 +42,19 @@
   background-color: var(--white);
   border: 0.1rem solid var(--grey2);
 }
+
+.close {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  font-size: 3rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--blue);
+  margin: 0;
+  padding: 0;
+  height: 0.5rem;
+  width: 0.5rem;
+  border: none;
+  justify-self: end;
+}
