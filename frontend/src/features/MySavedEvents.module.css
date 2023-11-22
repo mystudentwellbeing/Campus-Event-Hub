@@ -1,4 +1,5 @@
-main {
+.container {
+  color: var(--darkblue);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,8 +9,9 @@ main {
   text-align: center;
 }
 
-h1 {
+.container h1 {
   font-size: 2rem;
+  margin-bottom: 2rem;
 }
 
 .eventsList {

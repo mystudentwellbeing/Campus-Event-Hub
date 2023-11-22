@@ -12,7 +12,7 @@ const MySavedEvents = () => {
   );
 
   return (
-    <main>
+    <main className={styles.container}>
       <h1>My Saved Events ❤️</h1>
       <Link to="mysubmittedevents" className={styles.textWrapper}>
         <p>View My Submitted Events</p>

@@ -1,5 +1,11 @@
 .container {
   color: var(--darkblue);
+  text-align: center;
+}
+
+.container h1 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
 }
 
 .sectionContainer {
