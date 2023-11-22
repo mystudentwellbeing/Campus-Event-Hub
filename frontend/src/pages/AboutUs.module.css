@@ -1,0 +1,27 @@
+.aboutUsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10rem;
+  background-color: var(--white);
+  padding: 20px;
+}
+
+.aboutUsContainer h1 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: var(--darkblue);
+}
+
+.aboutUsContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 80%;
+  max-width: 1200px;
+  padding: 4rem;
+  font-size: 1.5rem;
+  text-align: left;
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.2);
+}

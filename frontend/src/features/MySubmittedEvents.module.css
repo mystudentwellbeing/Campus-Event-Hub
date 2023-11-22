@@ -1,0 +1,46 @@
+.container {
+  color: var(--darkblue);
+  text-align: center;
+}
+
+.container h1 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.sectionContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 4rem;
+  width: 80vw;
+  height: 55vh;
+  margin-top: 4rem;
+  font-size: 1.2rem;
+}
+
+.status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  overflow: auto;
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.status h2 {
+  color: var(--blue);
+  margin: 2rem 0;
+}
+
+.status::-webkit-scrollbar {
+  width: 1.5rem;
+}
+
+.status::-webkit-scrollbar-track {
+  background-color: var(--white);
+}
+
+.status::-webkit-scrollbar-thumb {
+  background-color: var(--grey1);
+  border-radius: 1rem;
+}

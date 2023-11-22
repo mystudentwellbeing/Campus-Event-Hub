@@ -8,8 +8,8 @@ const EventsProvider = ({ children }) => {
 
   const [query, setQuery] = useState('');
   const [filters, setFilters] = useState([]);
-  const [currentEvent, setCurrentEvent] = useState([]);
-  const [likedEvents, setLikedEvents] = useState({});
+  const [currentEvent, setCurrentEvent] = useState(null);
+  const [savedEvents, setSavedEvents] = useState({});
   // const [isLoading, setLoading] = useState(true);
   // const [error, setError] = useState('');
 
@@ -62,16 +62,27 @@ const EventsProvider = ({ children }) => {
   }, [filteredEvents]);
 
   const getEventById = (id) => {
-    const foundEvent = events.find((event) => event.event_id === id);
+    const foundEvent = events.find((event) => event.event_id === parseInt(id));
     setCurrentEvent(foundEvent);
   };
 
-  const toggleLike = (eventId) => {
-    setLikedEvents((prevLikedEvents) => ({
-      ...prevLikedEvents,
-      [eventId]: !prevLikedEvents[eventId],
+  const toggleSave = (eventId) => {
+    setSavedEvents((prevSavedEvents) => ({
+      ...prevSavedEvents,
+      [eventId]: !prevSavedEvents[eventId],
     }));
   };
+
+  // Events submiited by the current user
+  const currentUserId = 1;
+
+  const myApprovedEvents = events.filter(
+    (event) => event.user_id === currentUserId && event.is_approved === 1
+  );
+
+  const myPendingEvents = events.filter(
+    (event) => event.user_id === currentUserId && event.is_approved !== 1
+  );
 
   return (
     <EventsContext.Provider
@@ -84,8 +95,10 @@ const EventsProvider = ({ children }) => {
         setFilters,
         getEventById,
         currentEvent,
-        likedEvents,
-        toggleLike,
+        savedEvents,
+        toggleSave,
+        myApprovedEvents,
+        myPendingEvents,
       }}
     >
       {children}
