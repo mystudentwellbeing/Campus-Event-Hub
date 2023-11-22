@@ -78,3 +78,73 @@
   font-size: 2rem;
   margin-right: 0.5rem;
 }
+
+@media only screen and (max-width: 1080px) {
+  .event {
+    width: 35rem;
+  }
+  .eventImage {
+    width: 35rem;
+  }
+  .eventHeader h4 {
+    padding-left: 1rem;
+  }
+  .event p {
+    padding-left: 2rem;
+  }
+  .eventType {
+    padding-left: 2rem;
+  }
+}
+
+@media only screen and (max-width: 980px) {
+  .event {
+    width: 30rem;
+    height: auto;
+    font-size: 1.2rem;
+  }
+  .eventImage {
+    width: 30rem;
+  }
+}
+
+@media only screen and (max-width: 870px) {
+  .event {
+    width: 25rem;
+  }
+  .eventImage {
+    width: 25rem;
+  }
+}
+
+@media only screen and (max-width: 730px) {
+  .event {
+    width: 20rem;
+    height: auto;
+    font-size: 1rem;
+  }
+  .eventImage {
+    width: 20rem;
+  }
+  .eventHeader h4 {
+    padding-left: 0rem;
+  }
+  .event p {
+    padding-left: 1rem;
+  }
+  .eventType {
+    padding-left: 1rem;
+  }
+}
+
+@media only screen and (max-width: 620px) {
+  .event {
+    width: 12rem;
+    height: auto;
+    font-size: 0.8rem;
+  }
+  .eventImage {
+    width: 12rem;
+    height: 15rem;
+  }
+}
