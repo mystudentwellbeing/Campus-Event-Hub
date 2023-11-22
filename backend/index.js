@@ -1,11 +1,14 @@
-//import dotenv from 'dotenv';
+// import dotenv from 'dotenv';
 import express from 'express';
-import User from './src/models/usertemp.js'
+import authRouter from './src/routes/authRoutes.js';
+import userRouter from './src/routes/userRoutes.js';
+import User from './src/models/usertemp.js';
 import Events from './src/models/events.js';
 import eventRouter from './src/routes/eventsRoutes.js';
+import institutionRouter from './src/routes/institutionRoutes.js';
 import { verifyToken } from './src/middlewares/authMiddleware.js';
 
-//dotenv.config();
+// dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -16,18 +19,19 @@ if (process.env.NODE_ENV === 'development') {
 
 // allows us to parse json
 app.use(express.json());
+app.use(verifyToken);
 
 // work in progress
-app.use(eventRouter);
+// app.use(eventRouter);
 
-app.get('/', (req,res) => res.json({message : "Hello API World!"}));
+// app.get('/', (req, res) => res.json({ message: 'Hello API World!' }));
 
 // Routes
 app.use('/api', authRouter);
 app.use('/api/users', userRouter);
-app.use('/api/events', eventRouter);
-app.use('/api/institutions', institutionRouter);
-app.use('/api/eventInterests', eventInterestRouter);
+// app.use('/api/events', eventRouter);
+// app.use('/api/institutions', institutionRouter);
+// app.use('/api/eventInterests', eventInterestRouter);
 
 // testing if getting data from users table from connected db
 // const testFun = async () => {
@@ -35,11 +39,11 @@ app.use('/api/eventInterests', eventInterestRouter);
 //     console.log("User:", user);
 // }
 // testFun();
-const testFun = async () => {
-const event = await Events.findById(1);
-console.log("Events:", event);
-}
- testFun();
+// const testFun = async () => {
+//   const event = await Events.findById(1);
+//   console.log('Events:', event);
+// };
+// testFun();
 
 app.listen(port, () =>
   console.log(`API server ready on http://localhost:${port}`)

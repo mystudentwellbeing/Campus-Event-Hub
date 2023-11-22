@@ -1,21 +1,27 @@
 import Db from 'mysql2-async';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const configuration = {
-    // user: 'root' ,
-    // password: 'password',
-    // database: 'mystudentwellbeing-db',
-    // host: '127.0.0.1',
-    user: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE_NAME,
-    port:3306
-}
-if (process.env.DATABASE_SOCKET) {
-    configuration.socketPath = process.env.DATABASE_SOCKET
-} else {
-    configuration.host = process.env.DATABASE_HOST
-}
+  // user: 'root' ,
+  // password: 'password',
+  // database: 'mystudentwellbeing-db',
+  // host: '127.0.0.1',
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
+  port: 3308,
+};
+
+// if (process.env.DATABASE_SOCKET) {
+//   configuration.socketPath = process.env.DATABASE_SOCKET;
+// } else {
+//   configuration.host = process.env.DATABASE_HOST;
+// }
 
 const db = new Db(configuration);
+console.log(configuration);
 
 export default db;
