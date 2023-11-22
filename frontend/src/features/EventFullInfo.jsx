@@ -11,6 +11,9 @@ const EventFullInfo = () => {
     getEventById(id);
   }, [id, getEventById]);
 
+  if (!currentEvent) {
+    return <h2>Loading...</h2>;
+  }
   return (
     <main className={styles.container}>
       <h2>{currentEvent.name_of_event}</h2>
