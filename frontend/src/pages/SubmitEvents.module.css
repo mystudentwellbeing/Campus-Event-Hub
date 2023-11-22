@@ -24,15 +24,19 @@
 
 .formContainer {
   display: flex;
-  gap: 5rem;
+  gap: 2rem;
   justify-content: center;
+}
+
+.formContainer:first-child {
+  padding-top: 3rem;
 }
 
 .formContainer div {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin: 2rem;
+  margin: 1rem 2rem;
 }
 
 .formContainer div label {
@@ -40,12 +44,11 @@
   font-weight: 900;
 }
 
-.formContainer div input
-/* .formContainer div select, */ {
+.formContainer div input {
   height: 2.5rem;
   width: 20rem;
   border-radius: 0.5rem;
-  border: 0.001rem solid #d9d9d9;
+  border: 0.001rem solid var(--grey2);
   padding: 1rem;
 }
 
@@ -53,14 +56,14 @@
   height: 2.5rem;
   width: 20rem;
   border-radius: 0.5rem;
-  border: 0.001rem solid #d9d9d9;
+  border: 0.001rem solid var(--grey2);
 }
 
 .formContainerTextarea {
   height: 16rem;
   width: 20rem;
   border-radius: 0.5rem;
-  border: 0.001rem solid #d9d9d9;
+  border: 0.001rem solid var(--grey2);
   padding: 1rem;
 }
 
