@@ -1,82 +1,84 @@
 .submitEvents {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 15rem;
-    padding: 1rem;
-    background-color: var(--grey1);
-    border-radius: 1rem;
-    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.2);
-    height: auto;
-    width: 70rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10rem;
+  padding: 1rem;
+  height: auto;
+  width: 80%;
 }
 
 .title {
-    color: var(--darkblue);
-    font-size: 2rem;
-    font-weight: 900;
-    padding: 0.5rem 1rem;
-    margin: 1rem 4rem;
+  color: var(--darkblue);
+  font-size: 2rem;
+  font-weight: 900;
+  padding: 0.5rem 1rem;
+  margin-bottom: 2rem;
+}
+
+.submitEvents form {
+  background-color: var(--grey1);
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .formContainer {
-    display: flex;
-    gap: 5rem;
-    justify-content: center;
+  display: flex;
+  gap: 5rem;
+  justify-content: center;
 }
 
 .formContainer div {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 2rem;
 }
 
 .formContainer div label {
-    font-size: 1.2rem;
-    font-weight: 900;
+  font-size: 1.2rem;
+  font-weight: 900;
 }
 
 .formContainer div input
 /* .formContainer div select, */ {
-    height: 2.5rem;
-    width: 20rem;
-    border-radius: 0.5rem;
-    border: 0.001rem solid #d9d9d9;
-    padding: 1rem;
+  height: 2.5rem;
+  width: 20rem;
+  border-radius: 0.5rem;
+  border: 0.001rem solid #d9d9d9;
+  padding: 1rem;
 }
 
 .dropdownStyle {
-    height: 2.5rem;
-    width: 20rem;
-    border-radius: 0.5rem;
-    border: 0.001rem solid #d9d9d9;
+  height: 2.5rem;
+  width: 20rem;
+  border-radius: 0.5rem;
+  border: 0.001rem solid #d9d9d9;
 }
 
 .formContainerTextarea {
-    height: 16rem;
-    width: 20rem;
-    border-radius: 0.5rem;
-    border: 0.001rem solid #d9d9d9;
-    padding: 1rem;
+  height: 16rem;
+  width: 20rem;
+  border-radius: 0.5rem;
+  border: 0.001rem solid #d9d9d9;
+  padding: 1rem;
 }
 
 .formContainerSpecial {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin: 1.5rem;
-    gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 1.5rem;
+  gap: 1rem;
 }
 
 .formContainerTerms {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    font-size: 1.2rem;
-    font-weight: 900;
-    color: var(--blue);
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: var(--blue);
 }
 
 /* button {
@@ -91,20 +93,20 @@
 } */
 
 .btnEvents {
-    background-color: var(--darkblue);
-    margin: 1.5rem;
+  background-color: var(--darkblue);
+  margin: 1.5rem;
 }
 
-@media only screen and (max-width:767px) {
-    .submitEvents {
-        width: auto;
-    }
-    .formContainer {
-        flex-direction: column;
-        gap: 0rem;
-    }  
-    .btnEvents {
-        font-size: 1rem;
-        width: 7rem;
-    }
+@media only screen and (max-width: 767px) {
+  .submitEvents {
+    width: auto;
+  }
+  .formContainer {
+    flex-direction: column;
+    gap: 0rem;
+  }
+  .btnEvents {
+    font-size: 1rem;
+    width: 7rem;
+  }
 }
