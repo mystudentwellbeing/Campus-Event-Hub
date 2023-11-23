@@ -1,0 +1,56 @@
+.container {
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+  }
+
+.eventImage {
+  width: 1000px; 
+  height: 500px; 
+  display: block; 
+  margin: 0 auto;
+
+}
+
+.name_of_event {
+  color: #02057B;
+  font-size: 1.5em; 
+}
+
+.dateAndTime {
+  font-weight: bold;
+  
+}
+
+.price {
+    font-weight: bold;
+
+}
+
+.location {
+  font-weight: bold;
+  
+}
+
+.location span {
+    font-weight: normal;
+  }
+
+.broughtBy {
+  font-weight: bold;
+
+}
+
+.broughtBy span {
+    font-weight: normal;
+  }
+
+.descriptionTitle {
+  font-weight: bold; 
+
+}
+
+.link {
+  display: none; 
+}
