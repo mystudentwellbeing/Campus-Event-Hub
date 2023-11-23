@@ -1,8 +1,8 @@
 .container {
     display: flex; 
     flex-direction: column; 
-    justify-content: center; 
-    align-items: center;
+    justify-content: left; 
+    align-items: left;
   }
 
 .eventImage {
@@ -15,42 +15,55 @@
 
 .name_of_event {
   color: #02057B;
-  font-size: 1.5em; 
+  font-size: 2.5em; 
 }
 
 .dateAndTime {
   font-weight: bold;
+  font-size: 2em;
   
 }
 
 .price {
     font-weight: bold;
-
+    font-size: 2em;
 }
 
 .location {
   font-weight: bold;
-  
+  margin-top: 10px;
+  font-size: 2em;  
 }
 
 .location span {
     font-weight: normal;
+    font-size: 1em;
   }
 
 .broughtBy {
   font-weight: bold;
+  margin-top: 10px;
+  font-size: 2em;
 
 }
 
 .broughtBy span {
     font-weight: normal;
+    font-size: 1em;
   }
 
 .descriptionTitle {
   font-weight: bold; 
-
+  margin-top: 10px;
+  font-size: 2em;
 }
 
-.link {
+.eventDescription {
+    font-weight: normal;
+    font-size: 1.5em;
+  }
+  
+
+/* .link {
   display: none; 
-}
+} */
