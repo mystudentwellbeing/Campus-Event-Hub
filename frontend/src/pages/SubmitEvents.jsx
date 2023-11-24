@@ -322,7 +322,22 @@ const SubmitEvents = () => {
           </div>
         </div>
         <div className={styles.formContainer}>
-        
+          <div>
+            <label>Event Format</label>
+            <select
+              name="eventFormat"
+              className={styles.dropdownStyle}
+              value={eventFormat}
+              onChange={(e) => setEventFormat(e.target.value)}
+            >
+              <option value="">Select Event Format</option>
+              <option value="virtual">Virtual</option>
+              <option value="in-Person<">In-Person</option>
+              <option value="hybrid">Hybrid</option>
+              
+              {console.log(eventFormat)}
+            </select>
+          </div>
           {/* <div>
             <label>Type</label>
             <select
