@@ -46,7 +46,7 @@
 
 .formContainer div input {
   height: 2.5rem;
-  width: 20rem;
+  width: 25rem;
   border-radius: 0.5rem;
   border: 0.001rem solid var(--grey2);
   padding: 1rem;
@@ -54,14 +54,14 @@
 
 .dropdownStyle {
   height: 2.5rem;
-  width: 20rem;
+  width: 25rem;
   border-radius: 0.5rem;
   border: 0.001rem solid var(--grey2);
 }
 
 .formContainerTextarea {
   height: 16rem;
-  width: 20rem;
+  width: 25rem;
   border-radius: 0.5rem;
   border: 0.001rem solid var(--grey2);
   padding: 1rem;

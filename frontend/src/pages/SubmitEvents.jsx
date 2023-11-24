@@ -203,7 +203,7 @@ const SubmitEvents = () => {
             </select>
           </div>
           <div>
-            <label>Address (Street Number & Name)</label>
+            <label>Address(Street No.& Name) of Event</label>
             <input
               type="textbox"
               name="address"
