@@ -1,6 +1,6 @@
 import supabase from './supabase';
 
-const getEvents = async () => {
+export const getEvents = async () => {
   const { data, error } = await supabase
     .from('events')
     .select('*')
@@ -16,4 +16,17 @@ const getEvents = async () => {
   return data;
 };
 
-export default getEvents;
+export const getEvent = async (id) => {
+  const { data, error } = await supabase
+    .from('events')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (error) {
+    console.error(error);
+    throw new Error('Event not found');
+  }
+
+  return data;
+};
