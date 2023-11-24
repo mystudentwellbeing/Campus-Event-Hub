@@ -15,12 +15,11 @@ const Event = ({ event }) => {
   };
 
   const displayPrice = (price) => {
-    if (price.toLowerCase() === 'free' || price === '0') {
+    if (price === 0) {
       return 'Free';
-    } else if (price.startsWith('$')) {
+    } else {
       return '$';
     }
-    return price;
   };
 
   const formatEventDate = (date) => {
@@ -40,7 +39,7 @@ const Event = ({ event }) => {
   };
 
   return (
-    <Link to={`/events/${event.event_id}`} className={styles.eventCard}>
+    <Link to={`/events/${event.id}`} className={styles.eventCard}>
       <div className={styles.event}>
         <img
           className={styles.eventImage}
@@ -48,7 +47,7 @@ const Event = ({ event }) => {
           alt="EventImage"
         />
         <div className={styles.eventHeader}>
-          <h4>{event.name_of_event}</h4>
+          <h4>{event.name}</h4>
           <div className={styles.headerRightSide}>
             <h3>{displayPrice(event.price)}</h3>
             <div onClick={handleToggleSave}>
@@ -65,7 +64,7 @@ const Event = ({ event }) => {
           {event.endTime}
         </p>
         <p className={styles.eventType}>{event.type}</p>
-        <p>{event.short_description}</p>
+        <p>{event.name}</p>
       </div>
     </Link>
   );
