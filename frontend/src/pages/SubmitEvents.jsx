@@ -13,11 +13,10 @@ const SubmitEvents = () => {
   const [nameOfInst, setNameOfInst] = useState('');
   const [nameOfEvent, setNameOfEvent] = useState('');
   const [date, setDate] = useState('');
-  //const [time, setTime] = useState('');
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
   const [eventFormat, setEventFormat] = useState('');
-  const [eventType, setEventType] = useState('');
+  const [eventType, setEventType] = useState([]);
   const [address, setAddress] = useState('');
   const [nameOfVenue, setNameOfVenue] = useState('');
   const [postalCode, setPostalCode] = useState('');
@@ -30,60 +29,95 @@ const SubmitEvents = () => {
   const [termsCondition, setTermsCondition] = useState('');
   const [isModalOpen, setModalOpen] = useState(false);
 
+  const handleEventTypeChange = (e) => {
+    const { value, checked } = e.target;
+    let updatedEventTypes = [...eventType];
+
+    if (checked && !updatedEventTypes.includes(value)) {
+      updatedEventTypes.push(value); // Add the value if checked and not already in the array
+    } else {
+      updatedEventTypes = updatedEventTypes.filter((type) => type !== value); // Remove the value if unchecked
+    }
+
+    setEventType(updatedEventTypes); // Update the state with the array of selected event types
+
+  }
+
   const formRef = useRef(null);
 
   const today = new Date();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    alert(`Event Submitted`);
-    console.log(typeof(image));
+    try{
+      const { data, error } = await supabase.from('events').insert([
+        {
+          name:nameOfEvent,
+          type:eventType,
+          name_of_venue:nameOfVenue,
+          address:address,
+          city:city,
+          postal_code:postalCode,
+          event_format:eventFormat,
+          virtual_link:virtualLink,
+          image_url:image,
+          contact_name:contactName,
+          contact_phone:contactPhone,
+          contact_email:contactEmail,
+          date:date,
+          start_time:startTime,
+          end_time:endTime,
+          name_organization:nameOfOrg,
+          price:price,
+          name_of_inst:nameOfInst,
+          short_description:shortDesc,
+          description:desc,
+        },
+      ]);
 
-    // trying to upload image in our storage bucket
-    if (image && image instanceof Blob) {
-      const reader = new FileReader();
-      reader.readAsDataURL(image);
-      reader.onloadend = async () => {
-      const imageData = reader.result;
-
-      const { data, error } = await supabase.storage
-        .from('event_image')
-        .upload(imageData, {
-          cacheControl: '3600',
-          upsert: false,
-        });
-      
       if (error) {
-        console.error('Error uploading image:', error);
+        console.error('Error inserting data:', error);
+        // Log the specific error received from Supabase
+      console.error('Supabase error details:', error.message);
+      return;
       } else {
-        const imageUrl = data?.url;
-        console.log('Image uploaded successfully. URL:', imageUrl);
-      }}
+        // Data inserted successfully
+        alert('Event Submitted');
+        console.log('Data inserted:', data);
+        // Clear form fields after successful submission
+        handleReset();
+      }
+    } catch {
+      console.error('Error:', error.message);
     }
+  }
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   alert(`Event Submitted`);
+  //   console.log(typeof(image));
 
-    setContactName('');
-    setContactPhone('');
-    setContactEmail('');
-    setNameOfOrg('');
-    setNameOfInst('');
-    setNameOfEvent('');
-    setDate('');
-    //setTime('');
-    setStartTime('');
-    setEndTime('');
-    setEventFormat('');
-    setEventType('');
-    setAddress('');
-    setNameOfVenue('');
-    setPostalCode('');
-    setCity('');
-    setVirtualLink('');
-    setShortDesc('');
-    setDesc('');
-    setPrice('');
-    setImage('');
-    setTermsCondition('');
-  };
+  //   // trying to upload image in our storage bucket
+  //   if (image && image instanceof Blob) {
+  //     const reader = new FileReader();
+  //     reader.readAsDataURL(image);
+  //     reader.onloadend = async () => {
+  //     const imageData = reader.result;
+
+  //     const { data, error } = await supabase.storage
+  //       .from('event_image')
+  //       .upload(imageData, {
+  //         cacheControl: '3600',
+  //         upsert: false,
+  //       });
+      
+  //     if (error) {
+  //       console.error('Error uploading image:', error);
+  //     } else {
+  //       const imageUrl = data?.url;
+  //       console.log('Image uploaded successfully. URL:', imageUrl);
+  //     }}
+  //   }
+  // };
 
   const handleReset = () => {
     if (formRef.current) {
@@ -95,7 +129,6 @@ const SubmitEvents = () => {
       setNameOfInst('');
       setNameOfEvent('');
       setDate('');
-      //setTime('');
       setStartTime('');
       setEndTime('');
       setEventFormat('');
@@ -170,6 +203,7 @@ const SubmitEvents = () => {
               <option value="">Select University</option>
               <option value="university_of_manitoba">University of Manitoba</option>
               <option value="university_of_winnipeg">University of Winnipeg</option>
+              <option value="other">Other</option>
               {console.log(nameOfInst)}
             </select>
             {/* <input
@@ -227,8 +261,10 @@ const SubmitEvents = () => {
                 <input
                     type="checkbox"
                     name="eventType"
-                    value={eventType}
-                    onChange={(e) => setEventType(e.target.value)}
+                    value="NETWORKING"
+                    onChange={handleEventTypeChange}
+                    checked={eventType.includes("NETWORKING")}
+                    //onChange={(e) => setEventType(e.target.value)}
                 />
                 <label>NETWORKING</label>
               </div>
@@ -236,8 +272,9 @@ const SubmitEvents = () => {
                 <input
                     type="checkbox"
                     name="eventType"
-                    value={eventType}
-                    onChange={(e) => setEventType(e.target.value)}
+                    value="CAMPUS"
+                    onChange={handleEventTypeChange}
+                    checked={eventType.includes("CAMPUS")}
                 />
                 <label>CAMPUS</label>
               </div>
@@ -245,8 +282,9 @@ const SubmitEvents = () => {
                 <input
                     type="checkbox"
                     name="eventType"
-                    value={eventType}
-                    onChange={(e) => setEventType(e.target.value)}
+                    value="CULTURAL"
+                    onChange={handleEventTypeChange}
+                    checked={eventType.includes("CULTURAL")}
                 />
                 <label>CULTURAL</label>
               </div>
@@ -258,9 +296,9 @@ const SubmitEvents = () => {
                 <input
                     type="checkbox"
                     name="eventType"
-                    value={eventType}
-                    onChange={(e) => setEventType(e.target.value)}
-                    required
+                    value="HOBBIES"
+                    onChange={handleEventTypeChange}
+                    checked={eventType.includes("HOBBIES")}
                 />
                 <label>HOBBIES</label>
               </div>
@@ -268,9 +306,9 @@ const SubmitEvents = () => {
                 <input
                     type="checkbox"
                     name="eventType"
-                    value={eventType}
-                    onChange={(e) => setEventType(e.target.value)}
-                    required
+                    value="SPORTS"
+                    onChange={handleEventTypeChange}
+                    checked={eventType.includes("SPORTS")}
                 />
                 <label>SPORTS</label>
               </div>
@@ -278,9 +316,9 @@ const SubmitEvents = () => {
                 <input
                     type="checkbox"
                     name="eventType"
-                    value={eventType}
-                    onChange={(e) => setEventType(e.target.value)}
-                    required
+                    value="EDUCATIONAL"
+                    onChange={handleEventTypeChange}
+                    checked={eventType.includes("EDUCATIONAL")}
                 />
                 <label>EDUCATIONAL</label>
               </div>
@@ -292,9 +330,9 @@ const SubmitEvents = () => {
                 <input
                     type="checkbox"
                     name="eventType"
-                    value={eventType}
-                    onChange={(e) => setEventType(e.target.value)}
-                    required
+                    value="NIGHTLIFE"
+                    onChange={handleEventTypeChange}
+                    checked={eventType.includes("NIGHTLIFE")}
                 />
                 <label>NIGHTLIFE</label>
               </div>
@@ -302,9 +340,9 @@ const SubmitEvents = () => {
                 <input
                     type="checkbox"
                     name="eventType"
-                    value={eventType}
-                    onChange={(e) => setEventType(e.target.value)}
-                    required
+                    value="ARTS"
+                    onChange={handleEventTypeChange}
+                    checked={eventType.includes("ARTS")}
                 />
                 <label>ARTS</label>
               </div>
@@ -312,9 +350,9 @@ const SubmitEvents = () => {
                 <input
                     type="checkbox"
                     name="eventType"
-                    value={eventType}
-                    onChange={(e) => setEventType(e.target.value)}
-                    required
+                    value="WELLBEING"
+                    onChange={handleEventTypeChange}
+                    checked={eventType.includes("WELLBEING")}
                 />
                 <label>WELLBEING</label>
               </div>
@@ -331,9 +369,9 @@ const SubmitEvents = () => {
               onChange={(e) => setEventFormat(e.target.value)}
             >
               <option value="">Select Event Format</option>
-              <option value="virtual">Virtual</option>
+              <option value="Virtual">Virtual</option>
               <option value="in-Person<">In-Person</option>
-              <option value="hybrid">Hybrid</option>
+              <option value="Hybrid">Hybrid</option>
               
               {console.log(eventFormat)}
             </select>

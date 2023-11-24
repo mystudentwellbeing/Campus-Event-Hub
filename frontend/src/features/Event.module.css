@@ -100,7 +100,7 @@
 @media only screen and (max-width: 980px) {
   .event {
     width: 30rem;
-    height: auto;
+    height: 25rem;
     font-size: 1.2rem;
   }
   .eventImage {
@@ -120,7 +120,7 @@
 @media only screen and (max-width: 730px) {
   .event {
     width: 20rem;
-    height: auto;
+    /* height: auto; */
     font-size: 1rem;
   }
   .eventImage {
@@ -139,12 +139,12 @@
 
 @media only screen and (max-width: 620px) {
   .event {
-    width: 12rem;
-    height: auto;
+    width: 15rem;
+    /* height: auto; */
     font-size: 0.8rem;
   }
   .eventImage {
-    width: 12rem;
+    width: 15rem;
     height: 15rem;
   }
 }
