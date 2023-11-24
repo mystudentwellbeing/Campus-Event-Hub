@@ -16,7 +16,8 @@ const SubmitEvents = () => {
   //const [time, setTime] = useState('');
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
-  const [type, setType] = useState('');
+  const [eventFormat, setEventFormat] = useState('');
+  const [eventType, setEventType] = useState('');
   const [address, setAddress] = useState('');
   const [nameOfVenue, setNameOfVenue] = useState('');
   const [postalCode, setPostalCode] = useState('');
@@ -70,7 +71,8 @@ const SubmitEvents = () => {
     //setTime('');
     setStartTime('');
     setEndTime('');
-    setType('');
+    setEventFormat('');
+    setEventType('');
     setAddress('');
     setNameOfVenue('');
     setPostalCode('');
@@ -96,7 +98,8 @@ const SubmitEvents = () => {
       //setTime('');
       setStartTime('');
       setEndTime('');
-      setType('');
+      setEventFormat('');
+      setEventType('');
       setAddress('');
       setNameOfVenue('');
       setPostalCode('');
@@ -216,8 +219,111 @@ const SubmitEvents = () => {
             />
           </div>
         </div>
+        <div>
+          <label className={styles.checkBoxHeading}>Event Type</label>
+          <div className={styles.formContainerCheckbox}>
+            <div className={styles.checkboxRow}>
+              <div>
+                <input
+                    type="checkbox"
+                    name="eventType"
+                    value={eventType}
+                    onChange={(e) => setEventType(e.target.value)}
+                />
+                <label>NETWORKING</label>
+              </div>
+              <div>
+                <input
+                    type="checkbox"
+                    name="eventType"
+                    value={eventType}
+                    onChange={(e) => setEventType(e.target.value)}
+                />
+                <label>CAMPUS</label>
+              </div>
+              <div>
+                <input
+                    type="checkbox"
+                    name="eventType"
+                    value={eventType}
+                    onChange={(e) => setEventType(e.target.value)}
+                />
+                <label>CULTURAL</label>
+              </div>
+            </div>
+          </div>
+          <div className={styles.formContainerCheckbox}>
+            <div className={styles.checkboxRow}>
+              <div>
+                <input
+                    type="checkbox"
+                    name="eventType"
+                    value={eventType}
+                    onChange={(e) => setEventType(e.target.value)}
+                    required
+                />
+                <label>HOBBIES</label>
+              </div>
+              <div>
+                <input
+                    type="checkbox"
+                    name="eventType"
+                    value={eventType}
+                    onChange={(e) => setEventType(e.target.value)}
+                    required
+                />
+                <label>SPORTS</label>
+              </div>
+              <div>
+                <input
+                    type="checkbox"
+                    name="eventType"
+                    value={eventType}
+                    onChange={(e) => setEventType(e.target.value)}
+                    required
+                />
+                <label>EDUCATIONAL</label>
+              </div>
+            </div>
+          </div>
+          <div className={styles.formContainerCheckbox}>
+            <div className={styles.checkboxRow}>
+              <div>
+                <input
+                    type="checkbox"
+                    name="eventType"
+                    value={eventType}
+                    onChange={(e) => setEventType(e.target.value)}
+                    required
+                />
+                <label>NIGHTLIFE</label>
+              </div>
+              <div>
+                <input
+                    type="checkbox"
+                    name="eventType"
+                    value={eventType}
+                    onChange={(e) => setEventType(e.target.value)}
+                    required
+                />
+                <label>ARTS</label>
+              </div>
+              <div>
+                <input
+                    type="checkbox"
+                    name="eventType"
+                    value={eventType}
+                    onChange={(e) => setEventType(e.target.value)}
+                    required
+                />
+                <label>WELLBEING</label>
+              </div>
+            </div>
+          </div>
+        </div>
         <div className={styles.formContainer}>
-          <div>
+        
+          {/* <div>
             <label>Type</label>
             <select
               name="type"
@@ -237,7 +343,7 @@ const SubmitEvents = () => {
               <option value="WELLBEING">WELLBEING</option>
               {console.log(type)}
             </select>
-          </div>
+          </div> */}
           <div>
             <label>Address(Street No.& Name) of Event</label>
             <input
@@ -311,6 +417,7 @@ const SubmitEvents = () => {
             <input
               type="file"
               name="image"
+              accept="image/png image/jpeg"
               value={image}
               onChange={(e) => setImage(e.target.value)}
             />

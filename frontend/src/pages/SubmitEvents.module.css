@@ -84,6 +84,33 @@
   color: var(--blue);
 }
 
+.formContainerCheckbox {
+  display: flex;
+  margin: 1rem 2rem;
+}
+
+.checkBoxHeading {
+  font-size: 1.2rem;
+  font-weight: 900;
+  margin: 1rem 2rem;
+}
+
+.checkboxRow {
+  display: flex;
+  /* flex-direction: column; */
+  gap: 6rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkboxRow div {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
 /* button {
     color: var(--white);
     font-size: 1.25rem;
