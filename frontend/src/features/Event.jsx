@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import useEvents from '../hooks/useEvents';
-import { displayPrice, formatEventDate, formatTime } from '../utils/helper';
+import { displayPrice, formatEventDate, formatTime } from '../utils/helpers';
 import { IoIosHeartEmpty, IoIosHeart } from 'react-icons/io';
 
 import styles from './Event.module.css';

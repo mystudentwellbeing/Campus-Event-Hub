@@ -1,73 +1,46 @@
-import { useParams } from 'react-router-dom';
-import { useEffect } from 'react';
-import useEvents from '../hooks/useEvents';
+import { formatEventDate } from '../utils/helpers';
 import styles from './EventFullInfo.module.css';
 
-const formatEventDate = (date) => {
-  const dateOptions = {
-    weekday: 'short',
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  };
-  const [year, month, day] = date.split('-');
-  const formattedDate = new Date(year, month - 1, day).toLocaleDateString(
-    'en-US',
-    dateOptions
-  );
-
-  return formattedDate;
-};
+import useEvent from './useEvent';
 
 const EventFullInfo = () => {
-  const { id } = useParams();
-  const { currentEvent, getEventById } = useEvents();
-
-  useEffect(() => {
-    getEventById(id);
-  }, [id, getEventById]);
-
-  if (!currentEvent) {
-    return <h2>Loading...</h2>;
-  }
-
-  const formattedDate = formatEventDate(currentEvent.date);
+  const { isLoading, event } = useEvent();
+  if (isLoading || !event) return <div>Loading...</div>;
 
   return (
     <main className={styles.container}>
       <div className={styles.event}>
         <img
           className={styles.eventImage}
-          src={currentEvent.image_url}
+          src={event.image_url}
           alt="EventImage"
         />
       </div>
 
-      <h2 className={styles.name_of_event}>{currentEvent.name_of_event}</h2>
-      <p>{currentEvent.short_description}</p>
+      <h2 className={styles.name_of_event}>{event.name}</h2>
+      <p>{event.short_description}</p>
       <p className={styles.dateAndTime}>
-        Date and Time: {formattedDate} | Price: {currentEvent.price}</p>
+        Date and Time: {formatEventDate(event.date)} | Price: {event.price}
+      </p>
       <p className={styles.location}>
-        Location:<br />
-        <span>{currentEvent.name_of_venue}</span><br />
-        <span>{currentEvent.address}</span><br />
-        <span>{currentEvent.city}</span><br />
-        <span>{currentEvent.postal_code}</span>
+        Location:
+        <br />
+        <span>{event.name_of_venue}</span>
+        <br />
+        <span>{event.address}</span>
+        <br />
+        <span>{event.city}</span>
+        <br />
+        <span>{event.postal_code}</span>
       </p>
       <p className={styles.broughtBy}>
-        Brought You By<br />
-        <span>{currentEvent.name_organization}</span>
+        Brought You By
+        <br />
+        <span>{event.name_organization}</span>
       </p>
 
       <p className={styles.descriptionTitle}>Event Description</p>
-      <div className={styles.eventDescription}>{currentEvent.description}</div>
-
-      {currentEvent.event_link && (
-      <p className={styles.link}>
-        <a href={currentEvent.event_link} target="_blank" rel="noopener noreferrer">Link to More Info</a>
-      </p>
-        )
-      }
+      <div className={styles.eventDescription}>{event.description}</div>
     </main>
   );
 };
