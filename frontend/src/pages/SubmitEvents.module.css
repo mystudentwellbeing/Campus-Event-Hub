@@ -45,11 +45,11 @@
 }
 
 .formContainer div input {
-  height: 2.5rem;
+  height: 3rem;
   width: 25rem;
   border-radius: 0.5rem;
   border: 0.001rem solid var(--grey2);
-  padding: 1rem;
+  padding: 0.5rem;
 }
 
 .dropdownStyle {

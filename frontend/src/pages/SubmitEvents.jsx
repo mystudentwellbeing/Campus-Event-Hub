@@ -3,6 +3,7 @@ import TermsConditions from '../features/TermsConditions';
 import Modal from '../ui/Modal';
 import Button from '../ui/Button';
 import styles from './SubmitEvents.module.css';
+import supabase from '../services/supabase';
 
 const SubmitEvents = () => {
   const [contactName, setContactName] = useState('');
@@ -35,6 +36,29 @@ const SubmitEvents = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     alert(`Event Submitted`);
+    console.log(typeof(image));
+
+    // trying to upload image in our storage bucket
+    if (image && image instanceof Blob) {
+      const reader = new FileReader();
+      reader.readAsDataURL(image);
+      reader.onloadend = async () => {
+      const imageData = reader.result;
+
+      const { data, error } = await supabase.storage
+        .from('event_image')
+        .upload(imageData, {
+          cacheControl: '3600',
+          upsert: false,
+        });
+      
+      if (error) {
+        console.error('Error uploading image:', error);
+      } else {
+        const imageUrl = data?.url;
+        console.log('Image uploaded successfully. URL:', imageUrl);
+      }}
+    }
 
     setContactName('');
     setContactPhone('');
@@ -85,6 +109,7 @@ const SubmitEvents = () => {
       setTermsCondition('');
     }
   };
+  
   return (
     <div className={styles.submitEvents}>
       <h3 className={styles.title}>Submit your event</h3>
@@ -273,7 +298,7 @@ const SubmitEvents = () => {
             />
             <label>Image</label>
             <input
-              type="textbox"
+              type="file"
               name="image"
               value={image}
               onChange={(e) => setImage(e.target.value)}
