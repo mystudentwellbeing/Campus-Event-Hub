@@ -109,7 +109,7 @@ const SubmitEvents = () => {
       setTermsCondition('');
     }
   };
-  
+
   return (
     <div className={styles.submitEvents}>
       <h3 className={styles.title}>Submit your event</h3>
@@ -146,7 +146,7 @@ const SubmitEvents = () => {
             />
           </div>
           <div>
-            <label>Name of Orgnization</label>
+            <label>Name of Orgnization(Student Club)</label>
             <input
               type="textbox"
               name="nameOfOrg"
@@ -158,12 +158,23 @@ const SubmitEvents = () => {
         <div className={styles.formContainer}>
           <div>
             <label>Name of Instituion</label>
-            <input
+            <select
+              name="nameOfInst"
+              className={styles.dropdownStyle}
+              value={nameOfInst}
+              onChange={(e) => setNameOfInst(e.target.value)}
+            >
+              <option value="">Select University</option>
+              <option value="university_of_manitoba">University of Manitoba</option>
+              <option value="university_of_winnipeg">University of Winnipeg</option>
+              {console.log(nameOfInst)}
+            </select>
+            {/* <input
               type="textbox"
               name="nameOfInst"
               value={nameOfInst}
               onChange={(e) => setNameOfInst(e.target.value)}
-            />
+            /> */}
           </div>
           <div>
             <label>Name of Event</label>
