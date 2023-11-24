@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import useEvents from '../hooks/useEvents';
+import { displayPrice, formatEventDate, formatTime } from '../utils/helper';
 import { IoIosHeartEmpty, IoIosHeart } from 'react-icons/io';
+
 import styles from './Event.module.css';
 
 const Event = ({ event }) => {
@@ -12,30 +14,6 @@ const Event = ({ event }) => {
     e.preventDefault();
     e.stopPropagation();
     toggleSave(event.event_id);
-  };
-
-  const displayPrice = (price) => {
-    if (price === 0) {
-      return 'Free';
-    } else {
-      return '$';
-    }
-  };
-
-  const formatEventDate = (date) => {
-    const dateOptions = {
-      weekday: 'short',
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    };
-    const [year, month, day] = date.split('-');
-    const formattedDate = new Date(year, month - 1, day).toLocaleDateString(
-      'en-US',
-      dateOptions
-    );
-
-    return formattedDate;
   };
 
   return (
@@ -60,10 +38,10 @@ const Event = ({ event }) => {
           </div>
         </div>
         <p>
-          {formatEventDate(event.date)} &nbsp;&nbsp; {event.startTime} -{' '}
-          {event.endTime}
+          {formatEventDate(event.date)} &nbsp;&nbsp;{' '}
+          {formatTime(event.start_time)} - {formatTime(event.end_time)}
         </p>
-        <p className={styles.eventType}>{event.type}</p>
+        <p className={styles.eventType}>{event.type.join(',  ')}</p>
         <p>{event.name}</p>
       </div>
     </Link>
