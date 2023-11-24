@@ -45,23 +45,23 @@
 }
 
 .formContainer div input {
-  height: 2.5rem;
-  width: 20rem;
+  height: 3rem;
+  width: 25rem;
   border-radius: 0.5rem;
   border: 0.001rem solid var(--grey2);
-  padding: 1rem;
+  padding: 0.5rem;
 }
 
 .dropdownStyle {
   height: 2.5rem;
-  width: 20rem;
+  width: 25rem;
   border-radius: 0.5rem;
   border: 0.001rem solid var(--grey2);
 }
 
 .formContainerTextarea {
   height: 16rem;
-  width: 20rem;
+  width: 25rem;
   border-radius: 0.5rem;
   border: 0.001rem solid var(--grey2);
   padding: 1rem;
@@ -82,6 +82,33 @@
   font-size: 1.2rem;
   font-weight: 900;
   color: var(--blue);
+}
+
+.formContainerCheckbox {
+  display: flex;
+  margin: 1rem 2rem;
+}
+
+.checkBoxHeading {
+  font-size: 1.2rem;
+  font-weight: 900;
+  margin: 1rem 2rem;
+}
+
+.checkboxRow {
+  display: flex;
+  /* flex-direction: column; */
+  gap: 6rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkboxRow div {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  font-size: 1rem;
+  font-weight: 400;
 }
 
 /* button {

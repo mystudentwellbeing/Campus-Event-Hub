@@ -55,7 +55,8 @@ const ContactUs = () => {
               onChange={(e) => setMessage(e.target.value)}
             ></textarea>
           </div>
-          <div className={styles.formContainerTerms}>
+        </div>
+        <div className={styles.formContainerTerms}>
           <input
             type="checkbox"
             name="termsCondition"
@@ -76,9 +77,12 @@ const ContactUs = () => {
               </Modal>
             )}
           </label>
-          </div>
-          <div className={styles.formContainer}>
-            <Button type="submit" className={styles.btnContact}>
+        </div>
+        <div className={styles.formContainer}>
+            <Button 
+              type="submit" 
+              className={styles.btnContact}
+            >
               Submit
             </Button>
             <Button
@@ -88,7 +92,6 @@ const ContactUs = () => {
             >
               Cancel
             </Button>
-          </div>
         </div>
       </form>
     </div>
