@@ -1,4 +1,4 @@
-import useEvents from '../hooks/useEvents';
+import useEvents from './useEvents';
 import Button from '../ui/Button';
 import { GrGroup } from 'react-icons/gr';
 import { LuSchool, LuFlower2 } from 'react-icons/lu';
@@ -13,14 +13,24 @@ import { SlGraduation } from 'react-icons/sl';
 import styles from './Filter.module.css';
 
 const Filter = () => {
-  const { filters, setFilters, eventCountsByType } = useEvents();
+  const { isLoading, filters, setFilters, eventCountsByType } = useEvents();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!eventCountsByType) {
+    return <div>Error: Event counts not available.</div>;
+  }
 
   const toggleFilter = (filterType) => {
-    setFilters((prevFilters) =>
-      prevFilters.includes(filterType)
+    setFilters((prevFilters) => {
+      const newFilters = prevFilters.includes(filterType)
         ? prevFilters.filter((f) => f !== filterType)
-        : [...prevFilters, filterType]
-    );
+        : [...prevFilters, filterType];
+      console.log(newFilters);
+      return newFilters;
+    });
   };
 
   const isActive = (filterType) => filters.includes(filterType);

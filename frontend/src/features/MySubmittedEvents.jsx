@@ -1,17 +1,17 @@
-import useEvents from '../hooks/useEvents';
-import Event from './Event';
+// import useEvents from '../hooks/useEvents';
+// import Event from './Event';
 import styles from './MySubmittedEvents.module.css';
 
 const MySubmittedEvents = () => {
-  const { myApprovedEvents, myPendingEvents } = useEvents();
+  // const { myApprovedEvents, myPendingEvents } = useEvents();
 
-  const numApprovedEvents = myApprovedEvents.length;
-  const numPendingEvents = myPendingEvents.length;
+  // const numApprovedEvents = myApprovedEvents.length;
+  // const numPendingEvents = myPendingEvents.length;
 
   return (
     <main className={styles.container}>
       <h1>My Submitted Events</h1>
-      <div className={styles.sectionContainer}>
+      {/* <div className={styles.sectionContainer}>
         <section className={styles.status}>
           <h2>Approved Events ({numApprovedEvents})</h2>
           {myApprovedEvents.map((event) => (
@@ -24,7 +24,7 @@ const MySubmittedEvents = () => {
             <Event key={event.event_id} event={event} />
           ))}
         </section>
-      </div>
+      </div> */}
     </main>
   );
 };

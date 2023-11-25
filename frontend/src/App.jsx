@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider } from './contexts/AuthContext';
-import { EventsProvider } from './contexts/EventsContext';
 import Navbar from './ui/navbar/Navbar';
 import Homepage from './pages/Homepage';
 import EventList from './features/EventList';
@@ -33,50 +32,45 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <BrowserRouter>
-          <EventsProvider>
-            <Navbar />
-            <Routes>
-              <Route path="/" element={<Homepage />}>
-                <Route index element={<EventList />} />
-                <Route path="events" element={<EventList />} />
-                <Route path="events/:eventId" element={<EventFullInfo />} />
-              </Route>
-              <Route path="submitevents" element={<SubmitEvents />} />
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Homepage />}>
+              <Route index element={<EventList />} />
+              <Route path="events" element={<EventList />} />
+              <Route path="events/:eventId" element={<EventFullInfo />} />
+            </Route>
+            <Route path="submitevents" element={<SubmitEvents />} />
 
-              {/* Wrap ViewMyEvents and its nested routes with ProtectedRoute */}
-              <Route
-                path="viewmyevents"
-                element={
-                  <ProtectedRoute>
-                    <ViewMyEvents />
-                  </ProtectedRoute>
-                }
-              >
-                <Route index element={<MySavedEvents />} />
-                <Route path="mysavedevents" element={<MySavedEvents />} />
-                <Route
-                  path="mysubmittedevents"
-                  element={<MySubmittedEvents />}
-                />
-              </Route>
+            {/* Wrap ViewMyEvents and its nested routes with ProtectedRoute */}
+            <Route
+              path="viewmyevents"
+              element={
+                <ProtectedRoute>
+                  <ViewMyEvents />
+                </ProtectedRoute>
+              }
+            >
+              <Route index element={<MySavedEvents />} />
+              <Route path="mysavedevents" element={<MySavedEvents />} />
+              <Route path="mysubmittedevents" element={<MySubmittedEvents />} />
+            </Route>
 
-              {/* Wrap Setting with ProtectedRoute */}
-              <Route
-                path="setting"
-                element={
-                  <ProtectedRoute>
-                    <Setting />
-                  </ProtectedRoute>
-                }
-              />
+            {/* Wrap Setting with ProtectedRoute */}
+            <Route
+              path="setting"
+              element={
+                <ProtectedRoute>
+                  <Setting />
+                </ProtectedRoute>
+              }
+            />
 
-              <Route path="aboutus" element={<AboutUs />} />
-              <Route path="contactus" element={<ContactUs />} />
-              <Route path="login" element={<Login />} />
-              <Route path="signup" element={<Signup />} />
-            </Routes>
-            <Footer />
-          </EventsProvider>
+            <Route path="aboutus" element={<AboutUs />} />
+            <Route path="contactus" element={<ContactUs />} />
+            <Route path="login" element={<Login />} />
+            <Route path="signup" element={<Signup />} />
+          </Routes>
+          <Footer />
         </BrowserRouter>
       </AuthProvider>
     </QueryClientProvider>

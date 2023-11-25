@@ -14,10 +14,6 @@ const useEvent = () => {
     queryFn: () => getEvent(eventId),
     retry: false,
   });
-  console.log('id:', eventId);
-  console.log('isLoading:', isLoading);
-  console.log('error:', error);
-  console.log('event:', event);
 
   return { isLoading, error, event };
 };
