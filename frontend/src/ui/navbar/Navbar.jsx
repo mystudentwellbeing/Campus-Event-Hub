@@ -1,14 +1,14 @@
+import { useUser } from '../../features/authentication/useUser';
 import NotLoggedInNav from './NotLoggedInNav';
-// import LoggedInNav from './LoggedInNav';
+import LoggedInNav from './LoggedInNav';
 import styles from './Navbar.module.css';
 
 const Navbar = () => {
-  // const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = useUser();
 
   return (
     <nav className={styles.navBar}>
-      <NotLoggedInNav />
-      {/* {isAuthenticated ? <LoggedInNav /> : <NotLoggedInNav />} */}
+      {isAuthenticated ? <LoggedInNav /> : <NotLoggedInNav />}
     </nav>
   );
 };

@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
-import useAuth from '../../hooks/useAuth';
+// import { useUser } from '../../features/authentication/useUser';
+import { useLogout } from '../../features/authentication/useLogout';
 import Hamburger from 'hamburger-react';
 import useOutsideClick from '../../hooks/useOutsideClick';
 import Button from '../Button';
@@ -13,7 +14,7 @@ const LoggedInNav = () => {
   const hamburgerRef = useRef(null);
   const dropdownRef = useRef(null);
 
-  const { logout } = useAuth();
+  const { logout } = useLogout();
   const navigate = useNavigate();
 
   const handleClick = () => {

@@ -16,17 +16,15 @@ import ContactUs from './pages/ContactUs';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Footer from './ui/Footer';
-// import ProtectedRoute from './pages/ProtectedRoute';
+import ProtectedRoute from './ui/ProtectedRoute';
 import './App.css';
 
 function App() {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        // staleTime: 60 * 1000,
-        // staleTime: 0,
-        staleTime: 5 * 60 * 1000, // Data is considered stale after 5 minutes
-        cacheTime: 30 * 60 * 1000, // Cache the data for 30 minutes
+        staleTime: 0,
+        cacheTime: 1000,
       },
     },
   });
@@ -51,9 +49,9 @@ function App() {
           <Route
             path="viewmyevents"
             element={
-              // <ProtectedRoute>
-              <ViewMyEvents />
-              // </ProtectedRoute>
+              <ProtectedRoute>
+                <ViewMyEvents />
+              </ProtectedRoute>
             }
           >
             <Route index element={<MySavedEvents />} />
@@ -65,9 +63,9 @@ function App() {
           <Route
             path="setting"
             element={
-              // <ProtectedRoute>
-              <Setting />
-              // </ProtectedRoute>
+              <ProtectedRoute>
+                <Setting />
+              </ProtectedRoute>
             }
           />
 
@@ -87,12 +85,12 @@ function App() {
             duration: 3000,
           },
           error: {
-            duration: 5000,
+            duration: 4000,
           },
           style: {
-            fontSize: '16px',
-            maxWidth: '500px',
-            padding: '16px 24px',
+            fontSize: '1.5rem',
+            maxWidth: '50rem',
+            padding: '2rem',
             backgroundColor: 'var(--grey1)',
             color: 'var(--darakblue)',
           },
