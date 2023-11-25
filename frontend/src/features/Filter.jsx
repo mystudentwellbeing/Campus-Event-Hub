@@ -1,3 +1,5 @@
+import { useSearchParams } from 'react-router-dom';
+import { useState } from 'react';
 import useEvents from './useEvents';
 import Button from '../ui/Button';
 import { GrGroup } from 'react-icons/gr';
@@ -13,11 +15,10 @@ import { SlGraduation } from 'react-icons/sl';
 import styles from './Filter.module.css';
 
 const Filter = () => {
-  const { isLoading, filters, setFilters, eventCountsByType } = useEvents();
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { eventCountsByType } = useEvents();
+  const initialFilters = searchParams.get('filters')?.split(',') || [];
+  const [filters, setFilters] = useState(initialFilters);
 
   if (!eventCountsByType) {
     return <div>Error: Event counts not available.</div>;
@@ -25,10 +26,23 @@ const Filter = () => {
 
   const toggleFilter = (filterType) => {
     setFilters((prevFilters) => {
-      const newFilters = prevFilters.includes(filterType)
-        ? prevFilters.filter((f) => f !== filterType)
-        : [...prevFilters, filterType];
-      console.log(newFilters);
+      let newFilters;
+      if (prevFilters.includes(filterType)) {
+        // Remove the filterType if it already exists
+        newFilters = prevFilters.filter((f) => f !== filterType);
+      } else {
+        // Add the filterType if it doesn't exist
+        newFilters = [...prevFilters, filterType];
+      }
+
+      // Update the searchParams based on newFilters
+      if (newFilters.length > 0) {
+        setSearchParams({ filters: newFilters.join(',') }, { replace: true });
+      } else {
+        // If no filters are active, remove the 'filters' parameter or set it as an empty string
+        setSearchParams({}, { replace: true });
+      }
+
       return newFilters;
     });
   };

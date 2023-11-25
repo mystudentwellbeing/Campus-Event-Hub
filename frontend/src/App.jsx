@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider } from './contexts/AuthContext';
 import Navbar from './ui/navbar/Navbar';
@@ -23,13 +24,18 @@ function App() {
     defaultOptions: {
       queries: {
         // staleTime: 60 * 1000,
-        staleTime: 0,
+        // staleTime: 0,
+        staleTime: 5 * 60 * 1000, // Data is considered stale after 5 minutes
+        cacheTime: 30 * 60 * 1000, // Cache the data for 30 minutes
       },
     },
   });
 
   return (
     <QueryClientProvider client={queryClient}>
+      <div style={{ fontSize: '16px' }}>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </div>
       <AuthProvider>
         <BrowserRouter>
           <Navbar />
