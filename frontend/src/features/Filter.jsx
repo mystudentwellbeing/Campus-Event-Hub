@@ -28,20 +28,18 @@ const Filter = () => {
     setFilters((prevFilters) => {
       let newFilters;
       if (prevFilters.includes(filterType)) {
-        // Remove the filterType if it already exists
         newFilters = prevFilters.filter((f) => f !== filterType);
       } else {
-        // Add the filterType if it doesn't exist
         newFilters = [...prevFilters, filterType];
       }
 
-      // Update the searchParams based on newFilters
-      if (newFilters.length > 0) {
-        setSearchParams({ filters: newFilters.join(',') }, { replace: true });
-      } else {
-        // If no filters are active, remove the 'filters' parameter or set it as an empty string
-        setSearchParams({}, { replace: true });
-      }
+      setTimeout(() => {
+        if (newFilters.length > 0) {
+          setSearchParams({ filters: newFilters.join(',') }, { replace: true });
+        } else {
+          setSearchParams({}, { replace: true });
+        }
+      }, 0);
 
       return newFilters;
     });

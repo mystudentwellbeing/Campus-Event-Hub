@@ -1,33 +1,23 @@
-// import { useEffect, useRef } from 'react';
-// import useEvents from '../hooks/useEvents';
+import { useSearchParams } from 'react-router-dom';
 import styles from './Search.module.css';
 
 const Search = () => {
-  // const { query, setQuery } = useEvents();
-  // const inputEl = useRef(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchQuery = searchParams.get('search') || '';
 
-  // useEffect(() => {
-  //   const callback = (e) => {
-  //     if (document.activeElement === inputEl.current) return;
-
-  //     if (e.code === 'Enter') {
-  //       inputEl.current.focus();
-  //     }
-  //   };
-  //   document.addEventListener('keydown', callback);
-  //   return () => document.removeEventListener('keydown', callback);
-  // }, []);
+  const handleSearchChange = (event) => {
+    setSearchParams({ search: event.target.value });
+  };
 
   return (
     <div className={styles.searchContainer}>
-      {/* <input
+      <input
         className={styles.searchBox}
         type="text"
         placeholder="Search Events"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        ref={inputEl}
-      /> */}
+        value={searchQuery}
+        onChange={handleSearchChange}
+      />
     </div>
   );
 };

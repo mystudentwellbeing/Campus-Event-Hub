@@ -1,13 +1,11 @@
 import { Outlet } from 'react-router-dom';
-import Search from '../features/Search';
-import Filter from '../features/Filter';
+import EventOperations from '../features/EventOperations';
 import styles from './Homepage.module.css';
 
 const Homepage = () => {
   return (
     <main className={styles.homepage}>
-      <Search />
-      <Filter />
+      <EventOperations />
       <Outlet />
     </main>
   );
