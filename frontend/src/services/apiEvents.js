@@ -46,7 +46,7 @@ export const getEventsCreatedByUser = async (userId) => {
   return data;
 };
 
-export const createEvent = async (newEvent) => {
+export const createEditEvent = async (newEvent, id) => {
   const hasImagePath = newEvent.image?.startsWith?.(supabaseUrl);
   const imageName = `${Math.random()}-${newEvent.image.name}`.replaceAll(
     '/',
@@ -56,13 +56,12 @@ export const createEvent = async (newEvent) => {
     ? newEvent.image
     : `${supabaseUrl}/storage/v1/object/public/event_image/${imageName}`;
 
-  // let query = supabase.from('events');
+  let query = supabase.from('events');
 
-  // if (!id) query = query.insert([{ ...newEvent, image: imagePath }]);
+  if (!id) query = query.insert([{ ...newEvent, image: imagePath }]);
+  if (id) query = query.update({ ...newEvent, image: imagePath }).eq('id', id);
 
-  const { data, error } = await supabase
-    .from('events')
-    .insert([{ ...newEvent, image: imagePath }]);
+  const { data, error } = await query.select().single();
 
   if (error) {
     console.error(error);

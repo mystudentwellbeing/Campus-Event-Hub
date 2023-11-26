@@ -50,6 +50,17 @@ const Event = ({ event }) => {
     }
   };
 
+  const handleEdit = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigate('/submitevents', { state: { event } });
+  };
+
+  // const handleDelete = (e) => {
+  //   e.preventDefault();
+  //   e.stopPropagation();
+  // };
+
   return (
     <Link
       to={`/events/${event.id}`}
@@ -59,7 +70,9 @@ const Event = ({ event }) => {
     >
       {isCreator && isHovering && (
         <div className={styles.overlayButtons}>
-          <Button type="hoverBtn">Edit</Button>
+          <Button type="hoverBtn" onClick={handleEdit}>
+            Edit
+          </Button>
           <Button type="hoverBtn">Delete</Button>
         </div>
       )}

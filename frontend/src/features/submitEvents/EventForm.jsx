@@ -1,134 +1,88 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import { useUser } from '../../features/authentication/useUser';
 import { useCreateEvent } from './useCreateEvent';
+import { useEditEvent } from './useEditEvent';
 import TermsConditions from '../TermsConditions';
 import Modal from '../../ui/Modal';
 import Button from '../../ui/Button';
 import styles from './EventForm.module.css';
 
 const EventForm = () => {
-  const { user } = useUser();
-  const { createEvent } = useCreateEvent();
-  const [contactName, setContactName] = useState('');
-  const [contactPhone, setContactPhone] = useState('');
-  const [contactEmail, setContactEmail] = useState('');
-  const [nameOfOrg, setNameOfOrg] = useState('');
-  const [nameOfInst, setNameOfInst] = useState('');
-  const [nameOfEvent, setNameOfEvent] = useState('');
-  const [date, setDate] = useState('');
-  const [startTime, setStartTime] = useState('');
-  const [endTime, setEndTime] = useState('');
-  const [eventFormat, setEventFormat] = useState('');
-  const [eventType, setEventType] = useState([]);
-  const [address, setAddress] = useState('');
-  const [nameOfVenue, setNameOfVenue] = useState('');
-  const [postalCode, setPostalCode] = useState('');
-  const [city, setCity] = useState('');
-  const [virtualLink, setVirtualLink] = useState('');
-  const [shortDesc, setShortDesc] = useState('');
-  const [desc, setDesc] = useState('');
-  const [price, setPrice] = useState('');
-  const [image, setImage] = useState(null);
-  const [termsCondition, setTermsCondition] = useState('');
   const [isModalOpen, setModalOpen] = useState(false);
 
-  const handleEventTypeChange = (e) => {
-    const { value, checked } = e.target;
-    let updatedEventTypes = [...eventType];
+  const location = useLocation();
+  const eventToEdit = location.state?.event;
 
-    if (checked && !updatedEventTypes.includes(value)) {
-      updatedEventTypes.push(value); // Add the value if checked and not already in the array
-    } else {
-      updatedEventTypes = updatedEventTypes.filter((type) => type !== value); // Remove the value if unchecked
-    }
+  const editId = eventToEdit?.id;
+  const isEditSession = Boolean(editId);
 
-    setEventType(updatedEventTypes); // Update the state with the array of selected event types
-  };
+  const { user } = useUser();
+  const { isCreating, createEvent } = useCreateEvent();
+  const { isEditing, editEvent } = useEditEvent();
+  const { errors } = formState;
 
-  const formRef = useRef(null);
-
+  const isWorking = isCreating || isEditing;
   const today = new Date();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const { register, handleSubmit, reset, formState } = useForm({
+    defaultValues: isEditSession
+      ? { ...eventToEdit, type: eventToEdit.type || [] }
+      : { type: [] },
+  });
 
-    createEvent(
-      {
-        user_id: user.id,
-        name: nameOfEvent,
-        type: eventType,
-        name_of_venue: nameOfVenue,
-        address: address,
-        city: city,
-        postal_code: postalCode,
-        event_format: eventFormat,
-        virtual_link: virtualLink,
-        image: image,
-        contact_name: contactName,
-        contact_phone: contactPhone,
-        contact_email: contactEmail,
-        date: date,
-        start_time: startTime,
-        end_time: endTime,
-        name_of_org: nameOfOrg,
-        price: price,
-        name_of_inst: nameOfInst,
-        short_description: shortDesc,
-        description: desc,
-      },
-      { onSettled: handleReset }
-    );
+  const onError = (errors) => {
+    console.log(errors);
   };
 
-  const handleReset = () => {
-    if (formRef.current) {
-      formRef.current.reset();
-      setContactName('');
-      setContactPhone('');
-      setContactEmail('');
-      setNameOfOrg('');
-      setNameOfInst('');
-      setNameOfEvent('');
-      setDate('');
-      setStartTime('');
-      setEndTime('');
-      setEventFormat('');
-      setEventType('');
-      setAddress('');
-      setNameOfVenue('');
-      setPostalCode('');
-      setCity('');
-      setVirtualLink('');
-      setShortDesc('');
-      setDesc('');
-      setPrice('');
-      setImage('');
-      setTermsCondition('');
-    }
+  const onSubmit = (data) => {
+    const image = typeof data.image === 'string' ? data.image : data.image[0];
+    if (isEditSession)
+      editEvent(
+        { newEventData: { ...data, image, user_id: user.id }, id: editId },
+        {
+          onSuccess: (data) => {
+            reset();
+          },
+        }
+      );
+    else
+      createEvent(
+        { ...data, image, user_id: user.id },
+        {
+          onSuccess: (data) => {
+            reset();
+          },
+        }
+      );
   };
 
   return (
     <div className={styles.submitEvents}>
       <h3 className={styles.title}>Submit your event</h3>
-      <form onSubmit={handleSubmit} ref={formRef}>
+      <form onSubmit={handleSubmit(onSubmit, onError)}>
         <div className={styles.formContainer}>
           <div>
             <label>Contact Name</label>
             <input
               type="text"
-              name="contactName"
-              value={contactName}
-              onChange={(e) => setContactName(e.target.value)}
-              required
+              id="contactName"
+              disabled={isWorking}
+              {...register('contact_name', {
+                required: 'This field is required',
+              })}
             />
           </div>
           <div>
-            <label>Contact Phone#</label>
+            <label>Contact Phone #</label>
             <input
               type="text"
-              name="contactPhone"
-              value={contactPhone}
-              onChange={(e) => setContactPhone(e.target.value)}
+              id="contactPhone"
+              disabled={isWorking}
+              {...register('contact_phone', {
+                required: 'This field is required',
+              })}
             />
           </div>
         </div>
@@ -137,18 +91,20 @@ const EventForm = () => {
             <label>Contact Email</label>
             <input
               type="text"
-              name="contactEmail"
-              value={contactEmail}
-              onChange={(e) => setContactEmail(e.target.value)}
+              id="contactEmail"
+              disabled={isWorking}
+              {...register('contact_email', {
+                required: 'This field is required',
+              })}
             />
           </div>
           <div>
             <label>Name of Orgnization(Student Club)</label>
             <input
               type="text"
-              name="nameOfOrg"
-              value={nameOfOrg}
-              onChange={(e) => setNameOfOrg(e.target.value)}
+              id="nameOfOrg"
+              disabled={isWorking}
+              {...register('name_of_org')}
             />
           </div>
         </div>
@@ -156,10 +112,9 @@ const EventForm = () => {
           <div>
             <label>Name of Instituion</label>
             <select
-              name="nameOfInst"
+              id="nameOfInst"
               className={styles.dropdownStyle}
-              value={nameOfInst}
-              onChange={(e) => setNameOfInst(e.target.value)}
+              {...register('name_of_inst')}
             >
               <option value="">Select University</option>
               <option value="university_of_manitoba">
@@ -175,9 +130,11 @@ const EventForm = () => {
             <label>Name of Event</label>
             <input
               type="text"
-              name="nameOfEvent"
-              value={nameOfEvent}
-              onChange={(e) => setNameOfEvent(e.target.value)}
+              id="nameOfEvent"
+              disabled={isWorking}
+              {...register('name', {
+                required: 'This field is required',
+              })}
             />
           </div>
         </div>
@@ -186,28 +143,30 @@ const EventForm = () => {
             <label>Date</label>
             <input
               type="date"
-              name="date"
-              value={date}
-              min={today.toISOString().split('T')[0]}
-              onChange={(e) => setDate(e.target.value)}
-              required
+              id="date"
+              disabled={isWorking}
+              {...register('date', {
+                required: 'This field is required',
+                min: today.toISOString().split('T')[0],
+              })}
             />
           </div>
           <div>
             <label>Event Start & End Time</label>
             <input
               type="time"
-              name="startTime"
-              value={startTime}
-              onChange={(e) => setStartTime(e.target.value)}
-              required
+              id="startTime"
+              {...register('start_time', {
+                required: 'This field is required',
+              })}
             />
             <input
               type="time"
-              name="endTime"
-              value={endTime}
-              onChange={(e) => setEndTime(e.target.value)}
-              required
+              id="endTime"
+              disabled={isWorking}
+              {...register('end_time', {
+                required: 'This field is required',
+              })}
             />
           </div>
         </div>
@@ -219,10 +178,9 @@ const EventForm = () => {
                 <input
                   type="checkbox"
                   name="eventType"
+                  id="NETWORKING"
                   value="NETWORKING"
-                  onChange={handleEventTypeChange}
-                  checked={eventType.includes('NETWORKING')}
-                  //onChange={(e) => setEventType(e.target.value)}
+                  {...register('type')}
                 />
                 <label>NETWORKING</label>
               </div>
@@ -230,9 +188,9 @@ const EventForm = () => {
                 <input
                   type="checkbox"
                   name="eventType"
+                  id="CAMPUS"
                   value="CAMPUS"
-                  onChange={handleEventTypeChange}
-                  checked={eventType.includes('CAMPUS')}
+                  {...register('type')}
                 />
                 <label>CAMPUS</label>
               </div>
@@ -240,9 +198,9 @@ const EventForm = () => {
                 <input
                   type="checkbox"
                   name="eventType"
+                  id="CULTURAL"
                   value="CULTURAL"
-                  onChange={handleEventTypeChange}
-                  checked={eventType.includes('CULTURAL')}
+                  {...register('type')}
                 />
                 <label>CULTURAL</label>
               </div>
@@ -254,9 +212,9 @@ const EventForm = () => {
                 <input
                   type="checkbox"
                   name="eventType"
+                  id="HOBBIES"
                   value="HOBBIES"
-                  onChange={handleEventTypeChange}
-                  checked={eventType.includes('HOBBIES')}
+                  {...register('type')}
                 />
                 <label>HOBBIES</label>
               </div>
@@ -264,9 +222,9 @@ const EventForm = () => {
                 <input
                   type="checkbox"
                   name="eventType"
+                  id="SPORTS"
                   value="SPORTS"
-                  onChange={handleEventTypeChange}
-                  checked={eventType.includes('SPORTS')}
+                  {...register('type')}
                 />
                 <label>SPORTS</label>
               </div>
@@ -274,9 +232,9 @@ const EventForm = () => {
                 <input
                   type="checkbox"
                   name="eventType"
+                  id="EDUCATIONAL"
                   value="EDUCATIONAL"
-                  onChange={handleEventTypeChange}
-                  checked={eventType.includes('EDUCATIONAL')}
+                  {...register('type')}
                 />
                 <label>EDUCATIONAL</label>
               </div>
@@ -288,9 +246,9 @@ const EventForm = () => {
                 <input
                   type="checkbox"
                   name="eventType"
+                  id="NIGHTLIFE"
                   value="NIGHTLIFE"
-                  onChange={handleEventTypeChange}
-                  checked={eventType.includes('NIGHTLIFE')}
+                  {...register('type')}
                 />
                 <label>NIGHTLIFE</label>
               </div>
@@ -298,9 +256,9 @@ const EventForm = () => {
                 <input
                   type="checkbox"
                   name="eventType"
+                  id="ARTS"
                   value="ARTS"
-                  onChange={handleEventTypeChange}
-                  checked={eventType.includes('ARTS')}
+                  {...register('type')}
                 />
                 <label>ARTS</label>
               </div>
@@ -308,9 +266,9 @@ const EventForm = () => {
                 <input
                   type="checkbox"
                   name="eventType"
+                  id="WELLBEING"
                   value="WELLBEING"
-                  onChange={handleEventTypeChange}
-                  checked={eventType.includes('WELLBEING')}
+                  {...register('type')}
                 />
                 <label>WELLBEING</label>
               </div>
@@ -321,10 +279,12 @@ const EventForm = () => {
           <div>
             <label>Event Format</label>
             <select
-              name="eventFormat"
+              id="eventFormat"
               className={styles.dropdownStyle}
-              value={eventFormat}
-              onChange={(e) => setEventFormat(e.target.value)}
+              disabled={isWorking}
+              {...register('event_format', {
+                required: 'This field is required',
+              })}
             >
               <option value="">Select Event Format</option>
               <option value="Virtual">Virtual</option>
@@ -336,9 +296,9 @@ const EventForm = () => {
             <label>Address(Street No.& Name) of Event</label>
             <input
               type="text"
-              name="address"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
+              id="address"
+              disabled={isWorking}
+              {...register('address')}
             />
           </div>
         </div>
@@ -347,18 +307,18 @@ const EventForm = () => {
             <label>Name of Venue</label>
             <input
               type="text"
-              name="nameOfVenue"
-              value={nameOfVenue}
-              onChange={(e) => setNameOfVenue(e.target.value)}
+              id="nameOfVenue"
+              disabled={isWorking}
+              {...register('name_of_venue')}
             />
           </div>
           <div>
             <label>Postal Code</label>
             <input
               type="text"
-              name="postalCode"
-              value={postalCode}
-              onChange={(e) => setPostalCode(e.target.value)}
+              id="postalCode"
+              disabled={isWorking}
+              {...register('postal_code')}
             />
           </div>
         </div>
@@ -367,18 +327,18 @@ const EventForm = () => {
             <label>City</label>
             <input
               type="text"
-              name="city"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
+              id="city"
+              disabled={isWorking}
+              {...register('city')}
             />
           </div>
           <div>
             <label>If virtual - virtual link</label>
             <input
               type="text"
-              name="virtualLink"
-              value={virtualLink}
-              onChange={(e) => setVirtualLink(e.target.value)}
+              id="virtualLink"
+              disabled={isWorking}
+              {...register('virtual_link')}
             />
           </div>
         </div>
@@ -387,46 +347,47 @@ const EventForm = () => {
             <label>Short Description(150 characters)</label>
             <input
               type="text"
-              name="shortDesc"
-              value={shortDesc}
-              onChange={(e) => setShortDesc(e.target.value)}
+              id="shortDesc"
+              disabled={isWorking}
+              {...register('short_description', {
+                required: 'This field is required',
+              })}
             />
             <label>Price of Ticket</label>
             <input
               type="number"
-              name="price"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-              min="0"
-              step="0.01"
-              required
+              id="price"
+              disabled={isWorking}
+              {...register('price', {
+                required: 'This field is required',
+                min: '0',
+                step: '0.01',
+              })}
             />
             <label>Image</label>
             <input
               type="file"
-              name="image"
+              id="image"
               accept="image/*"
-              onChange={(e) => setImage(e.target.files[0])}
+              {...register('image', {
+                required: isEditSession ? false : 'This field is required',
+              })}
             />
           </div>
           <div>
             <label>Description of Event</label>
             <textarea
               className={styles.formContainerTextarea}
-              name="desc"
-              value={desc}
-              onChange={(e) => setDesc(e.target.value)}
+              id="desc"
+              disabled={isWorking}
+              {...register('description', {
+                required: 'This field is required',
+              })}
             ></textarea>
           </div>
         </div>
         <div className={styles.formContainerTerms}>
-          <input
-            type="checkbox"
-            name="termsCondition"
-            value={termsCondition}
-            onChange={(e) => setTermsCondition(e.target.value)}
-            required
-          />
+          <input type="checkbox" id="termsCondition" />
           <label>
             <a onClick={() => setModalOpen((show) => !show)}>
               Terms and Conditions
@@ -443,13 +404,9 @@ const EventForm = () => {
         </div>
         <div className={styles.formContainer}>
           <Button type="submit" className={styles.btnEvents}>
-            Submit
+            {isEditSession ? 'Edit Event' : 'Submit Event'}
           </Button>
-          <Button
-            type="reset"
-            className={styles.btnEvents}
-            onClick={handleReset}
-          >
+          <Button type="reset" className={styles.btnEvents}>
             Cancel
           </Button>
         </div>
