@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useUser } from './../features/authentication/useUser';
 import { useLikeEvent } from './likeEvents/useLikeEvent';
@@ -5,7 +6,7 @@ import { useUnlikeEvent } from './likeEvents/useUnlikeEvent';
 import { useEventInterests } from './likeEvents/useEventInterests';
 import { displayPrice, formatEventDate, formatTime } from '../utils/helpers';
 import { IoIosHeartEmpty, IoIosHeart } from 'react-icons/io';
-
+import Button from '../ui/Button';
 import styles from './Event.module.css';
 
 const Event = ({ event }) => {
@@ -13,6 +14,7 @@ const Event = ({ event }) => {
   const { likeEvent } = useLikeEvent();
   const { unlikeEvent } = useUnlikeEvent();
   const { likedEvents, refetchLikedEvents } = useEventInterests(user?.id);
+  const [isHovering, setIsHovering] = useState(false);
   const navigate = useNavigate();
 
   const isLiked = likedEvents?.some(
@@ -49,11 +51,16 @@ const Event = ({ event }) => {
   };
 
   return (
-    <Link to={`/events/${event.id}`} className={styles.eventCard}>
-      {isCreator && (
+    <Link
+      to={`/events/${event.id}`}
+      className={styles.eventCard}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+    >
+      {isCreator && isHovering && (
         <div className={styles.overlayButtons}>
-          <button>Edit</button>
-          <button>Delete</button>
+          <Button type="hoverBtn">Edit</Button>
+          <Button type="hoverBtn">Delete</Button>
         </div>
       )}
       <div className={styles.event}>
