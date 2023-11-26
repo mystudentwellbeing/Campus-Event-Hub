@@ -1,10 +1,12 @@
 import { useRef, useState } from 'react';
-import TermsConditions from '../../features/TermsConditions';
+import { useCreateEvent } from './useCreateEvent';
+import TermsConditions from '../TermsConditions';
 import Modal from '../../ui/Modal';
 import Button from '../../ui/Button';
-import styles from './SubmitEventForm.module.css';
+import styles from './EventForm.module.css';
 
-const submitEventForm = () => {
+const EventForm = () => {
+  const { createEvent } = useCreateEvent();
   const [contactName, setContactName] = useState('');
   const [contactPhone, setContactPhone] = useState('');
   const [contactEmail, setContactEmail] = useState('');
@@ -45,77 +47,31 @@ const submitEventForm = () => {
 
   const today = new Date();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      const { data, error } = await supabase.from('events').insert([
-        {
-          name: nameOfEvent,
-          type: eventType,
-          name_of_venue: nameOfVenue,
-          address: address,
-          city: city,
-          postal_code: postalCode,
-          event_format: eventFormat,
-          virtual_link: virtualLink,
-          image_url: image,
-          contact_name: contactName,
-          contact_phone: contactPhone,
-          contact_email: contactEmail,
-          date: date,
-          start_time: startTime,
-          end_time: endTime,
-          name_organization: nameOfOrg,
-          price: price,
-          name_of_inst: nameOfInst,
-          short_description: shortDesc,
-          description: desc,
-        },
-      ]);
-
-      if (error) {
-        console.error('Error inserting data:', error);
-        // Log the specific error received from Supabase
-        console.error('Supabase error details:', error.message);
-        return;
-      } else {
-        // Data inserted successfully
-        alert('Event Submitted');
-        console.log('Data inserted:', data);
-        // Clear form fields after successful submission
-        handleReset();
-      }
-    } catch {
-      console.error('Error:', error.message);
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    createEvent({
+      name: nameOfEvent,
+      type: eventType,
+      name_of_venue: nameOfVenue,
+      address: address,
+      city: city,
+      postal_code: postalCode,
+      event_format: eventFormat,
+      virtual_link: virtualLink,
+      image_url: image,
+      contact_name: contactName,
+      contact_phone: contactPhone,
+      contact_email: contactEmail,
+      date: date,
+      start_time: startTime,
+      end_time: endTime,
+      name_of_org: nameOfOrg,
+      price: price,
+      name_of_inst: nameOfInst,
+      short_description: shortDesc,
+      description: desc,
+    });
   };
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   alert(`Event Submitted`);
-  //   console.log(typeof(image));
-
-  //   // trying to upload image in our storage bucket
-  //   if (image && image instanceof Blob) {
-  //     const reader = new FileReader();
-  //     reader.readAsDataURL(image);
-  //     reader.onloadend = async () => {
-  //     const imageData = reader.result;
-
-  //     const { data, error } = await supabase.storage
-  //       .from('event_image')
-  //       .upload(imageData, {
-  //         cacheControl: '3600',
-  //         upsert: false,
-  //       });
-
-  //     if (error) {
-  //       console.error('Error uploading image:', error);
-  //     } else {
-  //       const imageUrl = data?.url;
-  //       console.log('Image uploaded successfully. URL:', imageUrl);
-  //     }}
-  //   }
-  // };
 
   const handleReset = () => {
     if (formRef.current) {
@@ -152,7 +108,7 @@ const submitEventForm = () => {
           <div>
             <label>Contact Name</label>
             <input
-              type="textbox"
+              type="text"
               name="contactName"
               value={contactName}
               onChange={(e) => setContactName(e.target.value)}
@@ -162,7 +118,7 @@ const submitEventForm = () => {
           <div>
             <label>Contact Phone#</label>
             <input
-              type="textbox"
+              type="text"
               name="contactPhone"
               value={contactPhone}
               onChange={(e) => setContactPhone(e.target.value)}
@@ -173,7 +129,7 @@ const submitEventForm = () => {
           <div>
             <label>Contact Email</label>
             <input
-              type="textbox"
+              type="text"
               name="contactEmail"
               value={contactEmail}
               onChange={(e) => setContactEmail(e.target.value)}
@@ -182,7 +138,7 @@ const submitEventForm = () => {
           <div>
             <label>Name of Orgnization(Student Club)</label>
             <input
-              type="textbox"
+              type="text"
               name="nameOfOrg"
               value={nameOfOrg}
               onChange={(e) => setNameOfOrg(e.target.value)}
@@ -208,17 +164,11 @@ const submitEventForm = () => {
               <option value="other">Other</option>
               {console.log(nameOfInst)}
             </select>
-            {/* <input
-              type="textbox"
-              name="nameOfInst"
-              value={nameOfInst}
-              onChange={(e) => setNameOfInst(e.target.value)}
-            /> */}
           </div>
           <div>
             <label>Name of Event</label>
             <input
-              type="textbox"
+              type="text"
               name="nameOfEvent"
               value={nameOfEvent}
               onChange={(e) => setNameOfEvent(e.target.value)}
@@ -372,37 +322,14 @@ const submitEventForm = () => {
             >
               <option value="">Select Event Format</option>
               <option value="Virtual">Virtual</option>
-              <option value="in-Person<">In-Person</option>
+              <option value="in-Person">In-Person</option>
               <option value="Hybrid">Hybrid</option>
-
-              {console.log(eventFormat)}
             </select>
           </div>
-          {/* <div>
-            <label>Type</label>
-            <select
-              name="type"
-              className={styles.dropdownStyle}
-              value={type}
-              onChange={(e) => setType(e.target.value)}
-            >
-              <option value="">Select Event Type</option>
-              <option value="NETWORKING">NETWORKING</option>
-              <option value="CAMPUS">CAMPUS</option>
-              <option value="CULTURAL">CULTURAL</option>
-              <option value="HOBBIES">HOBBIES</option>
-              <option value="SPORTS">SPORTS</option>
-              <option value="EDUCATIONAL">EDUCATIONAL</option>
-              <option value="NIGHTLIFE">NIGHTLIFE</option>
-              <option value="ARTS">ARTS</option>
-              <option value="WELLBEING">WELLBEING</option>
-              {console.log(type)}
-            </select>
-          </div> */}
           <div>
             <label>Address(Street No.& Name) of Event</label>
             <input
-              type="textbox"
+              type="text"
               name="address"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
@@ -413,7 +340,7 @@ const submitEventForm = () => {
           <div>
             <label>Name of Venue</label>
             <input
-              type="textbox"
+              type="text"
               name="nameOfVenue"
               value={nameOfVenue}
               onChange={(e) => setNameOfVenue(e.target.value)}
@@ -422,7 +349,7 @@ const submitEventForm = () => {
           <div>
             <label>Postal Code</label>
             <input
-              type="textbox"
+              type="text"
               name="postalCode"
               value={postalCode}
               onChange={(e) => setPostalCode(e.target.value)}
@@ -433,7 +360,7 @@ const submitEventForm = () => {
           <div>
             <label>City</label>
             <input
-              type="textbox"
+              type="text"
               name="city"
               value={city}
               onChange={(e) => setCity(e.target.value)}
@@ -442,7 +369,7 @@ const submitEventForm = () => {
           <div>
             <label>If virtual - virtual link</label>
             <input
-              type="textbox"
+              type="text"
               name="virtualLink"
               value={virtualLink}
               onChange={(e) => setVirtualLink(e.target.value)}
@@ -453,7 +380,7 @@ const submitEventForm = () => {
           <div className={styles.formContainerSpecial}>
             <label>Short Description(150 characters)</label>
             <input
-              type="textbox"
+              type="text"
               name="shortDesc"
               value={shortDesc}
               onChange={(e) => setShortDesc(e.target.value)}
@@ -470,7 +397,7 @@ const submitEventForm = () => {
             />
             <label>Image</label>
             <input
-              type="file"
+              type="text"
               name="image"
               accept="image/png image/jpeg"
               value={image}
@@ -526,4 +453,4 @@ const submitEventForm = () => {
   );
 };
 
-export default submitEventForm;
+export default EventForm;

@@ -1,4 +1,4 @@
-import SubmitEventForm from '../features/submitEvents/SubmitEventForm';
+import SubmitEventForm from '../features/submitEvents/EventForm';
 
 const SubmitEvents = () => {
   return (

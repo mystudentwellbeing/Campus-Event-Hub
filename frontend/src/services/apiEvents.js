@@ -30,3 +30,14 @@ export const getEvent = async (id) => {
 
   return data;
 };
+
+export const createEvent = async (newEvent) => {
+  const { data, error } = await supabase.from('events').insert(newEvent);
+
+  if (error) {
+    console.error(error);
+    throw new Error('Event could not be created');
+  }
+
+  return data;
+};
