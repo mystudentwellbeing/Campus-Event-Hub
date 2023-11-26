@@ -19,6 +19,8 @@ const Event = ({ event }) => {
     (likedEvent) => likedEvent.event_id === event.id
   );
 
+  const isCreator = user?.id === event.user_id;
+
   const toggleLike = async (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -48,6 +50,12 @@ const Event = ({ event }) => {
 
   return (
     <Link to={`/events/${event.id}`} className={styles.eventCard}>
+      {isCreator && (
+        <div className={styles.overlayButtons}>
+          <button>Edit</button>
+          <button>Delete</button>
+        </div>
+      )}
       <div className={styles.event}>
         <img className={styles.eventImage} src={event.image} alt="EventImage" />
         <div className={styles.eventHeader}>
@@ -68,7 +76,7 @@ const Event = ({ event }) => {
           {formatTime(event.start_time)} - {formatTime(event.end_time)}
         </p>
         <p className={styles.eventType}>{event.type.join(',  ')}</p>
-        <p>{event.name}</p>
+        <p className={styles.shortDesc}>{event.short_description}</p>
       </div>
     </Link>
   );

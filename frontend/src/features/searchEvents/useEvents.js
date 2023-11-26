@@ -32,7 +32,12 @@ const useEvents = () => {
             .includes(searchQuery.toLowerCase()) ||
           event.location?.toLowerCase().includes(searchQuery.toLowerCase()) ||
           event.format?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          event.name_of_inst?.toLowerCase().includes(searchQuery.toLowerCase())
+          event.name_of_inst
+            ?.toLowerCase()
+            .includes(searchQuery.toLowerCase()) ||
+          event.type.some((type) =>
+            type.toLowerCase().includes(searchQuery.toLowerCase())
+          )
         : true;
       const matchesFilter =
         filterValues.length === 0
