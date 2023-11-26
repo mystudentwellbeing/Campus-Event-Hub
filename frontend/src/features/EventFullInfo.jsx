@@ -11,7 +11,7 @@ const EventFullInfo = () => {
       <div className={styles.event}>
         <img
           className={styles.eventImage}
-          src={event.image_url}
+          src={event.image}
           alt="EventImage"
         />
       </div>
