@@ -10,7 +10,7 @@ import AboutUs from './pages/AboutUs';
 import SubmitEvents from './pages/SubmitEvents';
 import ViewMyEvents from './pages/ViewMyEvents';
 import MySavedEvents from './features/likeEvents/MySavedEvents';
-import MySubmittedEvents from './features/MySubmittedEvents';
+import MySubmittedEvents from './features/submitEvents/MySubmittedEvents';
 import Setting from './pages/Setting';
 import ContactUs from './pages/ContactUs';
 import Login from './pages/Login';
