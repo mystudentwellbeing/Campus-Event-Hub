@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { useUser } from '../../features/authentication/useUser';
 import { useCreateEvent } from './useCreateEvent';
 import TermsConditions from '../TermsConditions';
 import Modal from '../../ui/Modal';
@@ -6,6 +7,7 @@ import Button from '../../ui/Button';
 import styles from './EventForm.module.css';
 
 const EventForm = () => {
+  const { user } = useUser();
   const { createEvent } = useCreateEvent();
   const [contactName, setContactName] = useState('');
   const [contactPhone, setContactPhone] = useState('');
@@ -49,28 +51,32 @@ const EventForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createEvent({
-      name: nameOfEvent,
-      type: eventType,
-      name_of_venue: nameOfVenue,
-      address: address,
-      city: city,
-      postal_code: postalCode,
-      event_format: eventFormat,
-      virtual_link: virtualLink,
-      image_url: image,
-      contact_name: contactName,
-      contact_phone: contactPhone,
-      contact_email: contactEmail,
-      date: date,
-      start_time: startTime,
-      end_time: endTime,
-      name_of_org: nameOfOrg,
-      price: price,
-      name_of_inst: nameOfInst,
-      short_description: shortDesc,
-      description: desc,
-    });
+    createEvent(
+      {
+        user_id: user.id,
+        name: nameOfEvent,
+        type: eventType,
+        name_of_venue: nameOfVenue,
+        address: address,
+        city: city,
+        postal_code: postalCode,
+        event_format: eventFormat,
+        virtual_link: virtualLink,
+        image_url: image,
+        contact_name: contactName,
+        contact_phone: contactPhone,
+        contact_email: contactEmail,
+        date: date,
+        start_time: startTime,
+        end_time: endTime,
+        name_of_org: nameOfOrg,
+        price: price,
+        name_of_inst: nameOfInst,
+        short_description: shortDesc,
+        description: desc,
+      },
+      { onSettled: handleReset }
+    );
   };
 
   const handleReset = () => {
@@ -162,7 +168,6 @@ const EventForm = () => {
                 University of Winnipeg
               </option>
               <option value="other">Other</option>
-              {console.log(nameOfInst)}
             </select>
           </div>
           <div>
@@ -322,7 +327,7 @@ const EventForm = () => {
             >
               <option value="">Select Event Format</option>
               <option value="Virtual">Virtual</option>
-              <option value="in-Person">In-Person</option>
+              <option value="In-person">In-Person</option>
               <option value="Hybrid">Hybrid</option>
             </select>
           </div>
