@@ -35,7 +35,7 @@ const EventFullInfo = () => {
       <p className={styles.broughtBy}>
         Brought You By
         <br />
-        <span>{event.name_organization}</span>
+        <span>{event.name_of_org}</span>
       </p>
 
       <p className={styles.descriptionTitle}>Event Description</p>
