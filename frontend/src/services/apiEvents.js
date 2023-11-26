@@ -31,6 +31,21 @@ export const getEvent = async (id) => {
   return data;
 };
 
+export const getEventsCreatedByUser = async (userId) => {
+  const { data, error } = await supabase
+    .from('events')
+    .select('*')
+    .eq('user_id', userId)
+    .order('date', { ascending: true });
+
+  if (error) {
+    console.error(error);
+    throw new Error('Events could not be loaded');
+  }
+
+  return data;
+};
+
 export const createEvent = async (newEvent) => {
   const hasImagePath = newEvent.image?.startsWith?.(supabaseUrl);
   const imageName = `${Math.random()}-${newEvent.name}`.replaceAll('/', '');

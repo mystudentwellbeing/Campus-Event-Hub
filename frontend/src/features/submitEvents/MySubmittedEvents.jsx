@@ -1,17 +1,30 @@
-// import useEvents from '../hooks/useEvents';
-// import Event from './Event';
+import { useUser } from './../../features/authentication/useUser';
+import { useSubmittedEvents } from './useSubmittedEvents';
+import Event from '../Event';
 import styles from './MySubmittedEvents.module.css';
 
 const MySubmittedEvents = () => {
-  // const { myApprovedEvents, myPendingEvents } = useEvents();
+  const { user } = useUser();
+  const { submittedEvents, isLoading } = useSubmittedEvents(user?.id);
 
-  // const numApprovedEvents = myApprovedEvents.length;
-  // const numPendingEvents = myPendingEvents.length;
+  const myApprovedEvents = submittedEvents?.filter(
+    (event) => event.is_approved === true
+  );
+  const numApprovedEvents = myApprovedEvents?.length;
+
+  const myPendingEvents = submittedEvents?.filter(
+    (event) => event.is_approved === false
+  );
+  const numPendingEvents = myPendingEvents?.length;
+
+  if (isLoading) {
+    return <div>Loading events...</div>;
+  }
 
   return (
     <main className={styles.container}>
       <h1>My Submitted Events</h1>
-      {/* <div className={styles.sectionContainer}>
+      <div className={styles.sectionContainer}>
         <section className={styles.status}>
           <h2>Approved Events ({numApprovedEvents})</h2>
           {myApprovedEvents.map((event) => (
@@ -24,7 +37,7 @@ const MySubmittedEvents = () => {
             <Event key={event.event_id} event={event} />
           ))}
         </section>
-      </div> */}
+      </div>
     </main>
   );
 };

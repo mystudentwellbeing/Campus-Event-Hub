@@ -31,7 +31,7 @@ export const unlikeEvent = async (id) => {
   }
 };
 
-export const getMyLikedEvents = async (userId) => {
+export const getEventsLikedByUser = async (userId) => {
   const { data, error } = await supabase
     .from('event_interests')
     .select('*')

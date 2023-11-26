@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getMyLikedEvents } from '../../services/apiEventInterests';
+import { getEventsLikedByUser } from '../../services/apiEventInterests';
 
 export const useEventInterests = (userId) => {
   const {
@@ -9,7 +9,7 @@ export const useEventInterests = (userId) => {
     refetch,
   } = useQuery({
     queryKey: ['eventInterest', userId],
-    queryFn: () => getMyLikedEvents(userId),
+    queryFn: () => getEventsLikedByUser(userId),
     enabled: !!userId,
   });
 
