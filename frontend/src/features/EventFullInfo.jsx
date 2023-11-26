@@ -1,7 +1,6 @@
 import { formatEventDate } from '../utils/helpers';
 import styles from './EventFullInfo.module.css';
-
-import useEvent from './useEvent';
+import useEvent from './searchEvents/useEvent';
 
 const EventFullInfo = () => {
   const { isLoading, event } = useEvent();

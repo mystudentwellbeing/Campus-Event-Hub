@@ -1,7 +1,7 @@
 import { useSearchParams } from 'react-router-dom';
 import { useState } from 'react';
 import useEvents from './useEvents';
-import Button from '../ui/Button';
+import Button from '../../ui/Button';
 import { GrGroup } from 'react-icons/gr';
 import { LuSchool, LuFlower2 } from 'react-icons/lu';
 import { IoEarthOutline } from 'react-icons/io5';

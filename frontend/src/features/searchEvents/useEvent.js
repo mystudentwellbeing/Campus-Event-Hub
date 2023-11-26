@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
-import { getEvent } from './../services/apiEvents';
+import { getEvent } from '../../services/apiEvents';
 
 const useEvent = () => {
   const { eventId } = useParams();

@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useSearchParams } from 'react-router-dom';
-import { getEvents } from './../services/apiEvents';
+import { getEvents } from '../../services/apiEvents';
 
 const useEvents = () => {
   const {

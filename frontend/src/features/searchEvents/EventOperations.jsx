@@ -1,6 +1,5 @@
-// import { useState } from 'react';
-import Search from '../features/Search';
-import Filter from '../features/Filter';
+import Search from './Search';
+import Filter from './Filter';
 const EventOperations = () => {
   return (
     <div>

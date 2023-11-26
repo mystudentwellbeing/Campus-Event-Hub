@@ -1,34 +1,12 @@
 import supabase from './supabase';
 
-// export const getEvents = async () => {
-//   const { data, error } = await supabase
-//     .from('events')
-//     .select('*')
-//     .eq('is_approved', true)
-//     .gte('date', new Date().toISOString())
-//     .order('date', { ascending: true });
-
-//   if (error) {
-//     console.error(error);
-//     throw new Error('Events could not be loaded');
-//   }
-
-//   return data;
-// };
-
-export const getEvents = async (filters) => {
-  let query = supabase
+export const getEvents = async () => {
+  const { data, error } = await supabase
     .from('events')
     .select('*')
     .eq('is_approved', true)
     .gte('date', new Date().toISOString())
     .order('date', { ascending: true });
-
-  if (filters.length > 0) {
-    query = query.in('type', filters);
-  }
-
-  const { data, error } = await query;
 
   if (error) {
     console.error(error);

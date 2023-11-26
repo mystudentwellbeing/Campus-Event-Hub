@@ -1,6 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
-// import { useUser } from '../../features/authentication/useUser';
 import { useLogout } from '../../features/authentication/useLogout';
 import Hamburger from 'hamburger-react';
 import useOutsideClick from '../../hooks/useOutsideClick';

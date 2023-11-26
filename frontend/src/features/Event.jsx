@@ -1,20 +1,50 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useUser } from './../features/authentication/useUser';
+import { useLikeEvent } from './likeEvents/useLikeEvent';
+import { useUnlikeEvent } from './likeEvents/useUnlikeEvent';
+import { useEventInterests } from './likeEvents/useEventInterests';
 import { displayPrice, formatEventDate, formatTime } from '../utils/helpers';
-// import { IoIosHeartEmpty, IoIosHeart } from 'react-icons/io';
+import { IoIosHeartEmpty, IoIosHeart } from 'react-icons/io';
 
 import styles from './Event.module.css';
 
 const Event = ({ event }) => {
-  // const { savedEvents, toggleSave } = useEvents();
+  const { isAuthenticated, user } = useUser();
+  const { likeEvent } = useLikeEvent();
+  const { unlikeEvent } = useUnlikeEvent();
+  const { likedEvents, refetchLikedEvents } = useEventInterests(user?.id);
+  const navigate = useNavigate();
 
-  // const isSaved = savedEvents[event.event_id];
+  const isLiked = likedEvents?.some(
+    (likedEvent) => likedEvent.event_id === event.id
+  );
 
-  // const handleToggleSave = (e) => {
-  //   e.preventDefault();
+  const toggleLike = async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!isAuthenticated) {
+      navigate('/login');
+      return;
+    }
 
-  //   e.stopPropagation();
-  //   toggleSave(event.event_id);
-  // };
+    const likedEventRecord = likedEvents?.find(
+      (le) => le.event_id === event.id
+    );
+
+    try {
+      if (isLiked) {
+        const likedEventRecordId = likedEventRecord?.id;
+        if (likedEventRecordId) {
+          unlikeEvent(likedEventRecordId);
+        }
+      } else {
+        likeEvent({ event_id: event.id, user_id: user.id });
+      }
+      refetchLikedEvents();
+    } catch (error) {
+      console.error('Error in toggling like:', error);
+    }
+  };
 
   return (
     <Link to={`/events/${event.id}`} className={styles.eventCard}>
@@ -28,13 +58,13 @@ const Event = ({ event }) => {
           <h4>{event.name}</h4>
           <div className={styles.headerRightSide}>
             <h3>{displayPrice(event.price)}</h3>
-            {/* <div onClick={handleToggleSave}>
-              {isSaved ? (
+            <div onClick={(e) => toggleLike(e)}>
+              {isLiked ? (
                 <IoIosHeart className={styles.heartIcon} />
               ) : (
                 <IoIosHeartEmpty className={styles.emptyHeartIcon} />
               )}
-            </div> */}
+            </div>
           </div>
         </div>
         <p>
