@@ -28,7 +28,7 @@ const EventForm = () => {
   const [shortDesc, setShortDesc] = useState('');
   const [desc, setDesc] = useState('');
   const [price, setPrice] = useState('');
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState(null);
   const [termsCondition, setTermsCondition] = useState('');
   const [isModalOpen, setModalOpen] = useState(false);
 
@@ -51,6 +51,7 @@ const EventForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     createEvent(
       {
         user_id: user.id,
@@ -62,7 +63,7 @@ const EventForm = () => {
         postal_code: postalCode,
         event_format: eventFormat,
         virtual_link: virtualLink,
-        image_url: image,
+        image: image[0],
         contact_name: contactName,
         contact_phone: contactPhone,
         contact_email: contactEmail,
@@ -402,9 +403,9 @@ const EventForm = () => {
             />
             <label>Image</label>
             <input
-              type="text"
+              type="file"
               name="image"
-              accept="image/png image/jpeg"
+              accept="image/*"
               value={image}
               onChange={(e) => setImage(e.target.value)}
             />

@@ -49,11 +49,7 @@ const Event = ({ event }) => {
   return (
     <Link to={`/events/${event.id}`} className={styles.eventCard}>
       <div className={styles.event}>
-        <img
-          className={styles.eventImage}
-          src={event.image_url}
-          alt="EventImage"
-        />
+        <img className={styles.eventImage} src={event.image} alt="EventImage" />
         <div className={styles.eventHeader}>
           <h4>{event.name}</h4>
           <div className={styles.headerRightSide}>
