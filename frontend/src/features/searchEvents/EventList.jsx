@@ -1,4 +1,3 @@
-// import { useSearchParams } from 'react-router-dom';
 import useEvents from './useEvents';
 import Event from '../Event';
 import styles from './EventList.module.css';

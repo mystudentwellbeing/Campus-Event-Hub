@@ -34,7 +34,7 @@ export const unlikeEvent = async (id) => {
 export const getMyLikedEvents = async (userId) => {
   const { data, error } = await supabase
     .from('event_interests')
-    .select('*', 'event:events(*)')
+    .select('*')
     .eq('user_id', userId)
     .order('created_at', { ascending: false })
     .limit(10);
