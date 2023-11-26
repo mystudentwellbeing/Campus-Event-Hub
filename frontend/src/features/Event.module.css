@@ -26,6 +26,7 @@
 .eventImage {
   height: 14rem;
   width: 37rem;
+  object-fit: cover;
 }
 
 .eventHeader {

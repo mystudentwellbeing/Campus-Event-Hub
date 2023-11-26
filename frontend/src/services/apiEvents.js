@@ -48,7 +48,10 @@ export const getEventsCreatedByUser = async (userId) => {
 
 export const createEvent = async (newEvent) => {
   const hasImagePath = newEvent.image?.startsWith?.(supabaseUrl);
-  const imageName = `${Math.random()}-${newEvent.name}`.replaceAll('/', '');
+  const imageName = `${Math.random()}-${newEvent.image.name}`.replaceAll(
+    '/',
+    ''
+  );
   const imagePath = hasImagePath
     ? newEvent.image
     : `${supabaseUrl}/storage/v1/object/public/event_image/${imageName}`;

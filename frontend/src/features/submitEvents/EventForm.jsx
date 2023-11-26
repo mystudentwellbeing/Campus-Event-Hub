@@ -63,7 +63,7 @@ const EventForm = () => {
         postal_code: postalCode,
         event_format: eventFormat,
         virtual_link: virtualLink,
-        image: image[0],
+        image: image,
         contact_name: contactName,
         contact_phone: contactPhone,
         contact_email: contactEmail,
@@ -406,8 +406,7 @@ const EventForm = () => {
               type="file"
               name="image"
               accept="image/*"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
+              onChange={(e) => setImage(e.target.files[0])}
             />
           </div>
           <div>

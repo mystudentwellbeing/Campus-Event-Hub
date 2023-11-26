@@ -17,6 +17,5 @@ export const useSubmittedEvents = (userId) => {
     refetch();
   };
 
-  console.log('Submitted Events:', submittedEvents);
   return { submittedEvents, isLoading, error, refetchSubmittedEvents };
 };
