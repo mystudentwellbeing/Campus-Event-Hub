@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
+import { useUser } from '../../features/authentication/useUser';
 import Hamburger from 'hamburger-react';
 import useOutsideClick from '../../hooks/useOutsideClick';
 import Button from '../Button';
@@ -7,6 +8,7 @@ import logo from '../../assets/logo.png';
 import styles from './NotLoggedInNav.module.css';
 
 const NotLoggedInNav = () => {
+  const { isAuthenticated } = useUser();
   const [isHambugerOpen, setHamburgerOpen] = useState(false);
 
   const hamburgerRef = useRef(null);
@@ -53,7 +55,10 @@ const NotLoggedInNav = () => {
             </Link>
           </li>
           <li>
-            <Link to="/submitevents" onClick={closeMenu}>
+            <Link
+              to={isAuthenticated ? '/submitevents' : '/login'}
+              onClick={closeMenu}
+            >
               SUBMIT EVENTS
             </Link>
           </li>
