@@ -34,7 +34,6 @@ const ContactUs = () => {
               name="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              required
             />
           </div>
           <div>
@@ -44,6 +43,7 @@ const ContactUs = () => {
               name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
           </div>
           <div>
@@ -53,6 +53,7 @@ const ContactUs = () => {
               name="message"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
+              required
             ></textarea>
           </div>
         </div>
