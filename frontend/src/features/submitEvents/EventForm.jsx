@@ -41,7 +41,15 @@ const EventForm = () => {
     const image = typeof data.image === 'string' ? data.image : data.image[0];
     if (isEditSession)
       editEvent(
-        { newEventData: { ...data, image, user_id: user.id }, id: editId },
+        {
+          newEventData: {
+            ...data,
+            image,
+            user_id: user.id,
+            is_approved: false,
+          },
+          id: editId,
+        },
         {
           onSuccess: () => {
             reset();
