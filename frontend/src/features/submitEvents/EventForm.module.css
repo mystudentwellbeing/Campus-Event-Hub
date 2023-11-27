@@ -1,20 +1,10 @@
-.submitEvents {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 10rem;
-  padding: 1rem;
-  height: auto;
-  width: 80%;
-}
-
 .title {
   color: var(--darkblue);
   font-size: 2rem;
   font-weight: 900;
   padding: 0.5rem 1rem;
   margin-bottom: 2rem;
+  text-align: center;
 }
 
 .submitEvents form {

@@ -1,9 +1,11 @@
-import EventManagement from '../features/admin/EventManagement';
+import EventTableOperations from '../features/admin/EventTableOperations';
+import EventTable from '../features/admin/EventTable';
 const AdminEventManagement = () => {
   return (
-    <div>
-      <EventManagement />
-    </div>
+    <main>
+      <EventTableOperations />
+      <EventTable />
+    </main>
   );
 };
 

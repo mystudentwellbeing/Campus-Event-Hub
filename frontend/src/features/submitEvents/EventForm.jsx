@@ -70,7 +70,7 @@ const EventForm = () => {
   };
 
   return (
-    <div className={styles.submitEvents}>
+    <>
       <h3 className={styles.title}>Submit your event</h3>
       <form onSubmit={handleSubmit(onSubmit, onError)}>
         <div className={styles.formContainer}>
@@ -429,7 +429,7 @@ const EventForm = () => {
           </Button>
         </div>
       </form>
-    </div>
+    </>
   );
 };
 

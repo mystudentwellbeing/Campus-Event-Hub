@@ -1,0 +1,5 @@
+.imgSmall {
+  width: 8rem;
+  height: 4rem;
+  object-fit: cover;
+}
