@@ -11,6 +11,7 @@ import SubmitEvents from './pages/SubmitEvents';
 import ViewMyEvents from './pages/ViewMyEvents';
 import MySavedEvents from './features/likeEvents/MySavedEvents';
 import MySubmittedEvents from './features/submitEvents/MySubmittedEvents';
+import AdminEventManagement from './pages/AdminEventManagement';
 import Setting from './pages/Setting';
 import ContactUs from './pages/ContactUs';
 import Login from './pages/Login';
@@ -65,6 +66,15 @@ function App() {
             element={
               <ProtectedRoute>
                 <Setting />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="admin/events"
+            element={
+              <ProtectedRoute adminOnly>
+                <AdminEventManagement />{' '}
               </ProtectedRoute>
             }
           />

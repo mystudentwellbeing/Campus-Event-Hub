@@ -417,7 +417,14 @@ const EventForm = () => {
           <Button type="submit" className={styles.btnEvents}>
             {isEditSession ? 'Edit Event' : 'Submit Event'}
           </Button>
-          <Button type="reset" className={styles.btnEvents}>
+          <Button
+            type="reset"
+            className={styles.btnEvents}
+            onClick={(e) => {
+              e.preventDefault();
+              navigate(-1);
+            }}
+          >
             Cancel
           </Button>
         </div>

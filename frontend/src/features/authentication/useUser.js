@@ -8,6 +8,7 @@ export const useUser = () => {
   });
 
   const isAuthenticated = user?.role === 'authenticated';
+  const isAdmin = user?.app_metadata?.role === 'admin';
 
-  return { isLoading, user, isAuthenticated };
+  return { isLoading, user, isAuthenticated, isAdmin };
 };
