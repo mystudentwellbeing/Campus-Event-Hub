@@ -82,3 +82,24 @@ export const createEditEvent = async (newEvent, id) => {
   }
   return data;
 };
+
+export const deleteEvent = async (id) => {
+  const { error: storageError } = await supabase.storage
+    .from('event_image')
+    .remove([`event_image/${id}`]);
+
+  if (storageError) {
+    console.error(storageError);
+    throw new Error('Event image could not be deleted');
+  }
+
+  const { error: deleteError } = await supabase
+    .from('events')
+    .delete()
+    .eq('id', id);
+
+  if (deleteError) {
+    console.error(deleteError);
+    throw new Error('Event could not be deleted');
+  }
+};

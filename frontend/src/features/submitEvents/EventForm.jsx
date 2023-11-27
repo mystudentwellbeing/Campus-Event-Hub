@@ -14,23 +14,21 @@ const EventForm = () => {
 
   const location = useLocation();
   const eventToEdit = location.state?.event;
-
   const editId = eventToEdit?.id;
   const isEditSession = Boolean(editId);
-
-  const { user } = useUser();
-  const { isCreating, createEvent } = useCreateEvent();
-  const { isEditing, editEvent } = useEditEvent();
-  const { errors } = formState;
-
-  const isWorking = isCreating || isEditing;
-  const today = new Date();
 
   const { register, handleSubmit, reset, formState } = useForm({
     defaultValues: isEditSession
       ? { ...eventToEdit, type: eventToEdit.type || [] }
       : { type: [] },
   });
+
+  const { errors } = formState;
+  const { user } = useUser();
+  const { isCreating, createEvent } = useCreateEvent();
+  const { isEditing, editEvent } = useEditEvent();
+  const isWorking = isCreating || isEditing;
+  const today = new Date();
 
   const onError = (errors) => {
     console.log(errors);

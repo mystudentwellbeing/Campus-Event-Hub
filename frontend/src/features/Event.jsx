@@ -4,8 +4,11 @@ import { useUser } from './../features/authentication/useUser';
 import { useLikeEvent } from './likeEvents/useLikeEvent';
 import { useUnlikeEvent } from './likeEvents/useUnlikeEvent';
 import { useEventInterests } from './likeEvents/useEventInterests';
+// import { deleteEvent } from './submitEvents/useDeleteEvent';
 import { displayPrice, formatEventDate, formatTime } from '../utils/helpers';
 import { IoIosHeartEmpty, IoIosHeart } from 'react-icons/io';
+import Modal from '../ui/Modal';
+import DeleteAlert from '../ui/DeleteAlert';
 import Button from '../ui/Button';
 import styles from './Event.module.css';
 
@@ -15,6 +18,7 @@ const Event = ({ event }) => {
   const { unlikeEvent } = useUnlikeEvent();
   const { likedEvents, refetchLikedEvents } = useEventInterests(user?.id);
   const [isHovering, setIsHovering] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
 
   const isLiked = likedEvents?.some(
@@ -59,6 +63,7 @@ const Event = ({ event }) => {
   // const handleDelete = (e) => {
   //   e.preventDefault();
   //   e.stopPropagation();
+  //   deleteEvent(event.id);
   // };
 
   return (
@@ -73,7 +78,17 @@ const Event = ({ event }) => {
           <Button type="hoverBtn" onClick={handleEdit}>
             Edit
           </Button>
-          <Button type="hoverBtn">Delete</Button>
+          <Button type="hoverBtn" onClick={() => setModalOpen((show) => !show)}>
+            Delete
+          </Button>
+          {isModalOpen && (
+            <Modal
+              title="Terms and Conditions"
+              onClose={() => setModalOpen(false)}
+            >
+              <DeleteAlert onCloseModal={() => setModalOpen(false)} />
+            </Modal>
+          )}
         </div>
       )}
       <div className={styles.event}>
