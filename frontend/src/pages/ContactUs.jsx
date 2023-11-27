@@ -78,7 +78,7 @@ const ContactUs = () => {
             )}
           </label>
         </div>
-        <div className={styles.formContainer}>
+        <div className={styles.formbtnContainer}>
             <Button 
               type="submit" 
               className={styles.btnContact}
