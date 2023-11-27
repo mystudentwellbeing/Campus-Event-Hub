@@ -16,7 +16,7 @@ const Header = ({ children }) => {
 };
 
 const Row = ({ children }) => {
-  return <tr>{children}</tr>;
+  return <tr className={styles.tableRow}>{children}</tr>;
 };
 
 const Body = ({ data, render }) => {
@@ -25,7 +25,9 @@ const Body = ({ data, render }) => {
   if (!data.length) return <Empty>No data to show at the moment</Empty>;
 
   return (
-    <tbody>{data.map((item, index) => render(item, index, columns))}</tbody>
+    <tbody className={styles.tableBody}>
+      {data.map((item, index) => render(item, index, columns))}
+    </tbody>
   );
 };
 

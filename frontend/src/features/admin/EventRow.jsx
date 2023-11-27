@@ -1,5 +1,6 @@
 import Table from '../../ui/Table';
-// import Menus from '../../ui/Menus';
+import Menus from '../../ui/Menus';
+import { formatInstitutionName } from '../../utils/helpers';
 import styles from './EventRow.module.css';
 
 const EventRow = ({ event }) => {
@@ -8,11 +9,11 @@ const EventRow = ({ event }) => {
       <img src={event.image} className={styles.imgSmall} />
       <td>{event.date}</td>
       <td>{event.name}</td>
-      <td>{event.institution}</td>
+      <td>{formatInstitutionName(event.name_of_inst)}</td>
       <td>{event.city}</td>
-      <td>{event.price}</td>
-      <td>{event.is_approved}</td>
-      {/* <td>
+      <td>$ {event.price}</td>
+      <td>{event.is_approved === true ? 'Approved' : 'Pending'}</td>
+      <td>
         <Menus>
           <Menus.Toggle />
           <Menus.List>
@@ -20,7 +21,7 @@ const EventRow = ({ event }) => {
             <Menus.Button>Delete</Menus.Button>
           </Menus.List>
         </Menus>
-      </td> */}
+      </td>
     </Table.Row>
   );
 };

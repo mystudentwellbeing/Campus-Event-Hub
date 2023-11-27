@@ -10,7 +10,7 @@ const Search = () => {
   };
 
   return (
-    <div className={styles.searchContainer}>
+    <section className={styles.searchContainer}>
       <input
         className={styles.searchBox}
         type="text"
@@ -18,7 +18,7 @@ const Search = () => {
         value={searchQuery}
         onChange={handleSearchChange}
       />
-    </div>
+    </section>
   );
 };
 

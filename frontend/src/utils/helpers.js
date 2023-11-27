@@ -24,3 +24,9 @@ export const formatTime = (timeString) => {
 
   return formattedTime;
 };
+
+export const formatInstitutionName = (institution) => {
+  const formattedInstitution = institution.replace(/_/g, ' ');
+
+  return formattedInstitution;
+};
