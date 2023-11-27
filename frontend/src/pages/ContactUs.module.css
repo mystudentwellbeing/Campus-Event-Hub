@@ -20,6 +20,7 @@
 .submitContact form {
     background-color: var(--grey1);
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.2);
+    width: 50rem;
 }
 
 .formContainer {
@@ -27,6 +28,8 @@
     flex-direction: column;
     gap: 2rem;
     justify-content: center;
+    align-items: center;
+    margin: 2rem;
 }
 
 .formContainer div {
@@ -39,6 +42,7 @@
 .formContainer div label {
     font-size: 1.2rem;
     font-weight: 900;
+    margin-bottom: 0.5rem;
 }
   
 .formContainer div input {
@@ -47,6 +51,7 @@
     border-radius: 0.5rem;
     border: 0.001rem solid var(--grey2);
     padding: 1rem;
+    width: 35rem;
 }
 
 .formContainerTextarea {
@@ -55,18 +60,26 @@
     border-radius: 0.5rem;
     border: 0.001rem solid var(--grey2);
     padding: 1rem;
+    width: 35rem;
 }  
 
 .formContainerTerms {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
     gap: 2rem;
     margin: 1rem;
     font-size: 1.2rem;
     font-weight: 900;
     color: var(--blue);
 } 
+
+.formbtnContainer {
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
+}
 
 .btnContact {
     background-color: var(--darkblue);
@@ -75,3 +88,9 @@
     width: 8rem;
 }
   
+
+@media only screen and (max-width: 558px) {
+    .submitContact form {
+        width: auto;
+    }
+}
