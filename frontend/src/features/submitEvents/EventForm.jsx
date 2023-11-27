@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useUser } from '../../features/authentication/useUser';
@@ -30,6 +31,8 @@ const EventForm = () => {
   const isWorking = isCreating || isEditing;
   const today = new Date();
 
+  const navigate = useNavigate();
+
   const onError = (errors) => {
     console.log(errors);
   };
@@ -40,8 +43,9 @@ const EventForm = () => {
       editEvent(
         { newEventData: { ...data, image, user_id: user.id }, id: editId },
         {
-          onSuccess: (data) => {
+          onSuccess: () => {
             reset();
+            navigate('/viewmyevents/mysubmittedevents');
           },
         }
       );
@@ -49,8 +53,9 @@ const EventForm = () => {
       createEvent(
         { ...data, image, user_id: user.id },
         {
-          onSuccess: (data) => {
+          onSuccess: () => {
             reset();
+            navigate('/viewmyevents/mysubmittedevents');
           },
         }
       );
