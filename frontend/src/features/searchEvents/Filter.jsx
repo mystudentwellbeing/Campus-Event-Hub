@@ -48,7 +48,7 @@ const Filter = () => {
   const isActive = (filterType) => filters.includes(filterType);
 
   return (
-    <div className={styles.filterContainer}>
+    <section className={styles.filterContainer}>
       <Button
         type="filter"
         onClick={() => toggleFilter('NETWORKING')}
@@ -121,7 +121,7 @@ const Filter = () => {
         <LuFlower2 className={styles.filterIcon} />
         WELLBEING ({eventCountsByType['WELLBEING'] || 0})
       </Button>
-    </div>
+    </section>
   );
 };
 

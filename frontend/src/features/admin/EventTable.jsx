@@ -19,7 +19,7 @@ const EventTable = () => {
         <th>City</th>
         <th>Price</th>
         <th>Status</th>
-        <th>Actions</th>
+        <th></th>
       </Table.Header>
       <Table.Body
         data={events}

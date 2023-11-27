@@ -9,11 +9,11 @@ const EventList = () => {
   if (error) return <div>Error loading events: {error.message}</div>;
 
   return (
-    <div className={styles.allevents}>
+    <section className={styles.eventContainer}>
       {events.map((event) => (
         <Event key={event.id} event={event} />
       ))}
-    </div>
+    </section>
   );
 };
 
