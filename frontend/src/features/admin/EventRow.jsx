@@ -10,13 +10,12 @@ import Table from '../../ui/Table';
 import Menus from '../../ui/Menus';
 import Modal from '../../ui/Modal';
 import DeleteAlert from '../../ui/DeleteAlert';
-import SpinnerMini from '../../ui/SpinnerMini';
 import styles from './EventRow.module.css';
 
 const EventRow = ({ event }) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
-  const { approve, isApproving } = useApproveEvent();
+  const { approve } = useApproveEvent();
 
   const handleEdit = () => {
     navigate('/submitevents', { state: { event } });
@@ -45,13 +44,7 @@ const EventRow = ({ event }) => {
               event.is_approved ? styles.approved : styles.pending
             }`}
           >
-            {event.is_approved ? (
-              'APPROVED'
-            ) : isApproving ? (
-              <SpinnerMini />
-            ) : (
-              'PENDING'
-            )}
+            {event.is_approved ? 'APPROVED' : 'PENDING'}
           </span>
         </td>
         <td>

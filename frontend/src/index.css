@@ -51,5 +51,5 @@ main {
   background-color: var(--white);
   width: 90%;
   max-width: 1400px;
-  margin: 10rem auto;
+  margin: 10rem auto 2rem auto;
 }
