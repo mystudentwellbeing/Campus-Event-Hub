@@ -18,6 +18,14 @@ footer {
   align-items: center;
 }
 
+a {
+  text-decoration: none;
+}
+
+p {
+  color: var(--white);
+}
+
 .terms {
   display: flex;
   flex-direction: column;
@@ -38,6 +46,7 @@ footer {
   font-size: 2rem;
   margin-right: 1rem;
   vertical-align: center;
+  color: var(--white);
 }
 
 @media (min-width: 768px) {
