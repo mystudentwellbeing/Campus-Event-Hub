@@ -12,7 +12,7 @@ import Button from '../ui/Button';
 import styles from './Event.module.css';
 
 const Event = ({ event }) => {
-  const { isAuthenticated, user } = useUser();
+  const { isAuthenticated, user, isAdmin } = useUser();
   const { likeEvent } = useLikeEvent();
   const { unlikeEvent } = useUnlikeEvent();
   const { likedEvents, refetchLikedEvents } = useEventInterests(user?.id);
@@ -72,7 +72,7 @@ const Event = ({ event }) => {
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
-      {isCreator && isHovering && (
+      {(isCreator || isAdmin) && isHovering && (
         <div className={styles.overlayButtons}>
           <Button type="hoverBtn" onClick={handleEdit}>
             Edit
