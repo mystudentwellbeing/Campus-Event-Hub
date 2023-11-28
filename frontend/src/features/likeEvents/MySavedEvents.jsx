@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
-import { useUser } from './../../features/authentication/useUser';
-import useEvents from './../../features/searchEvents/useEvents';
-import { useEventInterests } from './useEventInterests';
 import { FaLongArrowAltRight } from 'react-icons/fa';
+import { useUser } from './../../features/authentication/useUser';
+import { useEventInterests } from './useEventInterests';
+import useEvents from './../../features/searchEvents/useEvents';
 import Event from '../Event';
+import Spinner from '../../ui/Spinner';
 import styles from './MySavedEvents.module.css';
 
 const MySavedEvents = () => {
@@ -20,7 +21,7 @@ const MySavedEvents = () => {
   );
 
   if (isEventsLoading) {
-    return <div>Loading events...</div>;
+    return <Spinner />;
   }
 
   if (eventsError) {

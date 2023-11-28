@@ -1,6 +1,7 @@
 import { useUser } from './../../features/authentication/useUser';
 import { useSubmittedEvents } from './useSubmittedEvents';
 import Event from '../Event';
+import Spinner from '../../ui/Spinner';
 import styles from './MySubmittedEvents.module.css';
 
 const MySubmittedEvents = () => {
@@ -18,7 +19,7 @@ const MySubmittedEvents = () => {
   const numPendingEvents = myPendingEvents?.length;
 
   if (isLoading) {
-    return <div>Loading events...</div>;
+    return <Spinner />;
   }
 
   return (

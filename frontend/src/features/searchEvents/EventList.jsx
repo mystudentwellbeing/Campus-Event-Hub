@@ -1,11 +1,12 @@
 import useEvents from './useEvents';
 import Event from '../Event';
+import Loader from '../../ui/Loader';
 import styles from './EventList.module.css';
 
 const EventList = () => {
   const { isLoading, events, error } = useEvents();
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loader />;
   if (error) return <div>Error loading events: {error.message}</div>;
 
   return (
