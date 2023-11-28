@@ -1,7 +1,7 @@
 import { useUser } from './../../features/authentication/useUser';
 import { useSubmittedEvents } from './useSubmittedEvents';
 import Event from '../Event';
-import Spinner from '../../ui/Spinner';
+import Spinner from '../../ui/SpinnerMini.jsx';
 import styles from './MySubmittedEvents.module.css';
 
 const MySubmittedEvents = () => {
