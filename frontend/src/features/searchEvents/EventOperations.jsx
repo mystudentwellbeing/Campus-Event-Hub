@@ -2,10 +2,10 @@ import Search from './Search';
 import Filter from './Filter';
 const EventOperations = () => {
   return (
-    <div>
+    <section>
       <Search />
       <Filter />
-    </div>
+    </section>
   );
 };
 

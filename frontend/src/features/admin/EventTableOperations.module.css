@@ -1,3 +1,12 @@
 .operationContainer {
+  display: flex;
+  gap: 2rem;
   margin: 2rem;
+  width: 90%;
+  justify-content: space-between;
+}
+
+.filterAndSortWrapper {
+  display: flex;
+  gap: 1rem;
 }
