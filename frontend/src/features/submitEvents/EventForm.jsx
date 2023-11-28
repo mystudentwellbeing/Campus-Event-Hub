@@ -45,7 +45,6 @@ const EventForm = () => {
           newEventData: {
             ...data,
             image,
-            user_id: user.id,
             is_approved: false,
           },
           id: editId,
@@ -128,13 +127,13 @@ const EventForm = () => {
               {...register('name_of_inst')}
             >
               <option value="">Select University</option>
-              <option value="university_of_manitoba">
+              <option value="University_of_Manitoba">
                 University of Manitoba
               </option>
-              <option value="university_of_winnipeg">
+              <option value="University_of_Winnipeg">
                 University of Winnipeg
               </option>
-              <option value="other">Other</option>
+              <option value="Other">Other</option>
             </select>
           </div>
           <div>

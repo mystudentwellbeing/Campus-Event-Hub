@@ -1,8 +1,8 @@
-import { Link, useNavigate } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useLogout } from '../../features/authentication/useLogout';
 import Hamburger from 'hamburger-react';
-import useOutsideClick from '../../hooks/useOutsideClick';
+import useOutsideClick from '../../hooks/useOutsideClickforNav';
 import Button from '../Button';
 import logo from '../../assets/logo.png';
 import styles from './notLoggedInNav.module.css';
@@ -58,6 +58,11 @@ const AdminNav = () => {
           <li>
             <Link to="/submitevents" onClick={closeMenu}>
               SUBMIT EVENTS
+            </Link>
+          </li>
+          <li>
+            <Link to="/viewmyevents" onClick={closeMenu}>
+              VIEW MY EVENTS
             </Link>
           </li>
           <li>

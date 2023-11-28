@@ -1,14 +1,10 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import useOutsideClick from '../hooks/useOutsideClick';
 import styles from './Menus.module.css';
 
 const MenusContext = createContext();
-
-const Menu = ({ children }) => {
-  return <div className={styles.menu}>{children}</div>;
-};
 
 const Menus = ({ children }) => {
   const [openId, setOpenId] = useState('');
@@ -50,7 +46,8 @@ const Toggle = ({ id }) => {
 
 const List = ({ id, children }) => {
   const { openId, position, close } = useContext(MenusContext);
-  const ref = useOutsideClick(close, false);
+  const listRef = useRef(null);
+  useOutsideClick(listRef, close, null);
 
   if (openId !== id) return null;
 
@@ -60,7 +57,7 @@ const List = ({ id, children }) => {
   };
 
   return createPortal(
-    <ul style={listStyles} className={styles.menuList} ref={ref}>
+    <ul style={listStyles} className={styles.menuList} ref={listRef}>
       {children}
     </ul>,
     document.body
@@ -85,7 +82,6 @@ const Button = ({ children, icon, onClick }) => {
   );
 };
 
-Menus.Menu = Menu;
 Menus.Toggle = Toggle;
 Menus.List = List;
 Menus.Button = Button;

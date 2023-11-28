@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
 import { useUser } from '../../features/authentication/useUser';
 import Hamburger from 'hamburger-react';
-import useOutsideClick from '../../hooks/useOutsideClick';
+import useOutsideClick from '../../hooks/useOutsideClickforNav';
 import Button from '../Button';
 import logo from '../../assets/logo.png';
 import styles from './NotLoggedInNav.module.css';

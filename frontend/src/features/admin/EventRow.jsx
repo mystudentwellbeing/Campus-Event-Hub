@@ -1,17 +1,27 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Table from '../../ui/Table';
 import Menus from '../../ui/Menus';
 import Modal from '../../ui/Modal';
+import DeleteAlert from '../../ui/DeleteAlert';
 import { formatInstitutionName } from '../../utils/helpers';
 import { CgMoreO } from 'react-icons/cg';
 import { BiEdit } from 'react-icons/bi';
-
 import { RiDeleteBin2Line } from 'react-icons/ri';
 import { FaRegCircleCheck } from 'react-icons/fa6';
 import styles from './EventRow.module.css';
 
 const EventRow = ({ event }) => {
+  const [isModalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
+
+  const handleEdit = () => {
+    navigate('/submitevents', { state: { event } });
+  };
+
+  const handleDeleteClick = (e) => {
+    setModalOpen(true);
+  };
 
   return (
     <Table.Row>
@@ -40,12 +50,26 @@ const EventRow = ({ event }) => {
             >
               Details
             </Menus.Button>
-            <Menus.Button icon={<BiEdit className={styles.icon} />}>
+            <Menus.Button
+              icon={<BiEdit className={styles.icon} />}
+              onClick={handleEdit}
+            >
               Edit
             </Menus.Button>
-            <Menus.Button icon={<RiDeleteBin2Line className={styles.icon} />}>
+            <Menus.Button
+              icon={<RiDeleteBin2Line className={styles.icon} />}
+              onClick={handleDeleteClick}
+            >
               Delete
             </Menus.Button>
+            {isModalOpen && (
+              <Modal title="Delete Event" onClose={() => setModalOpen(false)}>
+                <DeleteAlert
+                  eventId={event.id}
+                  onCloseModal={() => setModalOpen(false)}
+                />
+              </Modal>
+            )}
             <Menus.Button icon={<FaRegCircleCheck className={styles.icon} />}>
               Approve
             </Menus.Button>
