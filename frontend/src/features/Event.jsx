@@ -109,7 +109,7 @@ const Event = ({ event }) => {
           {formatEventDate(event.date)} &nbsp;&nbsp;{' '}
           {formatTime(event.start_time)} - {formatTime(event.end_time)}
         </p>
-        <p className={styles.eventType}>{event.type.join(',  ')}</p>
+        <p id={styles.eventType}>{event.type.join(',  ')}</p>
         <p className={styles.shortDesc}>{event.short_description}</p>
       </div>
     </Link>
