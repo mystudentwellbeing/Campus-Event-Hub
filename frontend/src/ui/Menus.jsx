@@ -2,8 +2,13 @@ import { createContext, useContext, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import useOutsideClick from '../hooks/useOutsideClick';
+import styles from './Menus.module.css';
 
 const MenusContext = createContext();
+
+const Menu = ({ children }) => {
+  return <div className={styles.menu}>{children}</div>;
+};
 
 const Menus = ({ children }) => {
   const [openId, setOpenId] = useState('');
@@ -30,14 +35,14 @@ const Toggle = ({ id }) => {
     const rect = e.target.closest('button').getBoundingClientRect();
     setPosition({
       x: window.innerWidth - rect.width - rect.x,
-      y: rect.y + rect.height + 8,
+      y: rect.y + rect.height + 2,
     });
 
     openId === '' || openId !== id ? open(id) : close();
   };
 
   return (
-    <button onClick={handleClick}>
+    <button onClick={handleClick} className={styles.moreBtn}>
       <BsThreeDotsVertical />
     </button>
   );
@@ -49,15 +54,13 @@ const List = ({ id, children }) => {
 
   if (openId !== id) return null;
 
-  const styles = {
-    position: 'absolute',
+  const listStyles = {
     top: `${position.y}px`,
     right: `${position.x}px`,
-    zIndex: 1000,
   };
 
   return createPortal(
-    <ul style={styles} ref={ref}>
+    <ul style={listStyles} className={styles.menuList} ref={ref}>
       {children}
     </ul>,
     document.body
@@ -73,8 +76,8 @@ const Button = ({ children, icon, onClick }) => {
   };
 
   return (
-    <li>
-      <button onClick={handleClick}>
+    <li className={styles.menuItem}>
+      <button onClick={handleClick} className={styles.menuBtn}>
         {icon}
         <span>{children}</span>
       </button>
@@ -82,7 +85,7 @@ const Button = ({ children, icon, onClick }) => {
   );
 };
 
-Menus.Menu = Menus;
+Menus.Menu = Menu;
 Menus.Toggle = Toggle;
 Menus.List = List;
 Menus.Button = Button;

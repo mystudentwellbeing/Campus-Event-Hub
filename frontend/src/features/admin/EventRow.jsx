@@ -1,9 +1,18 @@
+import { useNavigate } from 'react-router-dom';
 import Table from '../../ui/Table';
 import Menus from '../../ui/Menus';
+import Modal from '../../ui/Modal';
 import { formatInstitutionName } from '../../utils/helpers';
+import { CgMoreO } from 'react-icons/cg';
+import { BiEdit } from 'react-icons/bi';
+
+import { RiDeleteBin2Line } from 'react-icons/ri';
+import { FaRegCircleCheck } from 'react-icons/fa6';
 import styles from './EventRow.module.css';
 
 const EventRow = ({ event }) => {
+  const navigate = useNavigate();
+
   return (
     <Table.Row>
       <img src={event.image} className={styles.imgSmall} />
@@ -12,13 +21,34 @@ const EventRow = ({ event }) => {
       <td>{formatInstitutionName(event.name_of_inst)}</td>
       <td>{event.city}</td>
       <td>$ {event.price}</td>
-      <td>{event.is_approved === true ? 'Approved' : 'Pending'}</td>
+      <td>
+        <span
+          className={`${styles.status} ${
+            event.is_approved ? styles.approved : styles.pending
+          }`}
+        >
+          {event.is_approved ? 'APPROVED' : 'PENDING'}
+        </span>
+      </td>
       <td>
         <Menus>
-          <Menus.Toggle />
-          <Menus.List>
-            <Menus.Button>Edit</Menus.Button>
-            <Menus.Button>Delete</Menus.Button>
+          <Menus.Toggle id={event.id} />
+          <Menus.List id={event.id}>
+            <Menus.Button
+              icon={<CgMoreO className={styles.icon} />}
+              onClick={() => navigate(`/events/${event.id}`)}
+            >
+              Details
+            </Menus.Button>
+            <Menus.Button icon={<BiEdit className={styles.icon} />}>
+              Edit
+            </Menus.Button>
+            <Menus.Button icon={<RiDeleteBin2Line className={styles.icon} />}>
+              Delete
+            </Menus.Button>
+            <Menus.Button icon={<FaRegCircleCheck className={styles.icon} />}>
+              Approve
+            </Menus.Button>
           </Menus.List>
         </Menus>
       </td>

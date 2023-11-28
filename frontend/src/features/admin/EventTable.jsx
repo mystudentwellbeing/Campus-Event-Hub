@@ -1,10 +1,8 @@
 import EventRow from './EventRow';
-import useEvents from '../searchEvents/useEvents';
+import useAllEvents from './useAllEvents';
 import Table from '../../ui/Table';
-// import Menus from '../../ui/Menus';
-
 const EventTable = () => {
-  const { events, isLoading, error } = useEvents();
+  const { events, isLoading, error } = useAllEvents();
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading events: {error.message}</div>;

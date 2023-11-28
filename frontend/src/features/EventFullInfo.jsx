@@ -9,11 +9,7 @@ const EventFullInfo = () => {
   return (
     <main className={styles.container}>
       <div className={styles.event}>
-        <img
-          className={styles.eventImage}
-          src={event.image}
-          alt="EventImage"
-        />
+        <img className={styles.eventImage} src={event.image} alt="EventImage" />
       </div>
 
       <h2 className={styles.name_of_event}>{event.name}</h2>

@@ -3,3 +3,27 @@
   height: 4rem;
   object-fit: cover;
 }
+
+.status {
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  color: white;
+  text-align: center;
+  padding: 0.4rem;
+}
+
+.approved {
+  background-color: var(--grey2);
+}
+.pending {
+  background-color: var(--green);
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  margin-right: 1rem;
+}

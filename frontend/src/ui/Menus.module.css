@@ -1,0 +1,41 @@
+.moreBtn {
+  border: none;
+  background-color: var(--white);
+  padding: 1rem 1.2rem;
+  transition: all 0.3s;
+  border-radius: 1rem;
+}
+
+.moreBtn:hover {
+  background-color: var(--grey1);
+}
+
+.menuList {
+  position: absolute;
+  width: 15rem;
+  background-color: var(--white);
+  border: 0.05rem solid var(--grey2);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 0 2rem 0 rgba(0, 0, 0, 0.05), 0 0 0 0.1rem rgba(0, 0, 0, 0.08);
+  z-index: 10;
+}
+
+.menuItem {
+  list-style: none;
+}
+
+.menuBtn {
+  display: flex;
+  border: none;
+  font-size: 1.2rem;
+  padding: 1rem;
+  font-family: inherit;
+  background: none;
+  width: 100%;
+  transition: all 0.2s;
+}
+
+.menuBtn:hover {
+  background-color: var(--grey1);
+}

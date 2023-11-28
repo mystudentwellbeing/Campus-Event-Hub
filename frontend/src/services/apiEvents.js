@@ -31,6 +31,21 @@ export const getEvent = async (id) => {
   return data;
 };
 
+export const getAllEvents = async () => {
+  const { data, error } = await supabase
+    .from('events')
+    .select('*')
+    .gte('date', new Date().toISOString())
+    .order('date', { ascending: true });
+
+  if (error) {
+    console.error(error);
+    throw new Error('Events could not be loaded');
+  }
+
+  return data;
+};
+
 export const getEventsCreatedByUser = async (userId) => {
   const { data, error } = await supabase
     .from('events')
