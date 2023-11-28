@@ -1,19 +1,21 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Table from '../../ui/Table';
-import Menus from '../../ui/Menus';
-import Modal from '../../ui/Modal';
-import DeleteAlert from '../../ui/DeleteAlert';
 import { formatInstitutionName } from '../../utils/helpers';
 import { CgMoreO } from 'react-icons/cg';
 import { BiEdit } from 'react-icons/bi';
 import { RiDeleteBin2Line } from 'react-icons/ri';
 import { FaRegCircleCheck } from 'react-icons/fa6';
+import { useApproveEvent } from './useApproveEvent';
+import Table from '../../ui/Table';
+import Menus from '../../ui/Menus';
+import Modal from '../../ui/Modal';
+import DeleteAlert from '../../ui/DeleteAlert';
 import styles from './EventRow.module.css';
 
 const EventRow = ({ event }) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
+  const { approve } = useApproveEvent();
 
   const handleEdit = () => {
     navigate('/submitevents', { state: { event } });
@@ -21,6 +23,10 @@ const EventRow = ({ event }) => {
 
   const handleDeleteClick = (e) => {
     setModalOpen(true);
+  };
+
+  const handleApprove = () => {
+    approve({ id: event.id, is_approved: true });
   };
 
   return (
@@ -64,7 +70,10 @@ const EventRow = ({ event }) => {
                 Delete
               </Menus.Button>
 
-              <Menus.Button icon={<FaRegCircleCheck className={styles.icon} />}>
+              <Menus.Button
+                icon={<FaRegCircleCheck className={styles.icon} />}
+                onClick={handleApprove}
+              >
                 Approve
               </Menus.Button>
             </Menus.List>

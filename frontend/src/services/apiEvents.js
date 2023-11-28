@@ -98,6 +98,21 @@ export const createEditEvent = async (newEvent, id) => {
   return data;
 };
 
+export const approveEvent = async (id) => {
+  const { data, error } = await supabase
+    .from('events')
+    .update({ is_approved: true })
+    .eq('id', id)
+    .single();
+
+  if (error) {
+    console.error(error);
+    throw new Error('Event could not be approved');
+  }
+
+  return data;
+};
+
 export const deleteEvent = async (id) => {
   const { error: storageError } = await supabase.storage
     .from('event_image')

@@ -25,7 +25,7 @@ function App() {
     defaultOptions: {
       queries: {
         staleTime: 0,
-        cacheTime: 1000,
+        // cacheTime: 1000,
       },
     },
   });
