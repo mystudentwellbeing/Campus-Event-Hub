@@ -9,7 +9,7 @@ export const useApproveEvent = () => {
     mutationFn: ({ id, is_approved }) => approveEvent(id, is_approved),
     onSuccess: () => {
       toast.success('Event successfully approved');
-      queryClient.invalidateQueries({ queryKey: ['events'] });
+      queryClient.invalidateQueries({ queryKey: ['allEvents'] });
     },
     onError: (err) => toast.error(err.message),
   });
