@@ -4,7 +4,7 @@ import { useUser } from './../../features/authentication/useUser';
 import { useEventInterests } from './useEventInterests';
 import useEvents from './../../features/searchEvents/useEvents';
 import Event from '../Event';
-import Spinner from '../../ui/SpinnerMini';
+import Loader from '../../ui/Loader';
 import styles from './MySavedEvents.module.css';
 
 const MySavedEvents = () => {
@@ -21,7 +21,7 @@ const MySavedEvents = () => {
   );
 
   if (isEventsLoading) {
-    return <Spinner />;
+    return <Loader />;
   }
 
   if (eventsError) {

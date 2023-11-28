@@ -1,9 +1,11 @@
 .table {
-  width: 90%;
+  width: 100%;
+  max-width: 1200px;
   border: 0.1rem solid var(--grey2);
   border-radius: 0.5rem;
   overflow: hidden;
-  padding: 1rem;
+  padding: 2rem;
+  margin-top: 6rem;
 }
 
 .tableHeader {

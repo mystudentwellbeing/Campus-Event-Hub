@@ -40,16 +40,32 @@ body {
   min-height: 100vh;
   justify-content: space-between;
   align-items: center;
-  border: 0.1 solid red;
 }
 
 main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   background-color: var(--white);
   width: 90%;
   max-width: 1400px;
-  margin: 10rem auto 2rem auto;
+  margin: 12rem auto 2rem auto;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
 }

@@ -1,0 +1,15 @@
+.operationContainer {
+  width: 82%;
+  max-width: 1200px;
+  position: fixed;
+  top: 0;
+  margin: 10.64rem auto 0 auto;
+  background-color: var(--white);
+  z-index: 10;
+}
+
+.searchAndSortWrapper {
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
