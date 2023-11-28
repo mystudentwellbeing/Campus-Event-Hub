@@ -24,59 +24,62 @@ const EventRow = ({ event }) => {
   };
 
   return (
-    <Table.Row>
-      <img src={event.image} className={styles.imgSmall} />
-      <td>{event.date}</td>
-      <td>{event.name}</td>
-      <td>{formatInstitutionName(event.name_of_inst)}</td>
-      <td>{event.city}</td>
-      <td>$ {event.price}</td>
-      <td>
-        <span
-          className={`${styles.status} ${
-            event.is_approved ? styles.approved : styles.pending
-          }`}
-        >
-          {event.is_approved ? 'APPROVED' : 'PENDING'}
-        </span>
-      </td>
-      <td>
-        <Menus>
-          <Menus.Toggle id={event.id} />
-          <Menus.List id={event.id}>
-            <Menus.Button
-              icon={<CgMoreO className={styles.icon} />}
-              onClick={() => navigate(`/events/${event.id}`)}
-            >
-              Details
-            </Menus.Button>
-            <Menus.Button
-              icon={<BiEdit className={styles.icon} />}
-              onClick={handleEdit}
-            >
-              Edit
-            </Menus.Button>
-            <Menus.Button
-              icon={<RiDeleteBin2Line className={styles.icon} />}
-              onClick={handleDeleteClick}
-            >
-              Delete
-            </Menus.Button>
-            {isModalOpen && (
-              <Modal title="Delete Event" onClose={() => setModalOpen(false)}>
-                <DeleteAlert
-                  eventId={event.id}
-                  onCloseModal={() => setModalOpen(false)}
-                />
-              </Modal>
-            )}
-            <Menus.Button icon={<FaRegCircleCheck className={styles.icon} />}>
-              Approve
-            </Menus.Button>
-          </Menus.List>
-        </Menus>
-      </td>
-    </Table.Row>
+    <>
+      <Table.Row>
+        <img src={event.image} className={styles.imgSmall} />
+        <td>{event.date}</td>
+        <td>{event.name}</td>
+        <td>{formatInstitutionName(event.name_of_inst)}</td>
+        <td>{event.city}</td>
+        <td>$ {event.price}</td>
+        <td>
+          <span
+            className={`${styles.status} ${
+              event.is_approved ? styles.approved : styles.pending
+            }`}
+          >
+            {event.is_approved ? 'APPROVED' : 'PENDING'}
+          </span>
+        </td>
+        <td>
+          <Menus>
+            <Menus.Toggle id={event.id} />
+            <Menus.List id={event.id}>
+              <Menus.Button
+                icon={<CgMoreO className={styles.icon} />}
+                onClick={() => navigate(`/events/${event.id}`)}
+              >
+                Details
+              </Menus.Button>
+              <Menus.Button
+                icon={<BiEdit className={styles.icon} />}
+                onClick={handleEdit}
+              >
+                Edit
+              </Menus.Button>
+              <Menus.Button
+                icon={<RiDeleteBin2Line className={styles.icon} />}
+                onClick={handleDeleteClick}
+              >
+                Delete
+              </Menus.Button>
+
+              <Menus.Button icon={<FaRegCircleCheck className={styles.icon} />}>
+                Approve
+              </Menus.Button>
+            </Menus.List>
+          </Menus>
+        </td>
+      </Table.Row>
+      {isModalOpen && (
+        <Modal title="Delete Event" onClose={() => setModalOpen(false)}>
+          <DeleteAlert
+            eventId={event.id}
+            onCloseModal={() => setModalOpen(false)}
+          />
+        </Modal>
+      )}
+    </>
   );
 };
 
