@@ -4,7 +4,11 @@ import { useUser } from './../../features/authentication/useUser';
 import { useEventInterests } from './useEventInterests';
 import useEvents from './../../features/searchEvents/useEvents';
 import Event from '../Event';
+<<<<<<< HEAD
 import Loader from '../../ui/Loader';
+=======
+import Spinner from '../../ui/SpinnerMini';
+>>>>>>> 00fd3235824a0fcdef75b36c9202fc911380050e
 import styles from './MySavedEvents.module.css';
 
 const MySavedEvents = () => {

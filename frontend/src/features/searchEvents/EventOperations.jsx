@@ -1,6 +1,6 @@
 import Search from '../../ui/Search';
-import SortBy from '../../ui/SortBy';
 import Filter from './Filter';
+import SortBy from '../../ui/SortBy';
 import styles from './EventOperations.module.css';
 
 const EventOperations = () => {
