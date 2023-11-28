@@ -8,10 +8,41 @@ import styles from './LoginForm.module.css';
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [emailRequired, setEmailRequired] = useState('');
+  const [passwordRequired, setPasswordRequired] = useState('');
   const { login, isLoading } = useLogin();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // const emailFormat = /^[^\s@]+@([^\s@]+\.)+[^\s@]+$/;
+    const emailFormat =  /^[^\s@]+@[^\s@]+\.[^\s@]+$/ ;
+    if (!email.trim() && !password.trim()) {
+      setEmailRequired('Email is required');
+      setPasswordRequired('Password is required');
+      return;
+    } else {
+      setEmailRequired('');
+      setPasswordRequired('');
+    }
+
+    if (!email.trim()) {
+      setEmailRequired('Email is required');
+      return;
+    } else if (!emailFormat.test(email)) {
+      setEmailRequired('Email is not valid!');
+      return;
+    } else {
+      setEmailRequired('');
+    }
+
+    if (!password.trim()) {
+      setPasswordRequired('Password is required');
+      return;
+    } else {
+      setPasswordRequired('');
+    }
+
     if (!email || !password) return;
     login(
       { email, password },
@@ -36,10 +67,14 @@ const LoginForm = () => {
           placeholder="email"
           onChange={(e) => {
             setEmail(e.target.value);
+            setEmailRequired('');
           }}
           value={email}
           disabled={isLoading}
         />
+        {
+          emailRequired && <div className={styles.error}>{emailRequired}</div>
+        }
         <label htmlFor="password">Password</label>
         <Input
           type="password"
@@ -47,9 +82,13 @@ const LoginForm = () => {
           placeholder="password"
           onChange={(e) => {
             setPassword(e.target.value);
+            setPasswordRequired('');
           }}
           value={password}
         />
+        {
+          passwordRequired && <div className={styles.error}>{passwordRequired}</div>
+        }
         {/* {error && <div className={styles.error}>{error}</div>} */}
         <Button type="login">Log In</Button>
         <p>Not a member?</p>
