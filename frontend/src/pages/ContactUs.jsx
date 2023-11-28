@@ -1,9 +1,9 @@
-// import styles from './SubmitEvents.module.css';
 import styles from './ContactUs.module.css';
 import { useRef, useState } from 'react';
 import TermsConditions from '../features/TermsConditions';
 import Modal from '../ui/Modal';
 import Button from '../ui/Button';
+import emailjs from 'emailjs-com';
 
 const ContactUs = () => {
   const [name, setName] = useState('');
@@ -14,15 +14,41 @@ const ContactUs = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    alert(`Form Submitted`);
+
+    // this is the ids that I have in EmailJS
+    const serviceID = 'service_8c4r4kd';
+    const templateID = 'template_5vk37vn';
+    const userID = 'DvB3W4EsoBtfY5Ljj';
+
+    emailjs.send(serviceID, templateID, {
+      name: name,
+      email: email,
+      message: message,
+    }, userID)
+
+    .then((response) => {
+      console.log('Email sent!', response);
+      alert('Form Submitted and Email Sent!');
+    })
+
+    .catch((error) => {
+      console.error('Error sending email:', error);
+      alert('Failed to send email. Please try again later.');
+    });
+
+    handleReset();
   };
+  
   const formRef = useRef(null);
   const handleReset = () => {
     if (formRef.current) {
       formRef.current.reset();
+        setName(''),
+        setEmail(''),
+        setMessage('')
     }};
-  //return <div>ContactUs</div>;
-  return (
+
+    return (
     <div className={styles.submitContact}>
       <h3 className={styles.title}>Contact Us</h3>
       <form onSubmit={handleSubmit} ref={formRef}>

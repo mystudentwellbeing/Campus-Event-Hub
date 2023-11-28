@@ -22,7 +22,7 @@ a {
   text-decoration: none;
 }
 
-p {
+.email p {
   color: var(--white);
 }
 

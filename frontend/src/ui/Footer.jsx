@@ -9,12 +9,12 @@ const Footer = () => {
   return (
     <footer>
       <div className={styles.footerContainer}>
-      <a href="mailto:topiwalj@outlook.com">
-        <div className={styles.email}>
-          <MdOutlineEmail className={styles.reactIcons} />
-          <p>admin@campuseventhub.ca</p>
-        </div>
-      </a>
+        <a href="mailto:jigisha@my.yorku.ca">
+          <div className={styles.email}>
+            <MdOutlineEmail className={styles.reactIcons} />
+            <p>admin@campuseventhub.ca</p>
+          </div>
+        </a>
         <div className={styles.terms}>
           <p>Terms of Use and Privacy Policy</p>
           <p>&copy;{year} All rights reserved</p>
