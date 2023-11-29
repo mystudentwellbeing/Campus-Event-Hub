@@ -75,7 +75,6 @@ const LoginForm = () => {
   return (
     <form className={styles.loginContainer} onSubmit={handleSubmit(onSubmit)}>
       <h3>Sign In</h3>
-
       <div className={styles.inputRow}>
         <label htmlFor="email">Email</label>
         <input className={styles.input}
