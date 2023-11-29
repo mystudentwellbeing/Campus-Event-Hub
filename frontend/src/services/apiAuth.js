@@ -1,6 +1,11 @@
 import supabase from './supabase';
 
-export const signup = async ({ email, password }) => {
+export const signup = async ({ email, password, passwordConfirm}) => {
+  // Check if password and confirm password match
+  if (password !== passwordConfirm) {
+    throw new Error("Password and confirm password do not match.");
+  }
+  // If password and confirm password match, proceed with signup
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
