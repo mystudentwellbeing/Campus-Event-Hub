@@ -84,7 +84,7 @@ const EventForm = () => {
               })}
             />
             {errors.contact_name && (
-              <div className={styles.errorMsg}>{errors.contact_name.message}</div>
+              <p className={styles.errorMsg}>{errors.contact_name.message}</p>
             )}
           </div>
           <div>
@@ -98,7 +98,7 @@ const EventForm = () => {
               })}
             />
             {errors.contact_phone && (
-              <div className={styles.errorMsg}>{errors.contact_phone.message}</div>
+              <p className={styles.errorMsg}>{errors.contact_phone.message}</p>
             )}
           </div>
         </div>
@@ -114,7 +114,7 @@ const EventForm = () => {
               })}
             />
             {errors.contact_email && (
-              <div className={styles.errorMsg}>{errors.contact_email.message}</div>
+              <p className={styles.errorMsg}>{errors.contact_email.message}</p>
             )}
           </div>
           <div>
@@ -159,7 +159,7 @@ const EventForm = () => {
               })}
             />
             {errors.name && (
-              <div className={styles.errorMsg}>{errors.name.message}</div>
+              <p className={styles.errorMsg}>{errors.name.message}</p>
             )}
           </div>
         </div>
@@ -176,7 +176,7 @@ const EventForm = () => {
               })}
             />
             {errors.date && (
-              <div className={styles.errorMsg}>{errors.date.message}</div>
+              <p className={styles.errorMsg}>{errors.date.message}</p>
             )}
           </div>
           <div>
@@ -189,7 +189,7 @@ const EventForm = () => {
               })}
             />
             {errors.start_time && (
-              <div className={styles.errorMsg}>{errors.start_time.message}</div>
+              <p className={styles.errorMsg}>{errors.start_time.message}</p>
             )}
             <input
               type="time"
@@ -200,7 +200,7 @@ const EventForm = () => {
               })}
             />
             {errors.end_time && (
-              <div className={styles.errorMsg}>{errors.end_time.message}</div>
+              <p className={styles.errorMsg}>{errors.end_time.message}</p>
             )}
           </div>
         </div>
@@ -311,7 +311,7 @@ const EventForm = () => {
             </div>
           </div>
           {errors.type && (
-              <div className={styles.errorMsg}>{errors.type.message}</div>
+            <p className={styles.errorMsgType}>{errors.type.message}</p>
           )}
         </div>
         <div className={styles.formContainer}>
@@ -331,7 +331,7 @@ const EventForm = () => {
               <option value="Hybrid">Hybrid</option>
             </select>
             {errors.event_format && (
-              <div className={styles.errorMsg}>{errors.event_format.message}</div>
+              <p className={styles.errorMsg}>{errors.event_format.message}</p>
             )}
           </div>
           <div>
@@ -396,7 +396,7 @@ const EventForm = () => {
               })}
             />
             {errors.short_description && (
-              <div className={styles.errorMsg}>{errors.short_description.message}</div>
+              <p className={styles.errorMsg}>{errors.short_description.message}</p>
             )}
             <label>Price of Ticket</label>
             <input
@@ -410,10 +410,10 @@ const EventForm = () => {
               })}
             />
             {errors.price && (
-              <div className={styles.errorMsg}>{errors.price.message}</div>
+              <p className={styles.errorMsg}>{errors.price.message}</p>
             )}
             {errors.price && errors.price.type === "min" && (
-              <div className={styles.errorMsg}>Price must be 0 or more</div>
+              <p className={styles.errorMsg}>Price must be 0 or more</p>
             )}
             <label>Image</label>
             <input
@@ -425,7 +425,7 @@ const EventForm = () => {
               })}
             />
             {errors.image && (
-              <div className={styles.errorMsg}>{errors.image.message}</div>
+              <p className={styles.errorMsg}>{errors.image.message}</p>
             )}
           </div>
           <div>
@@ -439,7 +439,7 @@ const EventForm = () => {
               })}
             ></textarea>
             {errors.description && (
-              <div className={styles.errorMsg}>{errors.description.message}</div>
+              <p className={styles.errorMsg}>{errors.description.message}</p>
             )}
           </div>
         </div>
