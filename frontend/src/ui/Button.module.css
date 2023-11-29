@@ -33,16 +33,6 @@
   height: 4.2rem;
 }
 
-.filter {
-  font-size: 1.2rem;
-  width: 18rem;
-  font-weight: normal;
-  padding: 1rem 1.5rem;
-  color: var(--black);
-  background-color: var(--white);
-  border: 0.1rem solid var(--grey2);
-}
-
 .close {
   position: absolute;
   top: 2rem;

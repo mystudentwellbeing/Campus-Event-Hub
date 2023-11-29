@@ -1,4 +1,5 @@
 import { createContext, useContext } from 'react';
+import Empty from './Empty';
 import styles from './Table.module.css';
 
 const TableContext = createContext();
@@ -32,14 +33,12 @@ const Body = ({ data, render }) => {
 };
 
 const Footer = ({ children }) => {
-  return <tfoot>{children}</tfoot>;
-};
-
-const Empty = ({ children }) => {
   return (
-    <tr>
-      <td colSpan="100%">{children}</td>
-    </tr>
+    <tfoot className={styles.tableFooter}>
+      <tr>
+        <td colSpan="8">{children}</td>
+      </tr>
+    </tfoot>
   );
 };
 

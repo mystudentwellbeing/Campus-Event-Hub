@@ -1,0 +1,37 @@
+.filterContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem auto;
+  flex-wrap: wrap;
+  max-width: 1200px;
+}
+
+.filterBtn {
+  color: var(--black);
+  background-color: var(--white);
+  font-size: 1.2rem;
+  width: 18rem;
+  padding: 1rem;
+  border: 0.1rem solid var(--grey2);
+  border-radius: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem;
+}
+
+.activeFilter {
+  color: white;
+  background-color: var(--blue);
+  font-size: 1.2rem;
+  width: 18rem;
+  padding: 1rem;
+  border: 0.1rem solid var(--grey2);
+  border-radius: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem;
+}

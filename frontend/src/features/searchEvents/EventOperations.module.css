@@ -13,3 +13,10 @@
   display: flex;
   justify-content: space-between;
 }
+
+.filterIcon {
+  font-size: 2rem;
+  margin-right: 1rem;
+  display: flex;
+  align-items: center;
+}

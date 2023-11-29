@@ -3,9 +3,10 @@ import EventRow from './EventRow';
 import useAllEvents from './useAllEvents';
 import Table from '../../ui/Table';
 import Loader from '../../ui/Loader';
+import Pagination from '../../ui/Pagination';
 
 const EventTable = () => {
-  const { events, isLoading, error } = useAllEvents();
+  const { events, isLoading, error, count } = useAllEvents();
   const [searchParams] = useSearchParams();
   const currentDate = new Date();
 
@@ -56,7 +57,9 @@ const EventTable = () => {
         data={sortedEvents}
         render={(event) => <EventRow key={event.id} event={event} />}
       />
-      {/* <Table.Footer></Table.Footer> */}
+      <Table.Footer>
+        <Pagination count={count} />
+      </Table.Footer>
     </Table>
   );
 };
