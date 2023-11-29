@@ -45,6 +45,16 @@
   justify-content: center;
   width: 50%;
   margin: 1rem;
+  gap: 0.5rem;
+}
+
+.errorMsg {
+  color: red;
+  font-size: 1.2rem;
+  /* align-self: center; */
+  align-self: normal;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .input {
