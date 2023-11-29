@@ -35,9 +35,16 @@ const EventList = () => {
   const [field, direction] = sortBy.split('-');
   const modifier = direction === 'asc' ? 1 : -1;
 
-  let sortedEvents = [...filteredEvents].sort((a, b) => {
-    return (a[field] - b[field]) * modifier;
-  });
+  let sortedEvents = filteredEvents;
+  if (field === 'date') {
+    sortedEvents = [...filteredEvents].sort(
+      (a, b) => (new Date(a[field]) - new Date(b[field])) * modifier
+    );
+  } else if (field === 'price') {
+    sortedEvents = [...filteredEvents].sort(
+      (a, b) => (a[field] - b[field]) * modifier
+    );
+  }
 
   return (
     <section className={styles.eventContainer}>
