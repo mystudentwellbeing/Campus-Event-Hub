@@ -18,13 +18,13 @@ const EventForm = () => {
   const editId = eventToEdit?.id;
   const isEditSession = Boolean(editId);
 
-  const { register, handleSubmit, reset, formState } = useForm({
+  const { register, handleSubmit, reset, formState: {errors} } = useForm({
     defaultValues: isEditSession
       ? { ...eventToEdit, type: eventToEdit.type || [] }
       : { type: [] },
   });
 
-  const { errors } = formState;
+  //const { errors } = formState;
   const { user } = useUser();
   const { isCreating, createEvent } = useCreateEvent();
   const { isEditing, editEvent } = useEditEvent();
@@ -83,6 +83,9 @@ const EventForm = () => {
                 required: 'This field is required',
               })}
             />
+            {errors.contact_name && (
+              <div className={styles.errorMsg}>{errors.contact_name.message}</div>
+            )}
           </div>
           <div>
             <label>Contact Phone #</label>
@@ -94,6 +97,9 @@ const EventForm = () => {
                 required: 'This field is required',
               })}
             />
+            {errors.contact_phone && (
+              <div className={styles.errorMsg}>{errors.contact_phone.message}</div>
+            )}
           </div>
         </div>
         <div className={styles.formContainer}>
@@ -107,6 +113,9 @@ const EventForm = () => {
                 required: 'This field is required',
               })}
             />
+            {errors.contact_email && (
+              <div className={styles.errorMsg}>{errors.contact_email.message}</div>
+            )}
           </div>
           <div>
             <label>Name of Orgnization(Student Club)</label>
@@ -116,6 +125,9 @@ const EventForm = () => {
               disabled={isWorking}
               {...register('name_of_org')}
             />
+            {/* {errors.name_of_org && (
+              <div className={styles.errorMsg}>{errors.name_of_org.message}</div>
+            )} */}
           </div>
         </div>
         <div className={styles.formContainer}>
@@ -146,6 +158,9 @@ const EventForm = () => {
                 required: 'This field is required',
               })}
             />
+            {errors.name && (
+              <div className={styles.errorMsg}>{errors.name.message}</div>
+            )}
           </div>
         </div>
         <div className={styles.formContainer}>
@@ -160,6 +175,9 @@ const EventForm = () => {
                 min: today.toISOString().split('T')[0],
               })}
             />
+            {errors.date && (
+              <div className={styles.errorMsg}>{errors.date.message}</div>
+            )}
           </div>
           <div>
             <label>Event Start & End Time</label>
@@ -170,6 +188,9 @@ const EventForm = () => {
                 required: 'This field is required',
               })}
             />
+            {errors.start_time && (
+              <div className={styles.errorMsg}>{errors.start_time.message}</div>
+            )}
             <input
               type="time"
               id="endTime"
@@ -178,6 +199,9 @@ const EventForm = () => {
                 required: 'This field is required',
               })}
             />
+            {errors.end_time && (
+              <div className={styles.errorMsg}>{errors.end_time.message}</div>
+            )}
           </div>
         </div>
         <div>
@@ -190,7 +214,9 @@ const EventForm = () => {
                   name="eventType"
                   id="NETWORKING"
                   value="NETWORKING"
-                  {...register('type')}
+                  {...register('type', {
+                    required: 'Please select at-least one event type'
+                  })}
                 />
                 <label>NETWORKING</label>
               </div>
@@ -284,6 +310,9 @@ const EventForm = () => {
               </div>
             </div>
           </div>
+          {errors.type && (
+              <div className={styles.errorMsg}>{errors.type.message}</div>
+          )}
         </div>
         <div className={styles.formContainer}>
           <div>
@@ -301,6 +330,9 @@ const EventForm = () => {
               <option value="In-person">In-Person</option>
               <option value="Hybrid">Hybrid</option>
             </select>
+            {errors.event_format && (
+              <div className={styles.errorMsg}>{errors.event_format.message}</div>
+            )}
           </div>
           <div>
             <label>Address(Street No.& Name) of Event</label>
@@ -363,6 +395,9 @@ const EventForm = () => {
                 required: 'This field is required',
               })}
             />
+            {errors.short_description && (
+              <div className={styles.errorMsg}>{errors.short_description.message}</div>
+            )}
             <label>Price of Ticket</label>
             <input
               type="number"
@@ -374,6 +409,12 @@ const EventForm = () => {
                 step: '0.01',
               })}
             />
+            {errors.price && (
+              <div className={styles.errorMsg}>{errors.price.message}</div>
+            )}
+            {errors.price && errors.price.type === "min" && (
+              <div className={styles.errorMsg}>Price must be 0 or more</div>
+            )}
             <label>Image</label>
             <input
               type="file"
@@ -383,6 +424,9 @@ const EventForm = () => {
                 required: isEditSession ? false : 'This field is required',
               })}
             />
+            {errors.image && (
+              <div className={styles.errorMsg}>{errors.image.message}</div>
+            )}
           </div>
           <div>
             <label>Description of Event</label>
@@ -394,6 +438,9 @@ const EventForm = () => {
                 required: 'This field is required',
               })}
             ></textarea>
+            {errors.description && (
+              <div className={styles.errorMsg}>{errors.description.message}</div>
+            )}
           </div>
         </div>
         <div className={styles.formContainerTerms}>
