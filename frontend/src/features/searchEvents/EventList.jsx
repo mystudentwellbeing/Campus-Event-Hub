@@ -31,9 +31,24 @@ const EventList = () => {
     return matchesSearch && matchesFilter;
   });
 
+  const sortBy = searchParams.get('sortBy') || 'date-asc';
+  const [field, direction] = sortBy.split('-');
+  const modifier = direction === 'asc' ? 1 : -1;
+
+  let sortedEvents = filteredEvents;
+  if (field === 'date') {
+    sortedEvents = [...filteredEvents].sort(
+      (a, b) => (new Date(a[field]) - new Date(b[field])) * modifier
+    );
+  } else if (field === 'price') {
+    sortedEvents = [...filteredEvents].sort(
+      (a, b) => (a[field] - b[field]) * modifier
+    );
+  }
+
   return (
     <section className={styles.eventContainer}>
-      {filteredEvents.map((event) => (
+      {sortedEvents.map((event) => (
         <Event key={event.id} event={event} />
       ))}
     </section>
