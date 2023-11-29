@@ -5,9 +5,16 @@ import styles from './FilterEvent.module.css';
 
 const FilterEvent = ({ options }) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { eventCountsByType } = useEvents();
+  const { events } = useEvents();
   const initialFilters = searchParams.get('filters')?.split(',') || [];
   const [filters, setFilters] = useState(initialFilters);
+
+  const eventCountsByType = events?.reduce((acc, event) => {
+    event.type.forEach((type) => {
+      acc[type] = (acc[type] || 0) + 1;
+    });
+    return acc;
+  }, {});
 
   if (!eventCountsByType) {
     return <div>Error: Event counts not available.</div>;

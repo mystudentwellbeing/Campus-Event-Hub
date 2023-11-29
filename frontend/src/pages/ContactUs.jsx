@@ -20,35 +20,40 @@ const ContactUs = () => {
     const templateID = 'template_5vk37vn';
     const userID = 'DvB3W4EsoBtfY5Ljj';
 
-    emailjs.send(serviceID, templateID, {
-      name: name,
-      email: email,
-      message: message,
-    }, userID)
+    emailjs
+      .send(
+        serviceID,
+        templateID,
+        {
+          name: name,
+          email: email,
+          message: message,
+        },
+        userID
+      )
 
-    .then((response) => {
-      console.log('Email sent!', response);
-      alert('Form Submitted and Email Sent!');
-    })
+      .then((response) => {
+        console.log('Email sent!', response);
+        alert('Form Submitted and Email Sent!');
+      })
 
-    .catch((error) => {
-      console.error('Error sending email:', error);
-      alert('Failed to send email. Please try again later.');
-    });
+      .catch((error) => {
+        console.error('Error sending email:', error);
+        alert('Failed to send email. Please try again later.');
+      });
 
     handleReset();
   };
-  
+
   const formRef = useRef(null);
   const handleReset = () => {
     if (formRef.current) {
       formRef.current.reset();
-        setName(''),
-        setEmail(''),
-        setMessage('')
-    }};
+      setName(''), setEmail(''), setMessage('');
+    }
+  };
 
-    return (
+  return (
     <div className={styles.submitContact}>
       <h3 className={styles.title}>Contact Us</h3>
       <form onSubmit={handleSubmit} ref={formRef}>
@@ -106,23 +111,20 @@ const ContactUs = () => {
           </label>
         </div>
         <div className={styles.formbtnContainer}>
-            <Button 
-              type="submit" 
-              className={styles.btnContact}
-            >
-              Submit
-            </Button>
-            <Button
-              type="reset"
-              className={styles.btnContact}
-              onClick={handleReset}
-            >
-              Cancel
-            </Button>
+          <Button type="submit" className={styles.btnContact}>
+            Submit
+          </Button>
+          <Button
+            type="reset"
+            className={styles.btnContact}
+            onClick={handleReset}
+          >
+            Cancel
+          </Button>
         </div>
       </form>
     </div>
-  )
+  );
 };
 
 export default ContactUs;
