@@ -20,6 +20,8 @@ const EventTableOperations = () => {
         <SortBy
           options={[
             { value: 'date-asc', label: 'Sort by date' },
+            { value: 'name_of_inst-asc', label: 'Sort by school' },
+            { value: 'city-asc', label: 'Sort by city' },
             { value: 'price-asc', label: 'Sort by price (Low to High)' },
             { value: 'price-desc', label: 'Sort by price (High to Low)' },
           ]}
