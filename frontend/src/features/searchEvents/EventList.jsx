@@ -17,7 +17,7 @@ const EventList = () => {
     const matchesSearch = searchQuery
       ? event.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         event.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        event.location?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        event.city?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         event.format?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         event.name_of_inst?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         event.type.some((type) =>

@@ -30,14 +30,20 @@ const EventTable = () => {
 
     const name = event.name || '';
     const description = event.description || '';
-    const location = event.location || '';
-    const institution = event.institution || '';
+    const city = event.city || '';
+    const format = event.format || '';
+    const institution = event.name_of_inst || '';
+    const type = event.type || [];
 
     const matchesSearch = searchQuery
       ? name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        location.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        institution.toLowerCase().includes(searchQuery.toLowerCase())
+        city.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        format.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        institution.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        type.some((type) =>
+          type.toLowerCase().includes(searchQuery.toLowerCase())
+        )
       : true;
 
     return matchesStatus && matchesSearch;
