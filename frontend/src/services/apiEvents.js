@@ -31,18 +31,26 @@ export const getEvent = async (id) => {
   return data;
 };
 
-export const getAllEvents = async () => {
-  const { data, error } = await supabase
+export const getAllEvents = async ({ page }) => {
+  let query = supabase
     .from('events')
-    .select('*')
+    .select('*', { count: 'exact' })
     .order('date', { ascending: true });
+
+  if (page) {
+    const from = (page - 1) * 10;
+    const to = from + 10 - 1;
+    query = query.range(from, to);
+  }
+
+  const { data, error, count } = await query;
 
   if (error) {
     console.error(error);
-    throw new Error('Events could not be loaded');
+    throw new Error('Bookings could not be loaded');
   }
 
-  return data;
+  return { data, count };
 };
 
 export const getEventsCreatedByUser = async (userId) => {
