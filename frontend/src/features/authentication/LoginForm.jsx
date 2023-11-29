@@ -1,4 +1,4 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLogin } from './useLogin';
 // import Input from '../../ui/Input';
@@ -7,8 +7,8 @@ import styles from './LoginForm.module.css';
 import { useForm } from 'react-hook-form';
 
 const LoginForm = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
   // const [emailRequired, setEmailRequired] = useState('');
   // const [passwordRequired, setPasswordRequired] = useState('');
   const { login, isLoading } = useLogin();
@@ -56,7 +56,7 @@ const LoginForm = () => {
   //   );
   // };
 
-  const { register, handleSubmit, formState: {errors} } = useForm();
+  const { register, handleSubmit, formState: {errors}, reset } = useForm();
 
   const onSubmit = (data) => {
     const { email, password } = data;
@@ -65,11 +65,13 @@ const LoginForm = () => {
           { email, password },
           {
             onSettled: () => {
-              setEmail('');
-              setPassword('');
+              reset();
+              // setEmail('');
+              // setPassword('');
             },
           });
   }
+
   return (
     <form className={styles.loginContainer} onSubmit={handleSubmit(onSubmit)}>
       <h3>Sign In</h3>
