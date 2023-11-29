@@ -9,37 +9,47 @@ const EventTable = () => {
   const { events, isLoading, error, count } = useAllEvents();
   const [searchParams] = useSearchParams();
   const currentDate = new Date();
+  const searchQuery = searchParams.get('search') || '';
 
   if (isLoading) return <Loader />;
   if (error) return <div>Error loading events: {error.message}</div>;
 
-  const filterValue = searchParams.get('status') || 'all';
-  let filteredEvents = events.filter(
-    (event) => new Date(event.date) >= currentDate
-  );
-  if (filterValue === 'approved')
-    filteredEvents = events.filter((event) => event.is_approved === true);
-  if (filterValue === 'pending')
-    filteredEvents = events.filter((event) => event.is_approved === false);
-  if (filterValue === 'past')
-    filteredEvents = events.filter(
-      (event) => new Date(event.date) <= currentDate
-    );
+  let filteredEvents = events.filter((event) => {
+    const matchesStatus = (() => {
+      switch (searchParams.get('status')) {
+        case 'approved':
+          return event.is_approved === true;
+        case 'pending':
+          return event.is_approved === false;
+        case 'past':
+          return new Date(event.date) <= currentDate;
+        default:
+          return new Date(event.date) >= currentDate;
+      }
+    })();
 
-  const sortBy = searchParams.get('sortBy') || 'date-asc';
+    const name = event.name || '';
+    const description = event.description || '';
+    const location = event.location || '';
+    const institution = event.institution || '';
+
+    const matchesSearch = searchQuery
+      ? name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        location.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        institution.toLowerCase().includes(searchQuery.toLowerCase())
+      : true;
+
+    return matchesStatus && matchesSearch;
+  });
+
+  const sortBy = searchParams.get('sortBy') || 'price-asc';
   const [field, direction] = sortBy.split('-');
   const modifier = direction === 'asc' ? 1 : -1;
 
-  let sortedEvents = filteredEvents;
-  if (field === 'date') {
-    sortedEvents = [...filteredEvents].sort(
-      (a, b) => (new Date(a[field]) - new Date(b[field])) * modifier
-    );
-  } else if (field === 'price') {
-    sortedEvents = [...filteredEvents].sort(
-      (a, b) => (a[field] - b[field]) * modifier
-    );
-  }
+  let sortedEvents = [...filteredEvents].sort((a, b) => {
+    return (a[field] - b[field]) * modifier;
+  });
 
   return (
     <Table>
