@@ -11,13 +11,16 @@ import SubmitEvents from './pages/SubmitEvents';
 import ViewMyEvents from './pages/ViewMyEvents';
 import MySavedEvents from './features/likeEvents/MySavedEvents';
 import MySubmittedEvents from './features/submitEvents/MySubmittedEvents';
+import AdminDashboard from './pages/AdminDashboard';
 import AdminEventManagement from './pages/AdminEventManagement';
 import Setting from './pages/Setting';
 import ContactUs from './pages/ContactUs';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import Footer from './ui/Footer';
+import Unauthorized from './pages/Unauthorized';
+import PageNotFound from './pages/PageNotFound';
 import ProtectedRoute from './ui/ProtectedRoute';
+import Footer from './ui/Footer';
 import './App.css';
 
 function App() {
@@ -69,6 +72,14 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="admin/dashboard"
+            element={
+              <ProtectedRoute adminOnly>
+                <AdminDashboard />
+              </ProtectedRoute>
+            }
+          />
 
           <Route
             path="admin/events"
@@ -83,6 +94,8 @@ function App() {
           <Route path="contactus" element={<ContactUs />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
+          <Route path="unauthorized" element={<Unauthorized />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Footer />
       </BrowserRouter>
