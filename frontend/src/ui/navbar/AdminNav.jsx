@@ -56,6 +56,16 @@ const AdminNav = () => {
       >
         <div className={styles.menuWrapper}>
           <li>
+            <Link to="/admin/dashboard" onClick={closeMenu}>
+              DASHBOARD
+            </Link>
+          </li>
+          <li>
+            <Link to="/admin/events" onClick={closeMenu}>
+              EVENT MANAGEMENT
+            </Link>
+          </li>
+          <li>
             <Link to="/submitevents" onClick={closeMenu}>
               SUBMIT EVENTS
             </Link>
@@ -65,11 +75,7 @@ const AdminNav = () => {
               VIEW MY EVENTS
             </Link>
           </li>
-          <li>
-            <Link to="/admin/events" onClick={closeMenu}>
-              EVENT MANAGEMENT
-            </Link>
-          </li>
+
           <li>
             <Link to="/setting" onClick={closeMenu}>
               SETTING
