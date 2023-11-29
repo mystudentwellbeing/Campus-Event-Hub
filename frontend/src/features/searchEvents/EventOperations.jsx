@@ -20,8 +20,6 @@ const EventOperations = () => {
         <Search />
         <SortBy
           options={[
-            { value: 'date-asc', label: 'Sort by date (Old to New)' },
-            { value: 'date-desc', label: 'Sort by date (New to Old)' },
             { value: 'price-asc', label: 'Sort by price (Low to High)' },
             { value: 'price-desc', label: 'Sort by price (High to Low)' },
           ]}
