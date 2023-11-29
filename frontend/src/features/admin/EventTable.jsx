@@ -32,7 +32,7 @@ const EventTable = () => {
     const description = event.description || '';
     const city = event.city || '';
     const format = event.format || '';
-    const institution = event.name_of_inst || '';
+    const school = event.name_of_inst || '';
     const type = event.type || [];
 
     const matchesSearch = searchQuery
@@ -40,7 +40,7 @@ const EventTable = () => {
         description.toLowerCase().includes(searchQuery.toLowerCase()) ||
         city.toLowerCase().includes(searchQuery.toLowerCase()) ||
         format.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        institution.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        school.toLowerCase().includes(searchQuery.toLowerCase()) ||
         type.some((type) =>
           type.toLowerCase().includes(searchQuery.toLowerCase())
         )
@@ -61,6 +61,11 @@ const EventTable = () => {
   } else if (field === 'price') {
     sortedEvents = [...filteredEvents].sort(
       (a, b) => (a[field] - b[field]) * modifier
+    );
+  } else {
+    sortedEvents = [...filteredEvents].sort(
+      (a, b) =>
+        a[field].toLowerCase().localeCompare(b[field].toLowerCase()) * modifier
     );
   }
 

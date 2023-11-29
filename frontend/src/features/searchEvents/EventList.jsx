@@ -31,7 +31,7 @@ const EventList = () => {
     return matchesSearch && matchesFilter;
   });
 
-  const sortBy = searchParams.get('sortBy') || 'price-asc';
+  const sortBy = searchParams.get('sortBy') || 'date-asc';
   const [field, direction] = sortBy.split('-');
   const modifier = direction === 'asc' ? 1 : -1;
 
@@ -43,6 +43,11 @@ const EventList = () => {
   } else if (field === 'price') {
     sortedEvents = [...filteredEvents].sort(
       (a, b) => (a[field] - b[field]) * modifier
+    );
+  } else {
+    sortedEvents = [...filteredEvents].sort(
+      (a, b) =>
+        a[field].toLowerCase().localeCompare(b[field].toLowerCase()) * modifier
     );
   }
 
