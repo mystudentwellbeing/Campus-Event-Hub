@@ -3,7 +3,12 @@ import { useUser } from './../features/authentication/useUser';
 import { useEventInterests } from './likeEvents/useEventInterests';
 import { useLikeEvent } from './likeEvents/useLikeEvent';
 import { useUnlikeEvent } from './likeEvents/useUnlikeEvent';
-import { displayPrice, formatEventDate, formatTime } from '../utils/helpers';
+import {
+  displayPrice,
+  formatEventDate,
+  formatTime,
+  formatInstitutionName,
+} from '../utils/helpers';
 import { IoIosHeartEmpty, IoIosHeart } from 'react-icons/io';
 import { FiShare } from 'react-icons/fi';
 import { toast } from 'react-hot-toast';
@@ -78,7 +83,7 @@ const EventFullInfo = () => {
           </div>
         </div>
         <li className={styles.shortDesc}>{event.short_description}</li>
-        <div className={styles.datePriceContainer}>
+        <div className={styles.dateEventFormatContainer}>
           <li className={styles.dateAndTime}>
             {formatEventDate(event.date)} &nbsp;&nbsp;
             <span>
@@ -86,8 +91,9 @@ const EventFullInfo = () => {
               {event.end_time ? formatTime(event.end_time) : ''}
             </span>
           </li>
-          <li className={styles.price}>Price: {displayPrice(event.price)}</li>
+          <li className={styles.format}>{event.event_format}</li>
         </div>
+        <li className={styles.price}>Price: {displayPrice(event.price)}</li>
         <li className={styles.location}>
           Location:
           <br />
@@ -100,9 +106,8 @@ const EventFullInfo = () => {
           <span>{event.postal_code}</span>
         </li>
         <li className={styles.broughtBy}>
-          Brought You By
-          <br />
-          <span>{event.name_of_org}</span>
+          Brought You By: {event.name_of_org}{' '}
+          {formatInstitutionName(event.name_of_inst)}
         </li>
 
         <li className={styles.descriptionTitle}>Event Description</li>

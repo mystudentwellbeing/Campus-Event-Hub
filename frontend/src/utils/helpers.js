@@ -26,7 +26,10 @@ export const formatTime = (timeString) => {
 };
 
 export const formatInstitutionName = (institution) => {
-  const formattedInstitution = institution.replace(/_/g, ' ');
+  const formattedInstitution =
+    institution === 'Other' || institution === null
+      ? ''
+      : institution.replace(/_/g, ' ');
 
   return formattedInstitution;
 };
