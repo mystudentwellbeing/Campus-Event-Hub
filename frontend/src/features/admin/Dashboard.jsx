@@ -1,6 +1,13 @@
+import { MdOutlinePendingActions } from 'react-icons/md';
+import { MdEvent } from 'react-icons/md';
+import { RiUserReceived2Line } from 'react-icons/ri';
+import { LuUsers } from 'react-icons/lu';
+import { FaHeart } from 'react-icons/fa';
+import { FaSchool } from 'react-icons/fa';
 import useAllEvents from './useAllEvents';
 import useUsers from './useUsers';
 import useEventLikes from './useEventLikes';
+import Loader from '../../ui/Loader';
 import styles from './Dashboard.module.css';
 
 const Dashboard = () => {
@@ -8,7 +15,7 @@ const Dashboard = () => {
   const { isLoading: isLoading2, users, error2 } = useUsers();
   const { isLoading: isLoading3, eventLikes, error3 } = useEventLikes();
 
-  if (isLoading1 || isLoading2 || isLoading3) return <div>Loading...</div>;
+  if (isLoading1 || isLoading2 || isLoading3) return <Loader />;
   if (error1 || error2 || error3) {
     const errorMessage = error1?.message || error2?.message || error3?.message;
     return <div>Error: {errorMessage}</div>;
@@ -87,20 +94,40 @@ const Dashboard = () => {
     <div className={styles.dashboardContainer}>
       <div className={styles.topContainer}>
         <div className={styles.numOfPendingEvents}>
-          PENDING EVENTS:{pendingEvents?.length}
+          <MdOutlinePendingActions className={styles.icon} />
+          <div className={styles.statWrapper}>
+            <h4>PENDING EVENTS</h4>
+            <p>{pendingEvents?.length}</p>
+          </div>
         </div>
         <div className={styles.numOfEvents}>
-          EVENTS THIS MONTH:{eventsThisMonth?.length}
+          <MdEvent className={styles.icon} />
+          <div className={styles.statWrapper}>
+            <h4>EVENTS THIS MONTH</h4>
+            <p>{eventsThisMonth?.length}</p>
+          </div>
         </div>
         <div className={styles.numOfNewUsers}>
-          NEW USERS THIS MONTH:{newUsersThisMonth}
+          <RiUserReceived2Line className={styles.icon} />
+          <div className={styles.statWrapper}>
+            <h4>NEW USERS THIS MONTH</h4>
+            <p>{newUsersThisMonth}</p>
+          </div>
         </div>
         <div className={styles.numOfTotalUsers}>
-          TOTAL NUMBER OF USERS:{users?.length}
+          <LuUsers className={styles.icon} />
+          <div className={styles.statWrapper}>
+            <h4>TOTAL NUMBER OF USERS</h4>
+            <p>{users?.length}</p>
+          </div>
         </div>
       </div>
+
       <div className={styles.eventsContainer}>
-        <h3>TOP 3 EVENTS OF THE MOTNH</h3>
+        <div className={styles.headerWrapper}>
+          <FaHeart className={styles.icon} />
+          <h3>TOP 3 EVENTS OF THE MOTNH</h3>
+        </div>
         <ul>
           {top3Events.map((event, index) => (
             <li key={index}>
@@ -111,7 +138,10 @@ const Dashboard = () => {
         </ul>
       </div>
       <div className={styles.schoolContiner}>
-        <h3>NUMBER OF EVENTS BY SCHOOL</h3>
+        <div className={styles.headerWrapper}>
+          <FaSchool className={styles.icon} />
+          <h3>NUMBER OF EVENTS BY SCHOOL</h3>
+        </div>
         <ul>
           <li>University of Manitoba:{uOfManitobaCount}</li>
           <li>University of Winnipeg:{uOfWinnipegCount}</li>
