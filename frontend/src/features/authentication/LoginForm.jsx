@@ -108,7 +108,6 @@ const LoginForm = () => {
           placeholder="password"
           {...register("password", {
             required: true,
-            minLength: 6
           })}
           // onChange={(e) => {
           //   setPassword(e.target.value);
@@ -121,11 +120,6 @@ const LoginForm = () => {
         } */}
         {errors.password && errors.password.type === "required" && (
           <div className={styles.errorMsg}>Password is required.</div>
-        )}
-        {errors.password && errors.password.type === "minLength" && (
-          <div className={styles.errorMsg}>
-            Password should be at-least 6 characters.
-          </div>
         )}
         {/* {error && <div className={styles.error}>{error}</div>} */}
         <Button type="submit">Log In</Button>
