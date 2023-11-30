@@ -1,68 +1,117 @@
-.container {
-    display: flex; 
-    flex-direction: column; 
-    justify-content: left; 
-    align-items: left;
-  }
-
-.eventImage {
-  width: 1000px; 
-  height: 500px; 
-  display: block; 
-  margin: 0 auto;
-
+.eventContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: centre;
+  align-items: centre;
+  width: 100%;
+  max-width: 1000px;
+  border: 0.1rem solid var(--grey2);
+  padding: 2rem;
 }
 
-.name_of_event {
-  color: #02057B;
-  font-size: 2.5em; 
+.imageContainer {
+  width: 100%;
+  height: 50rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.headingContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.name {
+  color: var(--darkblue);
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem;
+  gap: 2rem;
+}
+
+.emptyHeartIcon,
+.heartIcon,
+.shareIcon {
+  display: flex;
+  align-items: center;
+  color: var(--black);
+  font-size: 3rem;
+  font-weight: bold;
+  margin-right: 0.5rem;
+  vertical-align: baseline;
+}
+
+.heartIcon {
+  color: var(--red);
+}
+
+.shortDesc {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .dateAndTime {
   font-weight: bold;
   font-size: 2em;
-  
+}
+
+.dateAndTime span {
+  font-weight: normal;
 }
 
 .price {
-    font-weight: bold;
-    font-size: 2em;
+  font-weight: bold;
+  font-size: 2em;
 }
 
 .location {
   font-weight: bold;
   margin-top: 10px;
-  font-size: 2em;  
+  font-size: 2em;
 }
 
 .location span {
-    font-weight: normal;
-    font-size: 1em;
-  }
+  font-weight: normal;
+  font-size: 1em;
+}
 
 .broughtBy {
   font-weight: bold;
   margin-top: 10px;
   font-size: 2em;
-
 }
 
 .broughtBy span {
-    font-weight: normal;
-    font-size: 1em;
-  }
+  font-weight: normal;
+  font-size: 1em;
+}
 
 .descriptionTitle {
-  font-weight: bold; 
+  font-weight: bold;
   margin-top: 10px;
   font-size: 2em;
 }
 
 .eventDescription {
-    font-weight: normal;
-    font-size: 1.5em;
-  }
-  
+  font-weight: normal;
+  font-size: 1.5em;
+}
 
 /* .link {
   display: none; 

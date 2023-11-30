@@ -1,4 +1,4 @@
-export const displayPrice = (price) => (price === 0 ? 'Free' : '$');
+export const displayPrice = (price) => (price === 0 ? 'Free' : `$${price}`);
 
 export const formatEventDate = (date) => {
   const dateOptions = {
