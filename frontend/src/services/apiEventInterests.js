@@ -46,11 +46,10 @@ export const getEventsLikedByUser = async (userId) => {
   return data;
 };
 
-export const getAllEventInterests = async () => {
+export const getEventLikes = async () => {
   const { data, error } = await supabase
     .from('event_interests')
-    .select('*')
-    .order('created_at', { ascending: false });
+    .select('id, event_id, events(id, name, date)');
 
   if (error) {
     console.error(error);

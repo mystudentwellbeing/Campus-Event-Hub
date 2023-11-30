@@ -1,1 +1,30 @@
+.dashboardContainer {
+  display: flex;
+  flex-direction: column;
+  border: 0.1rem solid black;
+  gap: 2rem;
+  font-size: 2rem;
+}
 
+.topContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.numOfPendingEvents,
+.numOfEvents,
+.numOfNewUsers,
+.numOfTotalUsers {
+  border: 0.1rem solid black;
+}
+
+.numOfUsers {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
