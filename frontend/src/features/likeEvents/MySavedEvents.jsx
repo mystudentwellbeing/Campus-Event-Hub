@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { FaLongArrowAltRight } from 'react-icons/fa';
 import { useUser } from './../../features/authentication/useUser';
 import { useEventInterests } from './useEventInterests';
-import useEvents from './../../features/searchEvents/useEvents';
 import Event from '../Event';
 import Loader from '../../ui/Loader';
 import styles from './MySavedEvents.module.css';
@@ -10,15 +9,10 @@ import styles from './MySavedEvents.module.css';
 const MySavedEvents = () => {
   const { user } = useUser();
   const {
-    events,
+    likedEvents,
     isLoading: isEventsLoading,
     error: eventsError,
-  } = useEvents();
-  const { likedEvents } = useEventInterests(user?.id);
-
-  const myLikedEvents = likedEvents?.map((likedEvent) =>
-    events.find((event) => event.id === likedEvent.event_id)
-  );
+  } = useEventInterests(user?.id);
 
   if (isEventsLoading) {
     return <Loader />;
@@ -30,15 +24,17 @@ const MySavedEvents = () => {
   }
 
   return (
-    <main className={styles.container}>
-      <h1>My Saved Events ❤️</h1>
-      <Link to="mysubmittedevents" className={styles.textWrapper}>
+    <main className={styles.savedEventsContainer}>
+      <h1>My Saved Events ({likedEvents.length})</h1>
+      <Link to="/viewmyevents/mysubmittedevents" className={styles.textWrapper}>
         <p>View My Submitted Events</p>
         <FaLongArrowAltRight />
       </Link>
       <div className={styles.eventsList}>
-        {myLikedEvents && myLikedEvents.length > 0 ? (
-          myLikedEvents.map((event) => <Event key={event.id} event={event} />)
+        {likedEvents && likedEvents.length > 0 ? (
+          likedEvents.map((likedEvent) => (
+            <Event key={likedEvent.event_id} event={likedEvent.events} />
+          ))
         ) : (
           <p>No saved events yet.</p>
         )}

@@ -93,28 +93,28 @@ const Dashboard = () => {
   return (
     <div className={styles.dashboardContainer}>
       <div className={styles.topContainer}>
-        <div className={styles.numOfPendingEvents}>
+        <div className={styles.statBox}>
           <MdOutlinePendingActions className={styles.icon} />
           <div className={styles.statWrapper}>
             <h4>PENDING EVENTS</h4>
             <p>{pendingEvents?.length}</p>
           </div>
         </div>
-        <div className={styles.numOfEvents}>
+        <div className={styles.statBox}>
           <MdEvent className={styles.icon} />
           <div className={styles.statWrapper}>
             <h4>EVENTS THIS MONTH</h4>
             <p>{eventsThisMonth?.length}</p>
           </div>
         </div>
-        <div className={styles.numOfNewUsers}>
+        <div className={styles.statBox}>
           <RiUserReceived2Line className={styles.icon} />
           <div className={styles.statWrapper}>
             <h4>NEW USERS THIS MONTH</h4>
             <p>{newUsersThisMonth}</p>
           </div>
         </div>
-        <div className={styles.numOfTotalUsers}>
+        <div className={styles.statBox}>
           <LuUsers className={styles.icon} />
           <div className={styles.statWrapper}>
             <h4>TOTAL NUMBER OF USERS</h4>

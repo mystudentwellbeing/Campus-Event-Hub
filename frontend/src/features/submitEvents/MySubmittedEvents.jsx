@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+import { FaLongArrowAltLeft } from 'react-icons/fa';
 import { useUser } from './../../features/authentication/useUser';
 import { useSubmittedEvents } from './useSubmittedEvents';
 import Event from '../Event';
@@ -25,6 +27,10 @@ const MySubmittedEvents = () => {
   return (
     <main className={styles.container}>
       <h1>My Submitted Events</h1>
+      <Link to="/viewmyevents/mysavedevents">
+        <FaLongArrowAltLeft />
+        <p>Back to My Saved Events</p>
+      </Link>
       <div className={styles.sectionContainer}>
         <section className={styles.status}>
           <h2>Approved Events ({numApprovedEvents})</h2>

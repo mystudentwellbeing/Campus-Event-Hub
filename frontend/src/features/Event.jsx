@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useUser } from './../features/authentication/useUser';
+import { useEventInterests } from './likeEvents/useEventInterests';
 import { useLikeEvent } from './likeEvents/useLikeEvent';
 import { useUnlikeEvent } from './likeEvents/useUnlikeEvent';
-import { useEventInterests } from './likeEvents/useEventInterests';
 import { displayPrice, formatEventDate, formatTime } from '../utils/helpers';
 import { IoIosHeartEmpty, IoIosHeart } from 'react-icons/io';
 import Modal from '../ui/Modal';
@@ -42,10 +42,10 @@ const Event = ({ event }) => {
       if (isLiked) {
         const likedEventRecordId = likedEventRecord?.id;
         if (likedEventRecordId) {
-          unlikeEvent(likedEventRecordId);
+          await unlikeEvent(likedEventRecordId);
         }
       } else {
-        likeEvent({ event_id: event.id, user_id: user.id });
+        await likeEvent({ event_id: event.id, user_id: user.id });
       }
       refetchLikedEvents();
     } catch (error) {
@@ -106,10 +106,12 @@ const Event = ({ event }) => {
           </div>
         </div>
         <p>
-          {formatEventDate(event.date)} &nbsp;&nbsp;{' '}
-          {formatTime(event.start_time)} - {formatTime(event.end_time)}
+          {event.date ? formatEventDate(event.date) : 'Date not available'}{' '}
+          &nbsp;&nbsp;
+          {event.start_time ? formatTime(event.start_time) : ''} -{' '}
+          {event.end_time ? formatTime(event.end_time) : ''}
         </p>
-        <p id={styles.eventType}>{event.type.join(',  ')}</p>
+        <p id={styles.eventType}>{event.type?.join(', ')}</p>
         <p className={styles.shortDesc}>{event.short_description}</p>
       </div>
     </Link>
