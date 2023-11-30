@@ -9,7 +9,7 @@ const ProtectedRoute = ({ children, adminOnly = false }) => {
   useEffect(() => {
     if (isLoading) return;
     if (!isAuthenticated) navigate('/login');
-    if (adminOnly && !isAdmin) navigate('/unasuhorized');
+    if (adminOnly && !isAdmin) navigate('/unauthorized');
   }, [isAuthenticated, isAdmin, isLoading, navigate, adminOnly]);
 
   if (isLoading) return <div>Loading...</div>;
