@@ -42,11 +42,10 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Homepage />}>
-            <Route index element={<EventList />} />
-            <Route path="events" element={<EventList />} />
-            <Route path="events/:eventId" element={<EventFullInfo />} />
-          </Route>
+          <Route path="/" element={<Homepage />} />
+
+          <Route path="events" element={<EventList />} />
+          <Route path="events/:eventId" element={<EventFullInfo />} />
           <Route path="submitevents" element={<SubmitEvents />} />
 
           {/* Wrap ViewMyEvents and its nested routes with ProtectedRoute */}
