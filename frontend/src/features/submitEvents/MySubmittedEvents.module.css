@@ -24,7 +24,8 @@
   align-items: center;
   width: 50%;
   overflow: auto;
-  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.2);
+  border: 0.1rem solid var(--grey2);
+  border-radius: 0.5rem;
 }
 
 .status h2 {

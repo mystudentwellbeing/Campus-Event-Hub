@@ -123,29 +123,30 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className={styles.eventsContainer}>
-        <div className={styles.headerWrapper}>
-          <FaHeart className={styles.icon} />
-          <h3>TOP 3 EVENTS OF THE MOTNH</h3>
-        </div>
-        <ul>
-          {top3Events.map((event, index) => (
-            <li key={index}>
-              Event ID: {event.event_id}, Name: {event.name}, Likes:
-              {event.likes}
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className={styles.schoolContiner}>
+      <div className={styles.infoContainer}>
         <div className={styles.headerWrapper}>
           <FaSchool className={styles.icon} />
           <h3>NUMBER OF EVENTS BY SCHOOL</h3>
         </div>
         <ul>
-          <li>University of Manitoba:{uOfManitobaCount}</li>
-          <li>University of Winnipeg:{uOfWinnipegCount}</li>
-          <li>Other:{otherCount}</li>
+          <li>University of Manitoba: {uOfManitobaCount}</li>
+          <li>University of Winnipeg: {uOfWinnipegCount}</li>
+          <li>Other: {otherCount}</li>
+        </ul>
+      </div>
+
+      <div className={styles.infoContainer}>
+        <div className={styles.headerWrapper}>
+          <FaHeart className={styles.icon} />
+          <h3>TOP 3 LIKED EVENTS OF THE MOTNH</h3>
+        </div>
+        <ul>
+          {top3Events.map((event, index) => (
+            <li key={index}>
+              {event.name}: &nbsp;
+              {event.likes} likes
+            </li>
+          ))}
         </ul>
       </div>
     </div>
