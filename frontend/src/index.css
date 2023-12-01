@@ -35,13 +35,13 @@ body {
   background-color: var(--white);
 }
 
-#root {
+/* #root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   justify-content: space-between;
   align-items: center;
-}
+} */
 
 main {
   display: flex;
@@ -52,6 +52,7 @@ main {
   width: 90%;
   max-width: 1400px;
   margin: 12rem auto 2rem auto;
+  min-height: 100vh;
 }
 
 input,
@@ -69,4 +70,8 @@ a {
 
 ul {
   list-style: none;
+}
+
+button {
+  cursor: pointer;
 }

@@ -1,5 +1,7 @@
-const Empty = ({ resourceName }) => {
-  return <p>No {resourceName} could be found.</p>;
+const Empty = () => {
+  return (
+    <p style={{ fontSize: '1.5rem', marginTop: '1rem' }}>No events found.</p>
+  );
 };
 
 export default Empty;
