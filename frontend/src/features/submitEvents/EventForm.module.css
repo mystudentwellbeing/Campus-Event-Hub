@@ -62,7 +62,7 @@
   flex-direction: column;
   align-items: flex-start;
   margin: 1.5rem;
-  gap: 1rem;
+  gap: 0.7rem;
 }
 
 .formContainerTerms {
@@ -115,6 +115,7 @@
 .btnEvents {
   background-color: var(--darkblue);
   margin: 1.5rem;
+  width: 14rem;
 }
 
 .errorMsg {
