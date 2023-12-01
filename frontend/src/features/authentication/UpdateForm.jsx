@@ -9,7 +9,10 @@ const UpdateForm = () => {
 
   const { updateUser, isUpdating } = useUpdateUser();
 
-  const onSubmit = ({ email, emailConfirm, password, passwordConfirm }) => {
+  const onSubmit = (data) => {
+    const {email, emailConfirm, password, passwordConfirm} = data;
+    console.log(data );
+    
     if (email !== emailConfirm) {
       toast.error('Emails need to match');
       return;
@@ -30,10 +33,14 @@ const UpdateForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.updateForm}>
-      <label>Email</label>
-      <input id="email" disabled={isUpdating} {...register('email')} />
-      <label>Confirm Email</label>
-      <input
+      <label htmlFor='email'>Email</label>
+      <input type='email' 
+        id="email" 
+        disabled={isUpdating} 
+        {...register('email')} 
+      />
+      <label htmlFor='emailConfirm'>Confirm Email</label>
+      <input type='email'
         id="emailConfirm"
         disabled={isUpdating}
         {...register('emailConfirm', {
@@ -42,26 +49,23 @@ const UpdateForm = () => {
         })}
       />
 
-      <label>Password</label>
-      <input
+      <label htmlFor='password'>Password</label>
+      <input type="password"
         id="password"
-        type="password"
         disabled={isUpdating}
         {...register('password')}
       />
-      <label>Confirm Password</label>
-
-      <input
+      <label htmlFor='passwordConfirm'>Confirm Password</label>
+      <input type="password"
         id="passwordConfirm"
-        type="password"
         disabled={isUpdating}
         {...register('passwordConfirm', {
           validate: (value) =>
             getValues().password === value || 'Passwords needs to match',
         })}
       />
-      <Button>Update</Button>
-      <Button>Cancel</Button>
+      <Button type='submit'>Update</Button>
+      <Button type='reset'>Cancel</Button>
     </form>
   );
 };
