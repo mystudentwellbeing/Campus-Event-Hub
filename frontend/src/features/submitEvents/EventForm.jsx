@@ -123,11 +123,13 @@ const EventForm = () => {
               type="text"
               id="nameOfOrg"
               disabled={isWorking}
-              {...register('name_of_org')}
+              {...register('name_of_org', {
+                required: 'This field is required',
+              })}
             />
-            {/* {errors.name_of_org && (
-              <div className={styles.errorMsg}>{errors.name_of_org.message}</div>
-            )} */}
+            {errors.name_of_org && (
+              <p className={styles.errorMsg}>{errors.name_of_org.message}</p>
+            )}
           </div>
         </div>
         <div className={styles.formContainer}>
@@ -136,7 +138,9 @@ const EventForm = () => {
             <select
               id="nameOfInst"
               className={styles.dropdownStyle}
-              {...register('name_of_inst')}
+              {...register('name_of_inst', {
+                required: 'This field is required',
+              })}
             >
               <option value="">Select University</option>
               <option value="University_of_Manitoba">
@@ -147,6 +151,9 @@ const EventForm = () => {
               </option>
               <option value="Other">Other</option>
             </select>
+            {errors.name_of_inst && (
+              <p className={styles.errorMsg}>{errors.name_of_inst.message}</p>
+            )}
           </div>
           <div>
             <label>Name of Event</label>
@@ -207,7 +214,9 @@ const EventForm = () => {
           </div>
         </div>
         <div>
-          <label className={styles.checkBoxHeading}>Event Type</label>
+          <label className={styles.checkBoxHeading}>
+            Event Type
+          </label>
           <div className={styles.formContainerCheckbox}>
             <div className={styles.checkboxRow}>
               <div>
@@ -383,8 +392,13 @@ const EventForm = () => {
               type="text"
               id="nameOfVenue"
               disabled={isWorking}
-              {...register('name_of_venue')}
+              {...register('name_of_venue', {
+                required: 'This field is required',
+              })}
             />
+            {errors.name_of_venue && (
+              <p className={styles.errorMsg}>{errors.name_of_venue.message}</p>
+            )}
           </div>
           <div>
             <label>Postal Code</label>
