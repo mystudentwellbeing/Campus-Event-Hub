@@ -1,6 +1,7 @@
 import { GrGroup } from 'react-icons/gr';
 import { LuSchool, LuFlower2 } from 'react-icons/lu';
-import { IoEarthOutline } from 'react-icons/io5';
+import { BsHouseHeart } from 'react-icons/bs';
+import { IoEarthOutline, IoFastFoodOutline } from 'react-icons/io5';
 import {
   MdOutlineHeadset,
   MdOutlineSportsBasketball,
@@ -8,6 +9,7 @@ import {
   MdOutlineColorLens,
 } from 'react-icons/md';
 import { SlGraduation } from 'react-icons/sl';
+import { RxFace } from 'react-icons/rx';
 import Search from '../../ui/Search';
 import FilterEvent from '../../ui/FilterEvent';
 import SortBy from '../../ui/SortBy';
@@ -30,37 +32,49 @@ const EventOperations = () => {
         filterfield="type"
         options={[
           {
-            value: 'NETWORKING',
-            icon: <GrGroup className={styles.filterIcon} />,
+            value: 'ARTS',
+            icon: <MdOutlineColorLens className={styles.filterIcon} />,
           },
           { value: 'CAMPUS', icon: <LuSchool className={styles.filterIcon} /> },
           {
+            value: 'COMMUNITY',
+            icon: <BsHouseHeart className={styles.filterIcon} />,
+          },
+          {
             value: 'CULTURAL',
             icon: <IoEarthOutline className={styles.filterIcon} />,
-          },
-          {
-            value: 'HOBBIES',
-            icon: <MdOutlineHeadset className={styles.filterIcon} />,
-          },
-          {
-            value: 'SPORTS',
-            icon: <MdOutlineSportsBasketball className={styles.filterIcon} />,
           },
           {
             value: 'EDUCATIONAL',
             icon: <SlGraduation className={styles.filterIcon} />,
           },
           {
+            value: 'FOOD',
+            icon: <IoFastFoodOutline className={styles.filterIcon} />,
+          },
+          {
+            value: 'HOBBIES',
+            icon: <MdOutlineHeadset className={styles.filterIcon} />,
+          },
+          {
+            value: 'NETWORKING',
+            icon: <GrGroup className={styles.filterIcon} />,
+          },
+          {
             value: 'NIGHTLIFE',
             icon: <MdNightlife className={styles.filterIcon} />,
           },
           {
-            value: 'ARTS',
-            icon: <MdOutlineColorLens className={styles.filterIcon} />,
+            value: 'SPORTS',
+            icon: <MdOutlineSportsBasketball className={styles.filterIcon} />,
           },
           {
             value: 'WELLBEING',
             icon: <LuFlower2 className={styles.filterIcon} />,
+          },
+          {
+            value: 'OTHER',
+            icon: <RxFace className={styles.filterIcon} />,
           },
         ]}
       />
