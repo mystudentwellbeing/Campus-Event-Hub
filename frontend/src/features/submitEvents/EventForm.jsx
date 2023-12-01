@@ -18,7 +18,7 @@ const EventForm = () => {
   const editId = eventToEdit?.id;
   const isEditSession = Boolean(editId);
 
-  const { register, handleSubmit, reset, formState: {errors} } = useForm({
+  const { register, handleSubmit, getValues, reset, formState: {errors} } = useForm({
     defaultValues: isEditSession
       ? { ...eventToEdit, type: eventToEdit.type || [] }
       : { type: [] },
@@ -172,8 +172,8 @@ const EventForm = () => {
               disabled={isWorking}
               {...register('date', {
                 required: 'This field is required',
-                min: today.toISOString().split('T')[0],
               })}
+              min={today.toISOString().split('T')[0]}
             />
             {errors.date && (
               <p className={styles.errorMsg}>{errors.date.message}</p>
@@ -197,6 +197,8 @@ const EventForm = () => {
               disabled={isWorking}
               {...register('end_time', {
                 required: 'This field is required',
+                  validate: (value) => 
+                    getValues().start_time < value || "Event Should end after it Starts!",
               })}
             />
             {errors.end_time && (
@@ -240,6 +242,16 @@ const EventForm = () => {
                 />
                 <label>CULTURAL</label>
               </div>
+              <div>
+                <input
+                  type="checkbox"
+                  name="eventType"
+                  id="COMMUNITY"
+                  value="COMMUNITY"
+                  {...register('type')}
+                />
+                <label>COMMUNITY</label>
+              </div>
             </div>
           </div>
           <div className={styles.formContainerCheckbox}>
@@ -274,6 +286,16 @@ const EventForm = () => {
                 />
                 <label>EDUCATIONAL</label>
               </div>
+              <div>
+                <input
+                  type="checkbox"
+                  name="eventType"
+                  id="FOOD"
+                  value="FOOD"
+                  {...register('type')}
+                />
+                <label>FOOD</label>
+              </div>
             </div>
           </div>
           <div className={styles.formContainerCheckbox}>
@@ -307,6 +329,16 @@ const EventForm = () => {
                   {...register('type')}
                 />
                 <label>WELLBEING</label>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  name="eventType"
+                  id="OTHER"
+                  value="OTHER"
+                  {...register('type')}
+                />
+                <label>OTHER</label>
               </div>
             </div>
           </div>
