@@ -18,7 +18,7 @@ const EventForm = () => {
   const editId = eventToEdit?.id;
   const isEditSession = Boolean(editId);
 
-  const { register, handleSubmit, getValues, reset, formState: {errors} } = useForm({
+  const { register, handleSubmit, getValues, watch, reset, formState: {errors} } = useForm({
     defaultValues: isEditSession
       ? { ...eventToEdit, type: eventToEdit.type || [] }
       : { type: [] },
@@ -67,6 +67,8 @@ const EventForm = () => {
         }
       );
   };
+
+  const eventFormat = watch('event_format');
 
   return (
     <>
@@ -140,7 +142,7 @@ const EventForm = () => {
               className={styles.dropdownStyle}
               {...register('name_of_inst', {
                 required: 'This field is required',
-              })}
+                })}
             >
               <option value="">Select University</option>
               <option value="University_of_Manitoba">
@@ -153,7 +155,7 @@ const EventForm = () => {
             </select>
             {errors.name_of_inst && (
               <p className={styles.errorMsg}>{errors.name_of_inst.message}</p>
-            )}
+            )}    
           </div>
           <div>
             <label>Name of Event</label>
@@ -368,7 +370,7 @@ const EventForm = () => {
             >
               <option value="">Select Event Format</option>
               <option value="Virtual">Virtual</option>
-              <option value="In-person">In-Person</option>
+              <option value="In-person">In-person</option>
               <option value="Hybrid">Hybrid</option>
             </select>
             {errors.event_format && (
@@ -376,15 +378,23 @@ const EventForm = () => {
             )}
           </div>
           <div>
-            <label>Address(Street No.& Name) of Event</label>
+            <label>If virtual - virtual link</label>
             <input
               type="text"
-              id="address"
+              id="virtualLink"
               disabled={isWorking}
-              {...register('address')}
+              {...register('virtual_link', {
+                required: "This field is required!",
+              })}
             />
+            {(eventFormat === "Virtual" || eventFormat === "Hybrid") &&
+              errors.virtual_link && (
+                <p className={styles.errorMsg}>{errors.virtual_link.message}</p>
+            )}
           </div>
         </div>
+        {eventFormat !== "Virtual" && (
+        <>
         <div className={styles.formContainer}>
           <div>
             <label>Name of Venue</label>
@@ -401,13 +411,18 @@ const EventForm = () => {
             )}
           </div>
           <div>
-            <label>Postal Code</label>
+          <label>Address(Street No.& Name) of Event</label>
             <input
               type="text"
-              id="postalCode"
+              id="address"
               disabled={isWorking}
-              {...register('postal_code')}
+              {...register('address', {
+                required: 'This field is required',
+              })}
             />
+            {errors.name_of_venue && (
+              <p className={styles.errorMsg}>{errors.name_of_venue.message}</p>
+            )}
           </div>
         </div>
         <div className={styles.formContainer}>
@@ -417,19 +432,31 @@ const EventForm = () => {
               type="text"
               id="city"
               disabled={isWorking}
-              {...register('city')}
+              {...register('city', {
+                required: 'This field is required',
+              })}
             />
+            {errors.name_of_venue && (
+              <p className={styles.errorMsg}>{errors.name_of_venue.message}</p>
+            )}
           </div>
           <div>
-            <label>If virtual - virtual link</label>
+            <label>Postal Code</label>
             <input
               type="text"
-              id="virtualLink"
+              id="postalCode"
               disabled={isWorking}
-              {...register('virtual_link')}
+              {...register('postal_code', {
+                required: 'This field is required',
+              })}
             />
+            {errors.name_of_venue && (
+              <p className={styles.errorMsg}>{errors.name_of_venue.message}</p>
+            )}
           </div>
         </div>
+        </>
+        )}
         <div className={styles.formContainer}>
           <div className={styles.formContainerSpecial}>
             <label>Short Description(150 characters)</label>
