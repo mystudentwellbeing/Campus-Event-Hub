@@ -23,8 +23,9 @@ const EventTable = () => {
           return event.is_approved === false;
         case 'past':
           return new Date(event.date) <= currentDate;
+        case 'all':
         default:
-          return new Date(event.date) >= currentDate;
+          return true;
       }
     })();
 
