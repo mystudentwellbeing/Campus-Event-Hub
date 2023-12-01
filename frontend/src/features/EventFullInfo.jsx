@@ -94,20 +94,19 @@ const EventFullInfo = () => {
           <li className={styles.format}>{event.event_format}</li>
         </div>
         <li className={styles.price}>Price: {displayPrice(event.price)}</li>
-        <li className={styles.location}>
-          Location:
-          <br />
-          <span>{event.name_of_venue}</span>
-          <br />
-          <span>{event.address}</span>
-          <br />
-          <span>{event.city}</span>
-          <br />
-          <span>{event.postal_code}</span>
+        <li>
+          <p className={styles.location}>Location:</p>
+          <p className={styles.locationInfo}>{event.name_of_venue}</p>
+          <p className={styles.locationInfo}>{event.address}</p>
+          <p className={styles.locationInfo}>{event.city}</p>
+          <p className={styles.locationInfo}>{event.postal_code}</p>
         </li>
-        <li className={styles.broughtBy}>
-          Brought You By: {event.name_of_org}{' '}
-          {formatInstitutionName(event.name_of_inst)}
+        <li>
+          <span className={styles.broughtBy}>Brought You By:&nbsp;</span>
+          <span className={styles.organization}>{event.name_of_org}&nbsp;</span>
+          <span className={styles.institution}>
+            {formatInstitutionName(event.name_of_inst)}
+          </span>
         </li>
 
         <li className={styles.descriptionTitle}>Event Description</li>

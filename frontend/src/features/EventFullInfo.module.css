@@ -92,7 +92,8 @@
 
 .price {
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 1.5rem;
+  color: var(--blue);
 }
 
 .location {
@@ -100,17 +101,22 @@
   font-size: 1.5rem;
 }
 
-.location span {
-  font-weight: normal;
-}
-
-.broughtBy {
-  font-weight: bold;
+.locationInfo {
   font-size: 1.5rem;
 }
 
-.broughtBy span {
-  font-weight: normal;
+.broughtBy {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.organization {
+  font-size: 1.5rem;
+}
+
+.institution {
+  font-weight: bold;
+  font-size: 1.5rem;
 }
 
 .descriptionTitle {
@@ -122,7 +128,3 @@
   font-weight: normal;
   font-size: 1.5rem;
 }
-
-/* .link {
-  display: none; 
-} */
