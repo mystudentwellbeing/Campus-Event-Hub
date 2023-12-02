@@ -34,3 +34,12 @@
   padding: 0.8rem;
   font-family: inherit;
 }
+
+.errorMsg {
+  color: red;
+  font-size: 1.2rem;
+  font-weight: 500;
+  align-self: normal;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}

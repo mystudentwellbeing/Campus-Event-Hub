@@ -83,6 +83,9 @@ const UpdateForm = () => {
               getValues().password === value || 'Passwords needs to match',
           })}
         />
+        {errors.passwordConfirm && (
+          <div className={styles.errorMsg}>{errors.passwordConfirm.message}</div>
+        )}
       </div>
       <Button type='submit'>Update</Button>
       <Button type='reset' onClick={handleReset}>Cancel</Button>
