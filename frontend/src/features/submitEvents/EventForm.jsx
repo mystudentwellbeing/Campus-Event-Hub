@@ -71,7 +71,7 @@ const EventForm = () => {
   const eventFormat = watch('event_format');
 
   return (
-    <>
+    <div>
       <h3 className={styles.title}>Submit your event</h3>
       <form onSubmit={handleSubmit(onSubmit, onError)}>
         <div className={styles.formContainer}>
@@ -253,16 +253,6 @@ const EventForm = () => {
                 />
                 <label>CULTURAL</label>
               </div>
-              <div>
-                <input
-                  type="checkbox"
-                  name="eventType"
-                  id="COMMUNITY"
-                  value="COMMUNITY"
-                  {...register('type')}
-                />
-                <label>COMMUNITY</label>
-              </div>
             </div>
           </div>
           <div className={styles.formContainerCheckbox}>
@@ -296,16 +286,6 @@ const EventForm = () => {
                   {...register('type')}
                 />
                 <label>EDUCATIONAL</label>
-              </div>
-              <div>
-                <input
-                  type="checkbox"
-                  name="eventType"
-                  id="FOOD"
-                  value="FOOD"
-                  {...register('type')}
-                />
-                <label>FOOD</label>
               </div>
             </div>
           </div>
@@ -341,6 +321,33 @@ const EventForm = () => {
                 />
                 <label>WELLBEING</label>
               </div>
+            </div>
+          </div>
+          {errors.type && (
+            <p className={styles.errorMsgType}>{errors.type.message}</p>
+          )}
+          <div className={styles.formContainerCheckbox}>
+            <div className={styles.checkboxRow}>
+              <div>
+                <input
+                  type="checkbox"
+                  name="eventType"
+                  id="COMMUNITY"
+                  value="COMMUNITY"
+                  {...register('type')}
+                />
+                <label>COMMUNITY</label>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  name="eventType"
+                  id="FOOD"
+                  value="FOOD"
+                  {...register('type')}
+                />
+                <label>FOOD</label>
+              </div>
               <div>
                 <input
                   type="checkbox"
@@ -353,9 +360,6 @@ const EventForm = () => {
               </div>
             </div>
           </div>
-          {errors.type && (
-            <p className={styles.errorMsgType}>{errors.type.message}</p>
-          )}
         </div>
         <div className={styles.formContainer}>
           <div>
@@ -548,7 +552,7 @@ const EventForm = () => {
           </Button>
         </div>
       </form>
-    </>
+    </div>
   );
 };
 

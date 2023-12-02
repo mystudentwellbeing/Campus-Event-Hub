@@ -74,14 +74,14 @@
   color: var(--blue);
 }
 
-.formContainerCheckbox {
-  display: flex;
-  margin: 1rem 2rem;
-}
-
 .checkBoxHeading {
   font-size: 1.2rem;
   font-weight: 900;
+  margin: 1rem 2rem;
+}
+
+.formContainerCheckbox {
+  display: flex;
   margin: 1rem 2rem;
 }
 
@@ -114,14 +114,13 @@
 
 .btnEvents {
   background-color: var(--darkblue);
-  margin: 1.5rem;
+  margin: 3rem;
   width: 14rem;
 }
 
 .errorMsg {
   color: red;
   font-size: 1.2rem;
-  /* align-self: center; */
   align-self: normal;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
@@ -130,7 +129,6 @@
 .errorMsgType {
   color: red;
   font-size: 1.2rem;
-  /* align-self: center; */
   align-self: normal;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
@@ -138,15 +136,26 @@
 }
 
 @media only screen and (max-width: 767px) {
-  .submitEvents {
+  /* .submitEvents {
     width: auto;
-  }
+  } */
   .formContainer {
     flex-direction: column;
     gap: 0rem;
   }
+  .formContainer div {
+    margin-left: 5rem; 
+  }
   .btnEvents {
     font-size: 1rem;
-    width: 7rem;
+    margin: 2rem;
+  }
+  .checkBoxHeading,
+  .formContainerCheckbox {
+    margin-left: 5rem;
+  }
+  .checkboxRow {
+    /* flex-wrap: wrap; */
+    gap: 1rem;
   }
 }
