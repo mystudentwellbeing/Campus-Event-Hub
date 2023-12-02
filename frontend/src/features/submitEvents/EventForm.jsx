@@ -521,7 +521,12 @@ const EventForm = () => {
           </div>
         </div>
         <div className={styles.formContainerTerms}>
-          <input type="checkbox" id="termsCondition" />
+          <input type="checkbox" 
+            id="termsCondition"
+            {...register("termsCondition", {
+              required: 'Please Check the Box to submit'
+            })}
+          />
           <label>
             <a onClick={() => setModalOpen((show) => !show)}>
               Terms and Conditions
@@ -535,7 +540,13 @@ const EventForm = () => {
               </Modal>
             )}
           </label>
+          {/* {errors.termsCondition && (
+              <p className={styles.errorMsg}>{errors.termsCondition.message}</p>
+          )} */}
         </div>
+        {errors.termsCondition && (
+          <p className={styles.errorMsgBox}>{errors.termsCondition.message}</p>
+        )}
         <div className={styles.formContainer}>
           <Button type="submit" className={styles.btnEvents}>
             {isEditSession ? 'Edit Event' : 'Submit Event'}

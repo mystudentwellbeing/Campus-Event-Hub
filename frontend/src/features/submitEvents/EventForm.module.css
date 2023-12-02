@@ -72,6 +72,7 @@
   font-size: 1.2rem;
   font-weight: 900;
   color: var(--blue);
+  margin: 1rem;
 }
 
 .checkBoxHeading {
@@ -124,7 +125,8 @@
   margin-bottom: 0.5rem;
 }
 
-.errorMsgType {
+.errorMsgType,
+.errorMsgBox {
   color: red;
   font-size: 1.2rem;
   align-self: normal;
@@ -132,6 +134,7 @@
   margin-bottom: 0.5rem;
   margin-left: 2rem;
 }
+
 
 @media only screen and (max-width: 767px) {
   .formContainer {
@@ -143,11 +146,16 @@
   }
   .checkBoxHeading,
   .formContainerCheckbox,
+  .formContainerTerms,
+  .errorMsgBox,
   .errorMsgType {
     margin-left: 5rem;
   }
   .formContainerCheckbox {
     gap: 2rem;
+  }
+  .formContainerTerms {
+    justify-content: flex-start;
   }
   .btnEvents {
     font-size: 1rem;
