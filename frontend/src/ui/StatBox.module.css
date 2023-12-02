@@ -23,6 +23,8 @@
   display: flex;
   flex-direction: column;
   font-size: 1.2rem;
+  width: 16rem;
+  align-items: center;
 }
 
 .statWrapper p {

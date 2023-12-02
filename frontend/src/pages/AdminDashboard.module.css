@@ -1,0 +1,11 @@
+@media (min-width: 481px) and (max-width: 1023px) {
+  .adminDashboard {
+    min-height: 80vh;
+  }
+}
+
+@media (min-width: 1024px) {
+  .adminDashboard {
+    min-height: 82vh;
+  }
+}
