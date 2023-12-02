@@ -6,8 +6,6 @@
 
 .aboutUsContainer h1 {
   font-size: 1.5rem;
-  margin-bottom: 2rem;
-  color: var(--darkblue);
 }
 
 .aboutUsContent {
@@ -37,8 +35,5 @@
     font-size: 1.6rem;
     padding: 4rem;
     min-height: 90vh;
-  }
-  .aboutUsContainer h1 {
-    font-size: 2.5rem;
   }
 }

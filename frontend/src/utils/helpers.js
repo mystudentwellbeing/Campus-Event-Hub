@@ -33,3 +33,18 @@ export const formatInstitutionName = (institution) => {
 
   return formattedInstitution;
 };
+
+export const getCurrentMonthDateRange = () => {
+  const now = new Date();
+  const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+  const lastDayOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+  return { firstDayOfMonth, lastDayOfMonth };
+};
+
+export const countEventsBySchool = (events) => {
+  return events.reduce((acc, event) => {
+    const uni = event.name_of_inst || 'Other';
+    acc[uni] = (acc[uni] || 0) + 1;
+    return acc;
+  }, {});
+};

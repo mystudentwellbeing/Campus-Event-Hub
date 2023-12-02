@@ -44,7 +44,12 @@ main {
   width: 90%;
   max-width: 1400px;
   margin: 12rem auto 2rem auto;
-  /* min-height: 100vh; */
+}
+
+main h1 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: var(--darkblue);
 }
 
 input,

@@ -1,12 +1,17 @@
-import { MdOutlinePendingActions } from 'react-icons/md';
-import { MdEvent } from 'react-icons/md';
+import { Link } from 'react-router-dom';
+import { MdOutlinePendingActions, MdEvent } from 'react-icons/md';
 import { RiUserReceived2Line } from 'react-icons/ri';
 import { LuUsers } from 'react-icons/lu';
-import { FaHeart } from 'react-icons/fa';
+import { GoHeartFill } from 'react-icons/go';
 import { FaSchool } from 'react-icons/fa';
+import {
+  getCurrentMonthDateRange,
+  countEventsBySchool,
+} from '../../utils/helpers';
 import useAllEvents from './useAllEvents';
 import useUsers from './useUsers';
 import useEventLikes from './useEventLikes';
+import StatBox from '../../ui/StatBox';
 import Loader from '../../ui/Loader';
 import styles from './Dashboard.module.css';
 
@@ -14,6 +19,8 @@ const Dashboard = () => {
   const { isLoading: isLoading1, events, error1 } = useAllEvents();
   const { isLoading: isLoading2, users, error2 } = useUsers();
   const { isLoading: isLoading3, eventLikes, error3 } = useEventLikes();
+  const { firstDayOfMonth, lastDayOfMonth } = getCurrentMonthDateRange();
+  const now = new Date();
 
   if (isLoading1 || isLoading2 || isLoading3) return <Loader />;
   if (error1 || error2 || error3) {
@@ -23,41 +30,26 @@ const Dashboard = () => {
 
   const pendingEvents = events?.filter((event) => event.is_approved === false);
   const eventsThisMonth = events?.filter((event) => {
-    const now = new Date();
-    const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
     const approved = event.is_approved === true;
     return (
       new Date(event.date) >= firstDayOfMonth &&
-      new Date(event.date) < now &&
+      new Date(event.date) <= lastDayOfMonth &&
       approved
     );
   });
 
-  const now = new Date();
-  const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-  const newUsersThisMonth =
-    users?.filter((user) => {
-      const userCreatedAt = new Date(user.created_at);
-      return userCreatedAt >= firstDayOfMonth && userCreatedAt < now;
-    }).length - 1;
+  const newUsersThisMonth = users?.filter((user) => {
+    const userCreatedAt = new Date(user.created_at);
+    return userCreatedAt >= firstDayOfMonth && userCreatedAt < now;
+  }).length;
 
-  const counts = events
-    ? events.reduce((acc, event) => {
-        const uni = event.name_of_inst || 'Other';
-        acc[uni] = (acc[uni] || 0) + 1;
-        return acc;
-      }, {})
-    : {};
+  const counts = countEventsBySchool(events);
 
   const uOfManitobaCount = counts['University_of_Manitoba'] || 0;
   const uOfWinnipegCount = counts['University_of_Winnipeg'] || 0;
   const otherCount = counts['Other'] || 0;
 
   const getTop3LikedEvents = (eventLikes, events) => {
-    const now = new Date();
-    const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-    const lastDayOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
-
     const likeCounts = {};
     eventLikes.forEach((eventLike) => {
       const event = events.find((e) => e.id === eventLike.event_id);
@@ -93,34 +85,26 @@ const Dashboard = () => {
   return (
     <div className={styles.dashboardContainer}>
       <div className={styles.topContainer}>
-        <div className={styles.statBox}>
-          <MdOutlinePendingActions className={styles.icon} />
-          <div className={styles.statWrapper}>
-            <h4>PENDING EVENTS</h4>
-            <p>{pendingEvents?.length}</p>
-          </div>
-        </div>
-        <div className={styles.statBox}>
-          <MdEvent className={styles.icon} />
-          <div className={styles.statWrapper}>
-            <h4>EVENTS THIS MONTH</h4>
-            <p>{eventsThisMonth?.length}</p>
-          </div>
-        </div>
-        <div className={styles.statBox}>
-          <RiUserReceived2Line className={styles.icon} />
-          <div className={styles.statWrapper}>
-            <h4>NEW USERS THIS MONTH</h4>
-            <p>{newUsersThisMonth}</p>
-          </div>
-        </div>
-        <div className={styles.statBox}>
-          <LuUsers className={styles.icon} />
-          <div className={styles.statWrapper}>
-            <h4>TOTAL NUMBER OF USERS</h4>
-            <p>{users?.length}</p>
-          </div>
-        </div>
+        <StatBox
+          IconComponent={MdOutlinePendingActions}
+          title="Pending Events"
+          count={pendingEvents?.length}
+        />
+        <StatBox
+          IconComponent={MdEvent}
+          title="Events This Month"
+          count={eventsThisMonth?.length}
+        />
+        <StatBox
+          IconComponent={RiUserReceived2Line}
+          title="New Users This Month"
+          count={newUsersThisMonth}
+        />
+        <StatBox
+          IconComponent={LuUsers}
+          title="Total Number of Users"
+          count={users?.length}
+        />
       </div>
 
       <div className={styles.infoContainer}>
@@ -137,15 +121,21 @@ const Dashboard = () => {
 
       <div className={styles.infoContainer}>
         <div className={styles.headerWrapper}>
-          <FaHeart className={styles.icon} />
+          <GoHeartFill className={styles.icon} />
           <h3>TOP 3 LIKED EVENTS OF THE MOTNH</h3>
         </div>
         <ul>
           {top3Events.map((event, index) => (
-            <li key={index}>
-              {event.name}: &nbsp;
-              {event.likes} likes
-            </li>
+            <Link
+              key={index}
+              to={`/events/${event.event_id}`}
+              className={styles.link}
+            >
+              <li>
+                {event.name}: &nbsp;
+                {event.likes} likes
+              </li>
+            </Link>
           ))}
         </ul>
       </div>

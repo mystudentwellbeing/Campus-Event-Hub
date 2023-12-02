@@ -1,4 +1,5 @@
 import Dashboard from '../features/admin/Dashboard';
+
 const AdminDashboard = () => {
   return (
     <main>
