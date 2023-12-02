@@ -521,7 +521,8 @@ const EventForm = () => {
           </div>
         </div>
         <div className={styles.formContainerTerms}>
-          <input type="checkbox" 
+          <input 
+            type="checkbox" 
             id="termsCondition"
             {...register("termsCondition", {
               required: 'Please Check the Box to submit'

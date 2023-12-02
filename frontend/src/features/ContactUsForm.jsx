@@ -11,7 +11,7 @@ const ContactUsForm = () => {
   // const [name, setName] = useState('');
   // const [email, setEmail] = useState('');
   // const [message, setMessage] = useState('');
-  const [termsCondition, setTermsCondition] = useState('');
+  // const [termsCondition, setTermsCondition] = useState('');
   const [isModalOpen, setModalOpen] = useState(false);
 
   const { register, handleSubmit, formState: {errors}, reset } = useForm();
@@ -150,7 +150,7 @@ const ContactUsForm = () => {
           <input
             type="checkbox"
             name="termsCondition"
-            value="Terms and Conditions"
+            // value="Terms and Conditions"
             {...register("termsCondition", {
               required: 'Please Check the Box to submit'
             })}
