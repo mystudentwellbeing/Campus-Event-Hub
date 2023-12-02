@@ -4,6 +4,7 @@ import TermsConditions from '../features/TermsConditions';
 import Modal from '../ui/Modal';
 import Button from '../ui/Button';
 import styles from './ContactUsForm.module.css';
+import { toast } from 'react-hot-toast';
 
 const ContactUsForm = () => {
   const [name, setName] = useState('');
@@ -34,12 +35,14 @@ const ContactUsForm = () => {
 
       .then((response) => {
         console.log('Email sent!', response);
-        alert('Form Submitted and Email Sent!');
+        toast.success('Form Submitted and Email Sent!');
+        //alert('Form Submitted and Email Sent!');
       })
 
       .catch((error) => {
         console.error('Error sending email:', error);
-        alert('Failed to send email. Please try again later.');
+        toast.error(error.message);
+        //alert('Failed to send email. Please try again later.');
       });
 
     handleReset();
