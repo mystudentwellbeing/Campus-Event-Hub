@@ -11,7 +11,6 @@ const AboutUs = () => {
           is a response to what you, the students, have been asking for - a
           simpler way to connect and engage with each other.
         </p>
-
         <p>
           Campus events can have so many benefits; they&apos;re gateways to
           self-discovery, valuable networking, introduction to new hobbies, and
