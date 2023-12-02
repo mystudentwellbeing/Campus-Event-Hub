@@ -61,6 +61,7 @@
   border: 0.001rem solid var(--grey2);
   padding: 1rem;
   width: 35rem;
+  margin-bottom: 1rem;
 }
 
 .formContainerTerms {
@@ -86,6 +87,14 @@
   margin: 1rem;
   font-size: 1.2rem;
   width: 8rem;
+}
+
+.errorMsg {
+  color: red;
+  font-size: 1.2rem;
+  align-self: normal;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 @media only screen and (max-width: 558px) {
