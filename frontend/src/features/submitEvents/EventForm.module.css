@@ -83,19 +83,17 @@
 .formContainerCheckbox {
   display: flex;
   margin: 1rem 2rem;
+  gap: 4rem;
 }
 
 .checkboxRow {
   display: flex;
-  /* flex-direction: column; */
-  gap: 6rem;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .checkboxRow div {
   display: flex;
-  justify-content: center;
   gap: 1rem;
   font-size: 1rem;
   font-weight: 400;
@@ -136,9 +134,6 @@
 }
 
 @media only screen and (max-width: 767px) {
-  /* .submitEvents {
-    width: auto;
-  } */
   .formContainer {
     flex-direction: column;
     gap: 0rem;
@@ -146,16 +141,16 @@
   .formContainer div {
     margin-left: 5rem; 
   }
+  .checkBoxHeading,
+  .formContainerCheckbox,
+  .errorMsgType {
+    margin-left: 5rem;
+  }
+  .formContainerCheckbox {
+    gap: 2rem;
+  }
   .btnEvents {
     font-size: 1rem;
     margin: 2rem;
-  }
-  .checkBoxHeading,
-  .formContainerCheckbox {
-    margin-left: 5rem;
-  }
-  .checkboxRow {
-    /* flex-wrap: wrap; */
-    gap: 1rem;
   }
 }

@@ -254,8 +254,8 @@ const EventForm = () => {
                 <label>CULTURAL</label>
               </div>
             </div>
-          </div>
-          <div className={styles.formContainerCheckbox}>
+          {/* </div> */}
+          {/* <div className={styles.formContainerCheckbox}> */}
             <div className={styles.checkboxRow}>
               <div>
                 <input
@@ -288,8 +288,8 @@ const EventForm = () => {
                 <label>EDUCATIONAL</label>
               </div>
             </div>
-          </div>
-          <div className={styles.formContainerCheckbox}>
+          {/* </div> */}
+          {/* <div className={styles.formContainerCheckbox}> */}
             <div className={styles.checkboxRow}>
               <div>
                 <input
@@ -322,11 +322,8 @@ const EventForm = () => {
                 <label>WELLBEING</label>
               </div>
             </div>
-          </div>
-          {errors.type && (
-            <p className={styles.errorMsgType}>{errors.type.message}</p>
-          )}
-          <div className={styles.formContainerCheckbox}>
+          {/* </div> */}
+          {/* <div className={styles.formContainerCheckbox}> */}
             <div className={styles.checkboxRow}>
               <div>
                 <input
@@ -360,6 +357,9 @@ const EventForm = () => {
               </div>
             </div>
           </div>
+          {errors.type && (
+            <p className={styles.errorMsgType}>{errors.type.message}</p>
+          )}
         </div>
         <div className={styles.formContainer}>
           <div>
