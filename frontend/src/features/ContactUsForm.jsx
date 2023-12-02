@@ -49,6 +49,10 @@ const ContactUsForm = () => {
         toast.error(error.message);
       })
   }
+
+  const handleReset = () => {
+    reset();
+  }
   // const handleSubmit = (event) => {
   //   event.preventDefault();
 
@@ -146,6 +150,7 @@ const ContactUsForm = () => {
           <input
             type="checkbox"
             name="termsCondition"
+            value="Terms and Conditions"
             {...register("termsCondition", {
               required: 'Please Check the Box to submit'
             })}
@@ -166,9 +171,11 @@ const ContactUsForm = () => {
               </Modal>
             )}
           </label>
+          <div>
           {errors.termsCondition && (
               <p className={styles.errorMsg}>{errors.termsCondition.message}</p>
           )}
+          </div>
         </div>
         
         <div className={styles.formbtnContainer}>
@@ -179,7 +186,7 @@ const ContactUsForm = () => {
             type="reset"
             //onClick={reset}
             className={styles.btnContact}
-            // onClick={handleReset}
+            onClick={handleReset}
           >
             Cancel
           </Button>
