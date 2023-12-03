@@ -14,9 +14,9 @@
   align-items: flex-start;
   justify-content: flex-start;
   padding-bottom: 1rem;
-  gap: 0.3rem;
+  gap: 0.4rem;
   height: 27rem;
-  width: 37rem;
+  width: 30rem;
   font-size: 1.5rem;
   border-radius: 0.4rem;
   background-color: var(--grey1);
@@ -25,7 +25,7 @@
 
 .eventImage {
   height: 14rem;
-  width: 37rem;
+  width: 30rem;
   object-fit: cover;
 }
 
@@ -40,6 +40,7 @@
 .eventHeader h4 {
   color: var(--darkblue);
   font-weight: 900;
+  font-size: 1.4rem;
 }
 
 .headerRightSide {
@@ -57,6 +58,8 @@
 .event p {
   padding: 0rem 1rem;
   color: var(--black);
+  text-align: left;
+  font-size: 1.4rem;
 }
 
 #eventType {
@@ -119,72 +122,14 @@
   box-shadow: none;
 }
 
-@media only screen and (max-width: 1080px) {
+@media (min-width: 1024px) {
   .event {
-    width: 35rem;
+    width: 38rem;
   }
   .eventImage {
-    width: 35rem;
+    width: 38rem;
   }
   .eventHeader h4 {
-    padding-left: 1rem;
-  }
-  .event p {
-    padding-left: 2rem;
-  }
-  .eventType {
-    padding-left: 2rem;
-  }
-}
-
-@media only screen and (max-width: 980px) {
-  .event {
-    width: 30rem;
-    height: 25rem;
-    font-size: 1.2rem;
-  }
-  .eventImage {
-    width: 30rem;
-  }
-}
-
-@media only screen and (max-width: 870px) {
-  .event {
-    width: 25rem;
-  }
-  .eventImage {
-    width: 25rem;
-  }
-}
-
-@media only screen and (max-width: 730px) {
-  .event {
-    width: 20rem;
-    /* height: auto; */
-    font-size: 1rem;
-  }
-  .eventImage {
-    width: 20rem;
-  }
-  .eventHeader h4 {
-    padding-left: 0rem;
-  }
-  .event p {
-    padding-left: 1rem;
-  }
-  .eventType {
-    padding-left: 1rem;
-  }
-}
-
-@media only screen and (max-width: 620px) {
-  .event {
-    width: 15rem;
-    /* height: auto; */
-    font-size: 0.8rem;
-  }
-  .eventImage {
-    width: 15rem;
-    height: 15rem;
+    font-size: 1.5rem;
   }
 }

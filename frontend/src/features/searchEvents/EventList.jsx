@@ -2,7 +2,6 @@ import { useSearchParams } from 'react-router-dom';
 import useEvents from './useEvents';
 import Event from '../Event';
 import Loader from '../../ui/Loader';
-import styles from './EventList.module.css';
 
 const EventList = () => {
   const { isLoading, events, error } = useEvents();
@@ -52,7 +51,7 @@ const EventList = () => {
   }
 
   return (
-    <section className={styles.eventContainer}>
+    <section>
       {sortedEvents.map((event) => (
         <Event key={event.id} event={event} />
       ))}

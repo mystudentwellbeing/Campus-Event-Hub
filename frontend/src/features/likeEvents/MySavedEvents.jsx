@@ -24,7 +24,7 @@ const MySavedEvents = () => {
   }
 
   return (
-    <main className={styles.savedEventsContainer}>
+    <div className={styles.savedEventsContainer}>
       <h1>My Saved Events ({likedEvents.length})</h1>
       <Link to="/viewmyevents/mysubmittedevents" className={styles.textWrapper}>
         <p>View My Submitted Events</p>
@@ -39,7 +39,7 @@ const MySavedEvents = () => {
           <p>No saved events yet.</p>
         )}
       </div>
-    </main>
+    </div>
   );
 };
 

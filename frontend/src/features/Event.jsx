@@ -92,6 +92,7 @@ const Event = ({ event }) => {
       )}
       <div className={styles.event}>
         <img className={styles.eventImage} src={event.image} alt="EventImage" />
+
         <div className={styles.eventHeader}>
           <h4>{event.name}</h4>
           <div className={styles.headerRightSide}>

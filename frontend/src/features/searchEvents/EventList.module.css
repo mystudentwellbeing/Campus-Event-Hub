@@ -1,8 +1,0 @@
-.eventContainer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  width: 90%;
-  gap: 2rem;
-  padding: 18rem 0;
-}
