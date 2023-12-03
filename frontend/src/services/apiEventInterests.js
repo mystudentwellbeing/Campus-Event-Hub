@@ -38,15 +38,7 @@ export const getEventsLikedByUser = async (userId) => {
       `
       id, event_id, user_id,
       events(
-        id,
-        image,
-        name,
-        price,
-        date,
-        start_time,
-        end_time,
-        type,
-        short_description
+        *
       )`
     )
     .eq('user_id', userId)
