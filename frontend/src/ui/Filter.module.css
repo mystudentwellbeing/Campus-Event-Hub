@@ -1,7 +1,8 @@
 .filterContainer {
   display: flex;
   justify-content: space-between;
-  width: 30rem;
+  width: 40rem;
+  height: 4rem;
   border: 0.1rem solid var(--grey2);
   background-color: var(--white);
   border-radius: 0.2rem;
