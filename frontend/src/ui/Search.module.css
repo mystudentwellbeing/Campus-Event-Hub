@@ -2,18 +2,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  min-width: 30rem;
 }
 
 .searchBox {
   display: flex;
   align-items: center;
-  height: 5rem;
+  height: 4rem;
   max-width: 45rem;
+  width: 100%;
   font-size: 1.5rem;
   background-color: var(--grey1);
   border: none;
-  border-radius: 1rem;
+  border-radius: 0.3rem;
   padding: 0rem 2rem;
   font-family: inherit;
 }
@@ -31,10 +32,4 @@
 .icon {
   font-size: 2rem;
   margin-left: 2rem;
-}
-
-@media only screen and (max-width: 470px) {
-  .searchBox {
-    width: 38rem;
-  }
 }

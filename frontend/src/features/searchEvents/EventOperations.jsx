@@ -18,7 +18,7 @@ import styles from './EventOperations.module.css';
 const EventOperations = () => {
   return (
     <section className={styles.operationContainer}>
-      <div className={styles.searchAndSortWrapper}>
+      <div className={styles.searchSortWrapper}>
         <Search />
         <SortBy
           options={[

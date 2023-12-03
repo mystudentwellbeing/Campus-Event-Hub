@@ -1,37 +1,71 @@
 .filterContainer {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin: 2rem auto;
-  flex-wrap: wrap;
-  max-width: 1200px;
+  overflow-x: scroll;
+  max-width: 30rem;
+  margin-bottom: 2rem;
+}
+
+.filterContainer::-webkit-scrollbar {
+  display: none;
 }
 
 .filterBtn {
-  color: var(--black);
-  background-color: var(--white);
-  font-size: 1.2rem;
-  width: 18rem;
-  padding: 1rem;
-  border: 0.1rem solid var(--grey2);
-  border-radius: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0.5rem;
+  color: var(--black);
+  background-color: var(--white);
+  font-size: 1rem;
+  width: auto;
+  padding: 0.5rem;
+  border: 0.1rem solid var(--grey2);
+  border-radius: 0.3rem;
+  margin-right: 1.5rem;
 }
 
 .activeFilter {
-  color: white;
-  background-color: var(--blue);
-  font-size: 1.2rem;
-  width: 18rem;
-  padding: 1rem;
-  border: 0.1rem solid var(--grey2);
-  border-radius: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0.5rem;
+  color: white;
+  background-color: var(--blue);
+  font-size: 1rem;
+  width: auto;
+  padding: 0.5rem;
+  border: 0.1rem solid var(--grey2);
+  border-radius: 0.3rem;
+  margin-right: 1.5rem;
+}
+
+@media (min-width: 481px) and (max-width: 1023px) {
+  .filterContainer {
+    max-width: 90%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .filterContainer {
+    max-width: 1200px;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem auto;
+    flex-wrap: wrap;
+  }
+
+  .filterBtn {
+    font-size: 1.2rem;
+    width: 19rem;
+    padding: 1rem;
+    border-radius: 2rem;
+    margin: 0.5rem;
+  }
+
+  .activeFilter {
+    font-size: 1.2rem;
+    width: 19rem;
+    padding: 1rem;
+    border-radius: 2rem;
+    margin: 0.5rem;
+  }
 }

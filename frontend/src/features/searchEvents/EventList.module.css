@@ -1,0 +1,20 @@
+.eventContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: 14rem;
+}
+
+@media (min-width: 481px) and (max-width: 1023px) {
+  .eventContainer {
+    margin-top: 10rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .eventContainer {
+    margin-top: 18rem;
+  }
+}
