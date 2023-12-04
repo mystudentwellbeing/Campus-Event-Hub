@@ -8,9 +8,9 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
   },
-  // build: {
-  //   rollupOptions: {
-  //     input: './src/main.jsx'
-  //   },
-  // },
+  build: {
+    rollupOptions: {
+      input: './src/main.jsx'
+    },
+  },
 });
