@@ -5,9 +5,12 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   // root: './src',
   plugins: [react()],
-  build: {
-    rollupOptions: {
-      input: './src/main.jsx'
-    },
+  server: {
+    host: '0.0.0.0',
   },
+  // build: {
+  //   rollupOptions: {
+  //     input: './src/main.jsx'
+  //   },
+  // },
 });
