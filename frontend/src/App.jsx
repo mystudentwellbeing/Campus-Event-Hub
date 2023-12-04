@@ -21,7 +21,9 @@ import Unauthorized from './pages/Unauthorized';
 import PageNotFound from './pages/PageNotFound';
 import ProtectedRoute from './ui/ProtectedRoute';
 import Footer from './ui/Footer';
-import './App.css';
+import { ThemeProvider } from '@mui/material/styles';
+import { theme } from './theme';
+// import './App.css';
 
 function App() {
   const queryClient = new QueryClient({
@@ -39,64 +41,62 @@ function App() {
         <ReactQueryDevtools initialIsOpen={false} />
       </div>
 
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route path="events" element={<EventList />} />
-          <Route path="events/:eventId" element={<EventFullInfo />} />
-          <Route path="submitevents" element={<SubmitEvents />} />
-
-          {/* Wrap ViewMyEvents and its nested routes with ProtectedRoute */}
-          <Route
-            path="viewmyevents"
-            element={
-              <ProtectedRoute>
-                <ViewMyEvents />
-              </ProtectedRoute>
-            }
-          >
-            <Route index element={<MySavedEvents />} />
-            <Route path="mysavedevents" element={<MySavedEvents />} />
-            <Route path="mysubmittedevents" element={<MySubmittedEvents />} />
-          </Route>
-
-          {/* Wrap Setting with ProtectedRoute */}
-          <Route
-            path="setting"
-            element={
-              <ProtectedRoute>
-                <Setting />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="admin/dashboard"
-            element={
-              <ProtectedRoute adminOnly>
-                <AdminDashboard />
-              </ProtectedRoute>
-            }
-          />
-
-          <Route
-            path="admin/events"
-            element={
-              <ProtectedRoute adminOnly>
-                <AdminEventManagement />{' '}
-              </ProtectedRoute>
-            }
-          />
-
-          <Route path="aboutus" element={<AboutUs />} />
-          <Route path="contactus" element={<ContactUs />} />
-          <Route path="login" element={<Login />} />
-          <Route path="signup" element={<Signup />} />
-          <Route path="unauthorized" element={<Unauthorized />} />
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
-        <Footer />
-      </BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Homepage />} />
+            <Route path="events" element={<EventList />} />
+            <Route path="events/:eventId" element={<EventFullInfo />} />
+            <Route path="submitevents" element={<SubmitEvents />} />
+            {/* Wrap ViewMyEvents and its nested routes with ProtectedRoute */}
+            <Route
+              path="viewmyevents"
+              element={
+                <ProtectedRoute>
+                  <ViewMyEvents />
+                </ProtectedRoute>
+              }
+            >
+              <Route index element={<MySavedEvents />} />
+              <Route path="mysavedevents" element={<MySavedEvents />} />
+              <Route path="mysubmittedevents" element={<MySubmittedEvents />} />
+            </Route>
+            {/* Wrap Setting with ProtectedRoute */}
+            <Route
+              path="setting"
+              element={
+                <ProtectedRoute>
+                  <Setting />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="admin/dashboard"
+              element={
+                <ProtectedRoute adminOnly>
+                  <AdminDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="admin/events"
+              element={
+                <ProtectedRoute adminOnly>
+                  <AdminEventManagement />{' '}
+                </ProtectedRoute>
+              }
+            />
+            <Route path="aboutus" element={<AboutUs />} />
+            <Route path="contactus" element={<ContactUs />} />
+            <Route path="login" element={<Login />} />
+            <Route path="signup" element={<Signup />} />
+            <Route path="unauthorized" element={<Unauthorized />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+          <Footer />
+        </BrowserRouter>
+      </ThemeProvider>
       <Toaster
         position="top-center"
         gutter={12}

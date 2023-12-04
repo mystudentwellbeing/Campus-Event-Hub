@@ -16,3 +16,20 @@ export const useUpdateUser = () => {
 
   return { updateUser, isUpdating };
 };
+
+// export const useUpdateUser = () => {
+//   const queryClient = useQueryClient();
+
+//   const { mutate: updateUser, isLoading: isUpdating } = useMutation({
+//     mutationFn: updateCurrentUser,
+//     onSuccess: (data, variables, context) => {
+//       if (context.successCallback) {
+//         context.successCallback(data.user);
+//       }
+//       queryClient.setQueryData(['user'], data.user);
+//     },
+//     onError: (err) => toast.error(err.message),
+//   });
+
+//   return { updateUser, isUpdating };
+// };

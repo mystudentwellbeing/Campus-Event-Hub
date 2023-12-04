@@ -7,8 +7,6 @@ import Button from '../../ui/Button';
 import styles from './SignupForm.module.css';
 
 const SignupForm = () => {
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
   const { signup, isLoading } = useSignup();
 
   const {
@@ -34,20 +32,6 @@ const SignupForm = () => {
     );
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (!email || !password) return;
-  //   signup(
-  //     { email, password },
-  //     {
-  //       onSettled: () => {
-  //         setEmail('');
-  //         setPassword('');
-  //       },
-  //     }
-  //   );
-  // };
-
   return (
     <form className={styles.signupContainer} onSubmit={handleSubmit(onSubmit)}>
       <h3>Create an account</h3>
@@ -62,10 +46,6 @@ const SignupForm = () => {
             required: true,
             pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
           })}
-          // onChange={(e) => {
-          //   setEmail(e.target.value);
-          // }}
-          // value={email}
           disabled={isLoading}
         />
         {errors.email && errors.email.type === 'required' && (
@@ -85,10 +65,6 @@ const SignupForm = () => {
             required: true,
             minLength: 6,
           })}
-          // onChange={(e) => {
-          //   setPassword(e.target.value);
-          // }}
-          // value={password}
         />
         {errors.password && errors.password.type === 'required' && (
           <div className={styles.errorMsg}>Password is required.</div>
@@ -113,7 +89,6 @@ const SignupForm = () => {
                 value === password || 'Passwords do not match',
             },
           })}
-          // value={password}
         />
         {errors.passwordConfirm &&
           errors.passwordConfirm.type === 'required' && (
@@ -130,7 +105,7 @@ const SignupForm = () => {
             <div className={styles.errorMsg}>Passwords do not match.</div>
           )}
 
-        <Button type="submit">Creat account</Button>
+        <Button type="submit">Creat Account</Button>
         <p>Already a member?</p>
         <Link to="/login">Sign in here!</Link>
       </div>

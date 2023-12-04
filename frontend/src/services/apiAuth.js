@@ -62,3 +62,17 @@ export const updateCurrentUser = async ({ email, password }) => {
 
   return data;
 };
+
+export const deleteUser = async (id) => {
+  const { data, error } = await supabase
+    .from('profiles')
+    .update({ delete_request_received: true })
+    .eq('id', id)
+    .single();
+
+  if (error) {
+    console.error(error);
+    throw new Error('User could not be deleted');
+  }
+  return data;
+};

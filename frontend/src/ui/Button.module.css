@@ -48,3 +48,9 @@
   border: none;
   justify-self: end;
 }
+
+.update,
+.submit,
+.reset {
+  font-size: 1.2rem;
+}
