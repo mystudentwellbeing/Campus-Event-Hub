@@ -4,11 +4,12 @@
   position: relative;
   padding: 2rem 3rem 1rem 3rem;
   font-weight: bold;
-}
-
-.navBarContainer {
   justify-content: space-between;
 }
+
+/* .navBarContainer {
+  justify-content: space-between;
+} */
 
 .navBarContainer img {
   height: 6rem;
