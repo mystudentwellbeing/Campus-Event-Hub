@@ -8,7 +8,8 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        main: 'App.jsx',
+        main:"index.html",
+        // main: 'App.jsx',
       },
     },
   },
