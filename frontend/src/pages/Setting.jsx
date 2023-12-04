@@ -1,4 +1,4 @@
-import UpdateForm from '../features/authentication/UpdateForm';
+import UpdateForm from '../features/authentication/UpdateProfileForm';
 import styles from './Setting.module.css';
 
 const Setting = () => {
