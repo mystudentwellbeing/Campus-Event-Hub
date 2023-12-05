@@ -3,72 +3,35 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: auto;
   width: 95%;
-  margin: auto;
-  padding: 3rem 1rem;
-  box-shadow: 0 0 2rem 0 rgba(0, 0, 0, 0.05), 0 0 0 0.1rem rgba(0, 0, 0, 0.08);
-}
-
-.signupContainer h3 {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-}
-
-.signupContainer label {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin: 1rem 0;
-}
-
-.signupContainer p {
-  font-size: 1.5rem;
-  margin-top: 2rem;
-  align-self: center;
-}
-
-.signupContainer a:link,
-.signupContainer a:visited {
-  color: inherit;
-  align-self: center;
-  font-size: 1.5rem;
-}
-
-.signupContainer a:hover {
-  color: var(--green2);
-}
-
-.inputRow {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  width: 50%;
-  margin: 1rem;
-  gap: 0.5rem;
+  max-width: 50rem;
+  padding: 3rem;
+  border: 0.1rem solid var(--grey2);
 }
 
 .errorMsg {
   color: red;
   font-size: 1.2rem;
-  /* align-self: center; */
   align-self: normal;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
 
-.input {
-  height: 3rem;
+.linkWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.2rem;
   width: 100%;
-  box-shadow: 0 0 2rem 0 rgba(0, 0, 0, 0.05), 0 0 0 0.1rem rgba(0, 0, 0, 0.08);
-  border: none;
-  padding: 0.8rem;
-  font-family: inherit;
-  font-size: 1.5rem;
 }
 
-.input:focus {
-  outline: none;
+.linkWrapper a {
+  font-size: 1.2rem;
+}
+
+.linkWrapper a:hover {
+  color: var(--blue);
+  text-decoration: underline;
 }
 
 @media (min-width: 481px) and (max-width: 1023px) {
