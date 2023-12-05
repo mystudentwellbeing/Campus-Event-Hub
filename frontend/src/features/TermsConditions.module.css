@@ -1,7 +1,8 @@
 .termsContainer {
     width: 90%;
     padding: 2rem;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+    font-weight: 500;
   }
   
   .termsContainer h1 {
@@ -15,8 +16,8 @@
   }
 
   .orderList {
-    list-style-type: decimal;
-    margin: 1rem;
+    margin: 1rem 3rem;
+    font-weight: 700;
   }
 
   .unorderList {
@@ -24,4 +25,5 @@
     color: var(--black);
     margin: 1rem;
     padding-left: 2rem;
+    font-weight: 500;
   }
