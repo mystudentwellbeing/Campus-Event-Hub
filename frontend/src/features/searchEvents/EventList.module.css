@@ -3,18 +3,20 @@
   flex-wrap: wrap;
   gap: 1.5rem;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   margin-top: 14rem;
 }
 
 @media (min-width: 481px) and (max-width: 1023px) {
   .eventContainer {
     margin-top: 10rem;
+    min-height: 60vh;
   }
 }
 
 @media (min-width: 1024px) {
   .eventContainer {
     margin-top: 18rem;
+    min-height: 80vh;
   }
 }
