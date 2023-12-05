@@ -130,6 +130,77 @@ const TermsConditions = () => {
           </ol>
         </p>
       </div>
+      <br/><br/>
+      <h1>Privacy Policy</h1>
+      <h1>Last Updated: December 1, 2023</h1>
+      <div className={styles.termsContent}>
+        <p>
+        My Student Wellbeing (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) is committed to protecting your privacy. This Privacy Policy explains how we collect, 
+        use, and safeguard your personal information when you use our event directory platform and associated services (collectively referred to as &quot;Services&quot;).
+        </p>
+        <p>
+        <ol className={styles.orderList}>
+          <li>Information We Collect</li>  
+            <ul className={styles.unorderList}>
+                <li>
+                We may collect personal information, including your name, email address, university affiliation, and event-related details when you use our Services. 
+                We may collect your general usage of our service such as what&apos;s been clicked on, saved, or other interactions.                
+                </li>
+            </ul>
+          <li>Use of Information</li>
+            <ul className={styles.unorderList}>
+                <li>We use your personal information to:
+                  <ul className={styles.unorderList}>
+                    <li>Create and manage your user account.</li>
+                    <li>Process event submissions and provide event-related information.</li>
+                    <li>Respond to your requests and inquiries.</li>
+                    <li>Improve and enhance our Services.</li>
+                    <li>Ensure compliance with our Terms of Use.</li>
+                  </ul>
+                </li>
+                <li>
+                We do not sell your information to any third parties. Your information stays within My Student Wellbeing. However, your information may be 
+                included should My Student Wellbeing be part of a sale in the future.
+                </li>
+            </ul>
+          <li>Data Security</li>
+            <ul className={styles.unorderList}>
+                <li>
+                We implement reasonable security measures to protect your personal information. However, please be aware that no data transmission over 
+                the internet is 100% secure, and we cannot guarantee the security of your information.        
+                </li>
+            </ul>
+          <li>Third-Party Links</li>
+            <ul className={styles.unorderList}>
+                <li>
+                Our Services may contain links to third-party websites or services. We are not responsible for the privacy practices or content of 
+                these third parties. Please review their privacy policies before using their services.                
+                </li>
+            </ul>
+          <li>Right to Deletion</li>
+            <ul className={styles.unorderList}>
+                <li>
+                If you would like your information deleted from our database, please let us know and we will do so when we can. We will aim to 
+                delete your information within 30 days of a request.                
+                </li>
+            </ul>
+          <li>Changes to Privacy Policy</li>
+            <ul className={styles.unorderList}>
+                <li>
+                My Student Wellbeing reserves the right to update this Privacy Policy at any time. You can review our Privacy Policy any time 
+                and your continued use of our Services constitutes acceptance of those changes.                
+                </li>
+            </ul>
+          <li>Contact Us</li>
+            <ul className={styles.unorderList}>
+                <li>
+                If you have any questions or concerns regarding this Privacy Policy, please contact us at events@mystudentwellbeing.ca                
+                </li>
+            </ul>
+        </ol>
+        </p>
+        <p>By using our Services, you agree to the terms of this Privacy Policy and our Terms of Use.</p>
+      </div>
     </main>
   )
 };
