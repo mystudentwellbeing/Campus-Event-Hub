@@ -20,6 +20,7 @@ import Signup from './pages/Signup';
 import Unauthorized from './pages/Unauthorized';
 import PageNotFound from './pages/PageNotFound';
 import ProtectedRoute from './ui/ProtectedRoute';
+import TermsConditions from './features/TermsConditions';
 import Footer from './ui/Footer';
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from './theme';
@@ -93,6 +94,7 @@ function App() {
             <Route path="signup" element={<Signup />} />
             <Route path="unauthorized" element={<Unauthorized />} />
             <Route path="*" element={<PageNotFound />} />
+            <Route path="terms-and-conditions" element={<TermsConditions />} />
           </Routes>
           <Footer />
         </BrowserRouter>
