@@ -3,10 +3,7 @@ import { useUser } from './useUser';
 import { useUpdateUser } from './useUpdateUser';
 import { useDeleteUser } from './useDeleteUser';
 import { toast } from 'react-hot-toast';
-
-import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-
 import Button from '../../ui/Button';
 import styles from './UpdateProfileForm.module.css';
 
@@ -46,35 +43,6 @@ const UpdateProfileForm = () => {
     );
   };
 
-  // const onSubmit = async (data, event) => {
-  //   const { email, emailConfirm, password, passwordConfirm } = data;
-
-  //   if (email !== emailConfirm) {
-  //     event.preventDefault();
-  //     toast.error('Emails need to match');
-  //     return;
-  //   }
-  //   if (password !== passwordConfirm) {
-  //     event.preventDefault();
-  //     toast.error('Passwords need to match');
-  //     return;
-  //   }
-
-  //   updateUser(
-  //     { email, password },
-  //     {
-  //       onSuccess: () => {
-  //         reset();
-  //       },
-  //       context: {
-  //         successCallback: (user) => {
-  //           toast.success('User account successfully updated');
-  //         },
-  //       },
-  //     }
-  //   );
-  // };
-
   const handleReset = () => {
     reset();
   };
@@ -84,12 +52,10 @@ const UpdateProfileForm = () => {
   };
 
   return (
-    <div className={styles.updateContainer}>
-      <Box
-        component="form"
+    <>
+      <form
         onSubmit={handleSubmit(onSubmit)}
-        noValidate
-        sx={{ mt: 1, width: '50%' }}
+        className={styles.updateContainer}
       >
         <Controller
           name="email"
@@ -112,7 +78,6 @@ const UpdateProfileForm = () => {
             />
           )}
         />
-
         <Controller
           name="emailConfirm"
           control={control}
@@ -146,7 +111,6 @@ const UpdateProfileForm = () => {
             Cancel
           </Button>
         </div>
-
         <Controller
           name="password"
           control={control}
@@ -168,7 +132,6 @@ const UpdateProfileForm = () => {
             />
           )}
         />
-
         <Controller
           name="passwordConfirm"
           control={control}
@@ -205,15 +168,14 @@ const UpdateProfileForm = () => {
             Cancel
           </Button>
         </div>
-      </Box>
-
+      </form>
       <div className={styles.deleteAccount}>
         <p>I want to delete my account.</p>
         <Button type="submit" onClick={handleDeleteAccount}>
           Delete Account
         </Button>
       </div>
-    </div>
+    </>
   );
 };
 
