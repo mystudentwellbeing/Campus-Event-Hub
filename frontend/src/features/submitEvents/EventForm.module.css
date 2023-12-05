@@ -84,7 +84,7 @@
 .formContainerCheckbox {
   display: flex;
   margin: 1rem 2rem;
-  gap: 4rem;
+  gap: 6.8rem;
 }
 
 .checkboxRow {
@@ -141,24 +141,32 @@
     flex-direction: column;
     gap: 0rem;
   }
-  .formContainer div {
+
+  /* .formContainer div {
     margin-left: 5rem; 
-  }
+  } */
+
   .checkBoxHeading,
   .formContainerCheckbox,
   .formContainerTerms,
   .errorMsgBox,
   .errorMsgType {
-    margin-left: 5rem;
+    margin-left: 2rem;
+    /* margin-left: 5rem; */
   }
+
   .formContainerCheckbox {
     gap: 2rem;
+    flex-direction: column;
   }
+
   .formContainerTerms {
     justify-content: flex-start;
   }
+
   .btnEvents {
     font-size: 1rem;
     margin: 2rem;
+    width: -webkit-fill-available;
   }
 }

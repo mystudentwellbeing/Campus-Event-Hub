@@ -3,8 +3,9 @@ import { SlSocialInstagram } from 'react-icons/sl';
 import { SlSocialFacebook } from 'react-icons/sl';
 import { SlSocialLinkedin } from 'react-icons/sl';
 import styles from './Footer.module.css';
+import { Link } from 'react-router-dom';
 
-const Footer = () => {
+const Footer = () => {  
   const year = new Date().getFullYear();
   return (
     <footer>
@@ -16,10 +17,14 @@ const Footer = () => {
             {/* <p>admin@campuseventhub.ca</p> */}
           </div>
         </a>
-        <div className={styles.terms}>
-          <p>Terms of Use and Privacy Policy</p>
-          <p>&copy;{year} All rights reserved</p>
+        <div className={styles.terms}> 
+
+        <Link to="/terms-and-conditions" target="_blank" rel="noopener noreferrer">
+            <p>Terms of Use and Privacy Policy</p>
+        </Link> 
+        <p>&copy;{year} All rights reserved</p>
         </div>
+
         <div className={styles.social}>
           <a href="https://www.instagram.com/mystudentwellbeing/?hl=en" target="_blank" rel="noopener noreferrer">
             <SlSocialInstagram className={styles.reactIcons} />
