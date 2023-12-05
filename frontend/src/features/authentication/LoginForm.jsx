@@ -45,10 +45,6 @@ const LoginForm = () => {
             disabled={isLoading}
             type="email"
             variant="outlined"
-            inputProps={{ style: { fontSize: '1.4rem' } }}
-            InputLabelProps={{
-              style: { fontSize: '1.2rem' },
-            }}
           />
         )}
       />
@@ -74,10 +70,6 @@ const LoginForm = () => {
             disabled={isLoading}
             type="password"
             variant="outlined"
-            inputProps={{ style: { fontSize: '1.4rem' } }}
-            InputLabelProps={{
-              style: { fontSize: '1.2rem' },
-            }}
           />
         )}
       />
