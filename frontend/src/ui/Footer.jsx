@@ -9,10 +9,11 @@ const Footer = () => {
   return (
     <footer>
       <div className={styles.footerContainer}>
-        <a href="mailto:jigisha@my.yorku.ca">
+        <a href="mailto:events@mystudentwellbeing.ca">
           <div className={styles.email}>
             <MdOutlineEmail className={styles.reactIcons} />
-            <p>admin@campuseventhub.ca</p>
+            <p>events@mystudentwellbeing.ca</p>
+            {/* <p>admin@campuseventhub.ca</p> */}
           </div>
         </a>
         <div className={styles.terms}>
