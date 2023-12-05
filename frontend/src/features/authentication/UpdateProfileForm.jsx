@@ -20,16 +20,11 @@ const UpdateProfileForm = () => {
   const { updateUser, isUpdating } = useUpdateUser();
   const { deleteRequest } = useDeleteUser();
 
-  const onSubmit = async (data, event) => {
-    const { email, emailConfirm, password, passwordConfirm } = data;
+  const onSubmit = async (data, e) => {
+    const { email, password, passwordConfirm } = data;
 
-    if (email !== emailConfirm) {
-      event.preventDefault();
-      toast.error('Emails need to match');
-      return;
-    }
     if (password !== passwordConfirm) {
-      event.preventDefault();
+      e.preventDefault();
       toast.error('Passwords need to match');
       return;
     }
@@ -43,9 +38,9 @@ const UpdateProfileForm = () => {
     );
   };
 
-  const handleReset = () => {
-    reset();
-  };
+  // const handleReset = () => {
+  //   reset();
+  // };
 
   const handleDeleteAccount = async () => {
     deleteRequest({ id: user.id, delete_request_received: true });
@@ -53,121 +48,98 @@ const UpdateProfileForm = () => {
 
   return (
     <>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className={styles.updateContainer}
-      >
-        <Controller
-          name="email"
-          control={control}
-          defaultValue=""
-          render={({ field }) => (
-            <TextField
-              {...field}
-              margin="normal"
-              fullWidth
-              id="email"
-              label="Email Address"
-              autoFocus
-              disabled={isUpdating}
-              variant="filled"
-              inputProps={{ style: { fontSize: '1.4rem' } }}
-              InputLabelProps={{
-                style: { fontSize: '1.2rem' },
-              }}
-            />
-          )}
-        />
-        <Controller
-          name="emailConfirm"
-          control={control}
-          defaultValue=""
-          rules={{
-            validate: (value) =>
-              getValues('email') === value || 'Emails need to match',
-          }}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              margin="normal"
-              fullWidth
-              id="emailConfirm"
-              label="Confirm Email Address"
-              disabled={isUpdating}
-              variant="filled"
-              inputProps={{ style: { fontSize: '1.4rem' } }}
-              InputLabelProps={{
-                style: { fontSize: '1.2rem' },
-              }}
-            />
-          )}
-        />
-        {errors.emailConfirm && (
-          <div className={styles.errorMsg}>{errors.emailConfirm.message}</div>
-        )}
-        <div className={styles.buttonWrapper}>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
+        <fieldset>
+          <legend>Update Email</legend>
+          <p className={styles.currentEmail}>
+            Your current email address is:<span>{user.email}</span>
+          </p>
+          <Controller
+            name="email"
+            control={control}
+            defaultValue=""
+            render={({ field }) => (
+              <TextField
+                {...field}
+                margin="normal"
+                fullWidth
+                id="email"
+                label="New Email Address"
+                autoFocus
+                disabled={isUpdating}
+                variant="filled"
+                inputProps={{ style: { fontSize: '1.4rem' } }}
+                InputLabelProps={{
+                  style: { fontSize: '1.2rem' },
+                }}
+              />
+            )}
+          />
+
           <Button type="submit">Update</Button>
-          <Button type="reset" onClick={handleReset}>
-            Cancel
-          </Button>
-        </div>
-        <Controller
-          name="password"
-          control={control}
-          defaultValue=""
-          render={({ field }) => (
-            <TextField
-              {...field}
-              margin="normal"
-              fullWidth
-              type="password"
-              id="password"
-              label="Password"
-              disabled={isUpdating}
-              variant="filled"
-              inputProps={{ style: { fontSize: '1.4rem' } }}
-              InputLabelProps={{
-                style: { fontSize: '1.2rem' },
-              }}
-            />
+          <p className={styles.updateInstruction}>
+            You&apos;ll get a confirmation link at your new email to verify the
+            changes.
+          </p>
+        </fieldset>
+      </form>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
+        <fieldset>
+          <legend>Update Password</legend>
+          <Controller
+            name="password"
+            control={control}
+            defaultValue=""
+            render={({ field }) => (
+              <TextField
+                {...field}
+                margin="normal"
+                fullWidth
+                type="password"
+                id="password"
+                label="New Password"
+                disabled={isUpdating}
+                variant="filled"
+                inputProps={{ style: { fontSize: '1.4rem' } }}
+                InputLabelProps={{
+                  style: { fontSize: '1.2rem' },
+                }}
+              />
+            )}
+          />
+          <Controller
+            name="passwordConfirm"
+            control={control}
+            defaultValue=""
+            rules={{
+              validate: (value) =>
+                getValues('password') === value || 'Passwords need to match',
+            }}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                margin="normal"
+                fullWidth
+                type="password"
+                id="passwordConfirm"
+                label="Confirm Password"
+                disabled={isUpdating}
+                variant="filled"
+                inputProps={{ style: { fontSize: '1.4rem' } }}
+                InputLabelProps={{
+                  style: { fontSize: '1.2rem' },
+                }}
+              />
+            )}
+          />
+          {errors.passwordConfirm && (
+            <div className={styles.errorMsg}>
+              {errors.passwordConfirm.message}
+            </div>
           )}
-        />
-        <Controller
-          name="passwordConfirm"
-          control={control}
-          defaultValue=""
-          rules={{
-            validate: (value) =>
-              getValues('password') === value || 'Passwords need to match',
-          }}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              margin="normal"
-              fullWidth
-              type="password"
-              id="passwordConfirm"
-              label="Confirm Password"
-              disabled={isUpdating}
-              variant="filled"
-              inputProps={{ style: { fontSize: '1.4rem' } }}
-              InputLabelProps={{
-                style: { fontSize: '1.2rem' },
-              }}
-            />
-          )}
-        />
-        {errors.passwordConfirm && (
-          <div className={styles.errorMsg}>
-            {errors.passwordConfirm.message}
-          </div>
-        )}
-        <div className={styles.buttonWrapper}>
+
           <Button type="submit">Update</Button>
-          <Button type="reset" onClick={handleReset}>
-            Cancel
-          </Button>
-        </div>
+        </fieldset>
       </form>
       <div className={styles.deleteAccount}>
         <p>I want to delete my account.</p>

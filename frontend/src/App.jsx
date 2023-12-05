@@ -17,6 +17,8 @@ import Setting from './pages/Setting';
 import ContactUs from './pages/ContactUs';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 import Unauthorized from './pages/Unauthorized';
 import PageNotFound from './pages/PageNotFound';
 import ProtectedRoute from './ui/ProtectedRoute';
@@ -91,6 +93,8 @@ function App() {
             <Route path="contactus" element={<ContactUs />} />
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
+            <Route path="forgotpassword" element={<ForgotPassword />} />
+            <Route path="resetpassword" element={<ResetPassword />} />
             <Route path="unauthorized" element={<Unauthorized />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>

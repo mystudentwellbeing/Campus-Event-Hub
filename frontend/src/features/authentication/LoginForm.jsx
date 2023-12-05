@@ -78,7 +78,7 @@ const LoginForm = () => {
       )}
       <Button type="login">Log In</Button>
       <div className={styles.linkWrapper}>
-        <Link>Forgot password?</Link>
+        <Link to="/forgotpassword">Forgot password?</Link>
         <Link to="/signup" className={styles.link}>
           Don&apos;t have an account? Sign Up
         </Link>

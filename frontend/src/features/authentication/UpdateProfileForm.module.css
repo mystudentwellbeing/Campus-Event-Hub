@@ -1,9 +1,37 @@
-.updateContainer {
+.formContainer {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
+  margin-bottom: 2rem;
   width: 100%;
+}
+
+.formContainer fieldset {
+  width: 100%;
+  padding: 2rem;
+  border: 0.1rem solid var(--grey2);
+}
+
+.formContainer legend {
+  font-size: 1.5rem;
+  padding: 0 2rem;
+  margin: 1rem;
+  font-weight: bold;
+}
+
+.currentEmail {
+  font-size: 1.5rem;
+}
+
+.formContainer span {
+  font-weight: bold;
+  margin-left: 1rem;
+}
+
+.updateInstruction {
+  font-size: 1rem;
+  margin-top: 1rem;
 }
 
 .errorMsg {
@@ -13,11 +41,6 @@
   align-self: normal;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
-}
-
-.buttonWrapper {
-  display: flex;
-  justify-content: center;
 }
 
 .deleteAccount {
@@ -34,7 +57,7 @@
 }
 
 @media (min-width: 481px) and (max-width: 1023px) {
-  .updateContainer {
+  .formContainer {
     width: 60%;
   }
   .deleteAccount {
@@ -43,7 +66,7 @@
 }
 
 @media (min-width: 1024px) {
-  .updateContainer {
+  .formContainer {
     width: 40%;
   }
   .deleteAccount {
