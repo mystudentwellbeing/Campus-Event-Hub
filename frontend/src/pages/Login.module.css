@@ -1,19 +1,9 @@
 .login {
-  flex-grow: 1;
-  margin-top: 4rem;
-}
-
-@media (min-width: 481px) and (max-width: 1023px) {
-  .login {
-    min-width: 60rem;
-    margin-top: 6rem;
-  }
+  min-height: 80vh;
 }
 
 @media (min-width: 1024px) {
   .login {
-    min-width: 100rem;
-    margin-top: 10rem;
     min-height: 85vh;
   }
 }
