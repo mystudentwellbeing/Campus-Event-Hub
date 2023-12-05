@@ -225,13 +225,13 @@ const EventForm = () => {
                 <input
                   type="checkbox"
                   name="eventType"
-                  id="NETWORKING"
-                  value="NETWORKING"
+                  id="ARTS"
+                  value="ARTS"
                   {...register('type', {
                     required: 'Please select at-least one event type'
                   })}
                 />
-                <label>NETWORKING</label>
+                <label>ARTS</label>
               </div>
               <div>
                 <input
@@ -247,11 +247,45 @@ const EventForm = () => {
                 <input
                   type="checkbox"
                   name="eventType"
+                  id="COMMUNITY"
+                  value="COMMUNITY"
+                  {...register('type')}
+                />
+                <label>COMMUNITY</label>
+              </div>
+            </div>
+          {/* </div> */}
+          {/* <div className={styles.formContainerCheckbox}> */}
+            <div className={styles.checkboxRow}>
+              <div>
+                <input
+                  type="checkbox"
+                  name="eventType"
                   id="CULTURAL"
                   value="CULTURAL"
                   {...register('type')}
                 />
                 <label>CULTURAL</label>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  name="eventType"
+                  id="EDUCATIONAL"
+                  value="EDUCATIONAL"
+                  {...register('type')}
+                />
+                <label>EDUCATIONAL</label>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  name="eventType"
+                  id="FOOD"
+                  value="FOOD"
+                  {...register('type')}
+                />
+                <label>FOOD</label>
               </div>
             </div>
           {/* </div> */}
@@ -271,26 +305,12 @@ const EventForm = () => {
                 <input
                   type="checkbox"
                   name="eventType"
-                  id="SPORTS"
-                  value="SPORTS"
+                  id="NETWORKING"
+                  value="NETWORKING"
                   {...register('type')}
                 />
-                <label>SPORTS</label>
+                <label>NETWORKING</label>
               </div>
-              <div>
-                <input
-                  type="checkbox"
-                  name="eventType"
-                  id="EDUCATIONAL"
-                  value="EDUCATIONAL"
-                  {...register('type')}
-                />
-                <label>EDUCATIONAL</label>
-              </div>
-            </div>
-          {/* </div> */}
-          {/* <div className={styles.formContainerCheckbox}> */}
-            <div className={styles.checkboxRow}>
               <div>
                 <input
                   type="checkbox"
@@ -301,15 +321,19 @@ const EventForm = () => {
                 />
                 <label>NIGHTLIFE</label>
               </div>
+            </div>
+          {/* </div> */}
+          {/* <div className={styles.formContainerCheckbox}> */}
+            <div className={styles.checkboxRow}>
               <div>
                 <input
                   type="checkbox"
                   name="eventType"
-                  id="ARTS"
-                  value="ARTS"
+                  id="SPORTS"
+                  value="SPORTS"
                   {...register('type')}
                 />
-                <label>ARTS</label>
+                <label>SPORTS</label>
               </div>
               <div>
                 <input
@@ -320,30 +344,6 @@ const EventForm = () => {
                   {...register('type')}
                 />
                 <label>WELLBEING</label>
-              </div>
-            </div>
-          {/* </div> */}
-          {/* <div className={styles.formContainerCheckbox}> */}
-            <div className={styles.checkboxRow}>
-              <div>
-                <input
-                  type="checkbox"
-                  name="eventType"
-                  id="COMMUNITY"
-                  value="COMMUNITY"
-                  {...register('type')}
-                />
-                <label>COMMUNITY</label>
-              </div>
-              <div>
-                <input
-                  type="checkbox"
-                  name="eventType"
-                  id="FOOD"
-                  value="FOOD"
-                  {...register('type')}
-                />
-                <label>FOOD</label>
               </div>
               <div>
                 <input
