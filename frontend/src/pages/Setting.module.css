@@ -1,4 +1,11 @@
-.container h1 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
+@media (min-width: 481px) and (max-width: 1023px) {
+  .setting {
+    min-height: 85vh;
+  }
+}
+
+@media (min-width: 1024px) {
+  .setting {
+    min-height: 90vh;
+  }
 }

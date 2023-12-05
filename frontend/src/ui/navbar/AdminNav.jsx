@@ -5,7 +5,7 @@ import Hamburger from 'hamburger-react';
 import useOutsideClick from '../../hooks/useOutsideClickforNav';
 import Button from '../Button';
 import logo from '../../assets/logo.png';
-import styles from './notLoggedInNav.module.css';
+import styles from './NotLoggedInNav.module.css';
 
 const AdminNav = () => {
   const [isHambugerOpen, setHamburgerOpen] = useState(false);

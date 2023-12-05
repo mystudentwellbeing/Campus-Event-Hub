@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { useLogin } from './useLogin';
+import TextField from '@mui/material/TextField';
 import Button from '../../ui/Button';
 import styles from './LoginForm.module.css';
 
@@ -8,15 +9,14 @@ const LoginForm = () => {
   const { login, isLoading } = useLogin();
 
   const {
-    register,
     handleSubmit,
     formState: { errors },
     reset,
+    control,
   } = useForm();
 
   const onSubmit = (data) => {
     const { email, password } = data;
-    console.log(data);
     login(
       { email, password },
       {
@@ -29,43 +29,67 @@ const LoginForm = () => {
 
   return (
     <form className={styles.loginContainer} onSubmit={handleSubmit(onSubmit)}>
-      <h3>Sign In</h3>
-      <div className={styles.inputRow}>
-        <label htmlFor="email">Email</label>
-        <input
-          className={styles.input}
-          type="email"
-          id="email"
-          placeholder="email"
-          {...register('email', {
-            required: true,
-            pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
-          })}
-          disabled={isLoading}
-        />
+      <Controller
+        name="email"
+        control={control}
+        defaultValue=""
+        rules={{ required: true, pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/ }}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            margin="normal"
+            fullWidth
+            id="email"
+            label="Email Address"
+            autoFocus
+            disabled={isLoading}
+            type="email"
+            variant="outlined"
+            inputProps={{ style: { fontSize: '1.4rem' } }}
+            InputLabelProps={{
+              style: { fontSize: '1.2rem' },
+            }}
+          />
+        )}
+      />
+      {errors.email && errors.email.type === 'required' && (
+        <div className={styles.errorMsg}>Email is required.</div>
+      )}
+      {errors.email && errors.email.type === 'pattern' && (
+        <div className={styles.errorMsg}>Email is not valid.</div>
+      )}
 
-        {errors.email && errors.email.type === 'required' && (
-          <div className={styles.errorMsg}>Email is required.</div>
+      <Controller
+        name="password"
+        control={control}
+        defaultValue=""
+        rules={{ required: true }}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            margin="normal"
+            fullWidth
+            id="password"
+            label="Password"
+            disabled={isLoading}
+            type="password"
+            variant="outlined"
+            inputProps={{ style: { fontSize: '1.4rem' } }}
+            InputLabelProps={{
+              style: { fontSize: '1.2rem' },
+            }}
+          />
         )}
-        {errors.email && errors.email.type === 'pattern' && (
-          <div className={styles.errorMsg}>Email is not valid.</div>
-        )}
-        <label htmlFor="password">Password</label>
-        <input
-          className={styles.input}
-          type="password"
-          id="password"
-          placeholder="password"
-          {...register('password', {
-            required: true,
-          })}
-        />
-        {errors.password && errors.password.type === 'required' && (
-          <div className={styles.errorMsg}>Password is required.</div>
-        )}
-        <Button type="submit">Log In</Button>
-        <p>Not a member?</p>
-        <Link to="/signup">Sign up here!</Link>
+      />
+      {errors.password && errors.password.type === 'required' && (
+        <div className={styles.errorMsg}>Password is required.</div>
+      )}
+      <Button type="login">Log In</Button>
+      <div className={styles.linkWrapper}>
+        <Link>Forgot password?</Link>
+        <Link to="/signup" className={styles.link}>
+          Don&apos;t have an account? Sign Up
+        </Link>
       </div>
     </form>
   );

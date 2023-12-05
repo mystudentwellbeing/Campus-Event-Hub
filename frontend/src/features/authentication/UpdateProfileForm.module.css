@@ -3,8 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  width: 50%;
-  min-height: 80vh;
+  width: 100%;
 }
 
 .errorMsg {
@@ -25,10 +24,29 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
   gap: 2rem;
   font-size: 1.5rem;
   border: 0.1rem solid var(--grey2);
   padding: 1rem 2rem;
   border-radius: 0.3rem;
   margin-top: 2rem;
+}
+
+@media (min-width: 481px) and (max-width: 1023px) {
+  .updateContainer {
+    width: 60%;
+  }
+  .deleteAccount {
+    width: 60%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .updateContainer {
+    width: 40%;
+  }
+  .deleteAccount {
+    width: 40%;
+  }
 }
