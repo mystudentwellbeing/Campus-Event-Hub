@@ -14,4 +14,20 @@ export const theme = createTheme({
   typography: {
     fontFamily: 'Poppins',
   },
+  components: {
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          fontSize: '1.4rem',
+        },
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          fontSize: '1.4rem',
+        },
+      },
+    },
+  },
 });
