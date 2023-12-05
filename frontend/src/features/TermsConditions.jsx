@@ -3,7 +3,7 @@ import styles from './TermsConditions.module.css';
 const TermsConditions = () => {
   // return <div>TermsConditions</div>;
   return (
-    <div className={styles.termsContainer}>
+    <main className={styles.termsContainer}>
       <h1>Terms of Use</h1>
       <h1>Last Updated: December 1, 2023</h1>
       <div className={styles.termsContent}>
@@ -80,9 +80,9 @@ const TermsConditions = () => {
                 resulting from:
                 <ol>
                   <li>(a) The use or inability to use the Platform;</li>
-                  <li>2. (b) Unauthorized access to or alteration of your data;</li>
-                  <li>3. (c) Statements or conduct of any third party on the Platform;</li>
-                  <li>4. (d) Any other matter relating to the Platform.</li>
+                  <li>(b) Unauthorized access to or alteration of your data;</li>
+                  <li>(c) Statements or conduct of any third party on the Platform;</li>
+                  <li>(d) Any other matter relating to the Platform.</li>
                 </ol>            
                 </li>
                 <li>
@@ -130,7 +130,7 @@ const TermsConditions = () => {
           </ol>
         </p>
       </div>
-    </div>
+    </main>
   )
 };
 
