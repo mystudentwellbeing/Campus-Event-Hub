@@ -20,13 +20,13 @@ const Footer = () => {
           <p>&copy;{year} All rights reserved</p>
         </div>
         <div className={styles.social}>
-          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.instagram.com/mystudentwellbeing/?hl=en" target="_blank" rel="noopener noreferrer">
             <SlSocialInstagram className={styles.reactIcons} />
           </a>
-          <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.facebook.com/profile.php?id=100076418081118" target="_blank" rel="noopener noreferrer">
             <SlSocialFacebook className={styles.reactIcons} />
           </a>
-          <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.linkedin.com/company/my-student-wellbeing/?viewAsMember=true" target="_blank" rel="noopener noreferrer">
             <SlSocialLinkedin className={styles.reactIcons} />
           </a>
           {/* <SlSocialInstagram className={styles.reactIcons} />
