@@ -125,7 +125,7 @@ const SignupForm = () => {
           <div className={styles.errorMsg}>Passwords do not match.</div>
         )}
 
-      <Button type="signup">Creat Account</Button>
+      <Button type="rectangle">Creat Account</Button>
       <div className={styles.linkWrapper}>
         <p>Already a member?</p>
         <Link to="/login">Sign in here!</Link>

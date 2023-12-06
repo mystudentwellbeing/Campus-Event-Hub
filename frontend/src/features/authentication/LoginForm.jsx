@@ -76,7 +76,7 @@ const LoginForm = () => {
       {errors.password && errors.password.type === 'required' && (
         <div className={styles.errorMsg}>Password is required.</div>
       )}
-      <Button type="login">Log In</Button>
+      <Button type="rectangle">Log In</Button>
       <div className={styles.linkWrapper}>
         <Link to="/forgotpassword">Forgot password?</Link>
         <Link to="/signup" className={styles.link}>

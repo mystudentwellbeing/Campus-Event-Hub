@@ -85,7 +85,9 @@ const AdminNav = () => {
         <div className={styles.btnWarapper}>
           <li>
             <Link to="/" className={styles.btnLink} onClick={closeMenu}>
-              <Button onClick={handleClick}>Log out</Button>
+              <Button type="navBtn" onClick={handleClick}>
+                Log out
+              </Button>
             </Link>
           </li>
         </div>

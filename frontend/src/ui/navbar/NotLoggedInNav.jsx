@@ -71,12 +71,12 @@ const NotLoggedInNav = () => {
         <div className={styles.btnWarapper}>
           <li>
             <Link to="/login" className={styles.btnLink} onClick={closeMenu}>
-              <Button type="login">Log In</Button>
+              <Button>Log In</Button>
             </Link>
           </li>
           <li>
             <Link to="/signup" className={styles.btnLink} onClick={closeMenu}>
-              <Button type="signup">Sign Up</Button>
+              <Button>Sign Up</Button>
             </Link>
           </li>
         </div>

@@ -76,7 +76,7 @@ const UpdateProfileForm = () => {
             )}
           />
 
-          <Button type="submit">Update</Button>
+          <Button>Update</Button>
           <p className={styles.updateInstruction}>
             You&apos;ll get a confirmation link at your new email to verify the
             changes.
@@ -138,14 +138,12 @@ const UpdateProfileForm = () => {
             </div>
           )}
 
-          <Button type="submit">Update</Button>
+          <Button>Update</Button>
         </fieldset>
       </form>
       <div className={styles.deleteAccount}>
         <p>I want to delete my account.</p>
-        <Button type="submit" onClick={handleDeleteAccount}>
-          Delete Account
-        </Button>
+        <Button onClick={handleDeleteAccount}>Delete Account</Button>
       </div>
     </>
   );
