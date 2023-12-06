@@ -31,6 +31,6 @@
 }
 
 .pageBtn:hover {
-  background-color: var(--blue);
-  color: var(--white);
+  font-weight: bold;
+  color: var(--blue);
 }
