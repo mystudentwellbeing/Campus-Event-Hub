@@ -16,6 +16,5 @@ export const useEventInterests = (userId) => {
   const refetchLikedEvents = () => {
     refetch();
   };
-  console.log('likedEvents', likedEvents);
   return { likedEvents, isLoading, error, refetchLikedEvents };
 };

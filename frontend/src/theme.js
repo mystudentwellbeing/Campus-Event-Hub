@@ -10,6 +10,9 @@ export const theme = createTheme({
     secondary: {
       main: '#01ab0d',
     },
+    warning: {
+      main: '#f73378',
+    },
   },
   typography: {
     fontFamily: 'Poppins',
@@ -26,6 +29,14 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           fontSize: '1.4rem',
+        },
+      },
+    },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          fontSize: '1.5rem',
+          color: 'var(--blue)',
         },
       },
     },
