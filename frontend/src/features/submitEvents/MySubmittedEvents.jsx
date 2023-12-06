@@ -67,7 +67,7 @@ const MySubmittedEvents = () => {
         />
       </Tabs>
       <div className={styles.sectionContainer}>
-        <section className={styles.status}>
+        <section className={styles.eventContainer}>
           <h2>
             Approved Events&nbsp;
             <Badge
@@ -87,7 +87,7 @@ const MySubmittedEvents = () => {
             <Event key={event.event_id} event={event} />
           ))}
         </section>
-        <section className={styles.status}>
+        <section className={styles.eventContainer}>
           <h2>
             Pending Events&nbsp;
             <Badge
