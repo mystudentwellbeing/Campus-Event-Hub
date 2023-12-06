@@ -48,7 +48,7 @@ const AdminNav = () => {
         <img src={logo} alt="my student wellbeing logo" />
       </Link>
       <Link to="/">
-        <h2>Student Event Hub</h2>
+        <h2>SEvent Hub</h2>
       </Link>
       <ul
         ref={dropdownRef}
@@ -98,6 +98,8 @@ const AdminNav = () => {
           toggled={isHambugerOpen}
           toggle={() => setHamburgerOpen((prev) => !prev)}
           label="Show menu"
+          color="#02057b"
+          size={22}
         />
       </div>
     </div>

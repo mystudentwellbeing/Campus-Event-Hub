@@ -48,7 +48,7 @@ const LoggedInNav = () => {
         <img src={logo} alt="my student wellbeing logo" />
       </Link>
       <Link to="/">
-        <h2>Student Event Hub</h2>
+        <h2>Event Hub</h2>
       </Link>
       <ul
         ref={dropdownRef}
@@ -95,6 +95,8 @@ const LoggedInNav = () => {
           toggled={isHambugerOpen}
           toggle={() => setHamburgerOpen((prev) => !prev)}
           label="Show menu"
+          color="#02057b"
+          size={22}
         />
       </div>
     </div>
