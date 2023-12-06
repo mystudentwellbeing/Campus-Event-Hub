@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useUser } from '../../features/authentication/useUser';
 import { useCreateEvent } from './useCreateEvent';
 import { useEditEvent } from './useEditEvent';
-import TermsConditions from '../../pages/TermsConditions';
+import TermsConditions from '../../ui/TermsConditionsContent';
 import Modal from '../../ui/Modal';
 import Button from '../../ui/Button';
 import styles from './EventForm.module.css';
