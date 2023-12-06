@@ -34,8 +34,7 @@ const MySavedEvents = () => {
   }
 
   return (
-    <section className={styles.savedEventsContainer}>
-      {/* <h1>My Events ({likedEvents.length})</h1> */}
+    <div className={styles.savedEventsContainer}>
       <Tabs value={value} onChange={handleChange} centered>
         <Tab
           label="My Saved Events"
@@ -71,7 +70,7 @@ const MySavedEvents = () => {
           <p>No saved events yet.</p>
         )}
       </div>
-    </section>
+    </div>
   );
 };
 
