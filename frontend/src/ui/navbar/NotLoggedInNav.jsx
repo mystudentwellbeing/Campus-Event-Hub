@@ -87,6 +87,7 @@ const NotLoggedInNav = () => {
           toggled={isHambugerOpen}
           toggle={() => setHamburgerOpen((prev) => !prev)}
           label="Show menu"
+          color="#02057b"
         />
       </div>
     </div>
