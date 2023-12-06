@@ -69,6 +69,7 @@
 }
 
 .emptyHeartIcon {
+  position: relative;
   display: flex;
   align-items: center;
   color: var(--black);
@@ -79,11 +80,17 @@
 }
 
 .heartIcon {
+  position: relative;
   display: flex;
   align-items: center;
   color: var(--red);
   font-size: 2rem;
   margin-right: 0.5rem;
+}
+
+.emptyHeartIcon:active,
+.heartIcon:active {
+  top: 2px;
 }
 
 .shortDesc {
