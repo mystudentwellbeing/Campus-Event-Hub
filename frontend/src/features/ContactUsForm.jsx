@@ -110,7 +110,7 @@ const ContactUsForm = () => {
             margin="normal"
             fullWidth
             id="message"
-            label="message"
+            label="Message"
             autoFocus
             variant="filled"
             multiline

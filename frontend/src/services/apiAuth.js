@@ -24,6 +24,12 @@ export const signup = async ({ email, password, passwordConfirm }) => {
 
   if (error) throw new Error(error.message);
 
+  // If signup is successful, log in the user automatically
+  if (data) {
+    const loginData = await login({ email, password });
+    return loginData;
+  }
+
   return data;
 };
 
