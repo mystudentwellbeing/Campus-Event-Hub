@@ -22,7 +22,7 @@ import ResetPassword from './pages/ResetPassword';
 import Unauthorized from './pages/Unauthorized';
 import PageNotFound from './pages/PageNotFound';
 import ProtectedRoute from './ui/ProtectedRoute';
-import TermsConditions from './features/TermsConditions';
+import TermsConditions from './pages/TermsConditions';
 import Footer from './ui/Footer';
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from './theme';

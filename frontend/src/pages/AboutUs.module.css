@@ -4,10 +4,6 @@
   font-size: 1.2rem;
 }
 
-.aboutUsContainer h1 {
-  font-size: 1.5rem;
-}
-
 .aboutUsContent {
   display: flex;
   flex-direction: column;

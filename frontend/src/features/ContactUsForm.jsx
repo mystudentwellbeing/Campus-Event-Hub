@@ -1,24 +1,26 @@
 import { useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { useForm, Controller } from 'react-hook-form';
 import emailjs from 'emailjs-com';
-import TermsConditions from '../features/TermsConditions';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import TermsConditions from '../ui/TermsConditionsContent';
 import Modal from '../ui/Modal';
 import Button from '../ui/Button';
 import styles from './ContactUsForm.module.css';
-import { toast } from 'react-hot-toast';
-import { useForm } from 'react-hook-form';
 
 const ContactUsForm = () => {
-  // const [name, setName] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [message, setMessage] = useState('');
-  // const [termsCondition, setTermsCondition] = useState('');
   const [isModalOpen, setModalOpen] = useState(false);
 
-  const { register, handleSubmit, formState: {errors}, reset } = useForm();
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
 
   const onSubmit = (data) => {
-    //event.preventDefault();
-
     const { name, email, message } = data;
 
     // this is the ids that I have in EmailJS
@@ -47,153 +49,275 @@ const ContactUsForm = () => {
       .catch((error) => {
         console.error('Error sending email:', error);
         toast.error(error.message);
-      })
-  }
+      });
+  };
 
   const handleReset = () => {
     reset();
-  }
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-
-    // this is the ids that I have in EmailJS
-    // const serviceID = 'service_8c4r4kd';
-    // const templateID = 'template_5vk37vn';
-    // const userID = 'DvB3W4EsoBtfY5Ljj';
-
-    // emailjs
-    //   .send(
-    //     serviceID,
-    //     templateID,
-    //     {
-    //       name: name,
-    //       email: email,
-    //       message: message,
-    //     },
-    //     userID
-    //   )
-
-    //   .then((response) => {
-    //     console.log('Email sent!', response);
-    //     toast.success('Form Submitted and Email Sent!');
-    //   })
-
-    //   .catch((error) => {
-    //     console.error('Error sending email:', error);
-    //     toast.error(error.message);
-    //   });
-
-    // handleReset();
-  // };
-
-  // const formRef = useRef(null);
-  // const handleReset = () => {
-  //   if (formRef.current) {
-  //     formRef.current.reset();
-  //     setName(''), setEmail(''), setMessage('');
-  //   }
-  // };
+  };
 
   return (
-    <div className={styles.submitContact}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <h3 className={styles.title}>Contact Us</h3>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className={styles.formContainer}>
-          <div>
-            <label>Name</label>
-            <input
-              type="textbox"
-              name="name"
-              {...register("name")}
-              // value={name}
-              // onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-          <div>
-            <label>Email</label>
-            <input
-              type="emial"
-              name="email"
-              {...register("email", {
-                required: 'Your email is required to submit',
-                pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/
-              })}
-              // value={email}
-              // onChange={(e) => setEmail(e.target.value)}
-              // required
-            />
-            {errors.email && (
-              <p className={styles.errorMsg}>{errors.email.message}</p>
-            )}
-            {errors.email && errors.email.type === "pattern" && (
-              <p className={styles.errorMsg}>Email is Not Valid</p>
-            )}
-          </div>
-          <div>
-            <label>Message</label>
-            <textarea
-              className={styles.formContainerTextarea}
-              name="message"
-              {...register("message", {
-                required: 'Your message is required to submit',
-              })}
-              // value={message}
-              // onChange={(e) => setMessage(e.target.value)}
-              // required
-            ></textarea>
-            {errors.message && (
-              <p className={styles.errorMsg}>{errors.message.message}</p>
-            )}
-          </div>
-        </div>
-        <div className={styles.formContainerTerms}>
-          <input
-            type="checkbox"
-            name="termsCondition"
-            // value="Terms and Conditions"
-            {...register("termsCondition", {
-              required: 'Please Check the Box to submit'
-            })}
-            // value={termsCondition}
-            // onChange={(e) => setTermsCondition(e.target.value)}
-            // required
+      <Controller
+        name="name"
+        control={control}
+        defaultValue=""
+        render={({ field }) => (
+          <TextField
+            {...field}
+            margin="normal"
+            fullWidth
+            id="name"
+            label="Name"
+            autoFocus
+            variant="filled"
           />
-          <label>
-            <a onClick={() => setModalOpen((show) => !show)}>
-              Terms and Conditions
-            </a>
-            {isModalOpen && (
-              <Modal
-                title="Terms and Conditions"
-                onClose={() => setModalOpen(false)}
-              >
-                <TermsConditions onCloseModal={() => setModalOpen(false)} />
-              </Modal>
-            )}
-          </label>
-          <div>
-          {errors.termsCondition && (
-              <p className={styles.errorMsg}>{errors.termsCondition.message}</p>
+        )}
+      />
+      <Controller
+        name="email"
+        control={control}
+        defaultValue=""
+        rules={{ required: true, pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/ }}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            margin="normal"
+            fullWidth
+            id="email"
+            label="Email Address"
+            autoFocus
+            type="email"
+            variant="filled"
+          />
+        )}
+      />
+      {errors.email && errors.email.type === 'required' && (
+        <div className={styles.errorMsg}>Email is required.</div>
+      )}
+      {errors.email && errors.email.type === 'pattern' && (
+        <div className={styles.errorMsg}>Email is not valid.</div>
+      )}
+      <Controller
+        name="message"
+        control={control}
+        defaultValue=""
+        rules={{ required: 'Your message is required to submit' }}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            margin="normal"
+            fullWidth
+            id="message"
+            label="message"
+            autoFocus
+            variant="filled"
+            multiline
+            rows={12}
+          />
+        )}
+      />
+      {errors.message && (
+        <p className={styles.errorMsg}>{errors.message.message}</p>
+      )}
+
+      <div className={styles.formContainerTerms}>
+        <Controller
+          name="termsCondition"
+          control={control}
+          defaultValue={false}
+          rules={{ required: 'Please Check the Box to submit' }}
+          render={({ field: { value, ...field } }) => (
+            <FormControlLabel
+              control={
+                <Checkbox
+                  {...field}
+                  checked={value}
+                  sx={{ '& .MuiSvgIcon-root': { fontSize: '2rem' } }}
+                />
+              }
+            />
           )}
-          </div>
+        />
+        <label>
+          <a onClick={() => setModalOpen((show) => !show)}>
+            Terms and Conditions
+          </a>
+          {isModalOpen && (
+            <Modal
+              title="Terms and Conditions"
+              onClose={() => setModalOpen(false)}
+            >
+              <TermsConditions onCloseModal={() => setModalOpen(false)} />
+            </Modal>
+          )}
+        </label>
+        <div>
+          {errors.termsCondition && (
+            <p className={styles.errorMsg}>{errors.termsCondition.message}</p>
+          )}
         </div>
-        
-        <div className={styles.formbtnContainer}>
-          <Button type="submit" className={styles.btnContact}>
-            Submit
-          </Button>
-          <Button
-            type="reset"
-            //onClick={reset}
-            className={styles.btnContact}
-            onClick={handleReset}
-          >
-            Cancel
-          </Button>
-        </div>
-      </form>
-    </div>
+      </div>
+
+      <div className={styles.formbtnContainer}>
+        <Button type="submit" className={styles.btnContact}>
+          Submit
+        </Button>
+        <Button
+          type="reset"
+          className={styles.btnContact}
+          onClick={handleReset}
+        >
+          Cancel
+        </Button>
+      </div>
+    </form>
   );
 };
 
 export default ContactUsForm;
+
+// import { useState } from 'react';
+// import { toast } from 'react-hot-toast';
+// import { useForm } from 'react-hook-form';
+// import emailjs from 'emailjs-com';
+
+// import TermsConditions from '../ui/TermsConditionsContent';
+// import Modal from '../ui/Modal';
+// import Button from '../ui/Button';
+// import styles from './ContactUsForm.module.css';
+
+// const ContactUsForm = () => {
+//   const [isModalOpen, setModalOpen] = useState(false);
+
+//   const {
+//     register,
+//     handleSubmit,
+//     formState: { errors },
+//     reset,
+//   } = useForm();
+
+//   const onSubmit = (data) => {
+//     const { name, email, message } = data;
+
+//     // this is the ids that I have in EmailJS
+//     const serviceID = 'service_8c4r4kd';
+//     const templateID = 'template_5vk37vn';
+//     const userID = 'DvB3W4EsoBtfY5Ljj';
+
+//     emailjs
+//       .send(
+//         serviceID,
+//         templateID,
+//         {
+//           name: name,
+//           email: email,
+//           message: message,
+//         },
+//         userID
+//       )
+
+//       .then((response) => {
+//         console.log('Email sent!', response);
+//         toast.success('Form Submitted and Email Sent!');
+//         reset();
+//       })
+
+//       .catch((error) => {
+//         console.error('Error sending email:', error);
+//         toast.error(error.message);
+//       });
+//   };
+
+//   const handleReset = () => {
+//     reset();
+//   };
+
+//   return (
+//     <div className={styles.submitContact}>
+//       <h3 className={styles.title}>Contact Us</h3>
+//       <form onSubmit={handleSubmit(onSubmit)}>
+//         <div className={styles.formContainer}>
+//           <div>
+//             <label>Name</label>
+//             <input type="textbox" name="name" {...register('name')} />
+//           </div>
+
+//           <div>
+//             <label>Email</label>
+//             <input
+//               type="emial"
+//               name="email"
+//               {...register('email', {
+//                 required: 'Your email is required to submit',
+//                 pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
+//               })}
+//             />
+//             {errors.email && (
+//               <p className={styles.errorMsg}>{errors.email.message}</p>
+//             )}
+//             {errors.email && errors.email.type === 'pattern' && (
+//               <p className={styles.errorMsg}>Email is Not Valid</p>
+//             )}
+//           </div>
+//           <div>
+//             <label>Message</label>
+//             <textarea
+//               className={styles.formContainerTextarea}
+//               name="message"
+//               {...register('message', {
+//                 required: 'Your message is required to submit',
+//               })}
+//             ></textarea>
+//             {errors.message && (
+//               <p className={styles.errorMsg}>{errors.message.message}</p>
+//             )}
+//           </div>
+//         </div>
+//         <div className={styles.formContainerTerms}>
+//           <input
+//             type="checkbox"
+//             name="termsCondition"
+//             {...register('termsCondition', {
+//               required: 'Please Check the Box to submit',
+//             })}
+//           />
+//           <label>
+//             <a onClick={() => setModalOpen((show) => !show)}>
+//               Terms and Conditions
+//             </a>
+//             {isModalOpen && (
+//               <Modal
+//                 title="Terms and Conditions"
+//                 onClose={() => setModalOpen(false)}
+//               >
+//                 <TermsConditions onCloseModal={() => setModalOpen(false)} />
+//               </Modal>
+//             )}
+//           </label>
+//           <div>
+//             {errors.termsCondition && (
+//               <p className={styles.errorMsg}>{errors.termsCondition.message}</p>
+//             )}
+//           </div>
+//         </div>
+
+//         <div className={styles.formbtnContainer}>
+//           <Button type="submit" className={styles.btnContact}>
+//             Submit
+//           </Button>
+//           <Button
+//             type="reset"
+//             className={styles.btnContact}
+//             onClick={handleReset}
+//           >
+//             Cancel
+//           </Button>
+//         </div>
+//       </form>
+//     </div>
+//   );
+// };
+
+// export default ContactUsForm;

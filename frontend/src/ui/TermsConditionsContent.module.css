@@ -1,0 +1,35 @@
+.termsContainer {
+  width: 90%;
+  padding: 2rem;
+  font-size: 1.3rem;
+  font-weight: 500;
+  border-top: 0.1rem solid var(--grey2);
+}
+
+.termsContainer h1 {
+  font-size: 2rem;
+}
+
+.termsContainer h3 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.termsContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.orderList {
+  margin: 1rem 3rem;
+  font-weight: 700;
+}
+
+.unorderList {
+  list-style-type: disc;
+  color: var(--black);
+  margin: 1rem;
+  padding-left: 2rem;
+  font-weight: 500;
+}

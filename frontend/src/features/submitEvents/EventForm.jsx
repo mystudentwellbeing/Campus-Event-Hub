@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useUser } from '../../features/authentication/useUser';
 import { useCreateEvent } from './useCreateEvent';
 import { useEditEvent } from './useEditEvent';
-import TermsConditions from '../TermsConditions';
+import TermsConditions from '../../pages/TermsConditions';
 import Modal from '../../ui/Modal';
 import Button from '../../ui/Button';
 import styles from './EventForm.module.css';
@@ -18,7 +18,14 @@ const EventForm = () => {
   const editId = eventToEdit?.id;
   const isEditSession = Boolean(editId);
 
-  const { register, handleSubmit, getValues, watch, reset, formState: {errors} } = useForm({
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm({
     defaultValues: isEditSession
       ? { ...eventToEdit, type: eventToEdit.type || [] }
       : { type: [] },
@@ -142,7 +149,7 @@ const EventForm = () => {
               className={styles.dropdownStyle}
               {...register('name_of_inst', {
                 required: 'This field is required',
-                })}
+              })}
             >
               <option value="">Select University</option>
               <option value="University_of_Manitoba">
@@ -155,7 +162,7 @@ const EventForm = () => {
             </select>
             {errors.name_of_inst && (
               <p className={styles.errorMsg}>{errors.name_of_inst.message}</p>
-            )}    
+            )}
           </div>
           <div>
             <label>Name of Event</label>
@@ -206,8 +213,9 @@ const EventForm = () => {
               disabled={isWorking}
               {...register('end_time', {
                 required: 'This field is required',
-                  validate: (value) => 
-                    getValues().start_time < value || "Event Should end after it Starts!",
+                validate: (value) =>
+                  getValues().start_time < value ||
+                  'Event Should end after it Starts!',
               })}
             />
             {errors.end_time && (
@@ -216,9 +224,7 @@ const EventForm = () => {
           </div>
         </div>
         <div>
-          <label className={styles.checkBoxHeading}>
-            Event Type
-          </label>
+          <label className={styles.checkBoxHeading}>Event Type</label>
           <div className={styles.formContainerCheckbox}>
             <div className={styles.checkboxRow}>
               <div>
@@ -228,7 +234,7 @@ const EventForm = () => {
                   id="ARTS"
                   value="ARTS"
                   {...register('type', {
-                    required: 'Please select at-least one event type'
+                    required: 'Please select at-least one event type',
                   })}
                 />
                 <label>ARTS</label>
@@ -254,8 +260,8 @@ const EventForm = () => {
                 <label>COMMUNITY</label>
               </div>
             </div>
-          {/* </div> */}
-          {/* <div className={styles.formContainerCheckbox}> */}
+            {/* </div> */}
+            {/* <div className={styles.formContainerCheckbox}> */}
             <div className={styles.checkboxRow}>
               <div>
                 <input
@@ -288,8 +294,8 @@ const EventForm = () => {
                 <label>FOOD</label>
               </div>
             </div>
-          {/* </div> */}
-          {/* <div className={styles.formContainerCheckbox}> */}
+            {/* </div> */}
+            {/* <div className={styles.formContainerCheckbox}> */}
             <div className={styles.checkboxRow}>
               <div>
                 <input
@@ -322,8 +328,8 @@ const EventForm = () => {
                 <label>NIGHTLIFE</label>
               </div>
             </div>
-          {/* </div> */}
-          {/* <div className={styles.formContainerCheckbox}> */}
+            {/* </div> */}
+            {/* <div className={styles.formContainerCheckbox}> */}
             <div className={styles.checkboxRow}>
               <div>
                 <input
@@ -388,78 +394,86 @@ const EventForm = () => {
               id="virtualLink"
               disabled={isWorking}
               {...register('virtual_link', {
-                required: "This field is required!",
+                required: 'This field is required!',
               })}
             />
-            {(eventFormat === "Virtual" || eventFormat === "Hybrid") &&
+            {(eventFormat === 'Virtual' || eventFormat === 'Hybrid') &&
               errors.virtual_link && (
                 <p className={styles.errorMsg}>{errors.virtual_link.message}</p>
-            )}
+              )}
           </div>
         </div>
-        {eventFormat !== "Virtual" && (
-        <>
-        <div className={styles.formContainer}>
-          <div>
-            <label>Name of Venue</label>
-            <input
-              type="text"
-              id="nameOfVenue"
-              disabled={isWorking}
-              {...register('name_of_venue', {
-                required: 'This field is required',
-              })}
-            />
-            {errors.name_of_venue && (
-              <p className={styles.errorMsg}>{errors.name_of_venue.message}</p>
-            )}
-          </div>
-          <div>
-          <label>Address(Street No.& Name) of Event</label>
-            <input
-              type="text"
-              id="address"
-              disabled={isWorking}
-              {...register('address', {
-                required: 'This field is required',
-              })}
-            />
-            {errors.name_of_venue && (
-              <p className={styles.errorMsg}>{errors.name_of_venue.message}</p>
-            )}
-          </div>
-        </div>
-        <div className={styles.formContainer}>
-          <div>
-            <label>City</label>
-            <input
-              type="text"
-              id="city"
-              disabled={isWorking}
-              {...register('city', {
-                required: 'This field is required',
-              })}
-            />
-            {errors.name_of_venue && (
-              <p className={styles.errorMsg}>{errors.name_of_venue.message}</p>
-            )}
-          </div>
-          <div>
-            <label>Postal Code</label>
-            <input
-              type="text"
-              id="postalCode"
-              disabled={isWorking}
-              {...register('postal_code', {
-                required: 'This field is required',
-              })}
-            />
-            {errors.name_of_venue && (
-              <p className={styles.errorMsg}>{errors.name_of_venue.message}</p>
-            )}
-          </div>
-        </div>
-        </>
+        {eventFormat !== 'Virtual' && (
+          <>
+            <div className={styles.formContainer}>
+              <div>
+                <label>Name of Venue</label>
+                <input
+                  type="text"
+                  id="nameOfVenue"
+                  disabled={isWorking}
+                  {...register('name_of_venue', {
+                    required: 'This field is required',
+                  })}
+                />
+                {errors.name_of_venue && (
+                  <p className={styles.errorMsg}>
+                    {errors.name_of_venue.message}
+                  </p>
+                )}
+              </div>
+              <div>
+                <label>Address(Street No.& Name) of Event</label>
+                <input
+                  type="text"
+                  id="address"
+                  disabled={isWorking}
+                  {...register('address', {
+                    required: 'This field is required',
+                  })}
+                />
+                {errors.name_of_venue && (
+                  <p className={styles.errorMsg}>
+                    {errors.name_of_venue.message}
+                  </p>
+                )}
+              </div>
+            </div>
+            <div className={styles.formContainer}>
+              <div>
+                <label>City</label>
+                <input
+                  type="text"
+                  id="city"
+                  disabled={isWorking}
+                  {...register('city', {
+                    required: 'This field is required',
+                  })}
+                />
+                {errors.name_of_venue && (
+                  <p className={styles.errorMsg}>
+                    {errors.name_of_venue.message}
+                  </p>
+                )}
+              </div>
+              <div>
+                <label>Postal Code</label>
+                <input
+                  type="text"
+                  id="postalCode"
+                  disabled={isWorking}
+                  {...register('postal_code', {
+                    required: 'This field is required',
+                  })}
+                />
+                {errors.name_of_venue && (
+                  <p className={styles.errorMsg}>
+                    {errors.name_of_venue.message}
+                  </p>
+                )}
+              </div>
+            </div>
+          </>
         )}
         <div className={styles.formContainer}>
           <div className={styles.formContainerSpecial}>
@@ -473,7 +487,9 @@ const EventForm = () => {
               })}
             />
             {errors.short_description && (
-              <p className={styles.errorMsg}>{errors.short_description.message}</p>
+              <p className={styles.errorMsg}>
+                {errors.short_description.message}
+              </p>
             )}
             <label>Price of Ticket</label>
             <input
@@ -489,7 +505,7 @@ const EventForm = () => {
             {errors.price && (
               <p className={styles.errorMsg}>{errors.price.message}</p>
             )}
-            {errors.price && errors.price.type === "min" && (
+            {errors.price && errors.price.type === 'min' && (
               <p className={styles.errorMsg}>Price must be 0 or more</p>
             )}
             <label>Image</label>
@@ -521,11 +537,11 @@ const EventForm = () => {
           </div>
         </div>
         <div className={styles.formContainerTerms}>
-          <input 
-            type="checkbox" 
+          <input
+            type="checkbox"
             id="termsCondition"
-            {...register("termsCondition", {
-              required: 'Please Check the Box to submit'
+            {...register('termsCondition', {
+              required: 'Please Check the Box to submit',
             })}
           />
           <label>
