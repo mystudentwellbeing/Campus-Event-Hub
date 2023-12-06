@@ -1,6 +1,6 @@
 .operationContainer {
   position: fixed;
-  top: 9.6rem;
+  top: 9.5rem;
   right: 0;
   left: 0;
   z-index: 2;
@@ -26,6 +26,9 @@
 }
 
 @media (min-width: 481px) and (max-width: 1023px) {
+  .operationContainer {
+    top: 9.63rem;
+  }
   .searchSortWrapper {
     flex-direction: row;
     justify-content: space-between;
@@ -38,6 +41,7 @@
     width: 100%;
     max-width: 1200px;
     margin: 1rem auto 0 auto;
+    top: 10.2rem;
   }
   .searchSortWrapper {
     flex-direction: row;

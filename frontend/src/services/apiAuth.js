@@ -7,6 +7,7 @@ export const getCurrentUser = async () => {
   const { data, error } = await supabase.auth.getUser();
 
   if (error) throw new Error(error.message);
+
   return data?.user;
 };
 
@@ -51,12 +52,20 @@ export const getAllUsers = async () => {
   return data;
 };
 
-export const updateCurrentUser = async ({ email, password }) => {
+export const updateUser = async ({ email, password }) => {
   let updateData = {};
   if (email) updateData.email = email;
   if (password) updateData.password = password;
 
   const { data, error } = await supabase.auth.updateUser(updateData);
+
+  if (error) throw new Error(error.message);
+
+  return data;
+};
+
+export const resetPassword = async ({ email }) => {
+  const { data, error } = await supabase.auth.resetPasswordForEmail(email);
 
   if (error) throw new Error(error.message);
 
@@ -70,9 +79,7 @@ export const deleteUser = async (id) => {
     .eq('id', id)
     .single();
 
-  if (error) {
-    console.error(error);
-    throw new Error('User could not be deleted');
-  }
+  if (error) throw new Error('User could not be deleted');
+
   return data;
 };

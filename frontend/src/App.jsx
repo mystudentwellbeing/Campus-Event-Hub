@@ -26,7 +26,6 @@ import TermsConditions from './features/TermsConditions';
 import Footer from './ui/Footer';
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from './theme';
-// import './App.css';
 
 function App() {
   const queryClient = new QueryClient({
@@ -109,7 +108,7 @@ function App() {
         containerStyle={{ margin: '8px' }}
         toastOptions={{
           success: {
-            duration: 3000,
+            duration: 4000,
           },
           error: {
             duration: 4000,

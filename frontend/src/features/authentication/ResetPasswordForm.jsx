@@ -1,7 +1,9 @@
 import { useForm, Controller } from 'react-hook-form';
-// import { useLogin } from './useLogin';
+import toast from 'react-hot-toast';
+import { useUpdateUser } from './useUpdateUser';
 import TextField from '@mui/material/TextField';
 import Button from '../../ui/Button';
+import styles from './ResetPasswordForm.module.css';
 
 const ResetPasswordForm = () => {
   const {
@@ -11,11 +13,33 @@ const ResetPasswordForm = () => {
     watch,
     control,
   } = useForm();
+  const { updateUser, isUpdating } = useUpdateUser();
 
   const password = watch('password');
 
+  const onSubmit = async (data, e) => {
+    const { password, passwordConfirm } = data;
+
+    if (password !== passwordConfirm) {
+      e.preventDefault();
+      toast.error('Passwords need to match');
+      return;
+    }
+    updateUser(
+      { password },
+      {
+        onSuccess: () => {
+          reset();
+        },
+      }
+    );
+  };
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className={styles.resetPasswordForm}
+    >
       <h3>Reset Your Password</h3>
       <Controller
         name="password"
@@ -29,7 +53,7 @@ const ResetPasswordForm = () => {
             fullWidth
             id="password"
             label="Password"
-            disabled={isLoading}
+            disabled={isUpdating}
             type="password"
             variant="outlined"
           />
@@ -63,7 +87,7 @@ const ResetPasswordForm = () => {
             fullWidth
             id="passwordConfirm"
             label="Confirm Password"
-            disabled={isLoading}
+            disabled={isUpdating}
             type="password"
             variant="outlined"
           />
@@ -83,7 +107,7 @@ const ResetPasswordForm = () => {
           <div className={styles.errorMsg}>Passwords do not match.</div>
         )}
 
-      <Button type="signup">Reset Password</Button>
+      <Button type="rectangle">Reset Password</Button>
     </form>
   );
 };

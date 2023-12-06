@@ -1,4 +1,5 @@
 import { useForm, Controller } from 'react-hook-form';
+import { useResetPassword } from './useResetPassword';
 import TextField from '@mui/material/TextField';
 import Button from '../../ui/Button';
 import styles from './ForgotPasswordForm.module.css';
@@ -11,12 +12,25 @@ const ForgotPasswordForm = () => {
     control,
   } = useForm();
 
+  const { resetPassword } = useResetPassword();
+
   const onSubmit = (data) => {
     const { email } = data;
+    resetPassword(
+      { email },
+      {
+        onSettled: () => {
+          reset();
+        },
+      }
+    );
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className={styles.forgotPasswordForm}
+    >
       <h3>
         Enter the email address associated with your account and you will
         receive an email with instructions on how to reset your password.
@@ -45,7 +59,7 @@ const ForgotPasswordForm = () => {
       {errors.email && errors.email.type === 'pattern' && (
         <div className={styles.errorMsg}>Email is not valid.</div>
       )}
-      <Button>SEND</Button>
+      <Button type="rectangle">SEND</Button>
     </form>
   );
 };

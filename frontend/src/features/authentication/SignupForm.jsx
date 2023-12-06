@@ -20,7 +20,7 @@ const SignupForm = () => {
 
   const onSubmit = (data) => {
     const { email, password, passwordConfirm } = data;
-    console.log(data);
+
     signup(
       { email, password, passwordConfirm },
       {

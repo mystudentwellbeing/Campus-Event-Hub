@@ -58,8 +58,8 @@
   justify-self: end;
 }
 
-.update,
-.submit,
-.reset {
+.rectangle {
+  width: 100%;
+  border-radius: 0.3rem;
   font-size: 1.2rem;
 }
