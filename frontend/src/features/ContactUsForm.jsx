@@ -5,6 +5,7 @@ import emailjs from 'emailjs-com';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import FormHelperText from '@mui/material/FormHelperText';
 import TermsConditions from '../ui/TermsConditionsContent';
 import Modal from '../ui/Modal';
 import Button from '../ui/Button';
@@ -16,7 +17,7 @@ const ContactUsForm = () => {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+
     reset,
   } = useForm();
 
@@ -79,8 +80,15 @@ const ContactUsForm = () => {
         name="email"
         control={control}
         defaultValue=""
-        rules={{ required: true, pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/ }}
-        render={({ field }) => (
+        rules={{
+          required: 'Email is required.',
+          validate: {
+            matchPattern: (v) =>
+              /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
+              'Email address must be a valid address',
+          },
+        }}
+        render={({ field, fieldState: { error } }) => (
           <TextField
             {...field}
             margin="normal"
@@ -90,21 +98,17 @@ const ContactUsForm = () => {
             autoFocus
             type="email"
             variant="filled"
+            error={!!error}
+            helperText={error ? error.message : ''}
           />
         )}
       />
-      {errors.email && errors.email.type === 'required' && (
-        <div className={styles.errorMsg}>Email is required.</div>
-      )}
-      {errors.email && errors.email.type === 'pattern' && (
-        <div className={styles.errorMsg}>Email is not valid.</div>
-      )}
       <Controller
         name="message"
         control={control}
         defaultValue=""
         rules={{ required: 'Your message is required to submit' }}
-        render={({ field }) => (
+        render={({ field, fieldState: { error } }) => (
           <TextField
             {...field}
             margin="normal"
@@ -115,49 +119,48 @@ const ContactUsForm = () => {
             variant="filled"
             multiline
             rows={12}
+            error={!!error}
+            helperText={error ? error.message : ''}
           />
         )}
       />
-      {errors.message && (
-        <p className={styles.errorMsg}>{errors.message.message}</p>
-      )}
 
-      <div className={styles.formContainerTerms}>
+      <div className={styles.termsWrapper}>
         <Controller
           name="termsCondition"
           control={control}
           defaultValue={false}
           rules={{ required: 'Please Check the Box to submit' }}
-          render={({ field: { value, ...field } }) => (
-            <FormControlLabel
-              control={
-                <Checkbox
-                  {...field}
-                  checked={value}
-                  sx={{ '& .MuiSvgIcon-root': { fontSize: '2rem' } }}
-                />
-              }
-            />
+          render={({ field: { value, ...field }, fieldState: { error } }) => (
+            <>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    {...field}
+                    checked={value}
+                    sx={{ '& .MuiSvgIcon-root': { fontSize: '2rem' } }}
+                  />
+                }
+                label={
+                  <a onClick={() => setModalOpen((show) => !show)}>
+                    Terms and Conditions
+                  </a>
+                }
+              />
+              {error && (
+                <FormHelperText error={!!error}>{error.message}</FormHelperText>
+              )}
+            </>
           )}
         />
-        <label>
-          <a onClick={() => setModalOpen((show) => !show)}>
-            Terms and Conditions
-          </a>
-          {isModalOpen && (
-            <Modal
-              title="Terms and Conditions"
-              onClose={() => setModalOpen(false)}
-            >
-              <TermsConditions onCloseModal={() => setModalOpen(false)} />
-            </Modal>
-          )}
-        </label>
-        <div>
-          {errors.termsCondition && (
-            <p className={styles.errorMsg}>{errors.termsCondition.message}</p>
-          )}
-        </div>
+        {isModalOpen && (
+          <Modal
+            title="Terms and Conditions"
+            onClose={() => setModalOpen(false)}
+          >
+            <TermsConditions onCloseModal={() => setModalOpen(false)} />
+          </Modal>
+        )}
       </div>
 
       <div className={styles.formbtnContainer}>

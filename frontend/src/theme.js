@@ -32,6 +32,28 @@ export const theme = createTheme({
         },
       },
     },
+    MuiFilledInput: {
+      styleOverrides: {
+        root: {
+          fontSize: '1.4rem',
+        },
+      },
+    },
+    MuiFormHelperText: {
+      styleOverrides: {
+        root: {
+          fontSize: '1.1rem',
+        },
+      },
+    },
+    MuiFormControlLabel: {
+      styleOverrides: {
+        label: {
+          fontSize: '1.2rem',
+        },
+      },
+    },
+
     MuiTab: {
       styleOverrides: {
         root: {
