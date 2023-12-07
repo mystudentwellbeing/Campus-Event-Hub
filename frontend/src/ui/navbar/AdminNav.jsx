@@ -48,7 +48,7 @@ const AdminNav = () => {
         <img src={logo} alt="my student wellbeing logo" />
       </Link>
       <Link to="/">
-        <h2>SEvent Hub</h2>
+        <h2>Event Hub</h2>
       </Link>
       <ul
         ref={dropdownRef}

@@ -53,7 +53,13 @@ export const theme = createTheme({
         },
       },
     },
-
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          fontSize: '1.5rem',
+        },
+      },
+    },
     MuiTab: {
       styleOverrides: {
         root: {

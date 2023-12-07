@@ -1,10 +1,24 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { useUser } from '../../features/authentication/useUser';
 import { useCreateEvent } from './useCreateEvent';
 import { useEditEvent } from './useEditEvent';
+import {
+  TextField,
+  FormControl,
+  FormControlLabel,
+  Checkbox,
+  InputLabel,
+  Select,
+  MenuItem,
+  FormHelperText,
+  OutlinedInput,
+  InputAdornment,
+  IconButton,
+} from '@mui/material';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import TermsConditions from '../../ui/TermsConditionsContent';
 import Modal from '../../ui/Modal';
 import Button from '../../ui/Button';
@@ -20,6 +34,7 @@ const EventForm = () => {
 
   const {
     register,
+    control,
     handleSubmit,
     getValues,
     watch,
@@ -31,12 +46,34 @@ const EventForm = () => {
       : { type: [] },
   });
 
-  //const { errors } = formState;
   const { user } = useUser();
   const { isCreating, createEvent } = useCreateEvent();
   const { isEditing, editEvent } = useEditEvent();
   const isWorking = isCreating || isEditing;
   const today = new Date();
+
+  const eventTypeOptions = [
+    'ARTS',
+    'CAMPUS',
+    'COMMUNITY',
+    'CULTURAL',
+    'EDUCATIONAL',
+    'FOOD',
+    'HOBBIES',
+    'NETWORKING',
+    'NIGHTLIFE',
+    'SPORTS',
+    'WELLBEING',
+    'OTHER',
+  ];
+
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleFileChange = (event) => {
+    if (event.target.files.length > 0) {
+      setSelectedFile(event.target.files[0]);
+    }
+  };
 
   const navigate = useNavigate();
 
@@ -78,499 +115,433 @@ const EventForm = () => {
   const eventFormat = watch('event_format');
 
   return (
-    <div>
-      <h3 className={styles.title}>Submit your event</h3>
-      <form onSubmit={handleSubmit(onSubmit, onError)}>
-        <div className={styles.formContainer}>
-          <div>
-            <label>Contact Name</label>
-            <input
-              type="text"
-              id="contactName"
-              disabled={isWorking}
-              {...register('contact_name', {
-                required: 'This field is required',
-              })}
-            />
-            {errors.contact_name && (
-              <p className={styles.errorMsg}>{errors.contact_name.message}</p>
-            )}
-          </div>
-          <div>
-            <label>Contact Phone #</label>
-            <input
-              type="text"
-              id="contactPhone"
-              disabled={isWorking}
-              {...register('contact_phone', {
-                required: 'This field is required',
-              })}
-            />
-            {errors.contact_phone && (
-              <p className={styles.errorMsg}>{errors.contact_phone.message}</p>
-            )}
-          </div>
-        </div>
-        <div className={styles.formContainer}>
-          <div>
-            <label>Contact Email</label>
-            <input
-              type="text"
-              id="contactEmail"
-              disabled={isWorking}
-              {...register('contact_email', {
-                required: 'This field is required',
-              })}
-            />
-            {errors.contact_email && (
-              <p className={styles.errorMsg}>{errors.contact_email.message}</p>
-            )}
-          </div>
-          <div>
-            <label>Name of Orgnization(Student Club)</label>
-            <input
-              type="text"
-              id="nameOfOrg"
-              disabled={isWorking}
-              {...register('name_of_org', {
-                required: 'This field is required',
-              })}
-            />
-            {errors.name_of_org && (
-              <p className={styles.errorMsg}>{errors.name_of_org.message}</p>
-            )}
-          </div>
-        </div>
-        <div className={styles.formContainer}>
-          <div>
-            <label>Name of Instituion</label>
-            <select
+    <form
+      onSubmit={handleSubmit(onSubmit, onError)}
+      className={styles.formContainer}
+    >
+      <TextField
+        id="contactName"
+        label="Contact Name"
+        type="text"
+        margin="normal"
+        fullWidth
+        disabled={isWorking}
+        {...register('contact_name', {
+          required: 'This field is required',
+        })}
+        error={!!errors.contact_name}
+        helperText={errors.contact_name ? errors.contact_name.message : ''}
+        variant="outlined"
+      />
+      <TextField
+        id="contactPhone"
+        label="Contact Phone"
+        type="text"
+        margin="normal"
+        fullWidth
+        disabled={isWorking}
+        {...register('contact_phone', {
+          required: 'This field is required',
+        })}
+        error={!!errors.contact_phone}
+        helperText={errors.contact_phone ? errors.contact_phone.message : ''}
+        variant="outlined"
+      />
+      <TextField
+        id="contactEmail"
+        label="Contact Email"
+        type="email"
+        margin="normal"
+        fullWidth
+        disabled={isWorking}
+        {...register('contact_email', {
+          required: 'This field is required',
+          pattern: {
+            value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+            message: 'Email address must be a valid address',
+          },
+        })}
+        error={!!errors.contact_email}
+        helperText={errors.contact_email ? errors.contact_email.message : ''}
+        variant="outlined"
+      />
+      <TextField
+        id="nameOfOrg"
+        label="Name of Organization (i.e. Student Club)"
+        type="text"
+        margin="normal"
+        fullWidth
+        disabled={isWorking}
+        {...register('name_of_org', {
+          required: 'This field is required',
+        })}
+        error={!!errors.name_of_org}
+        helperText={errors.name_of_org ? errors.name_of_org.message : ''}
+        variant="outlined"
+      />
+      <Controller
+        name="name_of_inst"
+        control={control}
+        defaultValue=""
+        rules={{
+          required: 'This field is required',
+        }}
+        render={({ field, fieldState: { error } }) => (
+          <FormControl
+            fullWidth
+            variant="outlined"
+            margin="normal"
+            error={!!error}
+          >
+            <InputLabel id="nameOfInst-label">Name of Institution</InputLabel>
+            <Select
+              {...field}
+              labelId="nameOfInst-label"
               id="nameOfInst"
-              className={styles.dropdownStyle}
-              {...register('name_of_inst', {
-                required: 'This field is required',
-              })}
+              label="Name of Institution"
             >
-              <option value="">Select University</option>
-              <option value="University_of_Manitoba">
+              <MenuItem value="">
+                <em>Select University</em>
+              </MenuItem>
+              <MenuItem value="University_of_Manitoba">
                 University of Manitoba
-              </option>
-              <option value="University_of_Winnipeg">
+              </MenuItem>
+              <MenuItem value="University_of_Winnipeg">
                 University of Winnipeg
-              </option>
-              <option value="Other">Other</option>
-            </select>
-            {errors.name_of_inst && (
-              <p className={styles.errorMsg}>{errors.name_of_inst.message}</p>
-            )}
+              </MenuItem>
+              <MenuItem value="Other">Other</MenuItem>
+            </Select>
+            <FormHelperText>{error ? error.message : ''}</FormHelperText>
+          </FormControl>
+        )}
+      />
+      <TextField
+        id="name"
+        label="Name of Event"
+        type="text"
+        margin="normal"
+        fullWidth
+        disabled={isWorking}
+        {...register('name', {
+          required: 'This field is required',
+        })}
+        error={!!errors.name}
+        helperText={errors.name ? errors.name.message : ''}
+        variant="outlined"
+      />
+      <div className={styles.eventTypeContainer}>
+        <label className={styles.eventTypeLabel}>Event Type</label>
+        <FormControl component="fieldset" error={!!errors.type}>
+          <div className={styles.eventTypeBox}>
+            {eventTypeOptions.map((option) => (
+              <FormControlLabel
+                key={option}
+                control={
+                  <Checkbox
+                    value={option}
+                    {...register('type', {
+                      required: 'Please select at least one event type',
+                    })}
+                  />
+                }
+                label={option}
+              />
+            ))}
           </div>
-          <div>
-            <label>Name of Event</label>
-            <input
-              type="text"
-              id="nameOfEvent"
-              disabled={isWorking}
-              {...register('name', {
-                required: 'This field is required',
-              })}
-            />
-            {errors.name && (
-              <p className={styles.errorMsg}>{errors.name.message}</p>
-            )}
-          </div>
-        </div>
-        <div className={styles.formContainer}>
-          <div>
-            <label>Date</label>
-            <input
-              type="date"
-              id="date"
-              disabled={isWorking}
-              {...register('date', {
-                required: 'This field is required',
-              })}
-              min={today.toISOString().split('T')[0]}
-            />
-            {errors.date && (
-              <p className={styles.errorMsg}>{errors.date.message}</p>
-            )}
-          </div>
-          <div>
-            <label>Event Start & End Time</label>
-            <input
-              type="time"
-              id="startTime"
-              {...register('start_time', {
-                required: 'This field is required',
-              })}
-            />
-            {errors.start_time && (
-              <p className={styles.errorMsg}>{errors.start_time.message}</p>
-            )}
-            <input
-              type="time"
-              id="endTime"
-              disabled={isWorking}
-              {...register('end_time', {
-                required: 'This field is required',
-                validate: (value) =>
-                  getValues().start_time < value ||
-                  'Event Should end after it Starts!',
-              })}
-            />
-            {errors.end_time && (
-              <p className={styles.errorMsg}>{errors.end_time.message}</p>
-            )}
-          </div>
-        </div>
-        <div>
-          <label className={styles.checkBoxHeading}>Event Type</label>
-          <div className={styles.formContainerCheckbox}>
-            <div className={styles.checkboxRow}>
-              <div>
-                <input
-                  type="checkbox"
-                  name="eventType"
-                  id="ARTS"
-                  value="ARTS"
-                  {...register('type', {
-                    required: 'Please select at-least one event type',
-                  })}
-                />
-                <label>ARTS</label>
-              </div>
-              <div>
-                <input
-                  type="checkbox"
-                  name="eventType"
-                  id="CAMPUS"
-                  value="CAMPUS"
-                  {...register('type')}
-                />
-                <label>CAMPUS</label>
-              </div>
-              <div>
-                <input
-                  type="checkbox"
-                  name="eventType"
-                  id="COMMUNITY"
-                  value="COMMUNITY"
-                  {...register('type')}
-                />
-                <label>COMMUNITY</label>
-              </div>
-            </div>
-            {/* </div> */}
-            {/* <div className={styles.formContainerCheckbox}> */}
-            <div className={styles.checkboxRow}>
-              <div>
-                <input
-                  type="checkbox"
-                  name="eventType"
-                  id="CULTURAL"
-                  value="CULTURAL"
-                  {...register('type')}
-                />
-                <label>CULTURAL</label>
-              </div>
-              <div>
-                <input
-                  type="checkbox"
-                  name="eventType"
-                  id="EDUCATIONAL"
-                  value="EDUCATIONAL"
-                  {...register('type')}
-                />
-                <label>EDUCATIONAL</label>
-              </div>
-              <div>
-                <input
-                  type="checkbox"
-                  name="eventType"
-                  id="FOOD"
-                  value="FOOD"
-                  {...register('type')}
-                />
-                <label>FOOD</label>
-              </div>
-            </div>
-            {/* </div> */}
-            {/* <div className={styles.formContainerCheckbox}> */}
-            <div className={styles.checkboxRow}>
-              <div>
-                <input
-                  type="checkbox"
-                  name="eventType"
-                  id="HOBBIES"
-                  value="HOBBIES"
-                  {...register('type')}
-                />
-                <label>HOBBIES</label>
-              </div>
-              <div>
-                <input
-                  type="checkbox"
-                  name="eventType"
-                  id="NETWORKING"
-                  value="NETWORKING"
-                  {...register('type')}
-                />
-                <label>NETWORKING</label>
-              </div>
-              <div>
-                <input
-                  type="checkbox"
-                  name="eventType"
-                  id="NIGHTLIFE"
-                  value="NIGHTLIFE"
-                  {...register('type')}
-                />
-                <label>NIGHTLIFE</label>
-              </div>
-            </div>
-            {/* </div> */}
-            {/* <div className={styles.formContainerCheckbox}> */}
-            <div className={styles.checkboxRow}>
-              <div>
-                <input
-                  type="checkbox"
-                  name="eventType"
-                  id="SPORTS"
-                  value="SPORTS"
-                  {...register('type')}
-                />
-                <label>SPORTS</label>
-              </div>
-              <div>
-                <input
-                  type="checkbox"
-                  name="eventType"
-                  id="WELLBEING"
-                  value="WELLBEING"
-                  {...register('type')}
-                />
-                <label>WELLBEING</label>
-              </div>
-              <div>
-                <input
-                  type="checkbox"
-                  name="eventType"
-                  id="OTHER"
-                  value="OTHER"
-                  {...register('type')}
-                />
-                <label>OTHER</label>
-              </div>
-            </div>
-          </div>
-          {errors.type && (
-            <p className={styles.errorMsgType}>{errors.type.message}</p>
+          <FormHelperText>
+            {errors.type ? errors.type.message : ''}
+          </FormHelperText>
+        </FormControl>
+      </div>
+
+      <div className={styles.timeWrapper}>
+        <TextField
+          id="startTime"
+          label="Event Start Time"
+          type="time"
+          margin="normal"
+          fullWidth
+          disabled={isWorking}
+          {...register('start_time', {
+            required: 'This field is required',
+          })}
+          error={!!errors.start_time}
+          helperText={errors.start_time ? errors.start_time.message : ''}
+          variant="outlined"
+          InputLabelProps={{ shrink: true }}
+        />
+        <TextField
+          id="endTime"
+          label="Event End Time"
+          type="time"
+          margin="normal"
+          fullWidth
+          disabled={isWorking}
+          {...register('end_time', {
+            required: 'This field is required',
+            validate: (value) =>
+              getValues('start_time') < value ||
+              'Event should end after it starts!',
+          })}
+          error={!!errors.end_time}
+          helperText={errors.end_time ? errors.end_time.message : ''}
+          variant="outlined"
+          InputLabelProps={{ shrink: true }}
+        />
+      </div>
+      <TextField
+        id="date"
+        label="Date"
+        type="date"
+        margin="normal"
+        fullWidth
+        disabled={isWorking}
+        {...register('date', {
+          required: 'This field is required',
+        })}
+        error={!!errors.date}
+        helperText={errors.date ? errors.date.message : ''}
+        variant="outlined"
+        InputLabelProps={{ shrink: true }}
+        InputProps={{
+          inputProps: { min: today.toISOString().split('T')[0] },
+        }}
+      />
+
+      <FormControl
+        fullWidth
+        variant="outlined"
+        margin="normal"
+        error={!!errors.event_format}
+      >
+        <InputLabel id="eventFormat-label">Event Format</InputLabel>
+        <Select
+          labelId="eventFormat-label"
+          id="eventFormat"
+          label="Event Format"
+          disabled={isWorking}
+          {...register('event_format', {
+            required: 'This field is required',
+          })}
+        >
+          <MenuItem value="">
+            <em>Select Event Format</em>
+          </MenuItem>
+          <MenuItem value="Virtual">Virtual</MenuItem>
+          <MenuItem value="In-person">In-person</MenuItem>
+          <MenuItem value="Hybrid">Hybrid</MenuItem>
+        </Select>
+        <FormHelperText>
+          {errors.event_format ? errors.event_format.message : ''}
+        </FormHelperText>
+      </FormControl>
+      {['Virtual', 'Hybrid'].includes(eventFormat) && (
+        <TextField
+          margin="normal"
+          fullWidth
+          id="virtualLink"
+          label="If virtual - virtual link"
+          type="text"
+          disabled={isWorking}
+          {...register('virtual_link', {
+            required: 'This field is required!',
+          })}
+          error={!!errors.virtual_link}
+          helperText={errors.virtual_link ? errors.virtual_link.message : ''}
+          variant="outlined"
+        />
+      )}
+      {eventFormat !== 'Virtual' && (
+        <>
+          <TextField
+            margin="normal"
+            fullWidth
+            id="nameOfVenue"
+            label="Name of Venue"
+            type="text"
+            disabled={isWorking}
+            {...register('name_of_venue', {
+              required: 'This field is required',
+            })}
+            error={!!errors.name_of_venue}
+            helperText={
+              errors.name_of_venue ? errors.name_of_venue.message : ''
+            }
+            variant="outlined"
+          />
+
+          <TextField
+            margin="normal"
+            fullWidth
+            id="address"
+            label="Address(Street No.& Name) of Event"
+            type="text"
+            disabled={isWorking}
+            {...register('address', {
+              required: 'This field is required',
+            })}
+            error={!!errors.address}
+            helperText={errors.address ? errors.address.message : ''}
+            variant="outlined"
+          />
+
+          <TextField
+            margin="normal"
+            fullWidth
+            id="city"
+            label="City"
+            type="text"
+            disabled={isWorking}
+            {...register('city', {
+              required: 'This field is required',
+            })}
+            error={!!errors.city}
+            helperText={errors.city ? errors.city.message : ''}
+            variant="outlined"
+          />
+
+          <TextField
+            margin="normal"
+            fullWidth
+            id="postalCode"
+            label="Postal Code"
+            type="text"
+            disabled={isWorking}
+            {...register('postal_code', {
+              required: 'This field is required',
+            })}
+            error={!!errors.postal_code}
+            helperText={errors.postal_code ? errors.postal_code.message : ''}
+            variant="outlined"
+          />
+        </>
+      )}
+      <TextField
+        margin="normal"
+        fullWidth
+        id="price"
+        label="Price of Ticket"
+        type="number"
+        disabled={isWorking}
+        {...register('price', {
+          required: 'This field is required',
+          min: { value: 0, message: 'Price must be 0 or more' },
+          step: '0.01',
+        })}
+        error={!!errors.price}
+        helperText={errors.price ? errors.price.message : ''}
+        variant="outlined"
+        inputProps={{ step: '0.01' }}
+      />
+      <TextField
+        id="shortDesc"
+        label="Short Description (150 characters)"
+        type="text"
+        margin="normal"
+        fullWidth
+        disabled={isWorking}
+        {...register('short_description', {
+          required: 'This field is required',
+        })}
+        error={!!errors.short_description}
+        helperText={
+          errors.short_description ? errors.short_description.message : ''
+        }
+        inputProps={{ maxLength: 150 }}
+        variant="outlined"
+      />
+      <TextField
+        id="desc"
+        label="Description of Event"
+        multiline
+        rows={6}
+        fullWidth
+        margin="normal"
+        disabled={isWorking}
+        {...register('description', {
+          required: 'This field is required',
+        })}
+        error={!!errors.description}
+        helperText={errors.description ? errors.description.message : ''}
+        variant="outlined"
+      />
+      <div className={styles.termsButtonWrapper}>
+        <FormControl
+          fullWidth
+          variant="outlined"
+          error={!!errors.image}
+          style={{ marginTop: '1.5rem', marginBottom: '0.75rem' }}
+        >
+          <InputLabel htmlFor="outlined-adornment-image">Image</InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-image"
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="file upload"
+                  edge="end"
+                  component="label"
+                  style={{ marginRight: '1rem' }}
+                >
+                  <input
+                    type="file"
+                    hidden
+                    accept="image/*"
+                    onChange={handleFileChange}
+                    {...register('image', {
+                      required: isEditSession
+                        ? false
+                        : 'This field is required',
+                    })}
+                  />
+                  <CloudUploadIcon fontSize="large" />
+                </IconButton>
+              </InputAdornment>
+            }
+            label="Image"
+            value={selectedFile ? selectedFile.name : ''}
+          />
+          {errors.image && (
+            <FormHelperText>{errors.image.message}</FormHelperText>
+          )}
+        </FormControl>
+
+        <div className={styles.termsWrapper}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                {...register('termsCondition', {
+                  required: 'Please Check the Box to submit',
+                })}
+                sx={{ '& .MuiSvgIcon-root': { fontSize: '2rem' } }}
+              />
+            }
+            label={
+              <a onClick={() => setModalOpen((show) => !show)}>
+                Terms and Conditions
+              </a>
+            }
+          />
+          {errors.termsCondition && (
+            <FormHelperText error>
+              {errors.termsCondition.message}
+            </FormHelperText>
+          )}
+          {isModalOpen && (
+            <Modal
+              title="Terms and Conditions"
+              onClose={() => setModalOpen(false)}
+            >
+              <TermsConditions onCloseModal={() => setModalOpen(false)} />
+            </Modal>
           )}
         </div>
-        <div className={styles.formContainer}>
-          <div>
-            <label>Event Format</label>
-            <select
-              id="eventFormat"
-              className={styles.dropdownStyle}
-              disabled={isWorking}
-              {...register('event_format', {
-                required: 'This field is required',
-              })}
-            >
-              <option value="">Select Event Format</option>
-              <option value="Virtual">Virtual</option>
-              <option value="In-person">In-person</option>
-              <option value="Hybrid">Hybrid</option>
-            </select>
-            {errors.event_format && (
-              <p className={styles.errorMsg}>{errors.event_format.message}</p>
-            )}
-          </div>
-          <div>
-            <label>If virtual - virtual link</label>
-            <input
-              type="text"
-              id="virtualLink"
-              disabled={isWorking}
-              {...register('virtual_link', {
-                required: 'This field is required!',
-              })}
-            />
-            {(eventFormat === 'Virtual' || eventFormat === 'Hybrid') &&
-              errors.virtual_link && (
-                <p className={styles.errorMsg}>{errors.virtual_link.message}</p>
-              )}
-          </div>
-        </div>
-        {eventFormat !== 'Virtual' && (
-          <>
-            <div className={styles.formContainer}>
-              <div>
-                <label>Name of Venue</label>
-                <input
-                  type="text"
-                  id="nameOfVenue"
-                  disabled={isWorking}
-                  {...register('name_of_venue', {
-                    required: 'This field is required',
-                  })}
-                />
-                {errors.name_of_venue && (
-                  <p className={styles.errorMsg}>
-                    {errors.name_of_venue.message}
-                  </p>
-                )}
-              </div>
-              <div>
-                <label>Address(Street No.& Name) of Event</label>
-                <input
-                  type="text"
-                  id="address"
-                  disabled={isWorking}
-                  {...register('address', {
-                    required: 'This field is required',
-                  })}
-                />
-                {errors.name_of_venue && (
-                  <p className={styles.errorMsg}>
-                    {errors.name_of_venue.message}
-                  </p>
-                )}
-              </div>
-            </div>
-            <div className={styles.formContainer}>
-              <div>
-                <label>City</label>
-                <input
-                  type="text"
-                  id="city"
-                  disabled={isWorking}
-                  {...register('city', {
-                    required: 'This field is required',
-                  })}
-                />
-                {errors.name_of_venue && (
-                  <p className={styles.errorMsg}>
-                    {errors.name_of_venue.message}
-                  </p>
-                )}
-              </div>
-              <div>
-                <label>Postal Code</label>
-                <input
-                  type="text"
-                  id="postalCode"
-                  disabled={isWorking}
-                  {...register('postal_code', {
-                    required: 'This field is required',
-                  })}
-                />
-                {errors.name_of_venue && (
-                  <p className={styles.errorMsg}>
-                    {errors.name_of_venue.message}
-                  </p>
-                )}
-              </div>
-            </div>
-          </>
-        )}
-        <div className={styles.formContainer}>
-          <div className={styles.formContainerSpecial}>
-            <label>Short Description(150 characters)</label>
-            <input
-              type="text"
-              id="shortDesc"
-              disabled={isWorking}
-              {...register('short_description', {
-                required: 'This field is required',
-              })}
-            />
-            {errors.short_description && (
-              <p className={styles.errorMsg}>
-                {errors.short_description.message}
-              </p>
-            )}
-            <label>Price of Ticket</label>
-            <input
-              type="number"
-              id="price"
-              disabled={isWorking}
-              {...register('price', {
-                required: 'This field is required',
-                min: '0',
-                step: '0.01',
-              })}
-            />
-            {errors.price && (
-              <p className={styles.errorMsg}>{errors.price.message}</p>
-            )}
-            {errors.price && errors.price.type === 'min' && (
-              <p className={styles.errorMsg}>Price must be 0 or more</p>
-            )}
-            <label>Image</label>
-            <input
-              type="file"
-              id="image"
-              accept="image/*"
-              {...register('image', {
-                required: isEditSession ? false : 'This field is required',
-              })}
-            />
-            {errors.image && (
-              <p className={styles.errorMsg}>{errors.image.message}</p>
-            )}
-          </div>
-          <div>
-            <label>Description of Event</label>
-            <textarea
-              className={styles.formContainerTextarea}
-              id="desc"
-              disabled={isWorking}
-              {...register('description', {
-                required: 'This field is required',
-              })}
-            ></textarea>
-            {errors.description && (
-              <p className={styles.errorMsg}>{errors.description.message}</p>
-            )}
-          </div>
-        </div>
-        <div className={styles.formContainerTerms}>
-          <input
-            type="checkbox"
-            id="termsCondition"
-            {...register('termsCondition', {
-              required: 'Please Check the Box to submit',
-            })}
-          />
-          <label>
-            <a onClick={() => setModalOpen((show) => !show)}>
-              Terms and Conditions
-            </a>
-            {isModalOpen && (
-              <Modal
-                title="Terms and Conditions"
-                onClose={() => setModalOpen(false)}
-              >
-                <TermsConditions onCloseModal={() => setModalOpen(false)} />
-              </Modal>
-            )}
-          </label>
-          {/* {errors.termsCondition && (
-              <p className={styles.errorMsg}>{errors.termsCondition.message}</p>
-          )} */}
-        </div>
-        {errors.termsCondition && (
-          <p className={styles.errorMsgBox}>{errors.termsCondition.message}</p>
-        )}
-        <div className={styles.formContainer}>
-          <Button type="submit" className={styles.btnEvents}>
+        <div className={styles.buttonWrapper}>
+          <Button type="submit">
             {isEditSession ? 'Edit Event' : 'Submit Event'}
           </Button>
           <Button
             type="reset"
-            className={styles.btnEvents}
             onClick={(e) => {
               e.preventDefault();
               navigate(-1);
@@ -579,8 +550,8 @@ const EventForm = () => {
             Cancel
           </Button>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   );
 };
 
