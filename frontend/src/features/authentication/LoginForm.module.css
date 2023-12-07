@@ -9,14 +9,6 @@
   border: 0.1rem solid var(--grey2);
 }
 
-.errorMsg {
-  color: red;
-  font-size: 1.2rem;
-  align-self: normal;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
 .linkWrapper {
   display: flex;
   width: 100%;

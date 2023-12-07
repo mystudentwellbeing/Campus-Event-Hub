@@ -55,7 +55,6 @@ const ContactUsForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <h3 className={styles.title}>Contact Us</h3>
       <Controller
         name="name"
         control={control}
@@ -159,13 +158,13 @@ const ContactUsForm = () => {
         )}
       </div>
 
-      <div className={styles.formbtnContainer}>
-        <Button type="submit" className={styles.btnContact}>
+      <div className={styles.buttonWrapper}>
+        <Button type="submit" className={styles.contactButton}>
           Submit
         </Button>
         <Button
           type="reset"
-          className={styles.btnContact}
+          className={styles.contactButton}
           onClick={handleReset}
         >
           Cancel

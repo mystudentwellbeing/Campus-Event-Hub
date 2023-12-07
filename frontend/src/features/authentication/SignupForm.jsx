@@ -8,13 +8,7 @@ import styles from './SignupForm.module.css';
 const SignupForm = () => {
   const { signup, isLoading } = useSignup();
 
-  const {
-    handleSubmit,
-    formState: { errors },
-    reset,
-    watch,
-    control,
-  } = useForm();
+  const { handleSubmit, reset, watch, control } = useForm();
 
   const password = watch('password'); // Get the value of the password field
 
@@ -37,8 +31,15 @@ const SignupForm = () => {
         name="email"
         control={control}
         defaultValue=""
-        rules={{ required: true, pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/ }}
-        render={({ field }) => (
+        rules={{
+          required: 'Email is required.',
+          validate: {
+            matchPattern: (v) =>
+              /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
+              'Email address must be a valid address',
+          },
+        }}
+        render={({ field, fieldState: { error } }) => (
           <TextField
             {...field}
             margin="normal"
@@ -49,22 +50,23 @@ const SignupForm = () => {
             disabled={isLoading}
             type="email"
             variant="outlined"
+            error={!!error}
+            helperText={error ? error.message : ''}
           />
         )}
       />
-      {errors.email && errors.email.type === 'required' && (
-        <div className={styles.errorMsg}>Email is required.</div>
-      )}
-      {errors.email && errors.email.type === 'pattern' && (
-        <div className={styles.errorMsg}>Email is not valid.</div>
-      )}
-
       <Controller
         name="password"
         control={control}
         defaultValue=""
-        rules={{ required: true, minLength: 6 }}
-        render={({ field }) => (
+        rules={{
+          required: 'Password is required.',
+          minLength: {
+            value: 6,
+            message: 'Password should be at least 6 characters.',
+          },
+        }}
+        render={({ field, fieldState: { error } }) => (
           <TextField
             {...field}
             margin="normal"
@@ -74,31 +76,23 @@ const SignupForm = () => {
             disabled={isLoading}
             type="password"
             variant="outlined"
+            error={!!error}
+            helperText={error ? error.message : ''}
           />
         )}
       />
-      {errors.password && errors.password.type === 'required' && (
-        <div className={styles.errorMsg}>Password is required.</div>
-      )}
-      {errors.password && errors.password.type === 'minLength' && (
-        <div className={styles.errorMsg}>
-          Password should be at-least 6 characters.
-        </div>
-      )}
-
       <Controller
         name="passwordConfirm"
         control={control}
         defaultValue=""
         rules={{
-          required: true,
-          minLength: 6,
+          required: 'Confirm Password is required.',
           validate: {
             matchesPassword: (value) =>
-              value === password || 'Passwords do not match',
+              value === password || 'Passwords do not match.',
           },
         }}
-        render={({ field }) => (
+        render={({ field, fieldState: { error } }) => (
           <TextField
             {...field}
             margin="normal"
@@ -108,23 +102,11 @@ const SignupForm = () => {
             disabled={isLoading}
             type="password"
             variant="outlined"
+            error={!!error}
+            helperText={error ? error.message : ''}
           />
         )}
       />
-      {errors.passwordConfirm && errors.passwordConfirm.type === 'required' && (
-        <div className={styles.errorMsg}>Confirm Password is required.</div>
-      )}
-      {errors.passwordConfirm &&
-        errors.passwordConfirm.type === 'minLength' && (
-          <div className={styles.errorMsg}>
-            Your Confirm Password should be same as password.
-          </div>
-        )}
-      {errors.passwordConfirm &&
-        errors.passwordConfirm.type === 'matchesPassword' && (
-          <div className={styles.errorMsg}>Passwords do not match.</div>
-        )}
-
       <Button type="rectangle">Creat Account</Button>
       <div className={styles.linkWrapper}>
         <p>Already a member?</p>
