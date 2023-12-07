@@ -27,25 +27,3 @@
   font-size: 1.2rem;
   width: 8rem;
 }
-
-.errorMsg {
-  color: red;
-  font-size: 1.2rem;
-  font-weight: 500;
-  align-self: normal;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-@media only screen and (max-width: 550px) {
-  /* .submitContact, */
-
-  .submitContact form {
-    width: 35rem;
-  }
-
-  .formContainer div input,
-  .formContainerTextarea {
-    width: 30rem;
-  }
-}

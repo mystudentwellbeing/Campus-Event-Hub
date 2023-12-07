@@ -14,12 +14,7 @@ import styles from './ContactUsForm.module.css';
 const ContactUsForm = () => {
   const [isModalOpen, setModalOpen] = useState(false);
 
-  const {
-    control,
-    handleSubmit,
-
-    reset,
-  } = useForm();
+  const { control, handleSubmit, reset } = useForm();
 
   const onSubmit = (data) => {
     const { name, email, message } = data;

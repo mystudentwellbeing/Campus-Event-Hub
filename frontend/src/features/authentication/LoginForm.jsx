@@ -8,12 +8,7 @@ import styles from './LoginForm.module.css';
 const LoginForm = () => {
   const { login, isLoading } = useLogin();
 
-  const {
-    handleSubmit,
-    formState: { errors },
-    reset,
-    control,
-  } = useForm();
+  const { handleSubmit, reset, control } = useForm();
 
   const onSubmit = (data) => {
     const { email, password } = data;
@@ -33,8 +28,15 @@ const LoginForm = () => {
         name="email"
         control={control}
         defaultValue=""
-        rules={{ required: true, pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/ }}
-        render={({ field }) => (
+        rules={{
+          required: 'Email is required.',
+          validate: {
+            matchPattern: (v) =>
+              /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
+              'Email address must be a valid address',
+          },
+        }}
+        render={({ field, fieldState: { error } }) => (
           <TextField
             {...field}
             margin="normal"
@@ -45,22 +47,18 @@ const LoginForm = () => {
             disabled={isLoading}
             type="email"
             variant="outlined"
+            error={!!error}
+            helperText={error ? error.message : ''}
           />
         )}
       />
-      {errors.email && errors.email.type === 'required' && (
-        <div className={styles.errorMsg}>Email is required.</div>
-      )}
-      {errors.email && errors.email.type === 'pattern' && (
-        <div className={styles.errorMsg}>Email is not valid.</div>
-      )}
 
       <Controller
         name="password"
         control={control}
         defaultValue=""
-        rules={{ required: true }}
-        render={({ field }) => (
+        rules={{ required: 'Password is required.' }}
+        render={({ field, fieldState: { error } }) => (
           <TextField
             {...field}
             margin="normal"
@@ -70,12 +68,12 @@ const LoginForm = () => {
             disabled={isLoading}
             type="password"
             variant="outlined"
+            error={!!error}
+            helperText={error ? error.message : ''}
           />
         )}
       />
-      {errors.password && errors.password.type === 'required' && (
-        <div className={styles.errorMsg}>Password is required.</div>
-      )}
+
       <Button type="rectangle">Log In</Button>
       <div className={styles.linkWrapper}>
         <Link to="/forgotpassword">Forgot password?</Link>
