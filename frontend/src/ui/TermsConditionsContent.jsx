@@ -3,7 +3,7 @@ import styles from './TermsConditionsContent.module.css';
 const TermsConditionsContent = () => {
   return (
     <section className={styles.termsContainer}>
-      <h1>Terms of Use</h1>
+      <h2>Terms of Use</h2>
       <h3>Last Updated: December 1, 2023</h3>
       <div className={styles.termsContent}>
         <p>
@@ -186,7 +186,7 @@ const TermsConditionsContent = () => {
       </div>
       <br />
       <br />
-      <h1>Privacy Policy</h1>
+      <h2>Privacy Policy</h2>
       <h3>Last Updated: December 1, 2023</h3>
       <div className={styles.termsContent}>
         <p>

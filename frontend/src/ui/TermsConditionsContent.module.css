@@ -1,13 +1,14 @@
 .termsContainer {
-  width: 90%;
+  width: 100%;
   padding: 2rem;
   font-size: 1.3rem;
   font-weight: 500;
   border-top: 0.1rem solid var(--grey2);
 }
 
-.termsContainer h1 {
+.termsContainer h2 {
   font-size: 2rem;
+  color: var(--darkblue);
 }
 
 .termsContainer h3 {
