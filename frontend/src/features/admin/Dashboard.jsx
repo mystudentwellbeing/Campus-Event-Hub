@@ -9,6 +9,7 @@ import {
   countEventsBySchool,
 } from '../../utils/helpers';
 import useAllEvents from './useAllEvents';
+import usePendingEventsCount from './usePendingEventsCount';
 import useUsers from './useUsers';
 import useEventLikes from './useEventLikes';
 import StatBox from '../../ui/StatBox';
@@ -17,18 +18,18 @@ import styles from './Dashboard.module.css';
 
 const Dashboard = () => {
   const { isLoading: isLoading1, events, error1 } = useAllEvents();
-  const { isLoading: isLoading2, users, error2 } = useUsers();
-  const { isLoading: isLoading3, eventLikes, error3 } = useEventLikes();
+  const { isLoading: isLoading2, count, error2 } = usePendingEventsCount();
+  const { isLoading: isLoading3, users, error3 } = useUsers();
+  const { isLoading: isLoading4, eventLikes, error4 } = useEventLikes();
   const { firstDayOfMonth, lastDayOfMonth } = getCurrentMonthDateRange();
   const now = new Date();
 
-  if (isLoading1 || isLoading2 || isLoading3) return <Loader />;
-  if (error1 || error2 || error3) {
+  if (isLoading1 || isLoading2 || isLoading3 || isLoading4) return <Loader />;
+  if (error1 || error2 || error3 || error4) {
     const errorMessage = error1?.message || error2?.message || error3?.message;
     return <div>Error: {errorMessage}</div>;
   }
 
-  const pendingEvents = events?.filter((event) => event.is_approved === false);
   const eventsThisMonth = events?.filter((event) => {
     const approved = event.is_approved === true;
     return (
@@ -88,7 +89,7 @@ const Dashboard = () => {
         <StatBox
           IconComponent={MdOutlinePendingActions}
           title="Pending Events"
-          count={pendingEvents?.length}
+          count={count}
         />
         <StatBox
           IconComponent={MdEvent}

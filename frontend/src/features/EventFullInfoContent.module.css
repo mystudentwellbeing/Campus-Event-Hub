@@ -1,9 +1,9 @@
 .eventContainer {
   display: flex;
   flex-direction: column;
-  /* justify-content: centre;
+  justify-content: centre;
   align-items: centre;
-  width: 100%; */
+  width: 100%;
   max-width: 1000px;
   border: 0.1rem solid var(--grey2);
   padding: 2rem;
@@ -11,7 +11,7 @@
 
 .imageContainer {
   width: 100%;
-  height: 50rem;
+  height: 15rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,7 +20,7 @@
 .image {
   width: 100%;
   height: 100%;
-  /* object-fit: cover; */
+  object-fit: cover;
 }
 
 .headingContainer {
@@ -32,17 +32,17 @@
 
 .name {
   color: var(--darkblue);
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   font-weight: bold;
 }
 
-.buttonContainer {
+.buttonWrapper {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin: 2rem;
-  gap: 2rem;
+  margin: 2rem 0;
+  gap: 1rem;
 }
 
 .emptyHeartIcon,
@@ -51,7 +51,7 @@
   display: flex;
   align-items: center;
   color: var(--black);
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: bold;
   vertical-align: baseline;
   cursor: pointer;
@@ -61,19 +61,22 @@
   color: var(--red);
 }
 
-.shortDesc {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
+.listContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 1.2rem;
 }
 
 .dateEventFormatContainer {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .dateAndTime {
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .dateAndTime span {
@@ -82,12 +85,11 @@
 
 .format {
   font-weight: bold;
-  font-size: 1.5rem;
   color: var(--white);
   background-color: var(--blue);
   padding: 0.5rem;
-  margin-right: 1rem;
   border-radius: 0.5rem;
+  width: fit-content;
 }
 
 .price {
@@ -96,40 +98,64 @@
   color: var(--blue);
 }
 
-.location {
-  font-weight: bold;
-  font-size: 1.5rem;
-}
-
-.locationInfo {
-  font-size: 1.5rem;
-}
-
-.broughtBy {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.organization {
-  font-size: 1.5rem;
-}
-
-.institution {
-  font-weight: bold;
-  font-size: 1.5rem;
-}
-
+.location,
+.broughtBy,
+.institution,
 .descriptionTitle {
   font-weight: bold;
-  font-size: 1.5rem;
 }
 
-.eventDescription {
-  font-weight: normal;
-  font-size: 1.5rem;
+@media (min-width: 375px) and (max-width: 480px) {
+  .imageContainer {
+    height: 25rem;
+  }
 }
 
+@media (min-width: 481px) and (max-width: 767px) {
+  .imageContainer {
+    height: 30rem;
+  }
+}
 
-@media only screen and (max-width: 1050px) {
-  
+@media (min-width: 768px) {
+  .imageContainer {
+    height: 40rem;
+  }
+
+  .name {
+    font-size: 2rem;
+  }
+
+  .buttonWrapper {
+    gap: 2rem;
+  }
+
+  .emptyHeartIcon,
+  .heartIcon,
+  .shareIcon {
+    font-size: 2.5rem;
+  }
+
+  .dateEventFormatContainer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .listContainer {
+    font-size: 1.5rem;
+  }
+
+  .dateAndTime,
+  .price,
+  .format {
+    font-size: 1.5rem;
+  }
+
+  .location,
+  .broughtBy,
+  .institution,
+  .descriptionTitle {
+    font-size: 1.5rem;
+  }
 }

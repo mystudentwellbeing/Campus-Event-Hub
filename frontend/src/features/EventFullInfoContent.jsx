@@ -1,21 +1,21 @@
 import { useNavigate } from 'react-router-dom';
-import { useUser } from './../features/authentication/useUser';
+import { IoIosHeartEmpty, IoIosHeart } from 'react-icons/io';
+import { FiShare } from 'react-icons/fi';
+import { toast } from 'react-hot-toast';
+import { useUser } from './authentication/useUser';
 import { useEventInterests } from './likeEvents/useEventInterests';
 import { useLikeEvent } from './likeEvents/useLikeEvent';
 import { useUnlikeEvent } from './likeEvents/useUnlikeEvent';
+import useEvent from './searchEvents/useEvent';
 import {
   displayPrice,
   formatEventDate,
   formatTime,
   formatInstitutionName,
 } from '../utils/helpers';
-import { IoIosHeartEmpty, IoIosHeart } from 'react-icons/io';
-import { FiShare } from 'react-icons/fi';
-import { toast } from 'react-hot-toast';
-import styles from './EventFullInfo.module.css';
-import useEvent from './searchEvents/useEvent';
+import styles from './EventFullInfoContent.module.css';
 
-const EventFullInfo = () => {
+const EventFullInfoContent = () => {
   const navigate = useNavigate();
   const { user, isAuthenticated } = useUser();
   const { likeEvent } = useLikeEvent();
@@ -42,10 +42,10 @@ const EventFullInfo = () => {
       if (isLiked) {
         const likedEventRecordId = likedEventRecord?.id;
         if (likedEventRecordId) {
-          await unlikeEvent(likedEventRecordId);
+          unlikeEvent(likedEventRecordId);
         }
       } else {
-        await likeEvent({ event_id: event.id, user_id: user.id });
+        likeEvent({ event_id: event.id, user_id: user.id });
       }
       refetchLikedEvents();
     } catch (error) {
@@ -61,27 +61,28 @@ const EventFullInfo = () => {
   };
 
   return (
-    <main className={styles.eventContainer}>
+    <div className={styles.eventContainer}>
       <div className={styles.imageContainer}>
         <img className={styles.image} src={event.image} alt="EventImage" />
       </div>
-      <ul>
-        <div className={styles.headingContainer}>
-          <li className={styles.name}>{event.name}</li>
-          <div className={styles.buttonContainer}>
-            <div onClick={(e) => toggleLike(e)}>
-              {isLiked ? (
-                <IoIosHeart className={styles.heartIcon} />
-              ) : (
-                <IoIosHeartEmpty className={styles.emptyHeartIcon} />
-              )}
-            </div>
-            <FiShare
-              className={styles.shareIcon}
-              onClick={(e) => handleShare(e)}
-            />
+
+      <div className={styles.headingContainer}>
+        <h3 className={styles.name}>{event.name}</h3>
+        <div className={styles.buttonWrapper}>
+          <div onClick={(e) => toggleLike(e)}>
+            {isLiked ? (
+              <IoIosHeart className={styles.heartIcon} />
+            ) : (
+              <IoIosHeartEmpty className={styles.emptyHeartIcon} />
+            )}
           </div>
+          <FiShare
+            className={styles.shareIcon}
+            onClick={(e) => handleShare(e)}
+          />
         </div>
+      </div>
+      <ul className={styles.listContainer}>
         <li className={styles.shortDesc}>{event.short_description}</li>
         <div className={styles.dateEventFormatContainer}>
           <li className={styles.dateAndTime}>
@@ -108,12 +109,11 @@ const EventFullInfo = () => {
             {formatInstitutionName(event.name_of_inst)}
           </span>
         </li>
-
         <li className={styles.descriptionTitle}>Event Description</li>
         <li className={styles.eventDescription}>{event.description}</li>
       </ul>
-    </main>
+    </div>
   );
 };
 
-export default EventFullInfo;
+export default EventFullInfoContent;

@@ -10,12 +10,15 @@ import Table from '../../ui/Table';
 import Menus from '../../ui/Menus';
 import Modal from '../../ui/Modal';
 import DeleteAlert from '../../ui/DeleteAlert';
+import Loader from '../../ui/Loader';
 import styles from './EventRow.module.css';
 
 const EventRow = ({ event }) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
-  const { approve } = useApproveEvent();
+  const { approve, isApproving } = useApproveEvent();
+
+  if (isApproving) return <Loader />;
 
   const handleEdit = () => {
     navigate('/submitevents', { state: { event } });

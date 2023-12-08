@@ -5,10 +5,10 @@ import { Toaster } from 'react-hot-toast';
 import Navbar from './ui/navbar/Navbar';
 import Homepage from './pages/Homepage';
 import EventList from './features/searchEvents/EventList';
-import EventFullInfo from './features/EventFullInfo';
 import AboutUs from './pages/AboutUs';
 import SubmitEvents from './pages/SubmitEvents';
 import ViewMyEvents from './pages/ViewMyEvents';
+import EventFullInfo from './pages/EventFullInfo';
 import MySavedEvents from './features/likeEvents/MySavedEvents';
 import MySubmittedEvents from './features/submitEvents/MySubmittedEvents';
 import AdminDashboard from './pages/AdminDashboard';
@@ -108,7 +108,7 @@ function App() {
         containerStyle={{ margin: '8px' }}
         toastOptions={{
           success: {
-            duration: 4000,
+            duration: 3000,
           },
           error: {
             duration: 4000,

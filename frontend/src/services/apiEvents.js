@@ -53,6 +53,19 @@ export const getAllEvents = async ({ page }) => {
   return { data, count };
 };
 
+export const getAllPendingEvents = async () => {
+  const { data, error } = await supabase
+    .from('events')
+    .select('*', { count: 'exact' })
+    .eq('is_approved', false);
+  if (error) {
+    console.error(error);
+    throw new Error('Events could not be loaded');
+  }
+
+  return data.length;
+};
+
 export const getEventsCreatedByUser = async (userId) => {
   const { data, error } = await supabase
     .from('events')
