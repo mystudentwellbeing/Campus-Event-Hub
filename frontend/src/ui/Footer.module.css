@@ -1,5 +1,5 @@
 footer {
-  width: 100vw;
+  width: 100%;
   padding: 2rem;
   color: var(--white);
   background-color: var(--grey3);
@@ -9,42 +9,43 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100vw;
+  width: 100%;
+}
+
+.footerContainer a {
+  text-decoration: none;
 }
 
 .email {
   display: flex;
+  gap: 1rem;
   margin-bottom: 1rem;
   align-items: center;
-}
-
-a {
-  text-decoration: none;
 }
 
 .email p {
   color: var(--white);
 }
 
-.terms {
+.termsWrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 2rem;
 }
 
-.terms p:first-child {
+.termsWrapper p:first-child {
   color: var(--blue);
 }
 
-.social {
+.socialWrapper {
   display: flex;
   margin-bottom: 0.5rem;
+  gap: 0.5rem;
 }
 
-.reactIcons {
+.icon {
   font-size: 2rem;
-  margin-right: 1rem;
   vertical-align: center;
   color: var(--white);
 }
@@ -63,20 +64,20 @@ a {
     margin-bottom: 0;
   }
 
-  .terms {
+  .termsWrapper {
     margin-bottom: 0;
   }
 
-  .terms p:first-child {
+  .termWrapper p:first-child {
     margin-right: 1rem;
   }
 
-  .social {
+  .socialWrapper {
     margin-bottom: 0;
+    gap: 1.5rem;
   }
 
-  .reactIcons {
+  .icon {
     font-size: 2.5rem;
-    margin-right: 1rem;
   }
 }

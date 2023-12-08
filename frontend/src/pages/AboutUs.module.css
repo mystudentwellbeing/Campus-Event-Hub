@@ -1,5 +1,4 @@
 .aboutUsContainer {
-  width: 90%;
   padding: 2rem;
   font-size: 1.2rem;
 }
@@ -15,10 +14,6 @@
     width: 90%;
     font-size: 1.4rem;
     padding: 3rem;
-    min-height: 80vh;
-  }
-  .aboutUsContainer h1 {
-    font-size: 2rem;
   }
   .aboutUsContent {
     gap: 1.5rem;
@@ -30,6 +25,5 @@
     max-width: 1200px;
     font-size: 1.6rem;
     padding: 4rem;
-    min-height: 90vh;
   }
 }

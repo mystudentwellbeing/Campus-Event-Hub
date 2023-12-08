@@ -1,9 +1,0 @@
-.signup {
-  min-height: 80vh;
-}
-
-@media (min-width: 1024px) {
-  .login {
-    min-height: 85vh;
-  }
-}
