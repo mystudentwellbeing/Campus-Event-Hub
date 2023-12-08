@@ -3,16 +3,11 @@ import toast from 'react-hot-toast';
 import { useUpdateUser } from './useUpdateUser';
 import TextField from '@mui/material/TextField';
 import Button from '../../ui/Button';
+import SpinnerMini from '../../ui/SpinnerMini';
 import styles from './ResetPasswordForm.module.css';
 
 const ResetPasswordForm = () => {
-  const {
-    handleSubmit,
-    formState: { errors },
-    reset,
-    watch,
-    control,
-  } = useForm();
+  const { handleSubmit, reset, watch, control } = useForm();
   const { updateUser, isUpdating } = useUpdateUser();
 
   const password = watch('password');
@@ -45,8 +40,14 @@ const ResetPasswordForm = () => {
         name="password"
         control={control}
         defaultValue=""
-        rules={{ required: true, minLength: 6 }}
-        render={({ field }) => (
+        rules={{
+          required: 'Password is required.',
+          minLength: {
+            value: 6,
+            message: 'Password should be at least 6 characters.',
+          },
+        }}
+        render={({ field, fieldState: { error } }) => (
           <TextField
             {...field}
             margin="normal"
@@ -56,31 +57,24 @@ const ResetPasswordForm = () => {
             disabled={isUpdating}
             type="password"
             variant="outlined"
+            error={!!error}
+            helperText={error ? error.message : ''}
           />
         )}
       />
-      {errors.password && errors.password.type === 'required' && (
-        <div className={styles.errorMsg}>Password is required.</div>
-      )}
-      {errors.password && errors.password.type === 'minLength' && (
-        <div className={styles.errorMsg}>
-          Password should be at-least 6 characters.
-        </div>
-      )}
 
       <Controller
         name="passwordConfirm"
         control={control}
         defaultValue=""
         rules={{
-          required: true,
-          minLength: 6,
+          required: 'Confirm Password is required.',
           validate: {
             matchesPassword: (value) =>
-              value === password || 'Passwords do not match',
+              value === password || 'Passwords do not match.',
           },
         }}
-        render={({ field }) => (
+        render={({ field, fieldState: { error } }) => (
           <TextField
             {...field}
             margin="normal"
@@ -90,24 +84,15 @@ const ResetPasswordForm = () => {
             disabled={isUpdating}
             type="password"
             variant="outlined"
+            error={!!error}
+            helperText={error ? error.message : ''}
           />
         )}
       />
-      {errors.passwordConfirm && errors.passwordConfirm.type === 'required' && (
-        <div className={styles.errorMsg}>Confirm Password is required.</div>
-      )}
-      {errors.passwordConfirm &&
-        errors.passwordConfirm.type === 'minLength' && (
-          <div className={styles.errorMsg}>
-            Your Confirm Password should be same as password.
-          </div>
-        )}
-      {errors.passwordConfirm &&
-        errors.passwordConfirm.type === 'matchesPassword' && (
-          <div className={styles.errorMsg}>Passwords do not match.</div>
-        )}
 
-      <Button type="rectangle">Reset Password</Button>
+      <Button type="rectangle">
+        {!isUpdating ? 'Reset Password' : <SpinnerMini />}
+      </Button>
     </form>
   );
 };

@@ -22,6 +22,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import TermsConditions from '../../ui/TermsConditionsContent';
 import Modal from '../../ui/Modal';
 import Button from '../../ui/Button';
+import SpinnerMini from '../../ui/SpinnerMini';
 import styles from './EventForm.module.css';
 
 const EventForm = () => {
@@ -538,7 +539,13 @@ const EventForm = () => {
         </div>
         <div className={styles.buttonWrapper}>
           <Button type="submit">
-            {isEditSession ? 'Edit Event' : 'Submit Event'}
+            {isWorking ? (
+              <SpinnerMini />
+            ) : isEditSession ? (
+              'Edit Event'
+            ) : (
+              'Submit Event'
+            )}
           </Button>
           <Button
             type="reset"

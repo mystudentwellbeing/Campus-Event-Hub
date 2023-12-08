@@ -4,6 +4,7 @@ import { useLogout } from '../../features/authentication/useLogout';
 import Hamburger from 'hamburger-react';
 import useOutsideClick from '../../hooks/useOutsideClickforNav';
 import Button from '../Button';
+import SpinnerMini from '../SpinnerMini';
 import logo from '../../assets/logo.png';
 import styles from './NotLoggedInNav.module.css';
 
@@ -13,7 +14,7 @@ const LoggedInNav = () => {
   const hamburgerRef = useRef(null);
   const dropdownRef = useRef(null);
 
-  const { logout } = useLogout();
+  const { logout, isLoading } = useLogout();
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -84,7 +85,10 @@ const LoggedInNav = () => {
         <div className={styles.btnWarapper}>
           <li>
             <Link to="/" className={styles.btnLink} onClick={closeMenu}>
-              <Button onClick={handleClick}>Log out</Button>
+              <Button onClick={handleClick}>
+                {' '}
+                {!isLoading ? 'Log Out' : <SpinnerMini />}
+              </Button>
             </Link>
           </li>
         </div>

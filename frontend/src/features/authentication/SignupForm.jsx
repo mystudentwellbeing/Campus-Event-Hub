@@ -3,6 +3,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { useSignup } from './useSignup';
 import TextField from '@mui/material/TextField';
 import Button from '../../ui/Button';
+import SpinnerMini from '../../ui/SpinnerMini';
 import styles from './SignupForm.module.css';
 
 const SignupForm = () => {
@@ -107,7 +108,9 @@ const SignupForm = () => {
           />
         )}
       />
-      <Button type="rectangle">Creat Account</Button>
+      <Button type="rectangle">
+        {!isLoading ? 'Create Account' : <SpinnerMini />}
+      </Button>
       <div className={styles.linkWrapper}>
         <p>Already a member?</p>
         <Link to="/login">Sign in here!</Link>

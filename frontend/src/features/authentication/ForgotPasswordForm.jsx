@@ -2,17 +2,13 @@ import { useForm, Controller } from 'react-hook-form';
 import { useResetPassword } from './useResetPassword';
 import TextField from '@mui/material/TextField';
 import Button from '../../ui/Button';
+import SpinnerMini from '../../ui/SpinnerMini';
 import styles from './ForgotPasswordForm.module.css';
 
 const ForgotPasswordForm = () => {
-  const {
-    handleSubmit,
-    formState: { errors },
-    reset,
-    control,
-  } = useForm();
+  const { handleSubmit, reset, control } = useForm();
 
-  const { resetPassword } = useResetPassword();
+  const { resetPassword, isResetting } = useResetPassword();
 
   const onSubmit = (data) => {
     const { email } = data;
@@ -39,8 +35,15 @@ const ForgotPasswordForm = () => {
         name="email"
         control={control}
         defaultValue=""
-        rules={{ required: true, pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/ }}
-        render={({ field }) => (
+        rules={{
+          required: 'Email is required.',
+          validate: {
+            matchPattern: (v) =>
+              /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
+              'Email address must be a valid address',
+          },
+        }}
+        render={({ field, fieldState: { error } }) => (
           <TextField
             {...field}
             margin="normal"
@@ -50,16 +53,14 @@ const ForgotPasswordForm = () => {
             autoFocus
             type="email"
             variant="outlined"
+            error={!!error}
+            helperText={error ? error.message : ''}
           />
         )}
       />
-      {errors.email && errors.email.type === 'required' && (
-        <div className={styles.errorMsg}>Email is required.</div>
-      )}
-      {errors.email && errors.email.type === 'pattern' && (
-        <div className={styles.errorMsg}>Email is not valid.</div>
-      )}
-      <Button type="rectangle">SEND</Button>
+      <Button type="rectangle">
+        {!isResetting ? 'SEND' : <SpinnerMini />}
+      </Button>
     </form>
   );
 };

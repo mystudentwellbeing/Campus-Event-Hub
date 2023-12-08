@@ -5,20 +5,16 @@ import { useDeleteUser } from './useDeleteUser';
 import { toast } from 'react-hot-toast';
 import TextField from '@mui/material/TextField';
 import Button from '../../ui/Button';
+import SpinnerMini from '../../ui/SpinnerMini';
 import styles from './UpdateProfileForm.module.css';
 
 const UpdateProfileForm = () => {
-  const {
-    handleSubmit,
-    getValues,
-    reset,
-    formState: { errors },
-    control,
-  } = useForm();
-
+  const { handleSubmit, reset, watch, control } = useForm();
   const { user } = useUser();
   const { updateUser, isUpdating } = useUpdateUser();
-  const { deleteRequest } = useDeleteUser();
+  const { deleteRequest, isDeleting } = useDeleteUser();
+
+  const password = watch('password');
 
   const onSubmit = async (data, e) => {
     const { email, password, passwordConfirm } = data;
@@ -37,10 +33,6 @@ const UpdateProfileForm = () => {
       }
     );
   };
-
-  // const handleReset = () => {
-  //   reset();
-  // };
 
   const handleDeleteAccount = async () => {
     deleteRequest({ id: user.id, delete_request_received: true });
@@ -90,60 +82,64 @@ const UpdateProfileForm = () => {
             name="password"
             control={control}
             defaultValue=""
-            render={({ field }) => (
+            rules={{
+              required: 'Password is required.',
+              minLength: {
+                value: 6,
+                message: 'Password should be at least 6 characters.',
+              },
+            }}
+            render={({ field, fieldState: { error } }) => (
               <TextField
                 {...field}
                 margin="normal"
                 fullWidth
-                type="password"
                 id="password"
-                label="New Password"
+                label="Password"
                 disabled={isUpdating}
+                type="password"
                 variant="filled"
-                inputProps={{ style: { fontSize: '1.4rem' } }}
-                InputLabelProps={{
-                  style: { fontSize: '1.2rem' },
-                }}
+                error={!!error}
+                helperText={error ? error.message : ''}
               />
             )}
           />
+
           <Controller
             name="passwordConfirm"
             control={control}
             defaultValue=""
             rules={{
-              validate: (value) =>
-                getValues('password') === value || 'Passwords need to match',
+              required: 'Confirm Password is required.',
+              validate: {
+                matchesPassword: (value) =>
+                  value === password || 'Passwords do not match.',
+              },
             }}
-            render={({ field }) => (
+            render={({ field, fieldState: { error } }) => (
               <TextField
                 {...field}
                 margin="normal"
                 fullWidth
-                type="password"
                 id="passwordConfirm"
                 label="Confirm Password"
                 disabled={isUpdating}
+                type="password"
                 variant="filled"
-                inputProps={{ style: { fontSize: '1.4rem' } }}
-                InputLabelProps={{
-                  style: { fontSize: '1.2rem' },
-                }}
+                error={!!error}
+                helperText={error ? error.message : ''}
               />
             )}
           />
-          {errors.passwordConfirm && (
-            <div className={styles.errorMsg}>
-              {errors.passwordConfirm.message}
-            </div>
-          )}
 
-          <Button>Update</Button>
+          <Button>{!isUpdating ? 'Update' : <SpinnerMini />}</Button>
         </fieldset>
       </form>
       <div className={styles.deleteAccount}>
         <p>I want to delete my account.</p>
-        <Button onClick={handleDeleteAccount}>Delete Account</Button>
+        <Button onClick={handleDeleteAccount}>
+          {!isDeleting ? 'Delete Account' : <SpinnerMini />}
+        </Button>
       </div>
     </>
   );
