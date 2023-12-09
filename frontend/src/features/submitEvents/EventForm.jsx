@@ -356,7 +356,7 @@ const EventForm = () => {
           margin="normal"
           fullWidth
           id="virtualLink"
-          label="If virtual - virtual link"
+          label="Virtual Link"
           type="text"
           disabled={isWorking}
           {...register('virtual_link', {
@@ -449,9 +449,50 @@ const EventForm = () => {
         variant="outlined"
         inputProps={{ step: '0.01' }}
       />
+      <FormControl
+        className={styles.imageUpload}
+        fullWidth
+        variant="outlined"
+        error={!!errors.image}
+        style={{ marginTop: '1.5rem', marginBottom: '0.75rem' }}
+      >
+        <InputLabel htmlFor="outlined-adornment-image">Image</InputLabel>
+        <OutlinedInput
+          id="outlined-adornment-image"
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="file upload"
+                edge="end"
+                component="label"
+                style={{ marginRight: '1rem' }}
+              >
+                <input
+                  type="file"
+                  hidden
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  {...register('image', {
+                    required: isEditSession ? false : 'This field is required',
+                  })}
+                />
+                <CloudUploadIcon fontSize="large" />
+              </IconButton>
+            </InputAdornment>
+          }
+          label="Image"
+          value={selectedFile ? selectedFile.name : ''}
+        />
+        {errors.image && (
+          <FormHelperText>{errors.image.message}</FormHelperText>
+        )}
+      </FormControl>
       <TextField
+        className={styles.shortDesc}
         id="shortDesc"
-        label="Short Description (150 characters)"
+        label="Short Description of Event (150 characters)"
+        multiline
+        rows={3}
         type="text"
         margin="normal"
         fullWidth
@@ -468,7 +509,7 @@ const EventForm = () => {
       />
       <TextField
         id="desc"
-        label="Description of Event"
+        label="Long Description of Event"
         multiline
         rows={6}
         fullWidth
@@ -481,47 +522,8 @@ const EventForm = () => {
         helperText={errors.description ? errors.description.message : ''}
         variant="outlined"
       />
-      <div className={styles.termsButtonWrapper}>
-        <FormControl
-          fullWidth
-          variant="outlined"
-          error={!!errors.image}
-          style={{ marginTop: '1.5rem', marginBottom: '0.75rem' }}
-        >
-          <InputLabel htmlFor="outlined-adornment-image">Image</InputLabel>
-          <OutlinedInput
-            id="outlined-adornment-image"
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="file upload"
-                  edge="end"
-                  component="label"
-                  style={{ marginRight: '1rem' }}
-                >
-                  <input
-                    type="file"
-                    hidden
-                    accept="image/*"
-                    onChange={handleFileChange}
-                    {...register('image', {
-                      required: isEditSession
-                        ? false
-                        : 'This field is required',
-                    })}
-                  />
-                  <CloudUploadIcon fontSize="large" />
-                </IconButton>
-              </InputAdornment>
-            }
-            label="Image"
-            value={selectedFile ? selectedFile.name : ''}
-          />
-          {errors.image && (
-            <FormHelperText>{errors.image.message}</FormHelperText>
-          )}
-        </FormControl>
 
+      <div className={styles.termsButtonWrapper}>
         <div className={styles.termsWrapper}>
           <FormControlLabel
             control={
