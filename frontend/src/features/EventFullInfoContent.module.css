@@ -47,7 +47,7 @@
 
 .emptyHeartIcon,
 .heartIcon,
-.shareIcon {
+.icon {
   display: flex;
   align-items: center;
   color: var(--black);
@@ -133,7 +133,7 @@
 
   .emptyHeartIcon,
   .heartIcon,
-  .shareIcon {
+  .icon {
     font-size: 2.5rem;
   }
 

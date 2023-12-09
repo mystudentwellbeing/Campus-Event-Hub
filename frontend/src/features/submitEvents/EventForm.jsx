@@ -92,6 +92,7 @@ const EventForm = () => {
     const image = typeof data.image === 'string' ? data.image : data.image[0];
 
     const selectedTypes = Object.entries(data.type)
+      // eslint-disable-next-line no-unused-vars
       .filter(([type, isSelected]) => isSelected)
       .map(([type]) => type);
 

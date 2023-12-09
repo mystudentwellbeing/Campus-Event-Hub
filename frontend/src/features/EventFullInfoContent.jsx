@@ -1,7 +1,10 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IoIosHeartEmpty, IoIosHeart } from 'react-icons/io';
 import { FiShare } from 'react-icons/fi';
 import { toast } from 'react-hot-toast';
+import { FiEdit } from 'react-icons/fi';
+import { AiOutlineDelete } from 'react-icons/ai';
 import { useUser } from './authentication/useUser';
 import { useEventInterests } from './likeEvents/useEventInterests';
 import { useLikeEvent } from './likeEvents/useLikeEvent';
@@ -13,16 +16,23 @@ import {
   formatTime,
   formatInstitutionName,
 } from '../utils/helpers';
+import Modal from '../ui/Modal';
+import DeleteAlert from '../ui/DeleteAlert';
 import styles from './EventFullInfoContent.module.css';
 
 const EventFullInfoContent = () => {
   const navigate = useNavigate();
-  const { user, isAuthenticated } = useUser();
+  const [isModalOpen, setModalOpen] = useState(false);
+  const { user, isAuthenticated, isAdmin } = useUser();
   const { likeEvent } = useLikeEvent();
   const { unlikeEvent } = useUnlikeEvent();
   const { likedEvents, refetchLikedEvents } = useEventInterests(user?.id);
   const { isLoading, event } = useEvent();
+
   if (isLoading || !event) return <div>Loading...</div>;
+
+  const isCreator = user?.id === event.user_id;
+
   const isLiked = likedEvents?.some(
     (likedEvent) => likedEvent.event_id === event.id
   );
@@ -53,12 +63,13 @@ const EventFullInfoContent = () => {
     }
   };
 
-  // const handleShare = (e) => {
-  //   e.preventDefault();
-  //   e.stopPropagation();
-  //   navigator.clipboard.writeText(window.location.href);
-  //   toast.success('Link copied to clipboard');
-  // };
+  const handleEdit = () => {
+    navigate('/submitevents', { state: { event } });
+  };
+
+  const handleDeleteClick = () => {
+    setModalOpen(true);
+  };
 
   const handleShare = async (e) => {
     e.preventDefault();
@@ -102,6 +113,23 @@ const EventFullInfoContent = () => {
       <div className={styles.headingContainer}>
         <h3 className={styles.name}>{event.name}</h3>
         <div className={styles.buttonWrapper}>
+          {(isCreator || isAdmin) && (
+            <>
+              <FiEdit className={styles.icon} onClick={handleEdit} />
+              <AiOutlineDelete
+                className={styles.icon}
+                onClick={handleDeleteClick}
+              />
+              {isModalOpen && (
+                <Modal title="Delete Event" onClose={() => setModalOpen(false)}>
+                  <DeleteAlert
+                    eventId={event.id}
+                    onCloseModal={() => setModalOpen(false)}
+                  />
+                </Modal>
+              )}
+            </>
+          )}
           <div onClick={(e) => toggleLike(e)}>
             {isLiked ? (
               <IoIosHeart className={styles.heartIcon} />
@@ -109,10 +137,7 @@ const EventFullInfoContent = () => {
               <IoIosHeartEmpty className={styles.emptyHeartIcon} />
             )}
           </div>
-          <FiShare
-            className={styles.shareIcon}
-            onClick={(e) => handleShare(e)}
-          />
+          <FiShare className={styles.icon} onClick={(e) => handleShare(e)} />
         </div>
       </div>
       <ul className={styles.listContainer}>
