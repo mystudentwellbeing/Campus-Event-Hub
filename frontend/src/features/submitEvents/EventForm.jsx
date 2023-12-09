@@ -33,26 +33,6 @@ const EventForm = () => {
   const editId = eventToEdit?.id;
   const isEditSession = Boolean(editId);
 
-  const {
-    register,
-    control,
-    handleSubmit,
-    getValues,
-    watch,
-    reset,
-    formState: { errors },
-  } = useForm({
-    defaultValues: isEditSession
-      ? { ...eventToEdit, type: eventToEdit.type || [] }
-      : { type: [] },
-  });
-
-  const { user } = useUser();
-  const { isCreating, createEvent } = useCreateEvent();
-  const { isEditing, editEvent } = useEditEvent();
-  const isWorking = isCreating || isEditing;
-  const today = new Date();
-
   const eventTypeOptions = [
     'ARTS',
     'CAMPUS',
@@ -67,6 +47,32 @@ const EventForm = () => {
     'WELLBEING',
     'OTHER',
   ];
+
+  const {
+    register,
+    control,
+    handleSubmit,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm({
+    defaultValues: isEditSession
+      ? {
+          ...eventToEdit,
+          event_format: eventToEdit.event_format || '',
+          type: eventTypeOptions.reduce((acc, type) => {
+            acc[type] = eventToEdit.type.includes(type);
+            return acc;
+          }, {}),
+        }
+      : { type: [], event_format: '' },
+  });
+
+  const { user } = useUser();
+  const { isCreating, createEvent } = useCreateEvent();
+  const { isEditing, editEvent } = useEditEvent();
+  const isWorking = isCreating || isEditing;
+  const today = new Date();
 
   const [selectedFile, setSelectedFile] = useState(null);
 
@@ -84,11 +90,17 @@ const EventForm = () => {
 
   const onSubmit = (data) => {
     const image = typeof data.image === 'string' ? data.image : data.image[0];
+
+    const selectedTypes = Object.entries(data.type)
+      .filter(([type, isSelected]) => isSelected)
+      .map(([type]) => type);
+
     if (isEditSession)
       editEvent(
         {
           newEventData: {
             ...data,
+            type: selectedTypes,
             image,
             is_approved: false,
           },
@@ -238,11 +250,12 @@ const EventForm = () => {
               <FormControlLabel
                 key={option}
                 control={
-                  <Checkbox
-                    value={option}
-                    {...register('type', {
-                      required: 'Please select at least one event type',
-                    })}
+                  <Controller
+                    name={`type.${option}`}
+                    control={control}
+                    render={({ field }) => (
+                      <Checkbox {...field} checked={field.value} />
+                    )}
                   />
                 }
                 label={option}
@@ -280,9 +293,6 @@ const EventForm = () => {
           disabled={isWorking}
           {...register('end_time', {
             required: 'This field is required',
-            validate: (value) =>
-              getValues('start_time') < value ||
-              'Event should end after it starts!',
           })}
           error={!!errors.end_time}
           helperText={errors.end_time ? errors.end_time.message : ''}
@@ -308,34 +318,38 @@ const EventForm = () => {
           inputProps: { min: today.toISOString().split('T')[0] },
         }}
       />
-
-      <FormControl
-        fullWidth
-        variant="outlined"
-        margin="normal"
-        error={!!errors.event_format}
-      >
-        <InputLabel id="eventFormat-label">Event Format</InputLabel>
-        <Select
-          labelId="eventFormat-label"
-          id="eventFormat"
-          label="Event Format"
-          disabled={isWorking}
-          {...register('event_format', {
-            required: 'This field is required',
-          })}
-        >
-          <MenuItem value="">
-            <em>Select Event Format</em>
-          </MenuItem>
-          <MenuItem value="Virtual">Virtual</MenuItem>
-          <MenuItem value="In-person">In-person</MenuItem>
-          <MenuItem value="Hybrid">Hybrid</MenuItem>
-        </Select>
-        <FormHelperText>
-          {errors.event_format ? errors.event_format.message : ''}
-        </FormHelperText>
-      </FormControl>
+      <Controller
+        name="event_format"
+        control={control}
+        defaultValue=""
+        rules={{
+          required: 'This field is required',
+        }}
+        render={({ field, fieldState: { error } }) => (
+          <FormControl
+            fullWidth
+            variant="outlined"
+            margin="normal"
+            error={!!errors.event_format}
+          >
+            <InputLabel id="eventFormat-label">Event Format</InputLabel>
+            <Select
+              {...field}
+              labelId="eventFormat-label"
+              id="eventFormat"
+              label="Event Format"
+            >
+              <MenuItem value="">
+                <em>Select Event Format</em>
+              </MenuItem>
+              <MenuItem value="Virtual">Virtual</MenuItem>
+              <MenuItem value="In-person">In-person</MenuItem>
+              <MenuItem value="Hybrid">Hybrid</MenuItem>
+            </Select>
+            <FormHelperText>{error ? error.message : ''}</FormHelperText>
+          </FormControl>
+        )}
+      />
       {['Virtual', 'Hybrid'].includes(eventFormat) && (
         <TextField
           margin="normal"

@@ -94,9 +94,9 @@ const Event = ({ event }) => {
         <img className={styles.eventImage} src={event.image} alt="EventImage" />
 
         <div className={styles.eventHeader}>
-          <h4>{event.name}</h4>
+          <h3>{event.name}</h3>
           <div className={styles.headerRightSide}>
-            <h3>{displayPrice(event.price)}</h3>
+            <h4>{displayPrice(event.price)}</h4>
             <div onClick={(e) => toggleLike(e)}>
               {isLiked ? (
                 <IoIosHeart className={styles.heartIcon} />
