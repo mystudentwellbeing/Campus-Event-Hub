@@ -65,7 +65,13 @@ const EventForm = () => {
             return acc;
           }, {}),
         }
-      : { type: [], event_format: '' },
+      : {
+          type: eventTypeOptions.reduce((acc, type) => {
+            acc[type] = false;
+            return acc;
+          }, {}),
+          event_format: '',
+        },
   });
 
   const { user } = useUser();
@@ -95,6 +101,8 @@ const EventForm = () => {
       // eslint-disable-next-line no-unused-vars
       .filter(([type, isSelected]) => isSelected)
       .map(([type]) => type);
+
+    data.type = `{${selectedTypes.join(',')}}`;
 
     if (isEditSession)
       editEvent(
