@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import { useUser } from './useUser';
 import { useUpdateUser } from './useUpdateUser';
@@ -9,12 +10,10 @@ import SpinnerMini from '../../ui/SpinnerMini';
 import styles from './UpdateProfileForm.module.css';
 
 const UpdateProfileForm = () => {
-  const { handleSubmit, reset, watch, control } = useForm();
+  const { handleSubmit, reset, control } = useForm();
   const { user } = useUser();
   const { updateUser, isUpdating } = useUpdateUser();
   const { deleteRequest, isDeleting } = useDeleteUser();
-
-  const password = watch('password');
 
   const onSubmit = async (data, e) => {
     const { email, password, passwordConfirm } = data;
@@ -75,7 +74,14 @@ const UpdateProfileForm = () => {
           </p>
         </fieldset>
       </form>
-      <form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
+      <div className={styles.deleteAccount}>
+        <p>I want to reset my password.</p>
+        <Link to="/resetpassword">
+          <Button>Reset Password</Button>
+        </Link>
+      </div>
+
+      {/* <form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
         <fieldset>
           <legend>Update Password</legend>
           <Controller
@@ -134,7 +140,7 @@ const UpdateProfileForm = () => {
 
           <Button>{!isUpdating ? 'Update' : <SpinnerMini />}</Button>
         </fieldset>
-      </form>
+      </form> */}
       <div className={styles.deleteAccount}>
         <p>I want to delete my account.</p>
         <Button onClick={handleDeleteAccount}>
