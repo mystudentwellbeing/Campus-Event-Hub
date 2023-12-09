@@ -85,6 +85,7 @@
 
 .format {
   font-weight: bold;
+  font-size: 1rem;
   color: var(--white);
   background-color: var(--blue);
   padding: 0.5rem;
@@ -107,7 +108,7 @@
 
 @media (min-width: 375px) and (max-width: 480px) {
   .imageContainer {
-    height: 25rem;
+    height: 20rem;
   }
 }
 
@@ -147,9 +148,12 @@
   }
 
   .dateAndTime,
-  .price,
-  .format {
+  .price {
     font-size: 1.5rem;
+  }
+
+  .format {
+    font-size: 1.2rem;
   }
 
   .location,

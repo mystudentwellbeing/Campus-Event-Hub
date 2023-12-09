@@ -53,11 +53,44 @@ const EventFullInfoContent = () => {
     }
   };
 
-  const handleShare = (e) => {
+  // const handleShare = (e) => {
+  //   e.preventDefault();
+  //   e.stopPropagation();
+  //   navigator.clipboard.writeText(window.location.href);
+  //   toast.success('Link copied to clipboard');
+  // };
+
+  const handleShare = async (e) => {
     e.preventDefault();
     e.stopPropagation();
-    navigator.clipboard.writeText(window.location.href);
-    toast.success('Link copied to clipboard');
+
+    const urlToCopy = window.location.href;
+
+    // Check if ClipboardItem is supported
+    if (
+      typeof ClipboardItem !== 'undefined' &&
+      navigator.clipboard &&
+      navigator.clipboard.write
+    ) {
+      const textBlob = new Blob([urlToCopy], { type: 'text/plain' });
+      const clipboardItem = new ClipboardItem({ 'text/plain': textBlob });
+      try {
+        await navigator.clipboard.write([clipboardItem]);
+        toast.success('Link copied to clipboard');
+      } catch (error) {
+        console.error('Clipboard API error:', error);
+        toast.error('Failed to copy the link');
+      }
+    } else {
+      // Fallback for browsers like Firefox without ClipboardItem support
+      try {
+        await navigator.clipboard.writeText(urlToCopy);
+        toast.success('Link copied to clipboard');
+      } catch (error) {
+        console.error('Clipboard writeText error:', error);
+        toast.error('Failed to copy the link');
+      }
+    }
   };
 
   return (

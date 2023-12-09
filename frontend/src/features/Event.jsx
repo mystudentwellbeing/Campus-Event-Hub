@@ -42,10 +42,10 @@ const Event = ({ event }) => {
       if (isLiked) {
         const likedEventRecordId = likedEventRecord?.id;
         if (likedEventRecordId) {
-          await unlikeEvent(likedEventRecordId);
+          unlikeEvent(likedEventRecordId);
         }
       } else {
-        await likeEvent({ event_id: event.id, user_id: user.id });
+        likeEvent({ event_id: event.id, user_id: user.id });
       }
       refetchLikedEvents();
     } catch (error) {
