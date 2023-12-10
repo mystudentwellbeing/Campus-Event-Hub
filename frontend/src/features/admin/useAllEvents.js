@@ -6,28 +6,34 @@ const useAllEvents = () => {
   const queryClient = useQueryClient();
   const [searchParams] = useSearchParams();
 
-  const page = !searchParams.get('page') ? 1 : Number(searchParams.get('page'));
+  const status = searchParams.get('status') || 'all';
+
+  const sortByRaw = searchParams.get('sortBy') || 'date-asc';
+  const [field, direction] = sortByRaw.split('-');
+  const sortBy = { field, direction };
+
+  const page = Number(searchParams.get('page')) || 1;
 
   const {
     isLoading,
     data: { data: events, count } = {},
     error,
   } = useQuery({
-    queryKey: ['allEvents', page],
-    queryFn: () => getAllEvents({ page }),
+    queryKey: ['allEvents', status, sortBy, page],
+    queryFn: () => getAllEvents({ status, sortBy, page }),
   });
 
   const pageCount = Math.ceil(count / 10);
 
   if (page < pageCount)
     queryClient.prefetchQuery({
-      queryKey: ['events', page + 1],
+      queryKey: ['events', status, sortBy, page + 1],
       queryFn: () => getAllEvents({ page: page + 1 }),
     });
 
   if (page > 1)
     queryClient.prefetchQuery({
-      queryKey: ['events', page - 1],
+      queryKey: ['events', status, sortBy, page - 1],
       queryFn: () => getAllEvents({ page: page - 1 }),
     });
 

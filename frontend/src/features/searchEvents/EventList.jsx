@@ -18,7 +18,7 @@ const EventList = () => {
       ? event.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         event.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         event.city?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        event.format?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        event.event_format?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         event.name_of_inst?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         event.type.some((type) =>
           type.toLowerCase().includes(searchQuery.toLowerCase())

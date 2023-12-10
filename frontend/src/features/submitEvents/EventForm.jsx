@@ -16,9 +16,7 @@ import {
   FormHelperText,
   OutlinedInput,
   InputAdornment,
-  IconButton,
 } from '@mui/material';
-// import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import TermsConditions from '../../ui/TermsConditionsContent';
 import Modal from '../../ui/Modal';
 import Button from '../../ui/Button';

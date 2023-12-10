@@ -31,11 +31,28 @@ export const getEvent = async (id) => {
   return data;
 };
 
-export const getAllEvents = async ({ page }) => {
-  let query = supabase
-    .from('events')
-    .select('*', { count: 'exact' })
-    .order('date', { ascending: true });
+export const getAllEvents = async ({ status, sortBy, page }) => {
+  let query = supabase.from('events').select('*', { count: 'exact' });
+
+  if (status) {
+    switch (status) {
+      case 'pending':
+        query = query.eq('is_approved', false);
+        break;
+      case 'approved':
+        query = query.eq('is_approved', true);
+        break;
+      case 'past':
+        query = query.lt('date', new Date().toISOString());
+        break;
+    }
+  }
+
+  if (sortBy) {
+    query = query.order(sortBy.field, {
+      ascending: sortBy.direction === 'asc',
+    });
+  }
 
   if (page) {
     const from = (page - 1) * 10;
