@@ -35,12 +35,6 @@
   gap: 5rem;
 }
 
-/* .fileInput:hover {
-  background-color: white;
-  border: none;
-  box-shadow: none;
-} */
-
 .fileInput::file-selector-button {
   font: inherit;
   font-weight: 500;
