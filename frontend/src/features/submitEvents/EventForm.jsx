@@ -18,7 +18,7 @@ import {
   InputAdornment,
   IconButton,
 } from '@mui/material';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+// import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import TermsConditions from '../../ui/TermsConditionsContent';
 import Modal from '../../ui/Modal';
 import Button from '../../ui/Button';
@@ -27,7 +27,6 @@ import styles from './EventForm.module.css';
 
 const EventForm = () => {
   const [isModalOpen, setModalOpen] = useState(false);
-
   const location = useLocation();
   const eventToEdit = location.state?.event;
   const editId = eventToEdit?.id;
@@ -84,7 +83,8 @@ const EventForm = () => {
 
   const handleFileChange = (event) => {
     if (event.target.files.length > 0) {
-      setSelectedFile(event.target.files[0]);
+      const file = event.target.files[0];
+      setSelectedFile(file);
     }
   };
 
@@ -467,34 +467,30 @@ const EventForm = () => {
         <InputLabel htmlFor="outlined-adornment-image">Image</InputLabel>
         <OutlinedInput
           id="outlined-adornment-image"
-          endAdornment={
-            <InputAdornment position="end">
-              <IconButton
-                aria-label="file upload"
-                edge="end"
-                component="label"
-                style={{ marginRight: '1rem' }}
-              >
-                <input
-                  type="file"
-                  hidden
-                  accept="image/*"
-                  onChange={handleFileChange}
-                  {...register('image', {
-                    required: isEditSession ? false : 'This field is required',
-                  })}
-                />
-                <CloudUploadIcon fontSize="large" />
-              </IconButton>
+          startAdornment={
+            <InputAdornment position="start">
+              <input
+                className={styles.fileInput}
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+                {...register('image', {
+                  required: isEditSession ? false : 'This field is required',
+                })}
+              />
             </InputAdornment>
           }
           label="Image"
           value={selectedFile ? selectedFile.name : ''}
         />
+        {selectedFile && (
+          <FormHelperText>Uploaded File: {selectedFile.name}</FormHelperText>
+        )}
         {errors.image && (
           <FormHelperText>{errors.image.message}</FormHelperText>
         )}
       </FormControl>
+
       <TextField
         className={styles.shortDesc}
         id="shortDesc"
