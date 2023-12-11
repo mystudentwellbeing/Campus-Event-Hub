@@ -74,12 +74,12 @@
   gap: 0.5rem;
 }
 
-.dateAndTime {
+.label {
   font-weight: bold;
   font-size: 1.5rem;
 }
 
-.dateAndTime span {
+.label span {
   font-weight: normal;
 }
 
@@ -97,13 +97,6 @@
   font-weight: bold;
   font-size: 1.5rem;
   color: var(--blue);
-}
-
-.location,
-.broughtBy,
-.institution,
-.descriptionTitle {
-  font-weight: bold;
 }
 
 @media (min-width: 375px) and (max-width: 480px) {

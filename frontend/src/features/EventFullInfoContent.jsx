@@ -143,7 +143,7 @@ const EventFullInfoContent = () => {
       <ul className={styles.listContainer}>
         <li className={styles.shortDesc}>{event.short_description}</li>
         <div className={styles.dateEventFormatContainer}>
-          <li className={styles.dateAndTime}>
+          <li className={styles.label}>
             {formatEventDate(event.date)} &nbsp;&nbsp;
             <span>
               {event.start_time ? formatTime(event.start_time) : ''} -{' '}
@@ -153,21 +153,31 @@ const EventFullInfoContent = () => {
           <li className={styles.format}>{event.event_format}</li>
         </div>
         <li className={styles.price}>Price: {displayPrice(event.price)}</li>
+        {event.event_format !== 'Virtual' && (
+          <li>
+            <p className={styles.label}>Location:</p>
+            <p className={styles.locationInfo}>{event.name_of_venue}</p>
+            <p className={styles.locationInfo}>{event.address}</p>
+            <p className={styles.locationInfo}>{event.city}</p>
+            <p className={styles.locationInfo}>{event.postal_code}</p>
+          </li>
+        )}
+
+        {(event.event_format === 'Virtual' ||
+          event.event_format === 'Hybrid') && (
+          <li>
+            <span className={styles.label}>Virtual Link:&nbsp;</span>
+            <span>{event.virtual_link}</span>
+          </li>
+        )}
         <li>
-          <p className={styles.location}>Location:</p>
-          <p className={styles.locationInfo}>{event.name_of_venue}</p>
-          <p className={styles.locationInfo}>{event.address}</p>
-          <p className={styles.locationInfo}>{event.city}</p>
-          <p className={styles.locationInfo}>{event.postal_code}</p>
-        </li>
-        <li>
-          <span className={styles.broughtBy}>Brought You By:&nbsp;</span>
+          <span className={styles.label}>Brought You By:&nbsp;</span>
           <span className={styles.organization}>{event.name_of_org}&nbsp;</span>
-          <span className={styles.institution}>
+          <span className={styles.label}>
             {formatInstitutionName(event.name_of_inst)}
           </span>
         </li>
-        <li className={styles.descriptionTitle}>Event Description</li>
+        <li className={styles.label}>Event Description</li>
         <li className={styles.eventDescription}>{event.description}</li>
       </ul>
     </div>

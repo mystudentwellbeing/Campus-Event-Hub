@@ -12,23 +12,23 @@ const EventList = () => {
   if (isLoading) return <Loader />;
   if (error) return <div>Error loading events: {error.message}</div>;
 
-  const filterValues = searchParams.get('filters')?.split(',') || [];
-  const filteredEvents = events?.filter((event) => {
-    const matchesSearch = searchQuery
-      ? event.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        event.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        event.city?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        event.event_format?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        event.name_of_inst?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        event.type.some((type) =>
-          type.toLowerCase().includes(searchQuery.toLowerCase())
-        )
-      : true;
-    const matchesFilter =
-      filterValues.length === 0
-        ? true
-        : filterValues.some((filter) => event.type.includes(filter));
-    return matchesSearch && matchesFilter;
+  const filteredEvents = events.filter((event) => {
+    const lowerCaseSearchQuery = searchQuery.toLowerCase();
+    const name = event.name?.toLowerCase() || '';
+    const description = event.description?.toLowerCase() || '';
+    const city = event.city?.toLowerCase() || '';
+    const format = event.event_format?.toLowerCase() || '';
+    const school = event.name_of_inst?.toLowerCase() || '';
+    const type = event.type?.map((t) => t.toLowerCase()) || [];
+
+    return (
+      name.includes(lowerCaseSearchQuery) ||
+      description.includes(lowerCaseSearchQuery) ||
+      city.includes(lowerCaseSearchQuery) ||
+      format.includes(lowerCaseSearchQuery) ||
+      school.includes(lowerCaseSearchQuery) ||
+      type.some((t) => t.includes(lowerCaseSearchQuery))
+    );
   });
 
   const sortBy = searchParams.get('sortBy') || 'date-asc';

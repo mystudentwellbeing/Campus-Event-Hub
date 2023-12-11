@@ -12,7 +12,7 @@ const useAllEvents = () => {
   const [field, direction] = sortByRaw.split('-');
   const sortBy = { field, direction };
 
-  const page = Number(searchParams.get('page')) || 1;
+  const page = parseInt(searchParams.get('page')) || 1;
 
   const {
     isLoading,
