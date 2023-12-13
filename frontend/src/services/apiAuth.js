@@ -41,6 +41,12 @@ export const login = async ({ email, password }) => {
 
   if (error) throw new Error(error.message);
 
+  // Add 'beforeunload' event listener to trigger logout when the tab/window is closed
+  window.addEventListener('beforeunload', async (event) => {
+    event.preventDefault(); // To prevent the default dialog
+    await logout();
+  });
+
   return data;
 };
 
