@@ -15,7 +15,7 @@
   justify-content: flex-start;
   padding-bottom: 1rem;
   gap: 0.4rem;
-  height: 27rem;
+  height: 31rem;
   width: 30rem;
   font-size: 1.5rem;
   border-radius: 0.4rem;
@@ -103,7 +103,7 @@
 
 .shortDesc {
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
