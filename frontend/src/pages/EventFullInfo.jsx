@@ -1,4 +1,4 @@
-import EventFullInfoContent from '../features/EventFullInfoContent';
+import EventFullInfoContent from '../features/searchEvents/EventFullInfoContent';
 
 const EventFullInfo = () => {
   return (

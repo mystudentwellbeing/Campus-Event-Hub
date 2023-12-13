@@ -5,19 +5,19 @@ import { IoIosHeartEmpty, IoIosHeart } from 'react-icons/io';
 import { FiShare } from 'react-icons/fi';
 import { FiEdit } from 'react-icons/fi';
 import { AiOutlineDelete } from 'react-icons/ai';
-import { useUser } from './authentication/useUser';
-import { useEventInterests } from './likeEvents/useEventInterests';
-import { useLikeEvent } from './likeEvents/useLikeEvent';
-import { useUnlikeEvent } from './likeEvents/useUnlikeEvent';
-import useEvent from './searchEvents/useEvent';
+import { useUser } from '../authentication/useUser';
+import { useEventInterests } from '../likeEvents/useEventInterests';
+import { useLikeEvent } from '../likeEvents/useLikeEvent';
+import { useUnlikeEvent } from '../likeEvents/useUnlikeEvent';
+import useEvent from './useEvent';
 import {
   displayPrice,
   formatEventDate,
   formatTime,
   formatInstitutionName,
-} from '../utils/helpers';
-import Modal from '../ui/Modal';
-import DeleteAlert from '../ui/DeleteAlert';
+} from '../../utils/helpers';
+import Modal from '../../ui/Modal';
+import DeleteAlert from '../../ui/DeleteAlert';
 import styles from './EventFullInfoContent.module.css';
 
 const EventFullInfoContent = () => {

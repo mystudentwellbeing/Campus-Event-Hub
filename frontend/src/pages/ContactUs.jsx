@@ -1,4 +1,4 @@
-import ContactUsForm from '../features/ContactUsForm';
+import ContactUsForm from '../ui/ContactUsForm';
 
 const ContactUs = () => {
   return (

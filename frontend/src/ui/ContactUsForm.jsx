@@ -6,9 +6,9 @@ import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import FormHelperText from '@mui/material/FormHelperText';
-import TermsConditions from '../ui/TermsConditionsContent';
-import Modal from '../ui/Modal';
-import Button from '../ui/Button';
+import TermsConditions from './TermsConditionsContent';
+import Modal from './Modal';
+import Button from './Button';
 import styles from './ContactUsForm.module.css';
 
 const ContactUsForm = () => {

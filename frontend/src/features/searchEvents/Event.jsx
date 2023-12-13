@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useUser } from './../features/authentication/useUser';
-import { useEventInterests } from './likeEvents/useEventInterests';
-import { useLikeEvent } from './likeEvents/useLikeEvent';
-import { useUnlikeEvent } from './likeEvents/useUnlikeEvent';
-import { displayPrice, formatEventDate, formatTime } from '../utils/helpers';
+import { useUser } from '../authentication/useUser';
+import { useEventInterests } from '../likeEvents/useEventInterests';
+import { useLikeEvent } from '../likeEvents/useLikeEvent';
+import { useUnlikeEvent } from '../likeEvents/useUnlikeEvent';
+import { displayPrice, formatEventDate, formatTime } from '../../utils/helpers';
 import { IoIosHeartEmpty, IoIosHeart } from 'react-icons/io';
-import Modal from '../ui/Modal';
-import DeleteAlert from '../ui/DeleteAlert';
-import Button from '../ui/Button';
+import Modal from '../../ui/Modal';
+import DeleteAlert from '../../ui/DeleteAlert';
+import Button from '../../ui/Button';
 import styles from './Event.module.css';
 
 const Event = ({ event }) => {
