@@ -42,6 +42,7 @@ const EventForm = () => {
     'NIGHTLIFE',
     'SPORTS',
     'WELLBEING',
+    'test',
     'OTHER',
   ];
 
