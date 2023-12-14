@@ -48,9 +48,9 @@ export const login = async ({ email, password }) => {
   });
 
   // setting up session timeout
-  const sessionTimeoutDuration = 30000;
+  const sessionTimeoutDuration = 60000;
   let sessionTimeout;
-  
+
   const resetSessionTimeout = () => {
     clearTimeout(sessionTimeout);
     sessionTimeout = setTimeout(async () => {
