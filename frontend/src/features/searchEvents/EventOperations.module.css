@@ -39,7 +39,7 @@
 
 @media (min-width: 1024px) {
   .operationContainer {
-    width: 100%;
+    width: 95%;
     max-width: 1200px;
     margin: 1rem auto 0 auto;
     top: 9.6rem;
