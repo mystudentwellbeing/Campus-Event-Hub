@@ -10,7 +10,9 @@ export const useDeleteUser = () => {
       deleteUserApi(id, delete_request_received),
 
     onSuccess: () => {
-      toast.success('Delete request sent!');
+      toast.success(
+        'Delete request sent! Please allow up to 5 business days for it to be processed and take effect.'
+      );
       queryClient.invalidateQueries({ queryKey: ['allUsers'] });
     },
     onError: (err) => toast.error(err.message),

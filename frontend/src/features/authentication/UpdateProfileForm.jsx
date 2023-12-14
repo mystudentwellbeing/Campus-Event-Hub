@@ -3,7 +3,6 @@ import { useForm, Controller } from 'react-hook-form';
 import { useUser } from './useUser';
 import { useUpdateUser } from './useUpdateUser';
 import { useDeleteUser } from './useDeleteUser';
-import { useLogout } from './useLogout';
 import { toast } from 'react-hot-toast';
 import TextField from '@mui/material/TextField';
 import Button from '../../ui/Button';
@@ -15,7 +14,6 @@ const UpdateProfileForm = () => {
   const { user } = useUser();
   const { updateUser, isUpdating } = useUpdateUser();
   const { deleteUser, isDeleting } = useDeleteUser();
-  const { logout } = useLogout();
 
   const onSubmit = async (data, e) => {
     const { email, password, passwordConfirm } = data;
@@ -39,9 +37,6 @@ const UpdateProfileForm = () => {
     deleteUser(
       { id: user.id, delete_request_received: true },
       {
-        onSuccess: () => {
-          logout();
-        },
         onError: (error) => {
           toast.error(error.message);
         },
