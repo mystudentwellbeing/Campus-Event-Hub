@@ -47,6 +47,15 @@
   text-decoration: none;
 }
 
+.navMenuDropdown li,
+.navMenu a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  line-height: 1.2;
+}
+
 .menuWrapper {
   flex-direction: column;
   align-items: center;
@@ -82,6 +91,7 @@
     margin-left: 4rem;
     gap: 4rem;
     list-style-type: none;
+    font-size: 1.3rem;
   }
 
   .navMenu a,
