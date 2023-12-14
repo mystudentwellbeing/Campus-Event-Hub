@@ -41,12 +41,33 @@ export const login = async ({ email, password }) => {
 
   if (error) throw new Error(error.message);
 
-  // Add 'beforeunload' event listener to trigger logout when the tab/window is closed
+  // add 'beforeunload' event listener to trigger logout when the tab/window is closed
   window.addEventListener('beforeunload', async (event) => {
     event.preventDefault(); // To prevent the default dialog
     await logout();
   });
 
+  // setting up session timeout
+  const sessionTimeoutDuration = 30000;
+  let sessionTimeout;
+  
+  const resetSessionTimeout = () => {
+    clearTimeout(sessionTimeout);
+    sessionTimeout = setTimeout(async () => {
+      console.log('Session timed out due to inactivity.');
+      await logout();
+    }, sessionTimeoutDuration);
+  };
+
+  resetSessionTimeout();
+
+  // set up event listeners for activity
+  window.addEventListener('mousedown', resetSessionTimeout);
+  window.addEventListener('mousemove', resetSessionTimeout);
+  window.addEventListener('keydown', resetSessionTimeout);
+  window.addEventListener('touchstart', resetSessionTimeout);
+  // we can add more events as needed
+  
   return data;
 };
 

@@ -19,8 +19,7 @@ const ContactUsForm = () => {
   const onSubmit = (data) => {
     const { name, email, message } = data;
 
-    // this is the ids that I have in EmailJS
-    // for youku email const serviceID = 'service_8c4r4kd';
+    // this is the ids that I have in EmailJS    
     const serviceID = 'service_qgmz8ep';
     const templateID = 'template_5vk37vn';
     const userID = 'DvB3W4EsoBtfY5Ljj';
