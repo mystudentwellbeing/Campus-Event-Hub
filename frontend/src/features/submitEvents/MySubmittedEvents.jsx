@@ -9,7 +9,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import EventIcon from '@mui/icons-material/Event';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import PendingActionsIcon from '@mui/icons-material/PendingActions';
-import Event from '../Event';
+import Event from '../searchEvents/Event';
 import Loader from '../../ui/Loader';
 import styles from './MySubmittedEvents.module.css';
 

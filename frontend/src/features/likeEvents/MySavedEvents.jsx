@@ -8,7 +8,7 @@ import Tab from '@mui/material/Tab';
 import Badge from '@mui/material/Badge';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import EventIcon from '@mui/icons-material/Event';
-import Event from '../Event';
+import Event from '../searchEvents/Event';
 import Loader from '../../ui/Loader';
 import styles from './MySavedEvents.module.css';
 

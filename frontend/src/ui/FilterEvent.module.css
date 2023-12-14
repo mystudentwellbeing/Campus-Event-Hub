@@ -10,12 +10,11 @@
   display: none;
 }
 
-.filterBtn {
+.filterBtn,
+.activeFilter {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--black);
-  background-color: var(--white);
   font-size: 1rem;
   width: auto;
   padding: 0.5rem;
@@ -24,18 +23,13 @@
   margin-right: 1.5rem;
 }
 
+.filterBtn {
+  color: var(--black);
+  background-color: var(--white);
+}
 .activeFilter {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   color: white;
   background-color: var(--blue);
-  font-size: 1rem;
-  width: auto;
-  padding: 0.5rem;
-  border: 0.1rem solid var(--grey2);
-  border-radius: 0.3rem;
-  margin-right: 1.5rem;
 }
 
 @media (min-width: 481px) and (max-width: 1023px) {
@@ -44,27 +38,39 @@
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1024px) and (max-width: 1316px) {
   .filterContainer {
     max-width: 1200px;
     justify-content: center;
     align-items: center;
-    margin: 2rem auto;
+    margin: 1rem auto 0 auto;
     flex-wrap: wrap;
   }
 
-  .filterBtn {
-    font-size: 1.2rem;
-    width: 19rem;
-    padding: 1rem;
+  .filterBtn,
+  .activeFilter {
+    font-size: 1rem;
+    width: 14rem;
+    padding: 0.7rem;
     border-radius: 2rem;
     margin: 0.5rem;
   }
+}
 
+@media (min-width: 1317px) {
+  .filterContainer {
+    max-width: 1200px;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem auto 0 auto;
+    flex-wrap: wrap;
+  }
+
+  .filterBtn,
   .activeFilter {
-    font-size: 1.2rem;
-    width: 19rem;
-    padding: 1rem;
+    font-size: 1.1rem;
+    width: 18.5rem;
+    padding: 0.9rem;
     border-radius: 2rem;
     margin: 0.5rem;
   }
