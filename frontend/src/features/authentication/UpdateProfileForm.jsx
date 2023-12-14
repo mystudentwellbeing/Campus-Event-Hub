@@ -3,6 +3,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { useUser } from './useUser';
 import { useUpdateUser } from './useUpdateUser';
 import { useDeleteUser } from './useDeleteUser';
+import { useLogout } from './useLogout';
 import { toast } from 'react-hot-toast';
 import TextField from '@mui/material/TextField';
 import Button from '../../ui/Button';
@@ -13,7 +14,8 @@ const UpdateProfileForm = () => {
   const { handleSubmit, reset, control } = useForm();
   const { user } = useUser();
   const { updateUser, isUpdating } = useUpdateUser();
-  const { deleteRequest, isDeleting } = useDeleteUser();
+  const { deleteUser, isDeleting } = useDeleteUser();
+  const { logout } = useLogout();
 
   const onSubmit = async (data, e) => {
     const { email, password, passwordConfirm } = data;
@@ -33,8 +35,18 @@ const UpdateProfileForm = () => {
     );
   };
 
-  const handleDeleteAccount = async () => {
-    deleteRequest({ id: user.id, delete_request_received: true });
+  const handleDeleteAccount = () => {
+    deleteUser(
+      { id: user.id, delete_request_received: true },
+      {
+        onSuccess: () => {
+          logout();
+        },
+        onError: (error) => {
+          toast.error(error.message);
+        },
+      }
+    );
   };
 
   return (
@@ -80,70 +92,10 @@ const UpdateProfileForm = () => {
           <Button>Reset Password</Button>
         </Link>
       </div>
-
-      {/* <form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
-        <fieldset>
-          <legend>Update Password</legend>
-          <Controller
-            name="password"
-            control={control}
-            defaultValue=""
-            rules={{
-              required: 'Password is required.',
-              minLength: {
-                value: 6,
-                message: 'Password should be at least 6 characters.',
-              },
-            }}
-            render={({ field, fieldState: { error } }) => (
-              <TextField
-                {...field}
-                margin="normal"
-                fullWidth
-                id="password"
-                label="Password"
-                disabled={isUpdating}
-                type="password"
-                variant="filled"
-                error={!!error}
-                helperText={error ? error.message : ''}
-              />
-            )}
-          />
-
-          <Controller
-            name="passwordConfirm"
-            control={control}
-            defaultValue=""
-            rules={{
-              required: 'Confirm Password is required.',
-              validate: {
-                matchesPassword: (value) =>
-                  value === password || 'Passwords do not match.',
-              },
-            }}
-            render={({ field, fieldState: { error } }) => (
-              <TextField
-                {...field}
-                margin="normal"
-                fullWidth
-                id="passwordConfirm"
-                label="Confirm Password"
-                disabled={isUpdating}
-                type="password"
-                variant="filled"
-                error={!!error}
-                helperText={error ? error.message : ''}
-              />
-            )}
-          />
-
-          <Button>{!isUpdating ? 'Update' : <SpinnerMini />}</Button>
-        </fieldset>
-      </form> */}
       <div className={styles.deleteAccount}>
         <p>I want to delete my account.</p>
-        <Button onClick={handleDeleteAccount}>
+
+        <Button onClick={handleDeleteAccount} type="delete">
           {!isDeleting ? 'Delete Account' : <SpinnerMini />}
         </Button>
       </div>

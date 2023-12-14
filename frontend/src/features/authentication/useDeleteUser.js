@@ -10,7 +10,7 @@ export const useDeleteUser = () => {
       deleteUserApi(id, delete_request_received),
 
     onSuccess: () => {
-      toast.success('User successfully deleted');
+      toast.success('Delete request sent!');
       queryClient.invalidateQueries({ queryKey: ['allUsers'] });
     },
     onError: (err) => toast.error(err.message),
