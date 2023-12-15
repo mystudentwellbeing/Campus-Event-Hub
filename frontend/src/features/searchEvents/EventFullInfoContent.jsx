@@ -16,6 +16,7 @@ import {
   formatTime,
   formatInstitutionName,
 } from '../../utils/helpers';
+import Loader from '../../ui/Loader';
 import Modal from '../../ui/Modal';
 import DeleteAlert from '../../ui/DeleteAlert';
 import styles from './EventFullInfoContent.module.css';
@@ -29,7 +30,7 @@ const EventFullInfoContent = () => {
   const { likedEvents, refetchLikedEvents } = useEventInterests(user?.id);
   const { isLoading, event } = useEvent();
 
-  if (isLoading || !event) return <div>Loading...</div>;
+  if (isLoading || !event) return <Loader />;
 
   const isCreator = user?.id === event.user_id;
 
