@@ -52,5 +52,5 @@ https://drive.google.com/file/d/1W7SFcBgQLPi31u1PaKrLVHIoLa1PwnIf/view
 ### Relational Model
 
 - User (user_id (pk), email, password, created_at, updated_at, deleted_at, is_admin)
-- Events (event_id (pk), name_of_event, type, date, start_time, end_time, name_of_venue, address, city, postal_code, description, short_description, event_format, virtual_link , image, contact_name, contact_email, contact_phone, name_of_org, name_of_inst, price, event_link, created_at, updated_at, deleted_at, is_approved, user_id(fk)
+- Events (event_id (pk), name, type, date, start_time, end_time, name_of_venue, address, city, postal_code, description, short_description, event_format, virtual_link , image, contact_name, contact_email, contact_phone, name_of_org, name_of_inst, price, created_at, updated_at, is_approved, user_id(fk))
 - Event_Interests (event_interests_id, created_at, updated_at, user_id (fk), event_id (fk))
