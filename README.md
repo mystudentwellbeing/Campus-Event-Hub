@@ -47,7 +47,7 @@ https://drive.google.com/file/d/1W7SFcBgQLPi31u1PaKrLVHIoLa1PwnIf/view
 ### Relationship:
 
 - A user may save 0 or more events. Events can be saved by 0 or more users.
-- Institution may have 0 or many event; An event belongs to one and only one university.
+- A user may submit 0 or more events. Events can be submitted by 1 user.
 
 ### Relational Model
 
