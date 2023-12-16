@@ -12,6 +12,7 @@ import useAllEvents from './useAllEvents';
 import usePendingEventsCount from './usePendingEventsCount';
 import useUsers from './useUsers';
 import useEventLikes from './useEventLikes';
+import useCurrentMonthEventsCount from './useCurrentMonthEventsCount';
 import StatBox from '../../ui/StatBox';
 import Loader from '../../ui/Loader';
 import styles from './Dashboard.module.css';
@@ -21,23 +22,20 @@ const Dashboard = () => {
   const { isLoading: isLoading2, count, error2 } = usePendingEventsCount();
   const { isLoading: isLoading3, users, error3 } = useUsers();
   const { isLoading: isLoading4, eventLikes, error4 } = useEventLikes();
+  const {
+    isLoading: isLoading5,
+    count: currentMonthEventsCount,
+    error: error5,
+  } = useCurrentMonthEventsCount();
   const { firstDayOfMonth, lastDayOfMonth } = getCurrentMonthDateRange();
   const now = new Date();
 
-  if (isLoading1 || isLoading2 || isLoading3 || isLoading4) return <Loader />;
-  if (error1 || error2 || error3 || error4) {
+  if (isLoading1 || isLoading2 || isLoading3 || isLoading4 || isLoading5)
+    return <Loader />;
+  if (error1 || error2 || error3 || error4 || error5) {
     const errorMessage = error1?.message || error2?.message || error3?.message;
     return <div>Error: {errorMessage}</div>;
   }
-
-  const eventsThisMonth = events?.filter((event) => {
-    const approved = event.is_approved === true;
-    return (
-      new Date(event.date) >= firstDayOfMonth &&
-      new Date(event.date) <= lastDayOfMonth &&
-      approved
-    );
-  });
 
   const newUsersThisMonth = users?.filter((user) => {
     const userCreatedAt = new Date(user.created_at);
@@ -94,7 +92,7 @@ const Dashboard = () => {
         <StatBox
           IconComponent={MdEvent}
           title="Events This Month"
-          count={eventsThisMonth?.length}
+          count={currentMonthEventsCount}
         />
         <StatBox
           IconComponent={RiUserReceived2Line}

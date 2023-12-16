@@ -1,4 +1,5 @@
 import supabase, { supabaseUrl } from './supabase';
+import { getCurrentMonthDateRange } from '../utils/helpers';
 
 export const getEvents = async () => {
   const { data, error } = await supabase
@@ -80,6 +81,21 @@ export const getAllPendingEvents = async () => {
     throw new Error('Events could not be loaded');
   }
 
+  return data.length;
+};
+
+export const getCurrentMonthEventsCount = async () => {
+  const { firstDayOfMonth, lastDayOfMonth } = getCurrentMonthDateRange();
+  const { data, error } = await supabase
+    .from('events')
+    .select('*', { count: 'exact' })
+    .eq('is_approved', true)
+    .gte('date', firstDayOfMonth.toISOString())
+    .lte('date', lastDayOfMonth.toISOString());
+  if (error) {
+    console.error(error);
+    throw new Error('Error fetching current month events count');
+  }
   return data.length;
 };
 
