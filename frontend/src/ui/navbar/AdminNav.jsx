@@ -48,9 +48,16 @@ const AdminNav = () => {
       <Link to="/">
         <img src={logo} alt="my student wellbeing logo" />
       </Link>
-      <Link to="/">
+      {/* <Link to="/">
         <h2>Event Hub</h2>
-      </Link>
+      </Link> */}
+      <a
+        href="https://mystudentwellbeing.ca/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <button className={styles.menuButton}>Mental Health Counselling</button>
+      </a>
       <ul
         ref={dropdownRef}
         className={isHambugerOpen ? styles.navMenuDropdown : styles.navMenu}
