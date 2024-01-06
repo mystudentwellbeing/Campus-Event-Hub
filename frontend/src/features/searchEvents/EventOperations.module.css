@@ -7,7 +7,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* gap: 1rem; */
   background-color: var(--white);
 }
 
@@ -16,7 +15,7 @@
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  margin-top: 1rem;
+  margin: 1rem 0;
 }
 
 .rightSideWrapper {
@@ -36,17 +35,16 @@
 @media (min-width: 481px) and (max-width: 1023px) {
   .operationContainer {
     top: 9.63rem;
-    gap: 1rem;
     position: absolute;
+    width: 90%;
+    margin: auto;
   }
   .searchSortWrapper {
     flex-direction: column;
-    width: 90%;
   }
   .rightSideWrapper {
     flex-direction: row;
     justify-content: space-between;
-    width: 90%;
   }
 }
 
@@ -55,14 +53,15 @@
     width: 95%;
     max-width: 1200px;
     margin: 0 auto;
-    top: 9.6rem;
-    /* padding-top: 1.5rem; */
+    padding: 0 1.5rem;
+    top: 7rem;
     position: absolute;
   }
   .searchSortWrapper {
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
+    margin-bottom: 0.8rem;
   }
   .rightSideWrapper {
     flex-direction: row;

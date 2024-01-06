@@ -4,7 +4,7 @@
   gap: 1.5rem;
   justify-content: center;
   align-items: flex-start;
-  margin-top: 12rem;
+  margin-top: 18rem;
 }
 
 @media (min-width: 481px) and (max-width: 1023px) {
@@ -16,14 +16,14 @@
 
 @media (min-width: 1024px) and (max-width: 1316px) {
   .eventContainer {
-    /* margin-top: 18rem; */
-    min-height: 80vh;
+    margin-top: 12rem;
+    min-height: 85vh;
   }
 }
 
 @media (min-width: 1317px) {
   .eventContainer {
-    /* margin-top: 19rem; */
+    margin-top: 12.5rem;
     min-height: 80vh;
   }
 }
