@@ -68,5 +68,12 @@ export const theme = createTheme({
         },
       },
     },
+    MuiListItemText: {
+      styleOverrides: {
+        primary: {
+          fontSize: '1.4rem',
+        },
+      },
+    },
   },
 });

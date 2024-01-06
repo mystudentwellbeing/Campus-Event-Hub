@@ -12,7 +12,10 @@ const EventList = () => {
   if (isLoading) return <Loader />;
   if (error) return <div>Error loading events: {error.message}</div>;
 
-  const filterValues = searchParams.get('filters')?.split(',') || [];
+  const typeFilterValues = searchParams.get('typeFilters')?.split(',') || [];
+  const schoolFilterValues =
+    searchParams.get('schoolFilters')?.split(',') || [];
+
   const filteredEvents = events?.filter((event) => {
     const matchesSearch = searchQuery
       ? event.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -24,11 +27,18 @@ const EventList = () => {
           type.toLowerCase().includes(searchQuery.toLowerCase())
         )
       : true;
-    const matchesFilter =
-      filterValues.length === 0
+    const matchesTypeFilter =
+      typeFilterValues.length === 0
         ? true
-        : filterValues.some((filter) => event.type.includes(filter));
-    return matchesSearch && matchesFilter;
+        : typeFilterValues.some((filter) => event.type.includes(filter));
+
+    const matchesSchoolFilter =
+      schoolFilterValues.length === 0
+        ? true
+        : schoolFilterValues.some((filter) =>
+            event.name_of_inst.includes(filter)
+          );
+    return matchesSearch && matchesTypeFilter && matchesSchoolFilter;
   });
 
   const sortBy = searchParams.get('sortBy') || 'date-asc';

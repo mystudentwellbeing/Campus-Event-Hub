@@ -19,6 +19,13 @@
   /* margin-top: 1rem; */
 }
 
+.rightSideWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
 .filterIcon {
   font-size: 2rem;
   margin-right: 1rem;
@@ -31,9 +38,12 @@
     top: 9.63rem;
   }
   .searchSortWrapper {
+    flex-direction: column;
+    width: 90%;
+  }
+  .rightSideWrapper {
     flex-direction: row;
     justify-content: space-between;
-    width: 90%;
   }
 }
 
@@ -48,6 +58,10 @@
   .searchSortWrapper {
     flex-direction: row;
     justify-content: space-between;
+    width: 100%;
+  }
+  .rightSideWrapper {
+    flex-direction: row;
     width: 100%;
   }
 }

@@ -11,6 +11,7 @@ import {
 import { SlGraduation } from 'react-icons/sl';
 import { RxFace } from 'react-icons/rx';
 import Search from '../../ui/Search';
+import FilterBySchools from '../../ui/FilterBySchools';
 import FilterEvent from '../../ui/FilterEvent';
 import SortBy from '../../ui/SortBy';
 import styles from './EventOperations.module.css';
@@ -20,13 +21,38 @@ const EventOperations = () => {
     <section className={styles.operationContainer}>
       <div className={styles.searchSortWrapper}>
         <Search />
-        <SortBy
-          options={[
-            { value: 'date-asc', label: 'Sort by date' },
-            { value: 'price-asc', label: 'Sort by price (Low to High)' },
-            { value: 'price-desc', label: 'Sort by price (High to Low)' },
-          ]}
-        />
+        <div className={styles.rightSideWrapper}>
+          <FilterBySchools
+            filterfield="name_of_inst"
+            options={[
+              {
+                value: 'Assiniboine_Community_College',
+                label: 'Assiniboine Community College',
+              },
+              { value: 'Brandon_University', label: 'Brandon University' },
+              {
+                value: 'St._Boniface_University',
+                label: 'St. Boniface University',
+              },
+              {
+                value: 'University_of_Manitoba',
+                label: 'University of Manitoba',
+              },
+              {
+                value: 'University_of_Winnipeg',
+                label: 'University of Winnipeg',
+              },
+              { value: 'Other', label: 'Other' },
+            ]}
+          />
+          <SortBy
+            options={[
+              { value: 'date-asc', label: 'Sort by date' },
+              { value: 'price-asc', label: 'Sort by price (Low to High)' },
+              { value: 'price-desc', label: 'Sort by price (High to Low)' },
+            ]}
+          />
+        </div>
       </div>
       <FilterEvent
         filterfield="type"
@@ -35,7 +61,10 @@ const EventOperations = () => {
             value: 'ARTS',
             icon: <MdOutlineColorLens className={styles.filterIcon} />,
           },
-          { value: 'CAMPUS', icon: <LuSchool className={styles.filterIcon} /> },
+          {
+            value: 'CAMPUS',
+            icon: <LuSchool className={styles.filterIcon} />,
+          },
           {
             value: 'COMMUNITY',
             icon: <BsHouseHeart className={styles.filterIcon} />,
