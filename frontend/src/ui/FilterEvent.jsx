@@ -31,7 +31,10 @@ const FilterEvent = ({ options }) => {
 
       setTimeout(() => {
         if (newFilters.length > 0) {
-          setSearchParams({ filters: newFilters.join(',') }, { replace: true });
+          setSearchParams(
+            { typeFilters: newFilters.join(',') },
+            { replace: true }
+          );
         } else {
           setSearchParams({}, { replace: true });
         }

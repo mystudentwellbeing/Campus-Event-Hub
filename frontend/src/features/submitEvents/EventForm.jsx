@@ -45,6 +45,18 @@ const EventForm = () => {
     'OTHER',
   ];
 
+  const schoolOptions = [
+    {
+      value: 'Assiniboine_Community_College',
+      label: 'Assiniboine Community College',
+    },
+    { value: 'Brandon_University', label: 'Brandon University' },
+    { value: 'St._Boniface_University', label: 'St. Boniface University' },
+    { value: 'University_of_Manitoba', label: 'University of Manitoba' },
+    { value: 'University_of_Winnipeg', label: 'University of Winnipeg' },
+    { value: 'Other', label: 'Other' },
+  ];
+
   const {
     register,
     control,
@@ -223,13 +235,11 @@ const EventForm = () => {
               <MenuItem value="">
                 <em>Select University</em>
               </MenuItem>
-              <MenuItem value="University_of_Manitoba">
-                University of Manitoba
-              </MenuItem>
-              <MenuItem value="University_of_Winnipeg">
-                University of Winnipeg
-              </MenuItem>
-              <MenuItem value="Other">Other</MenuItem>
+              {schoolOptions.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
             </Select>
             <FormHelperText>{error ? error.message : ''}</FormHelperText>
           </FormControl>
