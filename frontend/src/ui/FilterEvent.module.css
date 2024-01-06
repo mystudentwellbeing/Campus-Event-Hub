@@ -3,7 +3,7 @@
   flex-direction: row;
   overflow-x: scroll;
   max-width: 30rem;
-  margin-bottom: 2rem;
+  /* margin-bottom: 2rem; */
 }
 
 .filterContainer::-webkit-scrollbar {
@@ -43,7 +43,7 @@
     max-width: 1200px;
     justify-content: center;
     align-items: center;
-    margin: 1rem auto 0 auto;
+    /* margin: 1rem auto 0 auto; */
     flex-wrap: wrap;
   }
 
@@ -62,7 +62,7 @@
     max-width: 1200px;
     justify-content: center;
     align-items: center;
-    margin: 1rem auto 0 auto;
+    /* margin: 1rem auto 0 auto; */
     flex-wrap: wrap;
   }
 

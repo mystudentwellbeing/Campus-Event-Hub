@@ -7,7 +7,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  /* gap: 1rem; */
   background-color: var(--white);
 }
 
@@ -16,7 +16,7 @@
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  /* margin-top: 1rem; */
+  margin-top: 1rem;
 }
 
 .filterIcon {
@@ -29,6 +29,8 @@
 @media (min-width: 481px) and (max-width: 1023px) {
   .operationContainer {
     top: 9.63rem;
+    gap: 1rem;
+    position: absolute;
   }
   .searchSortWrapper {
     flex-direction: row;
@@ -43,7 +45,8 @@
     max-width: 1200px;
     margin: 0 auto;
     top: 9.6rem;
-    padding-top: 1.5rem;
+    /* padding-top: 1.5rem; */
+    position: absolute;
   }
   .searchSortWrapper {
     flex-direction: row;

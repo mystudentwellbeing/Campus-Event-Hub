@@ -45,6 +45,7 @@ main {
   max-width: 1400px;
   margin: 12rem auto 2rem auto;
   min-height: 80vh;
+  position: static;
 }
 
 main h1 {
