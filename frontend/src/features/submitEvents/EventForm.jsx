@@ -158,7 +158,7 @@ const EventForm = () => {
     >
       <TextField
         id="contactName"
-        label="Contact Name"
+        label="Contact Name*"
         type="text"
         margin="normal"
         fullWidth
@@ -177,16 +177,14 @@ const EventForm = () => {
         margin="normal"
         fullWidth
         disabled={isWorking}
-        {...register('contact_phone', {
-          required: 'This field is required',
-        })}
+        {...register('contact_phone')}
         error={!!errors.contact_phone}
         helperText={errors.contact_phone ? errors.contact_phone.message : ''}
         variant="outlined"
       />
       <TextField
         id="contactEmail"
-        label="Contact Email"
+        label="Contact Email*"
         type="email"
         margin="normal"
         fullWidth
@@ -204,7 +202,7 @@ const EventForm = () => {
       />
       <TextField
         id="nameOfOrg"
-        label="Name of Organization (i.e. Student Club)"
+        label="Name of Organization* (i.e. Student Club)"
         type="text"
         margin="normal"
         fullWidth
@@ -230,7 +228,7 @@ const EventForm = () => {
             margin="normal"
             error={!!error}
           >
-            <InputLabel id="nameOfInst-label">Name of Institution</InputLabel>
+            <InputLabel id="nameOfInst-label">Name of Institution*</InputLabel>
             <Select
               {...field}
               labelId="nameOfInst-label"
@@ -252,7 +250,7 @@ const EventForm = () => {
       />
       <TextField
         id="name"
-        label="Name of Event"
+        label="Name of Event*"
         type="text"
         margin="normal"
         fullWidth
@@ -265,7 +263,7 @@ const EventForm = () => {
         variant="outlined"
       />
       <div className={styles.eventTypeContainer}>
-        <label className={styles.eventTypeLabel}>Event Type</label>
+        <label className={styles.eventTypeLabel}>Event Type*</label>
         <FormControl component="fieldset" error={!!errors.type}>
           <div className={styles.eventTypeBox}>
             {eventTypeOptions.map((option) => (
@@ -293,7 +291,7 @@ const EventForm = () => {
       <div className={styles.timeWrapper}>
         <TextField
           id="startTime"
-          label="Event Start Time"
+          label="Event Start Time*"
           type="time"
           margin="normal"
           fullWidth
@@ -308,7 +306,7 @@ const EventForm = () => {
         />
         <TextField
           id="endTime"
-          label="Event End Time"
+          label="Event End Time*"
           type="time"
           margin="normal"
           fullWidth
@@ -324,7 +322,7 @@ const EventForm = () => {
       </div>
       <TextField
         id="date"
-        label="Date"
+        label="Date*"
         type="date"
         margin="normal"
         fullWidth
@@ -354,7 +352,7 @@ const EventForm = () => {
             margin="normal"
             error={!!errors.event_format}
           >
-            <InputLabel id="eventFormat-label">Event Format</InputLabel>
+            <InputLabel id="eventFormat-label">Event Format*</InputLabel>
             <Select
               {...field}
               labelId="eventFormat-label"
@@ -377,7 +375,7 @@ const EventForm = () => {
           margin="normal"
           fullWidth
           id="virtualLink"
-          label="Virtual Link"
+          label="Virtual Link*"
           type="text"
           disabled={isWorking}
           {...register('virtual_link', {
@@ -394,7 +392,7 @@ const EventForm = () => {
             margin="normal"
             fullWidth
             id="nameOfVenue"
-            label="Name of Venue"
+            label="Name of Venue*"
             type="text"
             disabled={isWorking}
             {...register('name_of_venue', {
@@ -411,7 +409,7 @@ const EventForm = () => {
             margin="normal"
             fullWidth
             id="address"
-            label="Address(Street No.& Name) of Event"
+            label="Address (Street No.& Name) of Event*"
             type="text"
             disabled={isWorking}
             {...register('address', {
@@ -426,7 +424,7 @@ const EventForm = () => {
             margin="normal"
             fullWidth
             id="city"
-            label="City"
+            label="City*"
             type="text"
             disabled={isWorking}
             {...register('city', {
@@ -444,9 +442,7 @@ const EventForm = () => {
             label="Postal Code"
             type="text"
             disabled={isWorking}
-            {...register('postal_code', {
-              required: 'This field is required',
-            })}
+            {...register('postal_code')}
             error={!!errors.postal_code}
             helperText={errors.postal_code ? errors.postal_code.message : ''}
             variant="outlined"
@@ -457,7 +453,7 @@ const EventForm = () => {
         margin="normal"
         fullWidth
         id="price"
-        label="Price of Ticket"
+        label="Price of Ticket*"
         type="number"
         disabled={isWorking}
         {...register('price', {
@@ -505,7 +501,7 @@ const EventForm = () => {
       <TextField
         className={styles.shortDesc}
         id="shortDesc"
-        label="Short Description of Event (150 characters)"
+        label="Short Description of Event* (150 characters)"
         multiline
         rows={3}
         type="text"
@@ -524,7 +520,7 @@ const EventForm = () => {
       />
       <TextField
         id="desc"
-        label="Long Description of Event"
+        label="Long Description of Event*"
         multiline
         rows={6}
         fullWidth
@@ -535,6 +531,18 @@ const EventForm = () => {
         })}
         error={!!errors.description}
         helperText={errors.description ? errors.description.message : ''}
+        variant="outlined"
+      />
+      <TextField
+        margin="normal"
+        fullWidth
+        id="linkToMoreInfo"
+        label="Link to more information (i.e. website or Instagram)"
+        type="text"
+        disabled={isWorking}
+        {...register('info_link')}
+        error={!!errors.info_link}
+        helperText={errors.info_link ? errors.info_link.message : ''}
         variant="outlined"
       />
 
