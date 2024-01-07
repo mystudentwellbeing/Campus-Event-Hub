@@ -105,24 +105,29 @@ const EventForm = () => {
   };
 
   const onSubmit = (data) => {
-    const image = typeof data.image === 'string' ? data.image : data.image[0];
+    const image =
+      data.image && typeof data.image === 'string' ? data.image : data.image[0];
 
     const selectedTypes = Object.entries(data.type)
       // eslint-disable-next-line no-unused-vars
       .filter(([type, isSelected]) => isSelected)
       .map(([type]) => type);
 
-    data.type = `{${selectedTypes.join(',')}}`;
+    const formData = {
+      ...data,
+      type: `{${selectedTypes.join(',')}}`,
+      ...(image && { image }),
+      is_approved: false,
+    };
+
+    if (isEditSession && !selectedFile) {
+      delete formData.image; // Avoid overwriting the existing image if no new image is provided
+    }
 
     if (isEditSession)
       editEvent(
         {
-          newEventData: {
-            ...data,
-            type: selectedTypes,
-            image,
-            is_approved: false,
-          },
+          newEventData: { ...formData, image },
           id: editId,
         },
         {
@@ -134,7 +139,7 @@ const EventForm = () => {
       );
     else
       createEvent(
-        { ...data, image, user_id: user.id },
+        { ...formData, user_id: user.id },
         {
           onSuccess: () => {
             reset();
@@ -482,9 +487,7 @@ const EventForm = () => {
                 type="file"
                 accept="image/*"
                 onChange={handleFileChange}
-                {...register('image', {
-                  required: isEditSession ? false : 'This field is required',
-                })}
+                {...register('image')}
               />
             </InputAdornment>
           }
