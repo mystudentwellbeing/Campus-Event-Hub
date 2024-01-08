@@ -1,16 +1,14 @@
 import SubmitEventForm from '../features/submitEvents/EventForm';
+import styles from './SubmitEvents.module.css';
 
 const SubmitEvents = () => {
   return (
     <main>
       <h1>Submit your event</h1>
-      <p style={{ fontSize: '1.2rem' }}>
-        Your contact name, phone number, and email will only be requested by My
-        Student Wellbeing in case additional details regarding your event are
-        needed.
-      </p>
-      <p style={{ fontSize: '1.2rem' }}>
-        This information will be not displayed on the website.
+      <p className={styles.statement}>
+        Contact name, phone number, and email are asked if My Student Wellbeing
+        needs more information about your event. This information will be not be
+        posted on the website.
       </p>
       <SubmitEventForm />
     </main>
