@@ -172,7 +172,7 @@ const EventFullInfoContent = () => {
           </li>
         )}
         <li>
-          <span className={styles.label}>Brought You By:&nbsp;</span>
+          <span className={styles.label}>Brought To You By:&nbsp;</span>
           <span className={styles.organization}>{event.name_of_org}&nbsp;</span>
           <span className={styles.label}>
             {formatInstitutionName(event.name_of_inst)}
