@@ -173,9 +173,13 @@ const EventFullInfoContent = () => {
         )}
         <li>
           <span className={styles.label}>Brought To You By:&nbsp;</span>
-          <span className={styles.organization}>{event.name_of_org}&nbsp;</span>
-          <span className={styles.label}>
-            {formatInstitutionName(event.name_of_inst)}
+          <span className={styles.organization}>{event.name_of_org}&nbsp;</span><br/>
+          <span className={styles.label}>Associated Institution:&nbsp;</span>
+          <span className={styles.organization}>
+          {formatInstitutionName(event.name_of_inst)}
+          &nbsp;(this event has been identified as being 
+          associated in some way with this institution, however, this does not necessarily mean 
+          the event is endorsed or supported by the institution)
           </span>
         </li>
         <li className={styles.label}>Event Description</li>
